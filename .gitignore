@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+/BAEKJOON/.vs/BAEKJOON/v15
+/BAEKJOON/.vs/BAEKJOON/v15/Browse.VC.db
+/BAEKJOON/.vs/BAEKJOON/v15/Browse.VC.opendb
+*.opendb
+*.db
+/BAEKJOON/.vs/BAEKJOON/v15
