@@ -1,6 +1,2 @@
-﻿  7568.cpp
-d:\visual studio 2017\projects\repository\programing_code\baekjoon\baekjoon\7568.cpp(7): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1272): note: 'scanf' 선언을 참조하십시오.
-d:\visual studio 2017\projects\repository\programing_code\baekjoon\baekjoon\7568.cpp(9): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(1272): note: 'scanf' 선언을 참조하십시오.
+﻿  1018.cpp
   BAEKJOON.vcxproj -> D:\Visual Studio 2017\Projects\Repository\PROGRAMING_CODE\BAEKJOON\x64\Debug\BAEKJOON.exe
