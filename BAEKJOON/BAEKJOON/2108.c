@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
+/* 퀵정렬 자체 구현(타임아웃)
 void quickSort(int *arr, int left, int right)
 {
 	int pivot, left_temp, right_temp;
@@ -29,6 +30,17 @@ void quickSort(int *arr, int left, int right)
 	if (left < pivot) quickSort(arr, left, pivot - 1);
 	if (right > pivot) quickSort(arr, pivot + 1, right);
 }
+*/
+
+int compare(void *first, void *second)
+{
+	if (*(int*)first > *(int*)second)
+		return 1;
+	else if (*(int*)first < *(int*)second)
+		return -1;
+	else
+		return 0;
+}
 
 int issign(int x)
 {
@@ -55,7 +67,7 @@ int main(void)
 		if (data[i] < 0) { count[-data[i]+4000]++; }
 		else { count[data[i]]++; }
 	}
-	quickSort(data, 0, N - 1);
+	qsort(data, N, sizeof(int), compare);
 	for (i = 0; i <= 8000; i++)
 	{
 		if (freq != 0 && freq == count[i])
@@ -69,7 +81,7 @@ int main(void)
 	}
 	if (k > 1)
 	{
-		quickSort(freq_data, 0, k - 1);
+		qsort(freq_data, k, sizeof(int), compare);
 		freq = freq_data[1];
 	}
 	else
