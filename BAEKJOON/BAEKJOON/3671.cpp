@@ -19,7 +19,7 @@ void setPrime()
 	{
 		if (prime[i] == i)
 		{
-			for (int j = i * i; j < MAX; j+=i)
+			for (int j = i * i; j <= MAX; j+=i)
 			{
 				if (prime[j] = j)
 					prime[j] = i;

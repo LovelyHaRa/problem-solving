@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="코딩테스트_고득점_Kit\해시\전화번호_목록.cpp" />
+    <ClCompile Include="코딩테스트_고득점_Kit\스택&amp;큐\다리를_지나는_트럭.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
