@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="코딩테스트_고득점_Kit\스택&amp;큐\다리를_지나는_트럭.cpp">
+    <ClCompile Include="코딩테스트_고득점_Kit\DFS&amp;BFS\타겟_넘버.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
