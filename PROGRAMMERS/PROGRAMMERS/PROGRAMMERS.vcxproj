@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="코딩테스트_고득점_Kit\DFS&amp;BFS\타겟_넘버.cpp" />
+    <ClCompile Include="코딩테스트_고득점_Kit\정렬\H-index.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
