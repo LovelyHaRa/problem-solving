@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="코딩테스트_고득점_Kit\Heap\이중우선순위큐.cpp" />
+    <ClCompile Include="코딩테스트_고득점_Kit\DFS&amp;BFS\네트워크.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
