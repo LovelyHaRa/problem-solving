@@ -18,6 +18,7 @@ int main(void)
 			if (s[i - 1] == '(' && i > 0)
 				res += top;
 			else
+
 				res += 1;
 		}
 	}
