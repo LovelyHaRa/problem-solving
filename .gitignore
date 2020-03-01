@@ -36,3 +36,11 @@
 *.opendb
 *.db
 /BAEKJOON/.vs/BAEKJOON/v15
+
+/PROGRAMMERS/.vs/PROGRAMMERS/v15
+/PROGRAMMERS/.vs/PROGRAMMERS/v15/Browse.VC.db
+/PROGRAMMERS/.vs/PROGRAMMERS/v15/Browse.VC.opendb
+
+/AOJ/.vs/AOJ/v15
+/AOJ/.vs/AOJ/v15/Browse.VC.db
+/AOJ/.vs/AOJ/v15/Browse.VC.opendb
