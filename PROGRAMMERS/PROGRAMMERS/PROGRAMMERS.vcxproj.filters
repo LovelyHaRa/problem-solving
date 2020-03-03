@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="코딩테스트_고득점_Kit\그리디\저울.cpp">
+    <ClCompile Include="코딩테스트_고득점_Kit\그리디\섬_연결하기.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
