@@ -6,7 +6,7 @@ int GCD(long long a, long long b)
 {
 	if (a < b) return GCD(a, b%a);
 	if (b == 0) return a;
-	GCD(b, a%b);
+	return GCD(b, a%b);
 }
 
 int main(void)
