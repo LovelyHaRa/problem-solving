@@ -7,7 +7,7 @@ int answer = -1;
 
 void dfs(int N, int number, int count, int prev) {
 	int t = N;
-	// 1. 종료조건1 : 최솟값이 9를 초과하면 리턴
+	// 1. 종료조건1 : 최솟값이 8을 초과하면 리턴
 	if (count > 8) {
 		answer = -1;
 		return;
