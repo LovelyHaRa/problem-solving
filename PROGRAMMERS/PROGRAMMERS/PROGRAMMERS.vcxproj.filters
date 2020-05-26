@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="최고의_집합.cpp">
+    <ClCompile Include="하노이의_탑.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
