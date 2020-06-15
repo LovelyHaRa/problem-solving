@@ -141,6 +141,12 @@
   <ItemGroup>
     <Text Include="input.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="fenwicktree.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="MEASURETIME.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
