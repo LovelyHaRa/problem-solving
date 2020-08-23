@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="수식_최대화.cpp">
+    <ClCompile Include="추석_트래픽.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
