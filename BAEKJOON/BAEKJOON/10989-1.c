@@ -1,0 +1,1 @@
+n['((']; t; main(i, N) { for (; ~scanf("%d", &N);)--i&&n[N]++; for (; t++<1e4;)for (; n[t]--;)printf("%d ", t); }
