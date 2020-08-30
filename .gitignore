@@ -30,26 +30,19 @@
 *.exe
 *.out
 *.app
-/BAEKJOON/.vs/BAEKJOON/v15
-/BAEKJOON/.vs/BAEKJOON/v15/Browse.VC.db
-/BAEKJOON/.vs/BAEKJOON/v15/Browse.VC.opendb
 *.opendb
 *.db
-/BAEKJOON/.vs/BAEKJOON/v15
+/BAEKJOON/.vs/**/*
 /BAEKJOON/BAEKJOON/x64
 /BAEKJOON/BAEKJOON/Debug
 /BAEKJOON/BAEKJOON/*.vcxproj.*
 /BAEKJOON/BAEKJOON/*.txt
 
-/PROGRAMMERS/.vs/PROGRAMMERS/v15
-/PROGRAMMERS/.vs/PROGRAMMERS/v15/Browse.VC.db
-/PROGRAMMERS/.vs/PROGRAMMERS/v15/Browse.VC.opendb
+/PROGRAMMERS/.vs/**/*
 /PROGRAMMERS/PROGRAMMERS/Debug
 /PROGRAMMERS/PROGRAMMERS/*.vcxproj.*
 
-/AOJ/.vs/AOJ/v15
-/AOJ/.vs/AOJ/v15/Browse.VC.db
-/AOJ/.vs/AOJ/v15/Browse.VC.opendb
+/AOJ/.vs/**/*
 /AOJ/AOJ/Debug
 /AOJ/AOJ/*.vcxproj.*
 
