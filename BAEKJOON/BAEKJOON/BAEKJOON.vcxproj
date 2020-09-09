@@ -106,6 +106,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>26451</DisableSpecificWarnings>
+      <ErrorReporting>Prompt</ErrorReporting>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
