@@ -32,21 +32,10 @@
 *.app
 *.opendb
 *.db
-/BAEKJOON/.vs/**/*
-/BAEKJOON/BAEKJOON/x64
-/BAEKJOON/BAEKJOON/Debug
-/BAEKJOON/BAEKJOON/*.vcxproj.*
-/BAEKJOON/BAEKJOON/*.txt
 
-/PROGRAMMERS/.vs/**/*
-/PROGRAMMERS/PROGRAMMERS/Debug
-/PROGRAMMERS/PROGRAMMERS/*.vcxproj.*
-
-/AOJ/.vs/**/*
-/AOJ/AOJ/Debug
-/AOJ/AOJ/*.vcxproj.*
+/Problem_Solving/.vs/**/*
+/Problem_Solving/**/Debug
+/Problem_Solving/**/*.vcxproj.*
+/Problem_Solving/**/*.txt
 
 /.vs
-
-/PROGRAMMERS/PROGRAMMERS/200405.cpp
-/PROGRAMMERS/PROGRAMMERS/20040502.cpp
