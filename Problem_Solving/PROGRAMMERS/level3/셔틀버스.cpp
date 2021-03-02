@@ -6,8 +6,8 @@ using namespace std;
 
 string solution(int n, int t, int m, vector<string> timetable) {
 	string answer = "";
-	vector<int> minutetable; // tametable ½Ã°£µéÀ» ºĞ ´ÜÀ§·Î º¯È¯ÇÑ °ª ÀúÀå
-	// 1. timetable ½Ã°£µéÀ» ºĞ´ÜÀ§·Î º¯È¯
+	vector<int> minutetable; // tametable ì‹œê°„ë“¤ì„ ë¶„ ë‹¨ìœ„ë¡œ ë³€í™˜í•œ ê°’ ì €ì¥
+	// 1. timetable ì‹œê°„ë“¤ì„ ë¶„ë‹¨ìœ„ë¡œ ë³€í™˜
 	for (int i = 0; i < timetable.size(); i++) {
 		int minute = 0, k = 60, j = 0;
 		while (k > 0) {
@@ -17,31 +17,31 @@ string solution(int n, int t, int m, vector<string> timetable) {
 		}
 		minutetable.push_back(minute);
 	}
-	// 2. ¿À¸§Â÷¼ø Á¤·Ä
+	// 2. ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
 	sort(minutetable.begin(), minutetable.end());
-	// 3. ¹ö½º Å¾½Â ½Ã¹Ä·¹ÀÌ¼Ç
-	// ¹ö½º µµÂø ½Ã°£, timetable ÀÎµ¦½º, Å¾½Â ÀÎ¿ø ¼ö, µµÂøÇØ¾ßµÇ´Â ½Ã°£
+	// 3. ë²„ìŠ¤ íƒ‘ìŠ¹ ì‹œë®¬ë ˆì´ì…˜
+	// ë²„ìŠ¤ ë„ì°© ì‹œê°„, timetable ì¸ë±ìŠ¤, íƒ‘ìŠ¹ ì¸ì› ìˆ˜, ë„ì°©í•´ì•¼ë˜ëŠ” ì‹œê°„
 	int bustime = 540, tableidx = 0, takecnt = m, res;
-	// ¼ÅÆ² ¹ö½º ¼øÈ¸
+	// ì…”í‹€ ë²„ìŠ¤ ìˆœíšŒ
 	for (int i = 0; i < n; i++, bustime += t) {
-		takecnt = m; // Å¾½Â ÀÎ¿ø ¼ö ÃÊ±âÈ­
-		// ¹ö½º¿¡ ´ë±âÇÏ´Â »ç¶÷ ÅÂ¿ì±â
+		takecnt = m; // íƒ‘ìŠ¹ ì¸ì› ìˆ˜ ì´ˆê¸°í™”
+		// ë²„ìŠ¤ì— ëŒ€ê¸°í•˜ëŠ” ì‚¬ëŒ íƒœìš°ê¸°
 		while (takecnt-- && tableidx != minutetable.size()) {
-			// ÇöÀç ¹ö½º¸¦ ¸øÅ¸´Â »ç¶÷ÀÎ °æ¿ì ´ÙÀ½ ¹ö½º¸¦ Å¸¾ßµÈ´Ù
+			// í˜„ì¬ ë²„ìŠ¤ë¥¼ ëª»íƒ€ëŠ” ì‚¬ëŒì¸ ê²½ìš° ë‹¤ìŒ ë²„ìŠ¤ë¥¼ íƒ€ì•¼ëœë‹¤
 			if (bustime < minutetable[tableidx]) {
 				break;
 			}
-			tableidx++; // ÀÎµ¦½º Áõ°¡
+			tableidx++; // ì¸ë±ìŠ¤ ì¦ê°€
 		}
-		// ¸¶Áö¸· ¹ö½ºÀÏ ¶§
+		// ë§ˆì§€ë§‰ ë²„ìŠ¤ì¼ ë•Œ
 		if (i == n - 1) {
-			// ½Â°´À» ¸ğµÎ ÅÂ¿î´Ù¸é, °¡Àå ¸¶Áö¸·¿¡ Åº»ç¶÷º¸´Ù 1ºĞ »¡¸®¿Í¾ßÇÑ´Ù
+			// ìŠ¹ê°ì„ ëª¨ë‘ íƒœìš´ë‹¤ë©´, ê°€ì¥ ë§ˆì§€ë§‰ì— íƒ„ì‚¬ëŒë³´ë‹¤ 1ë¶„ ë¹¨ë¦¬ì™€ì•¼í•œë‹¤
 			if (takecnt < 0) res = minutetable[tableidx - 1] - 1;
-			// ±×·¸Áö ¾Ê´Ù¸é ¹ö½º ½Ã°£¿¡ ¸ÂÃç¼­ µµÂøÇÏ¸é µÈ´Ù
+			// ê·¸ë ‡ì§€ ì•Šë‹¤ë©´ ë²„ìŠ¤ ì‹œê°„ì— ë§ì¶°ì„œ ë„ì°©í•˜ë©´ ëœë‹¤
 			else res = bustime;
 		}
 	}
-	// µµÂøÇØ¾ß µÇ´Â ½Ã°£À»À» ½Ã°£ ¹®ÀÚ¿­·Î º¯È¯ÇÑ´Ù
+	// ë„ì°©í•´ì•¼ ë˜ëŠ” ì‹œê°„ì„ì„ ì‹œê°„ ë¬¸ìì—´ë¡œ ë³€í™˜í•œë‹¤
 	answer += (res / 60) / 10 + '0';
 	answer += (res / 60) % 10 + '0';
 	answer += ':';

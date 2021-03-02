@@ -3,37 +3,37 @@
 
 using namespace std;
 
-// °áÁ¤ ¹®Á¦: ±×¸®µğ ¾Ë°í¸®Áò ÀÌ¿ë
-// Ä«¸Ş¶ó¸¦ ÁöÁ¡¸¶´Ù gap¸¸Å­ ¶ç¿ö¼­ ¼³Ä¡ÇÒ ¼ö ÀÖ´Â °æ¿ì°¡ Ä«¸Ş¶ó ¼öº¸´Ù Å©¸é true
+// ê²°ì • ë¬¸ì œ: ê·¸ë¦¬ë”” ì•Œê³ ë¦¬ì¦˜ ì´ìš©
+// ì¹´ë©”ë¼ë¥¼ ì§€ì ë§ˆë‹¤ gapë§Œí¼ ë„ì›Œì„œ ì„¤ì¹˜í•  ìˆ˜ ìˆëŠ” ê²½ìš°ê°€ ì¹´ë©”ë¼ ìˆ˜ë³´ë‹¤ í¬ë©´ true
 bool decision(const vector<double>& location, int cameras, double gap)
 {
-	double limit = -1; // ´ÙÀ½ Ä«¸Ş¶ó ¼³Ä¡ ÃÖ¼Ò ÁöÁ¡
-	int installed = 0; // ¼³Ä¡ÇÑ Ä«¸Ş¶ó ´ë¼ö
-	// ¼³Ä¡ °¡´ÉÇÑ ÁöÁ¡À» Å½»ö
+	double limit = -1; // ë‹¤ìŒ ì¹´ë©”ë¼ ì„¤ì¹˜ ìµœì†Œ ì§€ì 
+	int installed = 0; // ì„¤ì¹˜í•œ ì¹´ë©”ë¼ ëŒ€ìˆ˜
+	// ì„¤ì¹˜ ê°€ëŠ¥í•œ ì§€ì ì„ íƒìƒ‰
 	for (int i = 0; i < location.size(); i++)
 	{
 		if (limit <= location[i])
 		{
 			installed++;
-			// gap ÀÌ»ó ¸¸Å­ µÇ¾î¾ß ¼³Ä¡ °¡´É
+			// gap ì´ìƒ ë§Œí¼ ë˜ì–´ì•¼ ì„¤ì¹˜ ê°€ëŠ¥
 			limit = location[i] + gap;
 		}
 	}
-	// °á°úÀûÀ¸·Î Ä«¸Ş¶ó ´ë¼öº¸´Ù ¸¹ÀÌ ¼³Ä¡ÇÒ ¼ö ÀÖÀ¸¸é true
+	// ê²°ê³¼ì ìœ¼ë¡œ ì¹´ë©”ë¼ ëŒ€ìˆ˜ë³´ë‹¤ ë§ì´ ì„¤ì¹˜í•  ìˆ˜ ìˆìœ¼ë©´ true
 	return cameras <= installed;
 }
 
-// ÃÖÀûÈ­ ¹®Á¦: ÀÌºĞ¹ı ÀÌ¿ë
+// ìµœì í™” ë¬¸ì œ: ì´ë¶„ë²• ì´ìš©
 double optimize(const vector<double>& location, int cameras)
 {
 	double lo = 0, hi = 241;
 	for (int i = 0; i < 100; i++)
 	{
 		double mid = (lo + hi) / 2.0;
-		// mid °ªÀÌ °¡´ÉÇÑ °æ¿ì¶ó¸é ´äÀº ¿À¸¥ÂÊ ±¸°£¿¡ Á¸Àç
+		// mid ê°’ì´ ê°€ëŠ¥í•œ ê²½ìš°ë¼ë©´ ë‹µì€ ì˜¤ë¥¸ìª½ êµ¬ê°„ì— ì¡´ì¬
 		if (decision(location, cameras, mid))
 			lo = mid;
-		// ±×·¸Áö ¾Ê´Ù¸é ¿ŞÂÊ ±¸°£¿¡ Á¸Àç
+		// ê·¸ë ‡ì§€ ì•Šë‹¤ë©´ ì™¼ìª½ êµ¬ê°„ì— ì¡´ì¬
 		else
 			hi = mid;
 	}
@@ -51,7 +51,7 @@ int main(void)
 		vector<double> location(m);
 		for (int i = 0; i < m; i++)
 			cin >> location[i];
-		// ¼¼¹øÂ° ÀÚ¸®¿¡¼­ ¹İ¿Ã¸²
+		// ì„¸ë²ˆì§¸ ìë¦¬ì—ì„œ ë°˜ì˜¬ë¦¼
 		cout.precision(2);
 		cout << fixed << optimize(location, n) << '\n';
 	}

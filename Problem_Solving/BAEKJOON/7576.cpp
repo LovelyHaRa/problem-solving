@@ -13,24 +13,24 @@ int main(void)
 	queue<pair<int, int>> q;
 	int dx[] = { -1, 0, 1, 0 };
 	int dy[] = { 0, -1, 0, 1 };
-	int seq = 0, curSeq, day = 0; // ������ ť�� �߰��� Ƚ��, ���� ť�� �߰��� Ƚ��, �ϼ�
+	int seq = 0, curSeq, day = 0; // 전날에 큐에 추가된 횟수, 당일 큐에 추가된 횟수, 일수
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < m; j++)
 		{
 			cin >> adj[i][j];
-			// 1�̸� ť�� �߰�
+			// 1이면 큐에 추가
 			if (adj[i][j] == 1)
 			{
 				q.push(make_pair(i, j));
-				seq++; // ť�� �߰��� Ƚ�� ����
+				seq++; // 큐에 추가된 횟수 증가
 			}
 		}
-	// bfs Ž��
+	// bfs 탐색
 	while (!q.empty())
 	{
 		curSeq = 0;
-		int flag = 0; // ������ �丶�䰡 �̹� �;��ų� ���ٴ� ���� �ľ��ϱ� ���� �÷���
-		// ���� ť�� �߰��� Ƚ����ŭ ť���� ������
+		int flag = 0; // 인접한 토마토가 이미 익었거나 없다는 것을 파악하기 위한 플래그
+		// 전날 큐에 추가된 횟수만큼 큐에서 꺼낸다
 		for (int i = 0; i < seq; i++)
 		{
 			int x = q.front().first, y = q.front().second;
@@ -41,17 +41,17 @@ int main(void)
 				int nx = x + dx[j], ny = y + dy[j];
 				if (nx >= 0 && nx < n && ny >= 0 && ny < m && !visited[nx][ny] && !adj[nx][ny])
 				{
-					curSeq++; // ���� ť�� �߰��� Ƚ�� �߰�
-					flag = 1; // ������ �丶�並 �߰�(�ϼ��� ����)
+					curSeq++; // 당을 큐에 추가된 횟수 추가
+					flag = 1; // 안익은 토마토를 발견(일수를 증가)
 					adj[nx][ny] = 1;
-					q.push(make_pair(nx, ny)); // ť�� ����
+					q.push(make_pair(nx, ny)); // 큐에 삽입
 				}
 			}
 		}
-		seq = curSeq; // ť�� �߰��� Ƚ�� ����
-		if (flag) day++; // ������ �丶�䰡 �߰ߵǸ� �ϼ��� ����
+		seq = curSeq; // 큐에 추가된 횟수 갱신
+		if (flag) day++; // 안익은 토마토가 발견되면 일수를 증가
 	}
-	// ������ �丶�䰡 �ִ��� Ȯ��
+	// 안익은 토마토가 있는지 확인
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < m; j++)
 		{
@@ -61,6 +61,6 @@ int main(void)
 				return 0;
 			}
 		}
-	// ������ �丶�䰡 ������ �ϼ� ���
+	// 안익은 토마토가 없으면 일수 출력
 	cout << day << '\n';
 }

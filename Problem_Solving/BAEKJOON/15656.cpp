@@ -9,16 +9,16 @@ vector<int> a, selected;
 
 void permutation(int cnt)
 {
-	// ±âÀú»ç·Ê: cnt==m
+	// ê¸°ì €ì‚¬ë¡€: cnt==m
 	if (cnt == m)
 	{
-		// Ãâ·Â
+		// ì¶œë ¥
 		for (int i = 0; i < m; i++)
 			cout << selected[i] << ' ';
 		cout << '\n';
 		return;
 	}
-	// Áßº¹ ¼ø¿­ÀÌ¹Ç·Î ¸ðµç °æ¿ì¸¦ DFS
+	// ì¤‘ë³µ ìˆœì—´ì´ë¯€ë¡œ ëª¨ë“  ê²½ìš°ë¥¼ DFS
 	for (int i = 0; i < n; i++)
 	{
 		selected[cnt] = a[i];
@@ -34,7 +34,7 @@ int main(void)
 	selected.resize(m);
 	for (int i = 0; i < n; i++)
 		cin >> a[i];
-	// ¿À¸§Â÷¼ø Á¤·Ä
+	// ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
 	sort(a.begin(), a.end());
 	permutation(0);
 }

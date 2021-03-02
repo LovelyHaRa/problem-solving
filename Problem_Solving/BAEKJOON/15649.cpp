@@ -1,20 +1,20 @@
-// °£´ÜÇÑ DFS ¹®Á¦
-// ¼ø¿­ ±¸ÇÏ±â
+// ê°„ë‹¨í•œ DFS ë¬¸ì œ
+// ìˆœì—´ êµ¬í•˜ê¸°
 
 #include<iostream>
 #include<vector>
 using namespace std;
 
 int N, M;
-vector<int> s; // Ãâ·Â ¼ýÀÚ ÀúÀå
-int f[10]; // ¹æ¹® ¿©ºÎ Ã¼Å©
+vector<int> s; // ì¶œë ¥ ìˆ«ìž ì €ìž¥
+int f[10]; // ë°©ë¬¸ ì—¬ë¶€ ì²´í¬
 
 void func(int x)
 {
-	// ¼ø¿­ °³¼ö¸¸Å­ÀÇ ±íÀÌ¿¡ µµ´ÞÇÏ¸é
+	// ìˆœì—´ ê°œìˆ˜ë§Œí¼ì˜ ê¹Šì´ì— ë„ë‹¬í•˜ë©´
 	if (x == M)
 	{
-		// ÀúÀåÇÑ ¼ø¿­ Ãâ·Â
+		// ì €ìž¥í•œ ìˆœì—´ ì¶œë ¥
 		for (int i = 0; i < s.size(); i++)
 			cout << s[i] << ' ';
 		cout << '\n';
@@ -23,12 +23,12 @@ void func(int x)
 
 	for (int i = 1; i <= N; i++)
 	{
-		if (f[i]) continue; // ÀÌ¹Ì Ã¼Å© µÇ¾ú´Ù¸é ¼ø¿­ ºÒ°¡´É
-		f[i] = 1; // ¼ýÀÚ Ã¼Å©
-		s.push_back(i); // ¼ø¿­¿¡ Áý¾î³Ö±â
-		func(x + 1); // ±íÀÌ Áõ°¡
-		s.pop_back(); // ¼ø¿­¿¡¼­ »©±â
-		f[i] = 0; // Ã¼Å© ÃÊ±âÈ­
+		if (f[i]) continue; // ì´ë¯¸ ì²´í¬ ë˜ì—ˆë‹¤ë©´ ìˆœì—´ ë¶ˆê°€ëŠ¥
+		f[i] = 1; // ìˆ«ìž ì²´í¬
+		s.push_back(i); // ìˆœì—´ì— ì§‘ì–´ë„£ê¸°
+		func(x + 1); // ê¹Šì´ ì¦ê°€
+		s.pop_back(); // ìˆœì—´ì—ì„œ ë¹¼ê¸°
+		f[i] = 0; // ì²´í¬ ì´ˆê¸°í™”
 	}
 }
 
@@ -39,5 +39,5 @@ int main(void)
 	cout.tie(0);
 		
 	cin >> N >> M;
-	func(0); // ±íÀÌ 0ºÎÅÍ ½ÃÀÛ
+	func(0); // ê¹Šì´ 0ë¶€í„° ì‹œìž‘
 }

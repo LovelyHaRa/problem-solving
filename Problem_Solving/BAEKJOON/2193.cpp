@@ -5,16 +5,16 @@ using namespace std;
 
 vector<long long> cache;
 
-// ±ÔÄ¢ °á°ú ÇÇº¸³ªÄ¡ ¼ö¿­ÀÓÀ» ¾Ë°Ô µÊ
+// ê·œì¹™ ê²°ê³¼ í”¼ë³´ë‚˜ì¹˜ ìˆ˜ì—´ìž„ì„ ì•Œê²Œ ë¨
 long long f(int k)
 {
-	// ±âÀú »ç·Ê
+	// ê¸°ì € ì‚¬ë¡€
 	if (k < 0) return 0;
 	if (k <= 1) return k;
-	// ¸Þ¸ðÀÌÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì´ì œì´ì…˜
 	long long& ret = cache[k];
 	if (ret != -1) return ret;
-	// Á¡È­½Ä = f(n)=f(n-1)+f(n-2)
+	// ì í™”ì‹ = f(n)=f(n-1)+f(n-2)
 	return ret = f(k - 1) + f(k - 2);
 }
 

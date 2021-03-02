@@ -6,45 +6,45 @@ int main(void)
 {
 	int n;
 	cin >> n;
-	bool visited[200][200] = { 0, }; // ÁÂÇ¥ ¹æ¹® ¿©ºÎ
+	bool visited[200][200] = { 0, }; // ì¢Œí‘œ ë°©ë¬¸ ì—¬ë¶€
 	int r1, c1, r2, c2;
 	cin >> r1 >> c1 >> r2 >> c2;
-	// ÀÌµ¿ Áõ°¡·®
+	// ì´ë™ ì¦ê°€ëŸ‰
 	int dr[] = { -2,-2,0,0,2,2 };
 	int dc[] = { -1,1,-2,2,-1,1 };
-	// ÃÊ±â Å¥ ¼¼ÆÃ
+	// ì´ˆê¸° í ì„¸íŒ…
 	queue<pair<int, int>> q;
 	q.push(make_pair(r1, c1));
 	visited[r1][c1] = 1;
-	int moveCnt = 0; // ÀÌµ¿ È½¼ö
-	// BFS Å½»ö
+	int moveCnt = 0; // ì´ë™ íšŸìˆ˜
+	// BFS íƒìƒ‰
 	while (!q.empty())
 	{
-		int curSize = q.size(); // ÇöÀç ÀÌµ¿ÇÑ °÷¿¡¼­ ´ÙÀ½ ÀÌµ¿±îÁö °¡´ÉÇÑ ¸ğµç °æ¿ìÀÇ ¼ö
+		int curSize = q.size(); // í˜„ì¬ ì´ë™í•œ ê³³ì—ì„œ ë‹¤ìŒ ì´ë™ê¹Œì§€ ê°€ëŠ¥í•œ ëª¨ë“  ê²½ìš°ì˜ ìˆ˜
 		while (curSize--)
 		{
-			// Äí¿¡¼­ ÃßÃâ
+			// ì¿ ì—ì„œ ì¶”ì¶œ
 			int cr = q.front().first, cc = q.front().second;
 			q.pop();
-			// ¸ñÇ¥ÁöÁ¡ µµÂø È®ÀÎ
+			// ëª©í‘œì§€ì  ë„ì°© í™•ì¸
 			if (cr == r2 && cc == c2)
 			{
-				// Ãâ·Â ÈÄ ÇÁ·Î±×·¥ Á¾·á
+				// ì¶œë ¥ í›„ í”„ë¡œê·¸ë¨ ì¢…ë£Œ
 				cout << moveCnt << '\n';
 				return 0;
 			}
-			// ÁÂÇ¥ ÀÌµ¿ ¿©ºÎ
+			// ì¢Œí‘œ ì´ë™ ì—¬ë¶€
 			for (int i = 0; i < 6; i++)
 			{
-				int nr = cr + dr[i], nc = cc + dc[i]; // ÁÂÇ¥ °»½Å
-				// Á¶°Ç È®ÀÎ
+				int nr = cr + dr[i], nc = cc + dc[i]; // ì¢Œí‘œ ê°±ì‹ 
+				// ì¡°ê±´ í™•ì¸
 				if (nr < 0 || nr >= n || nc < 0 || nc >= n || visited[nr][nc]) continue;
-				// ÀÌµ¿ÇÒ ¼ö ÀÖÀ½À» ÀÇ¹Ì
-				visited[nr][nc] = 1; // ¹æ¹® Ã¼Å©
-				q.push(make_pair(nr, nc)); // Å¥¿¡ Ãß°¡
+				// ì´ë™í•  ìˆ˜ ìˆìŒì„ ì˜ë¯¸
+				visited[nr][nc] = 1; // ë°©ë¬¸ ì²´í¬
+				q.push(make_pair(nr, nc)); // íì— ì¶”ê°€
 			}
 		}
 		moveCnt++;
 	}
-	cout << "-1\n"; // ¸ñÇ¥ À§Ä¡¿¡ µµ´ŞÇÏÁö ¸øÇÔ
+	cout << "-1\n"; // ëª©í‘œ ìœ„ì¹˜ì— ë„ë‹¬í•˜ì§€ ëª»í•¨
 }

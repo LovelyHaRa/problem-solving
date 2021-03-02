@@ -8,23 +8,23 @@ vector<int> cache;
 
 int min(int a, int b) { return a < b ? a : b; }
 
-// k¸¦ Á¦°ö¼öÀÇ ÇÕÀ¸·Î Ç¥ÇöÇÒ ¼ö ÀÖ´Â Á¦°ö¼öÀÇ °³¼ö¸¦ ±¸ÇÑ´Ù
+// kë¥¼ ì œê³±ìˆ˜ì˜ í•©ìœ¼ë¡œ í‘œí˜„í•  ìˆ˜ ìžˆëŠ” ì œê³±ìˆ˜ì˜ ê°œìˆ˜ë¥¼ êµ¬í•œë‹¤
 int countSum(int k)
 {
-	// ±âÀú »ç·Ê: k==1
+	// ê¸°ì € ì‚¬ë¡€: k==1
 	if (k == 1) return 1;
-	// ¸Þ¸ðÀÌÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì´ì œì´ì…˜
 	int& ret = cache[k];
 	if (ret != -1) return ret;
-	ret = 100001; // ÃÖ¼Ú°ª ÀúÀåÀ» À§ÇÑ ÃÊ±â°ª ¼¼ÆÃ
-	double t = sqrt((double)k); // Á¦°ö±Ù °ª ±¸ÇÏ±â
-	if (t == ceil(t)) return ret = 1; // k°¡ Á¦°ö¼öÀÎÁö ÆÇº°
+	ret = 100001; // ìµœì†Ÿê°’ ì €ìž¥ì„ ìœ„í•œ ì´ˆê¸°ê°’ ì„¸íŒ…
+	double t = sqrt((double)k); // ì œê³±ê·¼ ê°’ êµ¬í•˜ê¸°
+	if (t == ceil(t)) return ret = 1; // kê°€ ì œê³±ìˆ˜ì¸ì§€ íŒë³„
 	else
 	{
-		// k ÀÌÇÏ °¡´ÉÇÑ ¸ðµç Á¦°ö¼ö Å½»ö( 12ÀÇ °æ¿ì (4+4+4) < (9+1+1+1) )
-		// Á¡È­½Ä countSum(k)=count(i^2)+count(k-i^2) (i: 1~t)
+		// k ì´í•˜ ê°€ëŠ¥í•œ ëª¨ë“  ì œê³±ìˆ˜ íƒìƒ‰( 12ì˜ ê²½ìš° (4+4+4) < (9+1+1+1) )
+		// ì í™”ì‹ countSum(k)=count(i^2)+count(k-i^2) (i: 1~t)
 		for (int i = (int)t; i > 0; i--)
-			ret = min(ret, countSum(pow(i, 2)) + countSum(k - pow(i, 2))); // ÃÖ¼Ú°ª °»½Å
+			ret = min(ret, countSum(pow(i, 2)) + countSum(k - pow(i, 2))); // ìµœì†Ÿê°’ ê°±ì‹ 
 	}
 	return ret;
 }

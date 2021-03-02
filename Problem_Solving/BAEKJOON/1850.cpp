@@ -14,8 +14,8 @@ int main(void)
 	long long a, b;
 	cin >> a >> b;
 	/*
-	  µÎ ¼öÀÇ ÃÖ´ë °ø¾à¼ö ¸¸Å­ 1À» ¹Ýº¹ Ãâ·Â
-	  µÎ ¼öÀÇ ÃÖ´ë °ø¾à¼ö ¸¸Å­ 1À» ¹Ýº¹ Ãâ·Â
+	  ë‘ ìˆ˜ì˜ ìµœëŒ€ ê³µì•½ìˆ˜ ë§Œí¼ 1ì„ ë°˜ë³µ ì¶œë ¥
+	  ë‘ ìˆ˜ì˜ ìµœëŒ€ ê³µì•½ìˆ˜ ë§Œí¼ 1ì„ ë°˜ë³µ ì¶œë ¥
 	*/
 	for (int i = 0; i < GCD(a,b); i++)
 		cout << "1";

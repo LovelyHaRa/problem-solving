@@ -10,7 +10,7 @@ int blockSize;
 vector< vector<pair<int, int>>> rotations;
 vector<vector<int>> covered;
 
-// ºí·ÏÀ» È¸Àü½ÃÅ²´Ù
+// ë¸”ë¡ì„ íšŒì „ì‹œí‚¨ë‹¤
 vector<string> rotate(const vector<string>& arr)
 {
 	vector<string> ret(arr[0].size(), string(arr.size(), ' '));
@@ -20,12 +20,12 @@ vector<string> rotate(const vector<string>& arr)
 	return ret;
 }
 
-// ºí·ÏÀÇ »ó´ëÁÂÇ¥¸¦ ¸ğµÎ ÀúÀåÇÑ´Ù
+// ë¸”ë¡ì˜ ìƒëŒ€ì¢Œí‘œë¥¼ ëª¨ë‘ ì €ì¥í•œë‹¤
 void generateRotations(vector<string> block)
 {
 	rotations.clear();
 	rotations.resize(4);
-	// ÃÑ 4°³
+	// ì´ 4ê°œ
 	for (int rot = 0; rot < 4; rot++)
 	{
 		int originY = -1, originX = -1;
@@ -33,61 +33,61 @@ void generateRotations(vector<string> block)
 			for (int j = 0; j < block[i].size(); j++)
 				if (block[i][j] == '#')
 				{
-					// ÁÂ»ó´Ü ÁÂÇ¥¸¦ ±¸ÇÑ´Ù
+					// ì¢Œìƒë‹¨ ì¢Œí‘œë¥¼ êµ¬í•œë‹¤
 					if (originY == -1)
 					{
 						originY = i;
 						originX = j;
 					}
-					// ÁÂ»ó´Ü ÁÂÇ¥ ±âÁØ »ó´ëÁÂÇ¥¸¦ ÀúÀåÇÑ´Ù.
+					// ì¢Œìƒë‹¨ ì¢Œí‘œ ê¸°ì¤€ ìƒëŒ€ì¢Œí‘œë¥¼ ì €ì¥í•œë‹¤.
 					rotations[rot].push_back(make_pair(i - originY, j - originX));
 				}
-		block = rotate(block); // ºí·ÏÀ» 90µµ È¸Àü½ÃÅ²´Ù.
+		block = rotate(block); // ë¸”ë¡ì„ 90ë„ íšŒì „ì‹œí‚¨ë‹¤.
 	}
-	sort(rotations.begin(), rotations.end()); // Á¤·Ä
-	// Áßº¹µÇ´Â ºí·°À» Á¦°ÅÇÑ´Ù.
+	sort(rotations.begin(), rotations.end()); // ì •ë ¬
+	// ì¤‘ë³µë˜ëŠ” ë¸”ëŸ­ì„ ì œê±°í•œë‹¤.
 	rotations.erase(unique(rotations.begin(), rotations.end()), rotations.end());
-	blockSize = rotations[0].size(); // ºí·° ÀÚÃ¼ÀÇ °³¼ö¸¦ ±¸ÇÑ´Ù
+	blockSize = rotations[0].size(); // ë¸”ëŸ­ ìì²´ì˜ ê°œìˆ˜ë¥¼ êµ¬í•œë‹¤
 }
 
 int best;
-// (y,x)¿¡ ºí·°À» ³õÀ» ¼ö ÀÖ´ÂÁö ¿©ºÎ¸¦ ¹İÈ¯, delta·Î ºí·°À» ³Ö°Å³ª »«´Ù.
+// (y,x)ì— ë¸”ëŸ­ì„ ë†“ì„ ìˆ˜ ìˆëŠ”ì§€ ì—¬ë¶€ë¥¼ ë°˜í™˜, deltaë¡œ ë¸”ëŸ­ì„ ë„£ê±°ë‚˜ ëº€ë‹¤.
 bool set(int y, int x, const vector<pair<int, int>>& block, int delta)
 {
 	bool res = true;
 	for (int i = 0; i < block.size(); i++)
 	{
-		// ÁÂÇ¥°¡ ¹üÀ§ ¾È¿¡ Æ÷ÇÔµÇ¸é
+		// ì¢Œí‘œê°€ ë²”ìœ„ ì•ˆì— í¬í•¨ë˜ë©´
 		if (y + block[i].first >= 0 && y + block[i].first < h && x + block[i].second >= 0 && x + block[i].second < w)
 		{
-			covered[y + block[i].first][x + block[i].second] += delta; // ºí·° ³Ö±â/»©±â
-			res = res && (covered[y + block[i].first][x + block[i].second] == 1); // ³ÖÀº À§Ä¡°¡ °ËÀº»öÀÌ¸é 2ÀÏ °Í ÀÌ´Ù
+			covered[y + block[i].first][x + block[i].second] += delta; // ë¸”ëŸ­ ë„£ê¸°/ë¹¼ê¸°
+			res = res && (covered[y + block[i].first][x + block[i].second] == 1); // ë„£ì€ ìœ„ì¹˜ê°€ ê²€ì€ìƒ‰ì´ë©´ 2ì¼ ê²ƒ ì´ë‹¤
 		}
 		else res = false;
 	}
 	return res;
 }
 
-// °¡ÁöÄ¡±â
+// ê°€ì§€ì¹˜ê¸°
 int blockPrune(int placed)
 {
 	int cnt = 0;
-	// º¸µå¿¡ ³ÖÀ» ¼ö ÀÖ´Â Ä­ÀÇ °³¼ö¸¦ ±¸ÇÑ´Ù.
+	// ë³´ë“œì— ë„£ì„ ìˆ˜ ìˆëŠ” ì¹¸ì˜ ê°œìˆ˜ë¥¼ êµ¬í•œë‹¤.
 	for (int i = 0; i < h; i++)
 	{
 		for (int j = 0; j < w; j++)
 			cnt += !(covered[i][j]) ? 1 : 0;
 	}
-	// Ä­ÀÇ °³¼ö / ºí·°´ÜÀ§ °³¼ö + ³ÖÀº ºí·°ÀÇ °³¼ö°¡ bestº¸´Ù ÀÛÀ¸¸é ÀÌ °æ¿ì´Â ÃÖÀûÇØ¸¦ Ã£À» ¼ö ¾ø´Ù
+	// ì¹¸ì˜ ê°œìˆ˜ / ë¸”ëŸ­ë‹¨ìœ„ ê°œìˆ˜ + ë„£ì€ ë¸”ëŸ­ì˜ ê°œìˆ˜ê°€ bestë³´ë‹¤ ì‘ìœ¼ë©´ ì´ ê²½ìš°ëŠ” ìµœì í•´ë¥¼ ì°¾ì„ ìˆ˜ ì—†ë‹¤
 	return ((cnt / blockSize) + placed <= best);
 }
 
 void search(int placed)
 {
-	// °¡ÁöÄ¡±â
+	// ê°€ì§€ì¹˜ê¸°
 	if (blockPrune(placed))
 		return;
-	// ÁÂ»ó´ÜºÎÅÍ ÃÖÃÊÀÇ ºó °ø°£À» Ã£´Â´Ù.
+	// ì¢Œìƒë‹¨ë¶€í„° ìµœì´ˆì˜ ë¹ˆ ê³µê°„ì„ ì°¾ëŠ”ë‹¤.
 	int y = -1, x = -1;
 	for (int i = 0; i < h; i++)
 	{
@@ -102,21 +102,21 @@ void search(int placed)
 		}
 		if (y != -1) break;
 	}
-	// ±âÀú »ç·Ê: ¸ğµç Ä­ÀÌ Ã¤¿öÁ® ÀÖÀ¸¸é ÃÖ´ë°ª °»½Å ÈÄ ¸®ÅÏ
+	// ê¸°ì € ì‚¬ë¡€: ëª¨ë“  ì¹¸ì´ ì±„ì›Œì ¸ ìˆìœ¼ë©´ ìµœëŒ€ê°’ ê°±ì‹  í›„ ë¦¬í„´
 	if (y == -1)
 	{
 		best = max(best, placed);
 		return;
 	}
-	// ºí·°À» ³Ö¾îº»´Ù
+	// ë¸”ëŸ­ì„ ë„£ì–´ë³¸ë‹¤
 	for (int i = 0; i < rotations.size(); i++)
 	{
-		// ºí·° Ã¤¿ì±â
+		// ë¸”ëŸ­ ì±„ìš°ê¸°
 		if (set(y, x, rotations[i], 1))
-			search(placed + 1); // Ã¤¿ï ¼ö ÀÖÀ¸¸é Ä«¿îÆÃ ÇÏ°í Àç±ÍÅ½»ö
-		set(y, x, rotations[i], -1); // ºí·° »©±â
+			search(placed + 1); // ì±„ìš¸ ìˆ˜ ìˆìœ¼ë©´ ì¹´ìš´íŒ… í•˜ê³  ì¬ê·€íƒìƒ‰
+		set(y, x, rotations[i], -1); // ë¸”ëŸ­ ë¹¼ê¸°
 	}
-	covered[y][x] = 1; // ÀÌ Ä­À» µ¤Áö ¾Ê°í ¸·¾ÆµĞ´Ù
+	covered[y][x] = 1; // ì´ ì¹¸ì„ ë®ì§€ ì•Šê³  ë§‰ì•„ë‘”ë‹¤
 	search(placed);
 	covered[y][x] = 0;
 }
@@ -130,7 +130,7 @@ int main(void)
 		cin >> h >> w >> r >> c;
 		vector<string> block(r);
 		covered.resize(h, vector<int>(w));
-		// º¸µåÆÇ Á¤º¸¸¦ 1, 0À¸·Î Ä¡È¯ ÈÄ ÀúÀå
+		// ë³´ë“œíŒ ì •ë³´ë¥¼ 1, 0ìœ¼ë¡œ ì¹˜í™˜ í›„ ì €ì¥
 		for (int i = 0; i < h; i++)
 		{
 			for (int j = 0; j < w; j++)
@@ -142,7 +142,7 @@ int main(void)
 		}
 		for (int i = 0; i < r; i++)
 			cin >> block[i];
-		// ºí·ÏÀÇ »ó´ëÁÂÇ¥ ÀúÀå
+		// ë¸”ë¡ì˜ ìƒëŒ€ì¢Œí‘œ ì €ì¥
 		generateRotations(block);
 		best = 0;
 		search(0);

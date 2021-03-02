@@ -3,23 +3,23 @@
 #include <algorithm>
 using namespace std;
 
-// 4 : ºñ±³ÇÔ¼ö
-// Á¤¼ø, ¿ª¼øÀ¸·Î ÇÕÄ£ °á°ú¸¦ ³»¸²Â÷¼øÀ¸·Î ºñ±³
+// 4 : ë¹„êµí•¨ìˆ˜
+// ì •ìˆœ, ì—­ìˆœìœ¼ë¡œ í•©ì¹œ ê²°ê³¼ë¥¼ ë‚´ë¦¼ì°¨ìˆœìœ¼ë¡œ ë¹„êµ
 bool compare(const string a, const string b)
 {
-	string ab = a + b; // Á¤¼ø
-	string ba = b + a; // ¿ª¼ø
-	return ab > ba ? true : false; // ³»¸²Â÷¼ø ºñ±³
+	string ab = a + b; // ì •ìˆœ
+	string ba = b + a; // ì—­ìˆœ
+	return ab > ba ? true : false; // ë‚´ë¦¼ì°¨ìˆœ ë¹„êµ
 }
 
 string solution(vector<int> numbers) {
 	string answer = "";
 	vector<string> str;
-	// 1. 0 ÀÎÁö °Ë»ç
-	// 2. ¼ýÀÚ¸¦ ¹®ÀÚ·Î Ä¡È¯ÇÏ¿© ¹è¿­¿¡ »ðÀÔ
-	// 3. ÁÖ¾îÁø ¼ö°¡ ¸ðµÎ 0ÀÌ¸é 0 ÇÏ³ª¸¸ ¹ÝÈ¯
-	// 4. µÎ ¹®ÀÚ¿­À» Á¤¼ø, ¿ª¼øÀ¸·Î ÇÕÃÄ¼­ »çÀü¼ø ºñ±³ ³»¸²Â÷¼ø Á¤·Ä
-	// 5. Á¤·Ä °á°ú¸¦ ÇÏ³ªÀÇ ¹®ÀÚ¿­·Î ¸¸µé±â
+	// 1. 0 ì¸ì§€ ê²€ì‚¬
+	// 2. ìˆ«ìžë¥¼ ë¬¸ìžë¡œ ì¹˜í™˜í•˜ì—¬ ë°°ì—´ì— ì‚½ìž…
+	// 3. ì£¼ì–´ì§„ ìˆ˜ê°€ ëª¨ë‘ 0ì´ë©´ 0 í•˜ë‚˜ë§Œ ë°˜í™˜
+	// 4. ë‘ ë¬¸ìžì—´ì„ ì •ìˆœ, ì—­ìˆœìœ¼ë¡œ í•©ì³ì„œ ì‚¬ì „ìˆœ ë¹„êµ ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬
+	// 5. ì •ë ¬ ê²°ê³¼ë¥¼ í•˜ë‚˜ì˜ ë¬¸ìžì—´ë¡œ ë§Œë“¤ê¸°
 	int zero = 0;
 	for (int i : numbers)
 	{

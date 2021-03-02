@@ -1,36 +1,36 @@
 #pragma once
 #include<vector>
 
-// ÆæÀ¨ Æ®¸®ÀÇ ±¸Çö. °¡»óÀÇ ¹è¿­ A[]ÀÇ ºÎºÐÇÕÀ»
-// ºü¸£°Ô ±¸ÇöÇÒ ¼ö ÀÖµµ·Ï ÇÑ´Ù.
-// ÃÊ±âÈ­½Ã¿¡´Â A[]ÀÇ ¿ø¼Ò°¡ ÀüºÎ 0ÀÌ¶ó°í »ý°¢ÇÑ´Ù
+// íŽœìœ… íŠ¸ë¦¬ì˜ êµ¬í˜„. ê°€ìƒì˜ ë°°ì—´ A[]ì˜ ë¶€ë¶„í•©ì„
+// ë¹ ë¥´ê²Œ êµ¬í˜„í•  ìˆ˜ ìžˆë„ë¡ í•œë‹¤.
+// ì´ˆê¸°í™”ì‹œì—ëŠ” A[]ì˜ ì›ì†Œê°€ ì „ë¶€ 0ì´ë¼ê³  ìƒê°í•œë‹¤
 template<typename T>
 struct fenwick_tree
 {
 	std::vector<T> tree;
 	fenwick_tree(int n) : tree(n + 1) {}
-	// pos ±îÁöÀÇ ºÎºÐÇÕÀ» ±¸ÇÑ´Ù
+	// pos ê¹Œì§€ì˜ ë¶€ë¶„í•©ì„ êµ¬í•œë‹¤
 	T sum(int pos)
 	{
-		// ÀÎµ¦½º´Â 1ºÎÅÍ ½ÃÀÛ
+		// ì¸ë±ìŠ¤ëŠ” 1ë¶€í„° ì‹œìž‘
 		pos++;
 		int ret = 0;
 		while (pos > 0)
 		{
 			ret += tree[pos];
-			// ÃÖÁ¾ ºñÆ®¸¦ Áö¿ì´Â ¿¬»ê
+			// ìµœì¢… ë¹„íŠ¸ë¥¼ ì§€ìš°ëŠ” ì—°ì‚°
 			pos &= (pos - 1);
 		}
 		return ret;
 	}
-	// A[pos]¿¡ valÀ» ´õÇÑ´Ù
+	// A[pos]ì— valì„ ë”í•œë‹¤
 	void add(int pos, T val)
 	{
 		pos++;
 		while (pos < tree.size())
 		{
 			tree[pos] += val;
-			// ¸¶Áö¸· ºñÆ®¸¦ ÃßÃâÇØ ´õÇÏ´Â ¿¬»ê
+			// ë§ˆì§€ë§‰ ë¹„íŠ¸ë¥¼ ì¶”ì¶œí•´ ë”í•˜ëŠ” ì—°ì‚°
 			pos += (pos&-pos);
 		}
 	}

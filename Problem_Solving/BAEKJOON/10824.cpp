@@ -9,5 +9,5 @@ int main(void)
 	cin >> a >> b >> c >> d;
 	a += b;
 	c += d;
-	cout << stoll(a) + stoll(c); // long long À¸·Î º¯È¯(ÃÖ´ë: 10^13)
+	cout << stoll(a) + stoll(c); // long long ìœ¼ë¡œ ë³€í™˜(ìµœëŒ€: 10^13)
 }

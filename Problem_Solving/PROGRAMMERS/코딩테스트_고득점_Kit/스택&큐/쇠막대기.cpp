@@ -5,11 +5,11 @@ using namespace std;
 
 int solution(string arrangement) {
 	int answer = 0;
-	// 1. ¿©´Â °ýÈ£´Â ½ºÅÃÆ÷ÀÎÅÍ Áõ°¡
-	// 2. ´Ý´Â °ýÈ£¸¦ ¸¸³µÀ» ¶§
-	// 3. ½ºÅÃÆ÷ÀÎÅÍ °¨¼Ò
-	// 4. Á÷Àü °ªÀÌ ¿©´Â °ýÈ£ÀÏ ¶§: ¼è¸·´ë±â¿¡ ½ºÅÃ Æ÷ÀÎÅÍ ¸¸Å­ Ãß°¡
-	// 5. 4°¡ ¾Æ´Ï¸é ¼è¸·´ë±â¿¡ 1 Ãß°¡
+	// 1. ì—¬ëŠ” ê´„í˜¸ëŠ” ìŠ¤íƒí¬ì¸í„° ì¦ê°€
+	// 2. ë‹«ëŠ” ê´„í˜¸ë¥¼ ë§Œë‚¬ì„ ë•Œ
+	// 3. ìŠ¤íƒí¬ì¸í„° ê°ì†Œ
+	// 4. ì§ì „ ê°’ì´ ì—¬ëŠ” ê´„í˜¸ì¼ ë•Œ: ì‡ ë§‰ëŒ€ê¸°ì— ìŠ¤íƒ í¬ì¸í„° ë§Œí¼ ì¶”ê°€
+	// 5. 4ê°€ ì•„ë‹ˆë©´ ì‡ ë§‰ëŒ€ê¸°ì— 1 ì¶”ê°€
 	int top = 0;
 	for (int i = 0; i < arrangement.size(); i++) {
 		if (arrangement[i] == '(')

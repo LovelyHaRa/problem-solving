@@ -4,55 +4,55 @@
 #include<string>
 using namespace std;
 
-bool visited[11][1000][1000]; // ºÎ¼ø º®ÀÇ °³¼ö, x, y Á¤º¸¸¦ ±â¹İÀ¸·Î ¹æ¹® ¿©ºÎ È®ÀÎ
-queue <pair<pair<int, int>, pair<int, int>>> q; // x,y Æä¾î, ÀÌµ¿°Å¸®, ºÎ¼ø º®ÀÇ °³¼ö Æä¾î Å¥
+bool visited[11][1000][1000]; // ë¶€ìˆœ ë²½ì˜ ê°œìˆ˜, x, y ì •ë³´ë¥¼ ê¸°ë°˜ìœ¼ë¡œ ë°©ë¬¸ ì—¬ë¶€ í™•ì¸
+queue <pair<pair<int, int>, pair<int, int>>> q; // x,y í˜ì–´, ì´ë™ê±°ë¦¬, ë¶€ìˆœ ë²½ì˜ ê°œìˆ˜ í˜ì–´ í
 
 int main(void)
 {
 	int n, m, k;
 	cin >> n >> m >> k;
-	vector<string> map(n); // ¸Ê Á¤º¸
+	vector<string> map(n); // ë§µ ì •ë³´
 	for (int i = 0; i < n; i++)
 		cin >> map[i];
-	// ÃÊ±â Å¥ ¼¼ÆÃ
+	// ì´ˆê¸° í ì„¸íŒ…
 	q.push(make_pair(make_pair(0, 0), make_pair(1,0)));
-	visited[0][0][0] = 1; // ¹æ¹® Ã¼Å©
-	int dx[] = { -1,0,0,1 }, dy[] = { 0,-1,1,0 }; // »óÇÏÁÂ¿ì ÀÌµ¿ Áõ°¡·®
-	int res = -1; // ÃÖ¼Ò ÀÌµ¿ °Å¸®
-	// BFS Å½»ö
+	visited[0][0][0] = 1; // ë°©ë¬¸ ì²´í¬
+	int dx[] = { -1,0,0,1 }, dy[] = { 0,-1,1,0 }; // ìƒí•˜ì¢Œìš° ì´ë™ ì¦ê°€ëŸ‰
+	int res = -1; // ìµœì†Œ ì´ë™ ê±°ë¦¬
+	// BFS íƒìƒ‰
 	while (!q.empty())
 	{
-		// Å¥¿¡¼­ ÃßÃâ
+		// íì—ì„œ ì¶”ì¶œ
 		pair<pair<int, int>, pair<int, int>> cur = q.front();
 		q.pop();
-		int x = cur.first.first, y = cur.first.second; // ÁÂÇ¥
-		int move = cur.second.first; // Áö±İ±îÁöÀÇ ÀÌµ¿ °Å¸®
-		int breakWall = cur.second.second; // Áö±İ±îÁöÀÇ º® ºÎ¼ø È½¼ö
-		// ³¡¿¡ µµ´ŞÇÏ¸é
+		int x = cur.first.first, y = cur.first.second; // ì¢Œí‘œ
+		int move = cur.second.first; // ì§€ê¸ˆê¹Œì§€ì˜ ì´ë™ ê±°ë¦¬
+		int breakWall = cur.second.second; // ì§€ê¸ˆê¹Œì§€ì˜ ë²½ ë¶€ìˆœ íšŸìˆ˜
+		// ëì— ë„ë‹¬í•˜ë©´
 		if (x == n - 1 && y == m - 1)
 		{
-			res = move; // °á°ú °»½Å
-			break; // Å½»ö Á¾·á
+			res = move; // ê²°ê³¼ ê°±ì‹ 
+			break; // íƒìƒ‰ ì¢…ë£Œ
 		}
-		// »óÇÏÁÂ¿ì ÀÌµ¿
+		// ìƒí•˜ì¢Œìš° ì´ë™
 		for (int i = 0; i < 4; i++)
 		{
-			// ´ÙÀ½ ÁÂÇ¥
+			// ë‹¤ìŒ ì¢Œí‘œ
 			int nx = x + dx[i], ny = y + dy[i];
-			// ¹üÀ§ ¹ÛÀÌ°Å³ª ÀÌ¹Ì ¹æ¹®Çß´Ù¸é °Ç³Ê¶Ù±â
+			// ë²”ìœ„ ë°–ì´ê±°ë‚˜ ì´ë¯¸ ë°©ë¬¸í–ˆë‹¤ë©´ ê±´ë„ˆë›°ê¸°
 			if (nx < 0 || nx >= n || ny < 0 || ny >= m || visited[breakWall][nx][ny]) continue;
-			// º®ºÎ¼ö°í ÀÌµ¿ °¡´ÉÇÒ ¶§
+			// ë²½ë¶€ìˆ˜ê³  ì´ë™ ê°€ëŠ¥í•  ë•Œ
 			if (breakWall < k && map[nx][ny] == '1')
 			{
-				visited[breakWall + 1][nx][ny] = 1; // º® ºÎ¼ö°í ¹æ¹® Ã¼Å©
-				// Å¥¿¡ »ğÀÔ
+				visited[breakWall + 1][nx][ny] = 1; // ë²½ ë¶€ìˆ˜ê³  ë°©ë¬¸ ì²´í¬
+				// íì— ì‚½ì…
 				q.push(make_pair(make_pair(nx, ny), make_pair(move + 1, breakWall + 1)));
 			}
-			// ÀÌµ¿ °¡´ÉÇÑ ÁöÁ¡ÀÌ¸é
+			// ì´ë™ ê°€ëŠ¥í•œ ì§€ì ì´ë©´
 			else if (map[nx][ny] == '0')
 			{
-				visited[breakWall][nx][ny] = 1; // ¹æ¹® Ã¼Å©
-				// Å¥¿¡ »ğÀÔ
+				visited[breakWall][nx][ny] = 1; // ë°©ë¬¸ ì²´í¬
+				// íì— ì‚½ì…
 				q.push(make_pair(make_pair(nx, ny), make_pair(move + 1, breakWall)));
 			}
 		}

@@ -5,7 +5,7 @@ using namespace std;
 
 vector<int> prime;
 
-// ¿¡¶óÅä½ºÅ×³×½º Ã¼¸¦ ÀÌ¿ëÇÏ¿© ¼Ò¼ö Å×ÀÌºí ±¸¼º
+// ì—ë¼í† ìŠ¤í…Œë„¤ìŠ¤ ì²´ë¥¼ ì´ìš©í•˜ì—¬ ì†Œìˆ˜ í…Œì´ë¸” êµ¬ì„±
 void setPrime(int n)
 {
 	prime.resize(n + 1);
@@ -23,7 +23,7 @@ void setPrime(int n)
 
 int main(void)
 {
-	setPrime(1000000); // ¼Ò¼ö Å×ÀÌºí ¸¸µé±â
+	setPrime(1000000); // ì†Œìˆ˜ í…Œì´ë¸” ë§Œë“¤ê¸°
 	int t;
 	cin >> t;
 	while (t--)
@@ -31,11 +31,11 @@ int main(void)
 		int n;
 		cin >> n;
 		int cnt = 0;
-		// ¹ÞÀº ¼ö´Â Â¦¼öÀÌ±â ¶§¹®¿¡ n/2 °¡ ¹Ýµå½Ã ³ª´©¾î ¶³¾îÁü
-		// n/2 ÀÌÈÄÀÇ °ªÀº ¼ø¼­¸¸ ¹Ù²ð »Ó µ¿ÀÏÇÔ
+		// ë°›ì€ ìˆ˜ëŠ” ì§ìˆ˜ì´ê¸° ë•Œë¬¸ì— n/2 ê°€ ë°˜ë“œì‹œ ë‚˜ëˆ„ì–´ ë–¨ì–´ì§
+		// n/2 ì´í›„ì˜ ê°’ì€ ìˆœì„œë§Œ ë°”ë€” ë¿ ë™ì¼í•¨
 		for (int i = 2; i <= (n / 2); i++)
 		{
-			// i, n-i °¡ µÑ´Ù ¼Ò¼öÀÌ¸é Ä«¿îÆ®
+			// i, n-i ê°€ ë‘˜ë‹¤ ì†Œìˆ˜ì´ë©´ ì¹´ìš´íŠ¸
 			if (prime[i] == i && prime[n - i] == (n - i))
 				cnt++;
 		}

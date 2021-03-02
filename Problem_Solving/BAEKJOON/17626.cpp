@@ -8,20 +8,20 @@ int main(void)
 {
 	int n;
 	cin >> n;
-	vector<int> dp(n + 1); // dp[n]: nÀÏ ¶§ ÃÖ¼Ò Á¦°ö ¼ö °³¼ö
-	// ±âÀú°ª ¼¼ÆÃ, dp[0]=0
+	vector<int> dp(n + 1); // dp[n]: nì¼ ë•Œ ìµœì†Œ ì œê³± ìˆ˜ ê°œìˆ˜
+	// ê¸°ì €ê°’ ì„¸íŒ…, dp[0]=0
 	dp[1] = 1;
-	// 2ºÎÅÍ n±îÁö ¼ö¿¡ ´ëÇØ¼­ ÃÖ¼Ò Á¦°ö ¼ö °³¼ö¸¦ °è»êÇÑ´Ù
+	// 2ë¶€í„° nê¹Œì§€ ìˆ˜ì— ëŒ€í•´ì„œ ìµœì†Œ ì œê³± ìˆ˜ ê°œìˆ˜ë¥¼ ê³„ì‚°í•œë‹¤
 	for (int i = 2; i <= n; i++)
 	{
-		int min_cnt = 5; // ÃÖ´ë°ª: 4
-		// jÀÇ Á¦°ö ¼ö°¡ i ÀÌÇÏÀÏ ¶§ ±îÁö ¹Ýº¹
+		int min_cnt = 5; // ìµœëŒ€ê°’: 4
+		// jì˜ ì œê³± ìˆ˜ê°€ i ì´í•˜ì¼ ë•Œ ê¹Œì§€ ë°˜ë³µ
 		for (int j = 1; j * j <= i; j++)
 		{
-			int k = i - j * j; // i¿¡¼­ Á¦°ö ¼ö ¸¸Å­ »«´Ù
-			min_cnt = min(min_cnt, dp[k]); // ¸Þ¸ðÀÌÁ¦ÀÌ¼ÇµÈ °ª°ú ºñ±³ÇØ¼­ ÃÖ¼Ò°ªÀ» °»½ÅÇÑ´Ù
+			int k = i - j * j; // iì—ì„œ ì œê³± ìˆ˜ ë§Œí¼ ëº€ë‹¤
+			min_cnt = min(min_cnt, dp[k]); // ë©”ëª¨ì´ì œì´ì…˜ëœ ê°’ê³¼ ë¹„êµí•´ì„œ ìµœì†Œê°’ì„ ê°±ì‹ í•œë‹¤
 		}
-		dp[i] = min_cnt + 1; // Á¦°ö ¼ö ÇÏ³ª°¡ Ãß°¡µÇ¾úÀ¸¹Ç·Î 1À» ´õÇØÁØ´Ù
+		dp[i] = min_cnt + 1; // ì œê³± ìˆ˜ í•˜ë‚˜ê°€ ì¶”ê°€ë˜ì—ˆìœ¼ë¯€ë¡œ 1ì„ ë”í•´ì¤€ë‹¤
 	}
-	cout << dp[n] << '\n'; // dp[n]À» Ãâ·ÂÇÑ´Ù
+	cout << dp[n] << '\n'; // dp[n]ì„ ì¶œë ¥í•œë‹¤
 }

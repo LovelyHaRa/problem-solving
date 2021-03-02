@@ -7,32 +7,32 @@
 using namespace std;
 
 int n, m;
-// catEat[i]: i¹øÂ° Ä£±¸°¡ ¸ÔÀ» ¼ö ÀÖ´Â À½½ÄÀÇ ÁıÇÕ
-// eaters[i]: i¹øÂ° À½½ÄÀ» ¸ÔÀ» ¼ö ÀÖ´Â Ä£±¸ÀÇ ÁıÇÕ
+// catEat[i]: ië²ˆì§¸ ì¹œêµ¬ê°€ ë¨¹ì„ ìˆ˜ ìˆëŠ” ìŒì‹ì˜ ì§‘í•©
+// eaters[i]: ië²ˆì§¸ ìŒì‹ì„ ë¨¹ì„ ìˆ˜ ìˆëŠ” ì¹œêµ¬ì˜ ì§‘í•©
 vector<vector<int>> canEat, eaters;
 int best;
 
 void search(vector<int>& edible, int chosen)
 {
-	// °£´ÜÇÑ °¡ÁöÄ¡±â
+	// ê°„ë‹¨í•œ ê°€ì§€ì¹˜ê¸°
 	if (chosen >= best) return;
 	int first = 0;
-	// ÇöÀç ¼±ÅÃµÈ À½½ÄµéÀ» ¸ø¸Ô´Â »ç¶÷ °Ë»ö
+	// í˜„ì¬ ì„ íƒëœ ìŒì‹ë“¤ì„ ëª»ë¨¹ëŠ” ì‚¬ëŒ ê²€ìƒ‰
 	while (first < n && edible[first]>0) first++;
-	// ±âÀú »ç·Ê: ¸ğµç Ä£±¸°¡ À½½ÄÀ» ¸ÔÀ» ¼ö ÀÖÀ» ¶§
+	// ê¸°ì € ì‚¬ë¡€: ëª¨ë“  ì¹œêµ¬ê°€ ìŒì‹ì„ ë¨¹ì„ ìˆ˜ ìˆì„ ë•Œ
 	if (first == n) {
-		best = chosen; // ÃÖÀû °ª ÀúÀå
+		best = chosen; // ìµœì  ê°’ ì €ì¥
 		return;
 	}
-	// ¸ø¸Ô´Â »ç¶÷ÀÌ ¸ÔÀ» ¼ö ÀÖ´Â À½½Ä Å½»ö
+	// ëª»ë¨¹ëŠ” ì‚¬ëŒì´ ë¨¹ì„ ìˆ˜ ìˆëŠ” ìŒì‹ íƒìƒ‰
 	for (int i = 0; i < canEat[first].size(); i++)
 	{
-		// À½½ÄÀ» ¸ÔÀ» ¼ö ÀÖ´ÂÁö Ã¼Å©
+		// ìŒì‹ì„ ë¨¹ì„ ìˆ˜ ìˆëŠ”ì§€ ì²´í¬
 		int food = canEat[first][i];
 		for (int j = 0; j < eaters[food].size(); j++)
 			edible[eaters[food][j]]++;
-		search(edible, chosen + 1); // Àç±Í Å½»ö
-		// ¿ø»ó º¹±¸
+		search(edible, chosen + 1); // ì¬ê·€ íƒìƒ‰
+		// ì›ìƒ ë³µêµ¬
 		for (int j = 0; j < eaters[food].size(); j++)
 			edible[eaters[food][j]]--;
 	}
@@ -45,13 +45,13 @@ int main(void)
 	while (t--)
 	{
 		cin >> n >> m;
-		map<string,int> friends; //Ä£±¸µéÀ» ÀÎµ¦½º·Î ¸ÅÇÎ
-		vector<int> edible(n, 0); // edible[i]: i¹øÂ° Ä£±¸°¡ ¸ÔÀ» ¼ö ÀÖ´Â À½½ÄÀÇ °³¼ö
+		map<string,int> friends; //ì¹œêµ¬ë“¤ì„ ì¸ë±ìŠ¤ë¡œ ë§¤í•‘
+		vector<int> edible(n, 0); // edible[i]: ië²ˆì§¸ ì¹œêµ¬ê°€ ë¨¹ì„ ìˆ˜ ìˆëŠ” ìŒì‹ì˜ ê°œìˆ˜
 		for (int i = 0; i < n; i++)
 		{
 			string f;
 			cin >> f;
-			friends[f] = i; // ¸ÅÇÎ
+			friends[f] = i; // ë§¤í•‘
 		}
 		eaters.resize(m);
 		canEat.resize(n);

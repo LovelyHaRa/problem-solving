@@ -4,7 +4,7 @@
 #include <algorithm>
 
 using namespace std;
-// ¹éÁØ 3079 Ç®ÀÌ ÂüÁ¶
+// ë°±ì¤€ 3079 í’€ì´ ì°¸ì¡°
 long long solution(int n, vector<int> times) {
 	long long answer = 0;
 	long long low = 0, high = 0;

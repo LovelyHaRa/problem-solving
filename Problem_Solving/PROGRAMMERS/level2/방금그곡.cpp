@@ -3,34 +3,34 @@
 
 using namespace std;
 
-// Ä«¿îÆ® ±¸ÇÏ±â
+// ì¹´ìš´íŠ¸ êµ¬í•˜ê¸°
 int getCount(string start, string end) {
-	// ½Ã°£ °è»ê
+	// ì‹œê°„ ê³„ì‚°
 	int hour = stoi(end.substr(0, 2)) - stoi(start.substr(0, 2));
-	// ºĞ °è»ê
+	// ë¶„ ê³„ì‚°
 	int s_min = stoi(start.substr(3, 2)), e_min = stoi(end.substr(3, 2));
 	int min, lower = 0;
 	if (s_min > e_min) {
 		min = 60 - s_min + e_min;
-		lower = 1; // ÀÚ¸® ³»¸²
+		lower = 1; // ìë¦¬ ë‚´ë¦¼
 	}
 	else {
 		min = e_min - s_min;
 	}
-	// ºĞÀ¸·Î È¯»ê ÈÄ ¸®ÅÏ
+	// ë¶„ìœ¼ë¡œ í™˜ì‚° í›„ ë¦¬í„´
 	return (hour - lower) * 60 + min;
 }
 string solution(string m, vector<string> musicinfos) {
 	string answer = "(None)";
-	vector<pair<string, int>> info; // Á¦¸ñ, Ä«¿îÆ® Æä¾î ¹è¿­
+	vector<pair<string, int>> info; // ì œëª©, ì¹´ìš´íŠ¸ í˜ì–´ ë°°ì—´
 	for (int i = 0; i < musicinfos.size(); i++) {
-		// 1. ½Ã°£ ÃßÃâ
+		// 1. ì‹œê°„ ì¶”ì¶œ
 		string start = musicinfos[i].substr(0, 5);
 		string end = musicinfos[i].substr(6, 5);
-		int j = 12; // Á¦¸ñ ½ÃÀÛÁ¡
-		string name, melody; // Á¦¸ñ, ¸á·Îµğ
-		string t; // ÀÓ½Ã ¹®ÀÚ¿­
-		// 2. Á¦¸ñ ÃßÃâ
+		int j = 12; // ì œëª© ì‹œì‘ì 
+		string name, melody; // ì œëª©, ë©œë¡œë””
+		string t; // ì„ì‹œ ë¬¸ìì—´
+		// 2. ì œëª© ì¶”ì¶œ
 		while (1) {
 			if (musicinfos[i][j] == ',') {
 				name = t;
@@ -40,49 +40,49 @@ string solution(string m, vector<string> musicinfos) {
 				t += musicinfos[i][j++];
 			}
 		}
-		// 3. ¸á·Îµğ ÃßÃâ
+		// 3. ë©œë¡œë”” ì¶”ì¶œ
 		melody = musicinfos[i].substr(j + 1);
-		// 4. Ä«¿îÆÃ ±¸ÇÏ±â(½Ã°£Â÷)
+		// 4. ì¹´ìš´íŒ… êµ¬í•˜ê¸°(ì‹œê°„ì°¨)
 		int count = getCount(start, end);
-		int c = count; // Ä«¿îÆ® º¹»ç(ÀúÀåÇÒ ¶§ »ç¿ë)
-		t = ""; // Àç»ıµÈ ¸á·Îµğ
-		// 5. Àç»ıµÈ ¸á·Îµğ ¹®ÀÚ¿­ ±¸ÇÏ±â
+		int c = count; // ì¹´ìš´íŠ¸ ë³µì‚¬(ì €ì¥í•  ë•Œ ì‚¬ìš©)
+		t = ""; // ì¬ìƒëœ ë©œë¡œë””
+		// 5. ì¬ìƒëœ ë©œë¡œë”” ë¬¸ìì—´ êµ¬í•˜ê¸°
 		j = 0;
 		while (count > 0) {
-			if (j == melody.size()) j = 0; // j°¡ ¹è¿­ ¹üÀ§¸¦ ¹ş¾î³ª¸é ÃÊ±âÈ­
-			// ´ÙÀ½ ÂüÁ¶°ªÀÌ # ÀÌ¸é ¼Ò¹®ÀÚ·Î ¹Ù²ã¼­ ÀúÀå
+			if (j == melody.size()) j = 0; // jê°€ ë°°ì—´ ë²”ìœ„ë¥¼ ë²—ì–´ë‚˜ë©´ ì´ˆê¸°í™”
+			// ë‹¤ìŒ ì°¸ì¡°ê°’ì´ # ì´ë©´ ì†Œë¬¸ìë¡œ ë°”ê¿”ì„œ ì €ì¥
 			if (j + 1 < melody.size() && melody[j + 1] == '#') {
-				t += melody[j] + 32; // ¼Ò¹®ÀÚ·Î ¹Ù²Ù±â
-				j += 2; // # ¶Ù¾î³Ñ±â
+				t += melody[j] + 32; // ì†Œë¬¸ìë¡œ ë°”ê¾¸ê¸°
+				j += 2; // # ë›°ì–´ë„˜ê¸°
 			}
-			// ±×·¸Áö ¾ÊÀ¸¸é º¯È¯ ¾øÀÌ ÀúÀå
+			// ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ ë³€í™˜ ì—†ì´ ì €ì¥
 			else {
 				t += melody[j++];
 			}
 			count--;
 		}
-		// 6. ±â¾ïÇÑ ¸á·Îµğµµ #À» ¼Ò¹®ÀÚ·Î ¹Ù²ã¼­ ÀúÀå
+		// 6. ê¸°ì–µí•œ ë©œë¡œë””ë„ #ì„ ì†Œë¬¸ìë¡œ ë°”ê¿”ì„œ ì €ì¥
 		string mm;
 		j = 0;
 		while (j < m.size()) {
-			// ´ÙÀ½ ÂüÁ¶°ªÀÌ # ÀÌ¸é ¼Ò¹®ÀÚ·Î ¹Ù²ã¼­ ÀúÀå
+			// ë‹¤ìŒ ì°¸ì¡°ê°’ì´ # ì´ë©´ ì†Œë¬¸ìë¡œ ë°”ê¿”ì„œ ì €ì¥
 			if (j + 1 < m.size() && m[j + 1] == '#') {
-				mm += m[j] + 32; // ¼Ò¹®ÀÚ·Î ¹Ù²Ù±â
-				j += 2; // # ¶Ù¾î³Ñ±â
+				mm += m[j] + 32; // ì†Œë¬¸ìë¡œ ë°”ê¾¸ê¸°
+				j += 2; // # ë›°ì–´ë„˜ê¸°
 			}
-			// ±×·¸Áö ¾ÊÀ¸¸é º¯È¯ ¾øÀÌ ÀúÀå
+			// ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ ë³€í™˜ ì—†ì´ ì €ì¥
 			else {
 				mm += m[j++];
 			}
 		}
-		// 7. ¹®ÀÚ¿­ Ã£±â
+		// 7. ë¬¸ìì—´ ì°¾ê¸°
 		auto n = t.find(mm);
-		// 8 ¹ß°ßÇÏ¸é info ¹è¿­¿¡ Æä¾î ÀúÀå
+		// 8 ë°œê²¬í•˜ë©´ info ë°°ì—´ì— í˜ì–´ ì €ì¥
 		if (n == string::npos) continue;
 		info.push_back({ name, c });
 	}
 	int max = -1;
-	// 9. Ä«¿îÆ®°¡ ÃÖ´ë°ªÀÎ info °ª ÀúÀå
+	// 9. ì¹´ìš´íŠ¸ê°€ ìµœëŒ€ê°’ì¸ info ê°’ ì €ì¥
 	for (int i = 0; i < info.size(); i++) {
 		if (max < info[i].second) {
 			max = info[i].second;

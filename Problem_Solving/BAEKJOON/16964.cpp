@@ -5,19 +5,19 @@
 using namespace std;
 
 int n;
-vector<vector<int>> adj; // ÀÎÁ¢ ¸®½ºÆ® ±¸Çö
-vector<bool> check; // ¹æ¹® ¿©ºÎ
-vector<int> ans; // Á¤´ä ÀÎÇ²
-vector<int> order; // ¹æ¹® ¼ø¼­ ÀÎµ¦½º
-vector<int> res; // dfs ¼öÇà °á°ú
+vector<vector<int>> adj; // ì¸ì ‘ ë¦¬ìŠ¤íŠ¸ êµ¬í˜„
+vector<bool> check; // ë°©ë¬¸ ì—¬ë¶€
+vector<int> ans; // ì •ë‹µ ì¸í’‹
+vector<int> order; // ë°©ë¬¸ ìˆœì„œ ì¸ë±ìŠ¤
+vector<int> res; // dfs ìˆ˜í–‰ ê²°ê³¼
 
-// dfs Å½»ö
+// dfs íƒìƒ‰
 void dfs(int x)
 {
-	// Å½»ö Ã¼Å©
+	// íƒìƒ‰ ì²´í¬
 	check[x] = 1;
-	res.push_back(x); // Å½»ö °á°ú ¹è¿­¿¡ ³Ö±â
-	// ´ÙÀ½ ³ëµå Å½»ö
+	res.push_back(x); // íƒìƒ‰ ê²°ê³¼ ë°°ì—´ì— ë„£ê¸°
+	// ë‹¤ìŒ ë…¸ë“œ íƒìƒ‰
 	for (int y = 0; y < adj[x].size(); y++)
 	{
 		int next = adj[x][y];
@@ -32,7 +32,7 @@ bool compare(int a, int b)
 
 int main(void)
 {
-	// ÀÔ·Â
+	// ì…ë ¥
 	cin >> n;
 	adj.resize(n + 1);
 	check.resize(n + 1);
@@ -40,7 +40,7 @@ int main(void)
 	{
 		int a, b;
 		cin >> a >> b;
-		a--; b--; // Á¤Á¡À» 0ºÎÅÍ ½ÃÀÛ
+		a--; b--; // ì •ì ì„ 0ë¶€í„° ì‹œì‘
 		adj[a].push_back(b);
 		adj[b].push_back(a);
 	}
@@ -49,14 +49,14 @@ int main(void)
 	for (int i = 0; i < n; i++)
 	{
 		cin >> ans[i];
-		ans[i]--; // Á¤Á¡À» 0ºÎÅÍ ½ÃÀÛ
-		order[ans[i]] = i; // ±â·ÏµÈ Á¤Á¡ÀÇ ¼ø¼­¸¦ ÀúÀå
+		ans[i]--; // ì •ì ì„ 0ë¶€í„° ì‹œì‘
+		order[ans[i]] = i; // ê¸°ë¡ëœ ì •ì ì˜ ìˆœì„œë¥¼ ì €ì¥
 	}
-	// ÀÎÁ¢ ¸®½ºÆ®ÀÇ Á¤Á¡À» ±â·ÏµÈ Á¤Á¡ÀÇ ¼ø¼­·Î Á¤·Ä
+	// ì¸ì ‘ ë¦¬ìŠ¤íŠ¸ì˜ ì •ì ì„ ê¸°ë¡ëœ ì •ì ì˜ ìˆœì„œë¡œ ì •ë ¬
 	for (int i = 0; i < n; i++)
 		sort(adj[i].begin(), adj[i].end(), compare);
-	// 1ºÎÅÍ dfs Å½»ö
+	// 1ë¶€í„° dfs íƒìƒ‰
 	dfs(0);
-	// Á¤´ä¹è¿­ÀÌ ¸ğµÎ Å½»öµÇ¾úÀ¸¸é 1 ¾Æ´Ï¸é 0
+	// ì •ë‹µë°°ì—´ì´ ëª¨ë‘ íƒìƒ‰ë˜ì—ˆìœ¼ë©´ 1 ì•„ë‹ˆë©´ 0
 	cout << (res == ans) << '\n';
 }

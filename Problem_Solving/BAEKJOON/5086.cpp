@@ -1,4 +1,4 @@
-// ¼öÇÐ ¹®Á¦
+// ìˆ˜í•™ ë¬¸ì œ
 #include<cstdio>
 
 using namespace std;
@@ -9,9 +9,9 @@ int main(void)
 	while (1)
 	{
 		scanf("%d %d", &a, &b);
-		// Å« ¼ö¸¦ ÀÛÀº¼ö·Î ³ª´©¾î ¶³¾îÁö¸é ¾à¼ö°Å³ª ¹è¼öÀÌ´Ù.
-		// ¾à¼ö : a < b ÀÎ °æ¿ì
-		// ¹è¼ö : a > b ÀÎ °æ¿ì
+		// í° ìˆ˜ë¥¼ ìž‘ì€ìˆ˜ë¡œ ë‚˜ëˆ„ì–´ ë–¨ì–´ì§€ë©´ ì•½ìˆ˜ê±°ë‚˜ ë°°ìˆ˜ì´ë‹¤.
+		// ì•½ìˆ˜ : a < b ì¸ ê²½ìš°
+		// ë°°ìˆ˜ : a > b ì¸ ê²½ìš°
 		if (!a && !b)
 			break;
 		if (a > b)

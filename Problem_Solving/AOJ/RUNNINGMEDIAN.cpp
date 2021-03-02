@@ -4,36 +4,36 @@
 
 using namespace std;
 
-// ¼±Çü ÇÕµ¿ ³­¼ö »ı¼º±â
+// ì„ í˜• í•©ë™ ë‚œìˆ˜ ìƒì„±ê¸°
 struct RNG
 {
 	int seed, a, b;
 	RNG(int _a, int _b) :a(_a), b(_b), seed(1983) {}
 	int next()
 	{
-		int ret = seed; // ±âÁ¸ ½Ãµå
-		seed = ((seed*(long long)a) + b) % 20090711; // »õ ½Ãµå »ı¼º
-		return ret; // ±âÁ¸ ½Ãµå ¸®ÅÏ
+		int ret = seed; // ê¸°ì¡´ ì‹œë“œ
+		seed = ((seed*(long long)a) + b) % 20090711; // ìƒˆ ì‹œë“œ ìƒì„±
+		return ret; // ê¸°ì¡´ ì‹œë“œ ë¦¬í„´
 	}
 };
 
 int runningMedian(int n, RNG rng)
 {
-	// Èü »ı¼º
+	// í™ ìƒì„±
 	priority_queue<int, vector<int>, less<int>> maxHeap;
 	priority_queue<int, vector<int>, greater<int>> minHeap;
-	int ret = 0; // Áß°£°ª ÇÕ°è ÀúÀå
-	// ºÒº¯½Ä
-	// 1. maxHeap Å©±â´Â minHeap Å©±âº¸´Ù Ç×»ó ÀÛ°Å³ª °°´Ù
-	// 2. maxHeap ·çÆ®´Â minHeap ·çÆ®º¸´Ù Ç×»ó ÀÛ°Å³ª °°´Ù
+	int ret = 0; // ì¤‘ê°„ê°’ í•©ê³„ ì €ì¥
+	// ë¶ˆë³€ì‹
+	// 1. maxHeap í¬ê¸°ëŠ” minHeap í¬ê¸°ë³´ë‹¤ í•­ìƒ ì‘ê±°ë‚˜ ê°™ë‹¤
+	// 2. maxHeap ë£¨íŠ¸ëŠ” minHeap ë£¨íŠ¸ë³´ë‹¤ í•­ìƒ ì‘ê±°ë‚˜ ê°™ë‹¤
 	for (int i = 0; i < n; i++)
 	{
-		// 1¹ø ºÒº¯½Ä ¸¸Á·½ÃÅ°±â
+		// 1ë²ˆ ë¶ˆë³€ì‹ ë§Œì¡±ì‹œí‚¤ê¸°
 		if (maxHeap.size() == minHeap.size())
 			maxHeap.push(rng.next());
 		else
 			minHeap.push(rng.next());
-		// 2¹ø ºÒº¯½ÄÀÌ ¸¸Á·µÇÁö ¾ÊÀ¸¸é ¾çÂÊ ·çÆ®¸¦ swap
+		// 2ë²ˆ ë¶ˆë³€ì‹ì´ ë§Œì¡±ë˜ì§€ ì•Šìœ¼ë©´ ì–‘ìª½ ë£¨íŠ¸ë¥¼ swap
 		if (!maxHeap.empty() && !minHeap.empty() && maxHeap.top() > minHeap.top())
 		{
 			int a = maxHeap.top(), b = minHeap.top();
@@ -42,10 +42,10 @@ int runningMedian(int n, RNG rng)
 			maxHeap.push(b);
 			minHeap.push(a);
 		}
-		// Áß°£°ª ´©Àû
+		// ì¤‘ê°„ê°’ ëˆ„ì 
 		ret = (ret + maxHeap.top()) % 20090711;
 	}
-	// ¸®ÅÏ
+	// ë¦¬í„´
 	return ret;
 }
 

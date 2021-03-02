@@ -15,7 +15,7 @@ int main(void)
 	}
 	int max = 0;
 	int sum = 0;
-	// ¹«½ÄÇÏ°Ô Ç®±â
+	// ë¬´ì‹í•˜ê²Œ í’€ê¸°
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < m; j++)
@@ -34,7 +34,7 @@ int main(void)
 				max = max < sum ? sum : max;
 				sum = 0;
 			}
-			// ¤±
+			// ã…
 			if (i + 1 < n&&j + 1 < m)
 			{
 				sum += p[i][j] + p[i][j + 1] + p[i + 1][j] + p[i + 1][j + 1];
@@ -47,66 +47,66 @@ int main(void)
 				sum += p[i][j] + p[i + 1][j] + p[i + 2][j] + p[i + 2][j + 1];
 				max = max < sum ? sum : max;
 				sum = 0;
-				// ¦¦¦¤
+				// â””â”
 				sum += p[i][j] + p[i + 1][j] + p[i + 1][j + 1] + p[i + 2][j + 1];
 				max = max < sum ? sum : max;
 				sum = 0;
-				// ¥Ã
+				// Î“
 				sum += p[i][j] + p[i + 1][j] + p[i + 2][j] + p[i][j + 1];
 				max = max < sum ? sum : max;
 				sum = 0;
-				// ¤¿
+				// ã…
 				sum += p[i][j] + p[i + 1][j] + p[i + 2][j] + p[i + 1][j + 1];
 				max = max < sum ? sum : max;
 				sum = 0;
-				// ¦Ä
+				// â”™
 				sum += p[i][j + 1] + p[i + 1][j + 1] + p[i + 2][j] + p[i + 2][j + 1];
 				max = max < sum ? sum : max;
 				sum = 0;
-				// ¦£¦¥
+				// â”Œâ”˜
 				sum += p[i][j + 1] + p[i + 1][j + 1] + p[i + 1][j] + p[i + 2][j];
 				max = max < sum ? sum : max;
 				sum = 0;
-				// ¤¡
+				// ã„±
 				sum += p[i][j + 1] + p[i + 1][j + 1] + p[i + 2][j + 1] + p[i][j];
 				max = max < sum ? sum : max;
 				sum = 0;
-				// ¤Ã
+				// ã…“
 				sum += p[i][j + 1] + p[i + 1][j + 1] + p[i + 2][j + 1] + p[i + 1][j];
 				max = max < sum ? sum : max;
 				sum = 0;
 			}
 			if (i+1<n && j+2<m)
 			{
-				// ¤¤
+				// ã„´
 				sum += p[i][j] + p[i + 1][j] + p[i + 1][j + 1] + p[i + 1][j + 2];
 				max = max < sum ? sum : max;
 				sum = 0;
-				// ¤¡_
+				// ã„±_
 				sum += p[i][j] + p[i][j + 1] + p[i + 1][j + 1] + p[i + 1][j + 2];
 				max = max < sum ? sum : max;
 				sum = 0;
-				// ¦£
+				// â”Œ
 				sum += p[i][j] + p[i][j + 1] + p[i][j + 2] + p[i + 1][j];
 				max = max < sum ? sum : max;
 				sum = 0;
-				// ¤Ì
+				// ã…œ
 				sum += p[i][j] + p[i][j + 1] + p[i][j + 2] + p[i + 1][j + 1];
 				max = max < sum ? sum : max;
 				sum = 0;
-				// ¦¡¦¤
+				// â”€â”
 				sum += p[i][j] + p[i][j + 1] + p[i][j + 2] + p[i + 1][j + 2];
 				max = max < sum ? sum : max;
 				sum = 0;
-				// ¦¡¦¥
+				// â”€â”˜
 				sum += p[i + 1][j] + p[i + 1][j + 1] + p[i + 1][j + 2] + p[i][j + 2];
 				max = max < sum ? sum : max;
 				sum = 0;
-				// _¦£
+				// _â”Œ
 				sum += p[i + 1][j] + p[i + 1][j + 1] + p[i][j + 1] + p[i][j + 2];
 				max = max < sum ? sum : max;
 				sum = 0;
-				// ¤Ç
+				// ã…—
 				sum += p[i + 1][j] + p[i + 1][j + 1] + p[i + 1][j + 2] + p[i][j + 1];
 				max = max < sum ? sum : max;
 				sum = 0;

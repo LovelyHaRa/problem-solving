@@ -3,19 +3,19 @@
 
 using namespace std;
 
-// ÁÂÇ¥¿¡ ÇØ´çÇÏ´Â ºñÆ® °è»ê
+// ì¢Œí‘œì— í•´ë‹¹í•˜ëŠ” ë¹„íŠ¸ ê³„ì‚°
 inline int cell(int y, int x) { return 1 << (y * 5 + x); }
 
 vector<int> moves;
-// °ÔÀÓÆÇ À§¿¡ µ¤À» ¼ö ÀÖ´Â ºí·ÏÀÇ ¸ðµç °æ¿ìÀÇ ¼ö¸¦ ±¸ÇÔ
+// ê²Œìž„íŒ ìœ„ì— ë®ì„ ìˆ˜ ìžˆëŠ” ë¸”ë¡ì˜ ëª¨ë“  ê²½ìš°ì˜ ìˆ˜ë¥¼ êµ¬í•¨
 void precalc()
 {
-	// L ¸ð¾ç ºí·ÏÀÇ °æ¿ì¸¦ ¸ÕÀú±¸ÇÔ(±×·¡¾ß »¡¸®³¡³²)
+	// L ëª¨ì–‘ ë¸”ë¡ì˜ ê²½ìš°ë¥¼ ë¨¼ì €êµ¬í•¨(ê·¸ëž˜ì•¼ ë¹¨ë¦¬ëë‚¨)
 	for (int y = 0; y < 4; y++)
 	{
 		for (int x = 0; x < 4; x++)
 		{
-			// 1. »ç°¢Çü ¸ð¾ç ÀúÀå
+			// 1. ì‚¬ê°í˜• ëª¨ì–‘ ì €ìž¥
 			vector<int> cells;
 			for (int dy = 0; dy < 2; dy++)
 			{
@@ -23,12 +23,12 @@ void precalc()
 					cells.push_back(cell(y + dy, x + dx));
 			}
 			int square = cells[0] + cells[1] + cells[2] + cells[3];
-			// 2. »ç°¢Çü ¸ð¾ç¿¡¼­ ÇÏ³ª¾¿ »©¸é¼­ °æ¿ì¸¦ ÀúÀå
+			// 2. ì‚¬ê°í˜• ëª¨ì–‘ì—ì„œ í•˜ë‚˜ì”© ë¹¼ë©´ì„œ ê²½ìš°ë¥¼ ì €ìž¥
 			for (int i = 0; i < 4; i++)
 				moves.push_back(square - cells[i]);
 		}
 	}
-	// 1ÀÚ ¸ð¾ç ºí·ÏÀÇ °æ¿ì
+	// 1ìž ëª¨ì–‘ ë¸”ë¡ì˜ ê²½ìš°
 	for (int i = 0; i < 5; i++)
 	{
 		for (int j = 0; j < 4; j++)
@@ -39,7 +39,7 @@ void precalc()
 	}
 }
 
-vector<char> cache(1 << 25 + 1, -1); // ¸Þ¸ð¸® ÃÊ°ú¶§¹®¿¡ charÇüÀ¸·Î ÀúÀå
+vector<char> cache(1 << 25 + 1, -1); // ë©”ëª¨ë¦¬ ì´ˆê³¼ë•Œë¬¸ì— charí˜•ìœ¼ë¡œ ì €ìž¥
 
 char play(int board)
 {
@@ -48,10 +48,10 @@ char play(int board)
 	ret = 0;
 	for (int i = 0; i < moves.size(); i++)
 	{
-		// °ãÄ¡Áö ¾Ê´Â °æ¿ì
+		// ê²¹ì¹˜ì§€ ì•ŠëŠ” ê²½ìš°
 		if ((moves[i] & board)==0)
 		{
-			// ÇØ´ç ºí·ÏÀ» ¹èÄ¡½ÃÅ² ÈÄ Àç±Í Å½»ö
+			// í•´ë‹¹ ë¸”ë¡ì„ ë°°ì¹˜ì‹œí‚¨ í›„ ìž¬ê·€ íƒìƒ‰
 			if (!play(board | moves[i]))
 			{
 				ret = 1;

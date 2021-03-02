@@ -5,40 +5,40 @@ using namespace std;
 
 vector<string> answer;
 bool dfs(string from, vector<vector<string>>& tickets, vector<string>& result, vector<int>& visit, int count) {
-	// 3. °æ·Î °»½Å
+	// 3. ê²½ë¡œ ê°±ì‹ 
 	result.push_back(from);
-	// 4. °æ·Î°¡ ¿Ï¼ºµÇ¸é Á¤´ä °»½Å ÈÄ true ¸®ÅÏ
+	// 4. ê²½ë¡œê°€ ì™„ì„±ë˜ë©´ ì •ë‹µ ê°±ì‹  í›„ true ë¦¬í„´
 	if (count == tickets.size()) {
 		answer = result;
 		return true;
 	}
-	// 5. Æ¼ÄÏ Å½»ö
+	// 5. í‹°ì¼“ íƒìƒ‰
 	for (int i = 0; i < tickets.size(); i++) {
-		// 6. Ãâ¹ßÁö°¡ °°°í Æ¼ÄÏÀ» ¾´ ÀûÀÌ ¾ø´Ù¸é
+		// 6. ì¶œë°œì§€ê°€ ê°™ê³  í‹°ì¼“ì„ ì“´ ì ì´ ì—†ë‹¤ë©´
 		if (tickets[i][0] == from && !visit[i]) {
-			// 7. ÇØ´ç Æ¼ÄÏ »ç¿ë
+			// 7. í•´ë‹¹ í‹°ì¼“ ì‚¬ìš©
 			visit[i] = 1;
-			// 7-1. ¸ñÀûÁö¸¦ Ãâ¹ßÁö·Î, Ä«¿îÆ®¸¦ 1 Áõ°¡½ÃÄÑ dfs Å½»ö
+			// 7-1. ëª©ì ì§€ë¥¼ ì¶œë°œì§€ë¡œ, ì¹´ìš´íŠ¸ë¥¼ 1 ì¦ê°€ì‹œì¼œ dfs íƒìƒ‰
 			bool success = dfs(tickets[i][1], tickets, result, visit, count + 1);
-			// 7-2. °æ·Î°¡ ¿Ï¼ºµÇ¸é dfs Á¾·á
+			// 7-2. ê²½ë¡œê°€ ì™„ì„±ë˜ë©´ dfs ì¢…ë£Œ
 			if (success)
 				return true;
-			// 7-3 .Æ¼ÄÏ »ç¿ë ¿©ºÎ º¹±¸
+			// 7-3 .í‹°ì¼“ ì‚¬ìš© ì—¬ë¶€ ë³µêµ¬
 			visit[i] = 0;
 		}
 	}
-	// 8. °æ·Î º¹±¸
+	// 8. ê²½ë¡œ ë³µêµ¬
 	result.pop_back();
 	return false;
 }
 
 vector<string> solution(vector<vector<string>> tickets) {
-	vector<string> result; // °á°ú °æ·Î
-	vector<int> visit(tickets.size()); // Æ¼ÄÏ »ç¿ë ¿©ºÎ
-	// 1. ¾ËÆÄºª ¿ì¼±Ãâ·ÂÀÌ¹Ç·Î Á¤·Ä
+	vector<string> result; // ê²°ê³¼ ê²½ë¡œ
+	vector<int> visit(tickets.size()); // í‹°ì¼“ ì‚¬ìš© ì—¬ë¶€
+	// 1. ì•ŒíŒŒë²³ ìš°ì„ ì¶œë ¥ì´ë¯€ë¡œ ì •ë ¬
 	sort(tickets.begin(), tickets.end());
-	// 2. dfs Å½»ö
+	// 2. dfs íƒìƒ‰
 	dfs("ICN", tickets, result, visit, 0);
-	// 9. Á¤´ä ¸®ÅÏ
+	// 9. ì •ë‹µ ë¦¬í„´
 	return answer;
 }

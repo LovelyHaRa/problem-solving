@@ -4,41 +4,41 @@
 
 using namespace std;
 
-vector<vector<int>> board, tile; // º¸µå, µµ¹Ì³ë Å¸ÀÏ
-vector<int> row, col, square; // ºñÆ® ¸¶½ºÅ©·Î Çà, ¿­, »ç°¢Çü ¼ıÀÚ Áßº¹ Ã¼Å©
+vector<vector<int>> board, tile; // ë³´ë“œ, ë„ë¯¸ë…¸ íƒ€ì¼
+vector<int> row, col, square; // ë¹„íŠ¸ ë§ˆìŠ¤í¬ë¡œ í–‰, ì—´, ì‚¬ê°í˜• ìˆ«ì ì¤‘ë³µ ì²´í¬
 int t = 1, solved, dx[] = { 1,0 }, dy[] = { 0,1 };
 
-// º¸µå(x, y)¿¡ ¼ıÀÚ numÀ» ³ÖÀ» ¼ö ÀÖ´ÂÁö ÆÇ´Ü
+// ë³´ë“œ(x, y)ì— ìˆ«ì numì„ ë„£ì„ ìˆ˜ ìˆëŠ”ì§€ íŒë‹¨
 bool check(int x, int y, int num)
 {
-	bool checkRow = row[x] & (1 << num); // Çà °Ë»ç(ÀÖÀ¸¸é true)
-	bool checkCol = col[y] & (1 << num); // ¿­ °Ë»ç(ÀÖÀ¸¸é true)
-	bool checkSquare = square[x / 3 * 3 + y / 3] & (1 << num); // »ç°¢Çü °Ë»ç(ÀÖÀ¸¸é true)
-	return !checkRow && !checkCol && !checkSquare; // °á°ú ¸®ÅÏ
+	bool checkRow = row[x] & (1 << num); // í–‰ ê²€ì‚¬(ìˆìœ¼ë©´ true)
+	bool checkCol = col[y] & (1 << num); // ì—´ ê²€ì‚¬(ìˆìœ¼ë©´ true)
+	bool checkSquare = square[x / 3 * 3 + y / 3] & (1 << num); // ì‚¬ê°í˜• ê²€ì‚¬(ìˆìœ¼ë©´ true)
+	return !checkRow && !checkCol && !checkSquare; // ê²°ê³¼ ë¦¬í„´
 }
 
-// ¼ıÀÚ Ãß°¡
+// ìˆ«ì ì¶”ê°€
 void addNum(int x, int y, int num)
 {
-	row[x] |= (1 << num); // ÇØ´ç Çà¿¡ Ãß°¡
-	col[y] |= (1 << num); // ÇØ´ç ¿­¿¡ Ãß°¡
-	square[x / 3 * 3 + y / 3] |= (1 << num);  // ÇØ´ç »ç°¢Çü¿¡ Ãß°¡
+	row[x] |= (1 << num); // í•´ë‹¹ í–‰ì— ì¶”ê°€
+	col[y] |= (1 << num); // í•´ë‹¹ ì—´ì— ì¶”ê°€
+	square[x / 3 * 3 + y / 3] |= (1 << num);  // í•´ë‹¹ ì‚¬ê°í˜•ì— ì¶”ê°€
 }
 
 void deleteNum(int x, int y, int num)
 {
-	row[x] &= (~(1 << num)); // ÇØ´ç Çà¿¡¼­ »èÁ¦
-	col[y] &= (~(1 << num)); // ÇØ´ç ¿­¿¡¼­ »èÁ¦
-	square[x / 3 * 3 + y / 3] &= (~(1 << num)); // ÇØ´ç »ç°¢Çü¿¡¼­ »èÁ¦
+	row[x] &= (~(1 << num)); // í•´ë‹¹ í–‰ì—ì„œ ì‚­ì œ
+	col[y] &= (~(1 << num)); // í•´ë‹¹ ì—´ì—ì„œ ì‚­ì œ
+	square[x / 3 * 3 + y / 3] &= (~(1 << num)); // í•´ë‹¹ ì‚¬ê°í˜•ì—ì„œ ì‚­ì œ
 }
 
-// 0~80 ±îÁö 81Ä­À» ¸ğµÎ ¹æ¹®ÇÑ´Ù
+// 0~80 ê¹Œì§€ 81ì¹¸ì„ ëª¨ë‘ ë°©ë¬¸í•œë‹¤
 void solve(int here)
 {
-	// ¸ğµÎ ¹æ¹® ÇßÀ» °æ¿ì
+	// ëª¨ë‘ ë°©ë¬¸ í–ˆì„ ê²½ìš°
 	if (here == 81)
 	{
-		// °á°ú Ãâ·Â
+		// ê²°ê³¼ ì¶œë ¥
 		cout << "Puzzle " << t << '\n';
 		for (int i = 0; i < 9; i++)
 		{
@@ -46,51 +46,51 @@ void solve(int here)
 				cout << board[i][j];
 			cout << '\n';
 		}
-		solved = 1; // Å»Ãâ ÇÃ·¡±× ¼³Á¤
+		solved = 1; // íƒˆì¶œ í”Œë˜ê·¸ ì„¤ì •
 		return;
 	}
-	// ÁÂÇ¥ °è»ê
+	// ì¢Œí‘œ ê³„ì‚°
 	int x = here / 9, y = here % 9;
-	// ÇØ´ç ÁÂÇ¥¿¡ ÀÌ¹Ì °ªÀÌ ÀÖ´Ù¸é ´ÙÀ½ Ä­À¸·Î °Ç³Ê¶Ù±â
+	// í•´ë‹¹ ì¢Œí‘œì— ì´ë¯¸ ê°’ì´ ìˆë‹¤ë©´ ë‹¤ìŒ ì¹¸ìœ¼ë¡œ ê±´ë„ˆë›°ê¸°
 	if (board[x][y])
 	{
 		solve(here + 1);
 		return;
 	}
-	// °¡´ÉÇÑ ¸ğµç Å¸ÀÏ ¼øÈ¸
+	// ê°€ëŠ¥í•œ ëª¨ë“  íƒ€ì¼ ìˆœíšŒ
 	for (int i = 1; i <= 9; i++)
 	{
 		for (int j = i + 1; j <= 9; j++)
 		{
-			if (tile[i][j] || tile[j][i]) continue; // ÀÌ¹Ì »ç¿ëÇÑ Å¸ÀÏÀÌ¸é °Ç³Ê¶Ù±â
-			// °¡·Î, ¼¼·Î Å¸ÀÏ Ãß°¡
+			if (tile[i][j] || tile[j][i]) continue; // ì´ë¯¸ ì‚¬ìš©í•œ íƒ€ì¼ì´ë©´ ê±´ë„ˆë›°ê¸°
+			// ê°€ë¡œ, ì„¸ë¡œ íƒ€ì¼ ì¶”ê°€
 			for (int k = 0; k < 2; k++)
 			{
-				int nx = x + dx[k], ny = y + dy[k]; // Ã¹ ¹øÂ°´Â °¡·Î, µÎ ¹øÂ°´Â ¼¼·Î
-				// ¹üÀ§ ¹× º¸µå¿¡ ¼ıÀÚ°¡ ÀÖ´ÂÁö °Ë»ç
+				int nx = x + dx[k], ny = y + dy[k]; // ì²« ë²ˆì§¸ëŠ” ê°€ë¡œ, ë‘ ë²ˆì§¸ëŠ” ì„¸ë¡œ
+				// ë²”ìœ„ ë° ë³´ë“œì— ìˆ«ìê°€ ìˆëŠ”ì§€ ê²€ì‚¬
 				if (nx < 9 && ny < 9 && !board[nx][ny])
 				{
-					int l = 2; // (i, j), (j, i) ¸ğµÎ ³Ö¾î¾ß ÇÑ´Ù
+					int l = 2; // (i, j), (j, i) ëª¨ë‘ ë„£ì–´ì•¼ í•œë‹¤
 					while (l--)
 					{
-						// °ªÀ» ³ÖÀ» ¼ö ÀÖ´ÂÁö Ã¼Å©
+						// ê°’ì„ ë„£ì„ ìˆ˜ ìˆëŠ”ì§€ ì²´í¬
 						bool checkFirst = check(x, y, i);
 						bool checkSecond = check(nx, ny, j);
-						// °ªÀ» ³ÖÀ» ¼ö ÀÖ´Ù¸é
+						// ê°’ì„ ë„£ì„ ìˆ˜ ìˆë‹¤ë©´
 						if (checkFirst && checkSecond)
 						{
-							// Å¸ÀÏ »ç¿ë Ã¼Å©
+							// íƒ€ì¼ ì‚¬ìš© ì²´í¬
 							tile[i][j] = 1;
 							tile[j][i] = 1;
-							// º¸µå¿¡ °ª ³Ö±â
+							// ë³´ë“œì— ê°’ ë„£ê¸°
 							board[x][y] = i;
 							board[nx][ny] = j;
-							// ¼ıÀÚ »ç¿ë Ã¼Å©
+							// ìˆ«ì ì‚¬ìš© ì²´í¬
 							addNum(x, y, i);
 							addNum(nx, ny, j);
-							// ´ÙÀ½ ÁöÁ¡ Å½»ö
+							// ë‹¤ìŒ ì§€ì  íƒìƒ‰
 							solve(here + 1);
-							// ¿ø»óº¹±¸
+							// ì›ìƒë³µêµ¬
 							deleteNum(x, y, i);
 							deleteNum(nx, ny, j);
 							board[x][y] = 0;
@@ -105,7 +105,7 @@ void solve(int here)
 					}
 				}
 			}
-			if (solved) return; // ÆÛÁñÀ» ¸ğµÎ Ç®¾úÀ¸¸é ±×³É ¸®ÅÏ
+			if (solved) return; // í¼ì¦ì„ ëª¨ë‘ í’€ì—ˆìœ¼ë©´ ê·¸ëƒ¥ ë¦¬í„´
 		}
 	}
 }
@@ -118,41 +118,41 @@ int main(void)
 		int n;
 		cin >> n;
 		if (!n) break;
-		// ÃÊ±â ¼¼ÆÃ
+		// ì´ˆê¸° ì„¸íŒ…
 		board.resize(9, vector<int>(9));
 		tile.resize(10, vector<int>(10));
 		row.resize(9);
 		col.resize(9);
 		square.resize(9);
 		solved = 0;
-		// Å¸ÀÏ ÀÔ·Â
+		// íƒ€ì¼ ì…ë ¥
 		for (int i = 0; i < n; i++)
 		{
 			int first, second;
 			string fpos, spos;
 			cin >> first >> fpos >> second >> spos;
-			// ÁÂÇ¥ °è»ê
+			// ì¢Œí‘œ ê³„ì‚°
 			int fx = fpos[0] - 65, fy = fpos[1] - '0' - 1, sx = spos[0] - 65, sy = spos[1] - '0' - 1;
-			// º¸µå¿¡ ¼ıÀÚ Ãß°¡
+			// ë³´ë“œì— ìˆ«ì ì¶”ê°€
 			board[fx][fy] = first, board[sx][sy] = second;
-			// ¼ıÀÚ »ç¿ë Ã¼Å©
+			// ìˆ«ì ì‚¬ìš© ì²´í¬
 			addNum(fx, fy, first);
 			addNum(sx, sy, second);
-			// Å¸ÀÏ »ç¿ë Ã¼Å©
+			// íƒ€ì¼ ì‚¬ìš© ì²´í¬
 			tile[first][second] = tile[second][first] = 1;
 		}
 		for (int i = 1; i <= 9; i++)
 		{
 			string pos;
 			cin >> pos;
-			// ÁÂÇ¥ °è»ê
+			// ì¢Œí‘œ ê³„ì‚°
 			int x = pos[0] - 65, y = pos[1] - '0' - 1;
-			board[x][y] = i; // ¼ıÀÚ »ç¿ë Ã¼Å©
-			addNum(x, y, i); // Å¸ÀÏ »ç¿ë Ã¼Å©
+			board[x][y] = i; // ìˆ«ì ì‚¬ìš© ì²´í¬
+			addNum(x, y, i); // íƒ€ì¼ ì‚¬ìš© ì²´í¬
 		}
-		solve(0); // ÆÛÁñ Ç®±â
+		solve(0); // í¼ì¦ í’€ê¸°
 		t++;
-		// ¹éÅÍ ÃÊ±âÈ­
+		// ë°±í„° ì´ˆê¸°í™”
 		board.clear();
 		tile.clear();
 		row.clear();

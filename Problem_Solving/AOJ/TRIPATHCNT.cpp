@@ -8,7 +8,7 @@ vector<vector<int>> triangle, pathCache, countCache;
 
 int max(int a, int b) { return a > b ? a : b; }
 
-// ÃÖ´ë ÇÕ °æ·Î¸¦ ±¸ÇÑ´Ù.
+// ìµœëŒ€ í•© ê²½ë¡œë¥¼ êµ¬í•œë‹¤.
 int path(int y, int x)
 {
 	if (y == n - 1) return triangle[y][x]; 
@@ -19,13 +19,13 @@ int path(int y, int x)
 
 int count(int y, int x)
 {
-	// ±âÀú »ç·Ê: y°¡ ³¡±îÁö µµ´ÞÇßÀ» ‹š
+	// ê¸°ì € ì‚¬ë¡€: yê°€ ëê¹Œì§€ ë„ë‹¬í–ˆì„ ë–„
 	if (y == n - 1) return 1;
-	// ¸Þ¸ðÀÌÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì´ì œì´ì…˜
 	int& ret = countCache[y][x];
 	if (ret != -1) return ret;
-	ret = 0; // Ä«¿îÆÃ ÃÊ±âÈ­
-	// Á¡È­½Ä Àû¿ë
+	ret = 0; // ì¹´ìš´íŒ… ì´ˆê¸°í™”
+	// ì í™”ì‹ ì ìš©
 	if (path(y + 1, x) >= path(y + 1, x + 1)) ret += count(y + 1, x);
 	if (path(y + 1, x) <= path(y + 1, x + 1)) ret += count(y + 1, x + 1);
 	return ret;

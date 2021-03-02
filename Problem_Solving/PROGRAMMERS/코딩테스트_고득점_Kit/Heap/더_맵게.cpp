@@ -8,23 +8,23 @@ using namespace std;
 int solution(vector<int> scoville, int K) {
 	int answer = 0;
 	priority_queue<int, vector<int>, greater<int>> pq;
-	// 1. ¿À¸§Â÷¼ø ¿ì¼±¼øÀ§ Å¥¿¡ µ¥ÀÌÅÍ Áý¾î³Ö±â
+	// 1. ì˜¤ë¦„ì°¨ìˆœ ìš°ì„ ìˆœìœ„ íì— ë°ì´í„° ì§‘ì–´ë„£ê¸°
 	for (int i = 0; i < scoville.size(); i++) {
 		pq.push(scoville[i]);
 	}
-	// 2. ¿ì¼±¼øÀ§ Å¥¿¡ µÎ°³ ÀÌ»ó µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏ°í ¼±ÃâµÇ´Â °ªÀÌ K ¹Ì¸¸ÀÏ ¶§±îÁö ¹Ýº¹
+	// 2. ìš°ì„ ìˆœìœ„ íì— ë‘ê°œ ì´ìƒ ë°ì´í„°ê°€ ì¡´ìž¬í•˜ê³  ì„ ì¶œë˜ëŠ” ê°’ì´ K ë¯¸ë§Œì¼ ë•Œê¹Œì§€ ë°˜ë³µ
 	while (pq.top() < K && pq.size() > 1) {
-		// 3. Ã¹¹øÂ°¿Í µÎ¹øÂ° µ¥ÀÌÅÍ¸¦ Å¥¿¡¼­ ÃßÃâ
+		// 3. ì²«ë²ˆì§¸ì™€ ë‘ë²ˆì§¸ ë°ì´í„°ë¥¼ íì—ì„œ ì¶”ì¶œ
 		int first, second;
 		first = pq.top();
 		pq.pop();
 		second = pq.top();
 		pq.pop();
-		// 4. »õ·Î¿î ½ºÄÚºô Áö¼ö °è»ê µÚ push
+		// 4. ìƒˆë¡œìš´ ìŠ¤ì½”ë¹Œ ì§€ìˆ˜ ê³„ì‚° ë’¤ push
 		pq.push(first + second * 2);
 		answer++;
 	}
-	// 5. ¾î¶°ÇÑ °æ¿ì¿¡µµ ½ºÄÚºô Áö¼ö°¡ K¸¦ ³ÑÁö ¸øÇÏ´Â °æ¿ì -1 Ãâ·Â
+	// 5. ì–´ë– í•œ ê²½ìš°ì—ë„ ìŠ¤ì½”ë¹Œ ì§€ìˆ˜ê°€ Kë¥¼ ë„˜ì§€ ëª»í•˜ëŠ” ê²½ìš° -1 ì¶œë ¥
 	if (pq.top() < K)
 		return -1;
 	return answer;

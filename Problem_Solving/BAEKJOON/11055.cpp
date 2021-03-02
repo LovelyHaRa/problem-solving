@@ -7,21 +7,21 @@ int main(void)
 {
 	int n;
 	cin >> n;
-	vector<int> a(n), cache(n); // ¼ö¿­, ÇÕ°èÀÇ ÃÖ´ë°ªÀ» ÀúÀåÇÏ´Â DP ¹è¿­
+	vector<int> a(n), cache(n); // ìˆ˜ì—´, í•©ê³„ì˜ ìµœëŒ€ê°’ì„ ì €ì¥í•˜ëŠ” DP ë°°ì—´
 	for (int i = 0; i < n; i++)
 	{
 		cin >> a[i];
-		cache[i] = a[i]; // ÃÊ±â°ª: a[i]¿Í °°Àº °ª
+		cache[i] = a[i]; // ì´ˆê¸°ê°’: a[i]ì™€ ê°™ì€ ê°’
 	}
-	int res = 0; // ÃÖ´ë°ª ÀúÀå
+	int res = 0; // ìµœëŒ€ê°’ ì €ì¥
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < i; j++)
-			// Á¶°Ç 1: LIS¸¦ ¸¸Á·ÇÏ´ÂÁö?(a[j]<a[i])
-			// Á¶°Ç 2: ÇÕÀÌ ´õ Å«°¡?
+			// ì¡°ê±´ 1: LISë¥¼ ë§Œì¡±í•˜ëŠ”ì§€?(a[j]<a[i])
+			// ì¡°ê±´ 2: í•©ì´ ë” í°ê°€?
 			if (a[j] < a[i] && cache[i] < cache[j] + a[i])
-				cache[i] = cache[j] + a[i]; // ÃÖ´ë°ª °»½Å
-		res = res < cache[i] ? cache[i] : res; // ±¸ÇÒ ¼ö ÀÖ´Â ¸ğµç ¼ö¿­ÀÇ ÇÕ ÃÖ´ë°ª °»½Å
+				cache[i] = cache[j] + a[i]; // ìµœëŒ€ê°’ ê°±ì‹ 
+		res = res < cache[i] ? cache[i] : res; // êµ¬í•  ìˆ˜ ìˆëŠ” ëª¨ë“  ìˆ˜ì—´ì˜ í•© ìµœëŒ€ê°’ ê°±ì‹ 
 	}
 	cout << res << '\n';
 }

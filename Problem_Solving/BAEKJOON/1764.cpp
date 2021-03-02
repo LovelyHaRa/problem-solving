@@ -8,25 +8,25 @@ int main(void)
 {
 	int n, m;
 	cin >> n >> m;
-	set<string> s; // µé¾îº¸Áö ¸øÇÑ »ç¶÷ ÁıÇÕ
-	// µé¾îº¸Áö ¸øÇÑ »ç¶÷ Ãß°¡
+	set<string> s; // ë“¤ì–´ë³´ì§€ ëª»í•œ ì‚¬ëŒ ì§‘í•©
+	// ë“¤ì–´ë³´ì§€ ëª»í•œ ì‚¬ëŒ ì¶”ê°€
 	while (n--)
 	{
 		string str;
 		cin >> str;
 		s.insert(str);
 	}
-	set<string> ss; // µèµµ º¸µµ ¸øÇÑ »ç¶÷ ÁıÇÕ
-	// µèµµ º¸µµ ¸øÇÑ »ç¶÷ Ãß°¡
+	set<string> ss; // ë“£ë„ ë³´ë„ ëª»í•œ ì‚¬ëŒ ì§‘í•©
+	// ë“£ë„ ë³´ë„ ëª»í•œ ì‚¬ëŒ ì¶”ê°€
 	while (m--)
 	{
 		string str;
 		cin >> str;
-		// µé¾îº¸Áö ¸øÇÑ »ç¶÷ÀÌ¸é Ãß°¡
+		// ë“¤ì–´ë³´ì§€ ëª»í•œ ì‚¬ëŒì´ë©´ ì¶”ê°€
 		if (s.find(str) != s.end())
 			ss.insert(str);			
 	}
-	// Ãâ·Â
+	// ì¶œë ¥
 	cout << ss.size() << '\n';
 	for (auto it = ss.begin(); it != ss.end(); it++)
 		cout << *it << '\n';

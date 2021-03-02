@@ -6,21 +6,21 @@ using namespace std;
 
 int concat(const vector<int>& lengths)
 {
-	priority_queue<int, vector<int>, greater<int>> pq; // ¿À¸§Â÷¼ø ¿ì¼±¼öÀ§Å¥ »ç¿ë
-	// Å¥¿¡ µ¥ÀÌÅÍ »ğÀÔ
+	priority_queue<int, vector<int>, greater<int>> pq; // ì˜¤ë¦„ì°¨ìˆœ ìš°ì„ ìˆ˜ìœ„í ì‚¬ìš©
+	// íì— ë°ì´í„° ì‚½ì…
 	for (int i = 0; i < lengths.size(); i++)
 		pq.push(lengths[i]);
 	int ret = 0;
 	while (pq.size() > 1)
 	{
-		// ÃÖ¼Ò°ª µÎ°³ ²¨³»±â
+		// ìµœì†Œê°’ ë‘ê°œ êº¼ë‚´ê¸°
 		int min1 = pq.top();
 		pq.pop();
 		int min2 = pq.top();
 		pq.pop();
-		// ´õÇØ¼­ ´Ù½Ã ³Ö±â
+		// ë”í•´ì„œ ë‹¤ì‹œ ë„£ê¸°
 		pq.push(min1 + min2);
-		// ´õÇÑ °ª ´©Àû
+		// ë”í•œ ê°’ ëˆ„ì 
 		ret += min1 + min2;
 	}
 	return ret;

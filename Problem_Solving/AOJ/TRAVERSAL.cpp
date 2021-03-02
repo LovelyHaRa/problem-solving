@@ -4,28 +4,28 @@
 
 using namespace std;
 
-// ÁÖ¾îÁø ¹è¿­À» a¿¡¼­ b±¸°£¸¸Å­ Àß¶ó ¹İÈ¯
+// ì£¼ì–´ì§„ ë°°ì—´ì„ aì—ì„œ bêµ¬ê°„ë§Œí¼ ì˜ë¼ ë°˜í™˜
 vector<int> slice(const vector<int>& v, int a, int b)
 {
 	return vector<int>(v.begin() + a, v.begin() + b);
 }
 
-// Æ®¸®ÀÇ ÀüÀ§Å½»ö °á°ú¿Í ÁßÀ§Å½»ö °á°ú°¡ ÁÖ¾îÁú ¶§ ÈÄÀ§Å½»ö °á°ú¸¦ Ãâ·ÂÇÑ´Ù.
+// íŠ¸ë¦¬ì˜ ì „ìœ„íƒìƒ‰ ê²°ê³¼ì™€ ì¤‘ìœ„íƒìƒ‰ ê²°ê³¼ê°€ ì£¼ì–´ì§ˆ ë•Œ í›„ìœ„íƒìƒ‰ ê²°ê³¼ë¥¼ ì¶œë ¥í•œë‹¤.
 void printPostOrder(const vector<int>& preorder, const vector<int>& inorder)
 {
-	// Æ®¸®¿¡ Æ÷ÇÔµÈ ³ëµå ¼ö
+	// íŠ¸ë¦¬ì— í¬í•¨ëœ ë…¸ë“œ ìˆ˜
 	const int N = preorder.size();
-	// ±âÀú »ç·Ê: ÅÖ ºó Æ®¸®¸é °ğÀå Á¾·á
+	// ê¸°ì € ì‚¬ë¡€: í…… ë¹ˆ íŠ¸ë¦¬ë©´ ê³§ì¥ ì¢…ë£Œ
 	if (preorder.empty()) return;
-	// ·çÆ®´Â ÀüÀ§¼øÈ¸ ¹è¿­ ¸Ç ¾ÕÀÚ¸®
+	// ë£¨íŠ¸ëŠ” ì „ìœ„ìˆœíšŒ ë°°ì—´ ë§¨ ì•ìë¦¬
 	const int root = preorder[0];
-	// ¿ŞÂÊ ¼­ºêÆ®¸® Å©±â´Â ÁßÀ§Å½»ö °á°ú¿¡¼­ ·çÆ®ÀÇ À§Ä¡¸¦ Ã£¾Æ¼­ ¾Ë ¼ö ÀÖ´Ù
+	// ì™¼ìª½ ì„œë¸ŒíŠ¸ë¦¬ í¬ê¸°ëŠ” ì¤‘ìœ„íƒìƒ‰ ê²°ê³¼ì—ì„œ ë£¨íŠ¸ì˜ ìœ„ì¹˜ë¥¼ ì°¾ì•„ì„œ ì•Œ ìˆ˜ ìˆë‹¤
 	const int L = find(inorder.begin(), inorder.end(), root) - inorder.begin();
-	// ¿ŞÂÊ ¼­ºêÆ®¸® Å½»ö
+	// ì™¼ìª½ ì„œë¸ŒíŠ¸ë¦¬ íƒìƒ‰
 	printPostOrder(slice(preorder, 1, L + 1), slice(inorder, 0, L));
-	// ¿À¸¥ÂÊ ¼­ºêÆ®¸® Å½»ö
+	// ì˜¤ë¥¸ìª½ ì„œë¸ŒíŠ¸ë¦¬ íƒìƒ‰
 	printPostOrder(slice(preorder, L + 1, N), slice(inorder, L + 1, N));
-	// ·çÆ® Ãâ·Â
+	// ë£¨íŠ¸ ì¶œë ¥
 	cout << root << ' ';
 }
 

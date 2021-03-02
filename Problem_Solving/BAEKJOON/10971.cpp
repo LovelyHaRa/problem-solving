@@ -8,31 +8,31 @@ vector<vector<int>> dist;
 
 int min(int a, int b) { return a < b ? a : b; }
 
-// Áö±İ±îÁöÀÇ °æ·Î path¿Í ¹æ¹®¿©ºÎ°¡ ÁÖ¾îÁ³À» ¶§, ÃÖ¼Òºñ¿ëÀ» ¹İÈ¯ÇÑ´Ù
+// ì§€ê¸ˆê¹Œì§€ì˜ ê²½ë¡œ pathì™€ ë°©ë¬¸ì—¬ë¶€ê°€ ì£¼ì–´ì¡Œì„ ë•Œ, ìµœì†Œë¹„ìš©ì„ ë°˜í™˜í•œë‹¤
 int shortestPath(vector<int>& path, vector<bool>& visited, int currentLength)
 {
-	// ±âÀú »ç·Ê: ¸ğµç °æ·Î¸¦ Å½»ö ÇßÀ» ¶§
+	// ê¸°ì € ì‚¬ë¡€: ëª¨ë“  ê²½ë¡œë¥¼ íƒìƒ‰ í–ˆì„ ë•Œ
 	if (path.size() == n)
 	{
-		// ½ÃÀÛÁ¡°ú ¿¬°áµÇ¾îÀÖ´ÂÁö È®ÀÎ
+		// ì‹œì‘ì ê³¼ ì—°ê²°ë˜ì–´ìˆëŠ”ì§€ í™•ì¸
 		if (dist[path.back()][path[0]] > 0)
 			return currentLength + dist[path.back()][path[0]];
-		return 1987654321; // ¿¬°á ¾ÈµÇÀÖÀ¸¸é ¼øÈ¸ ºÒ°¡´ÉÀÌ¹Ç·Î Å« °ª ¸®ÅÏ
+		return 1987654321; // ì—°ê²° ì•ˆë˜ìˆìœ¼ë©´ ìˆœíšŒ ë¶ˆê°€ëŠ¥ì´ë¯€ë¡œ í° ê°’ ë¦¬í„´
 	}
 	int ret = 1987654321;
-	// ¸ğµç ÁöÁ¡ Å½»ö
+	// ëª¨ë“  ì§€ì  íƒìƒ‰
 	for (int i = 0; i < n; i++)
 	{
 		int here = path.back();
-		// ¹æ¹® Çß°Å³ª ¿¬°áµÇ¾îÀÖÁö ¾ÊÀº °æ¿ì °Ç³Ê¶Ù±â
+		// ë°©ë¬¸ í–ˆê±°ë‚˜ ì—°ê²°ë˜ì–´ìˆì§€ ì•Šì€ ê²½ìš° ê±´ë„ˆë›°ê¸°
 		if (visited[i] || dist[here][i] == 0) continue;
-		visited[i] = true; // ¹æ¹® Ã¼Å©
-		path.push_back(i); // °æ·Î Ãß°¡
-		// ´ÙÀ½ °æ·Î Å½»ö
+		visited[i] = true; // ë°©ë¬¸ ì²´í¬
+		path.push_back(i); // ê²½ë¡œ ì¶”ê°€
+		// ë‹¤ìŒ ê²½ë¡œ íƒìƒ‰
 		int cand = shortestPath(path, visited, currentLength + dist[here][i]);
-		// ÃÖ¼Ò ºñ¿ë °»½Å
+		// ìµœì†Œ ë¹„ìš© ê°±ì‹ 
 		ret = min(cand, ret);
-		// ¿ø»ó º¹±¸
+		// ì›ìƒ ë³µêµ¬
 		visited[i] = false;
 		path.pop_back();
 	}
@@ -47,14 +47,14 @@ int main(void)
 		for (int j = 0; j < n; j++)
 			cin >> dist[i][j];
 	int res = 1987654321;
-	// ¸ğµç À§Ä¡¿¡¼­ ½ÃÀÛ
+	// ëª¨ë“  ìœ„ì¹˜ì—ì„œ ì‹œì‘
 	for (int i = 0; i < n; i++)
 	{
-		// ½ÃÀÛÁ¡ path Ãß°¡ ¹× ¹æ¹® Ã¼Å©
+		// ì‹œì‘ì  path ì¶”ê°€ ë° ë°©ë¬¸ ì²´í¬
 		vector<int> path(1, i);
 		vector<bool> visited(n);
 		visited[i] = true;
-		// ÃÖ¼Ò ºñ¿ë °»½Å
+		// ìµœì†Œ ë¹„ìš© ê°±ì‹ 
 		res = min(shortestPath(path, visited, 0), res);
 	}
 	cout << res << '\n';

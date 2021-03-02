@@ -5,16 +5,16 @@ using namespace std;
 
 string reverse(string::iterator& it)
 {
-	char head = *it; // Ã¹±ÛÀÚ
-	++it; // ¹Ýº¹ÀÚ Áõ°¡
+	char head = *it; // ì²«ê¸€ìž
+	++it; // ë°˜ë³µìž ì¦ê°€
 	if (head == 'b' || head == 'w')
-		return string(1, head); // b, w 1°³ ´ÜÀ§´Â µÚÁý¾îµµ °°À½
-	// xÀÌ¸é 4ºÐ¸é ¸ðµÎ Àç±ÍÈ£Ãâ
+		return string(1, head); // b, w 1ê°œ ë‹¨ìœ„ëŠ” ë’¤ì§‘ì–´ë„ ê°™ìŒ
+	// xì´ë©´ 4ë¶„ë©´ ëª¨ë‘ ìž¬ê·€í˜¸ì¶œ
 	string upperLeft = reverse(it);
 	string upperRight = reverse(it);
 	string lowerLeft = reverse(it);
 	string lowerRight = reverse(it);
-	// ¼ø¼­¸¦ ¹ÝÀü ½ÃÄÑ ¸®ÅÏ (3,4,1,2)
+	// ìˆœì„œë¥¼ ë°˜ì „ ì‹œì¼œ ë¦¬í„´ (3,4,1,2)
 	return "x" + lowerLeft + lowerRight + upperLeft + upperRight;
 }
 
@@ -27,7 +27,7 @@ int main(void)
 		string s;
 		cin >> s;
 		string::iterator it = s.begin();
-		// ¹Ýº¹ÀÚ Æ÷ÀÎÅÍ¸¦ ÆÄ¶ó¹ÌÅÍ·Î ÇÔÀ¸·Î½á, Æ÷ÀÎÅÍ À§Ä¡¸¦ ¸Å¹ø °»½Å °¡´É
+		// ë°˜ë³µìž í¬ì¸í„°ë¥¼ íŒŒë¼ë¯¸í„°ë¡œ í•¨ìœ¼ë¡œì¨, í¬ì¸í„° ìœ„ì¹˜ë¥¼ ë§¤ë²ˆ ê°±ì‹  ê°€ëŠ¥
 		cout << reverse(it) << '\n';
 	}
 }

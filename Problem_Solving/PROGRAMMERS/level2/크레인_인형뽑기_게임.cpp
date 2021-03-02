@@ -7,24 +7,24 @@ using namespace std;
 int solution(vector<vector<int>> board, vector<int> moves) {
 	int answer = 0;
 	stack<int> s;
-	// 1. Å©·¹ÀÎ ÀÌµ¿ È½¼ö¸¸Å­ Å½»ö
+	// 1. í¬ë ˆì¸ ì´ë™ íšŸìˆ˜ë§Œí¼ íƒìƒ‰
 	for (int i = 0; i < moves.size(); i++) {
-		// 2. ÇöÀç À§Ä¡ ÀÎµ¦½º·Î ÀúÀå(-1)
+		// 2. í˜„ì¬ ìœ„ì¹˜ ì¸ë±ìŠ¤ë¡œ ì €ì¥(-1)
 		int location = moves[i] - 1;
-		// 3. ÇöÀç À§Ä¡¿¡¼­ ¼¼·Î·Î Å½»ö
+		// 3. í˜„ì¬ ìœ„ì¹˜ì—ì„œ ì„¸ë¡œë¡œ íƒìƒ‰
 		for (int j = 0; j < board.size(); j++) {
-			// 4. ÀÎÇüÀÌ Ã³À½ ¹ß°ßµÇ¸é
+			// 4. ì¸í˜•ì´ ì²˜ìŒ ë°œê²¬ë˜ë©´
 			if (board[j][location] > 0) {
-				// 5. ½ºÅÃ ÃÖ»ó´Ü ÀÎÇü°ú ¶È°°À¸¸é 2°³ ¾ø¾Ö±â
+				// 5. ìŠ¤íƒ ìµœìƒë‹¨ ì¸í˜•ê³¼ ë˜‘ê°™ìœ¼ë©´ 2ê°œ ì—†ì• ê¸°
 				if (!s.empty() && s.top() == board[j][location]) {
 					answer += 2;
 					s.pop();
 				}
-				// 6. ¾Æ´Ï¸é ½ºÅÃ¿¡ Ãß°¡
+				// 6. ì•„ë‹ˆë©´ ìŠ¤íƒì— ì¶”ê°€
 				else {
 					s.push(board[j][location]);
 				}
-				// 7. °İÀÚ¿¡¼­ Á¦°Å
+				// 7. ê²©ìì—ì„œ ì œê±°
 				board[j][location] = 0;
 				break;
 			}

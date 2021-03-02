@@ -1,12 +1,12 @@
-// ºÐÇÒÁ¤º¹
+// ë¶„í• ì •ë³µ
 #include <iostream>
 
 using namespace std;
 
 long long a, b, c;
 
-// ÀÏ¹ÝÀûÀÎ Á¦°ö Àç±Í´Â O(N)
-// ºÐÇÒ Á¤º¹À» ÀÌ¿ëÇÏ¿© O(logN)À¸·Î °³¼±ÇÒ ¼ö ÀÖ´Ù.
+// ì¼ë°˜ì ì¸ ì œê³± ìž¬ê·€ëŠ” O(N)
+// ë¶„í•  ì •ë³µì„ ì´ìš©í•˜ì—¬ O(logN)ìœ¼ë¡œ ê°œì„ í•  ìˆ˜ ìžˆë‹¤.
 long long multi(int a, int b)
 {
 	if (!b)
@@ -14,9 +14,9 @@ long long multi(int a, int b)
 	if (b == 1)
 		return a;
 	if (b % 2)
-		return multi(a, b - 1)*a; // È¦¼ö¸é a^(b-1)*a·Î ºÐÇÒ °¡´É
-	long long h = multi(a, b / 2); // Â¦¼ö¸é a^(b/2)*a^(b/2)·Î ºÐÇÒ °¡´É
-	// °è»ê Áß°£¿¡ ³ª´« ³ª¸ÓÁö¶û ¸ðµç °è»êÀÌ ³¡³­ µÚ ³ª´« ³ª¸ÓÁö´Â °°´Ù
+		return multi(a, b - 1)*a; // í™€ìˆ˜ë©´ a^(b-1)*aë¡œ ë¶„í•  ê°€ëŠ¥
+	long long h = multi(a, b / 2); // ì§ìˆ˜ë©´ a^(b/2)*a^(b/2)ë¡œ ë¶„í•  ê°€ëŠ¥
+	// ê³„ì‚° ì¤‘ê°„ì— ë‚˜ëˆˆ ë‚˜ë¨¸ì§€ëž‘ ëª¨ë“  ê³„ì‚°ì´ ëë‚œ ë’¤ ë‚˜ëˆˆ ë‚˜ë¨¸ì§€ëŠ” ê°™ë‹¤
 	h %= c;
 	return (h*h) % c;
 

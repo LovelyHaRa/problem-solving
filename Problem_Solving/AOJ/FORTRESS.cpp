@@ -4,76 +4,76 @@
 
 using namespace std;
 
-int n, longest; // longest=°¡Àå ±ä ¸®ÇÁ °£ ³ëµå ±æÀÌ
+int n, longest; // longest=ê°€ì¥ ê¸´ ë¦¬í”„ ê°„ ë…¸ë“œ ê¸¸ì´
 vector<int> y, x, radius;
 
-// Æ®¸® ±¸Á¶Ã¼
+// íŠ¸ë¦¬ êµ¬ì¡°ì²´
 struct TreeNode
 {
 	vector<TreeNode*> children;
 };
 
-// xÀÇ Á¦°öÀ» ¹İÈ¯ÇÑ´Ù
+// xì˜ ì œê³±ì„ ë°˜í™˜í•œë‹¤
 int pow(int x) { return x * x; }
 
-// a, b°£ °Å¸®¸¦ ±¸ÇÑ´Ù
+// a, bê°„ ê±°ë¦¬ë¥¼ êµ¬í•œë‹¤
 int dist(int a, int b) { return pow(y[a] - y[b]) + pow(x[a] - x[b]); }
 
-// ¼ºº® a°¡ ¼ºº® b¸¦ Æ÷ÇÔÇÏ´ÂÁö È®ÀÎÇÑ´Ù
+// ì„±ë²½ aê°€ ì„±ë²½ bë¥¼ í¬í•¨í•˜ëŠ”ì§€ í™•ì¸í•œë‹¤
 bool encloses(int a, int b)
 {
 	return radius[a] > radius[b] && dist(a, b) < pow(radius[a] - radius[b]);
 }
 
-// ¼ºº® Æ®¸®¿¡¼­ parent°¡ childÀÇ ºÎ¸ğÀÎÁö È®ÀÎÇÑ´Ù
+// ì„±ë²½ íŠ¸ë¦¬ì—ì„œ parentê°€ childì˜ ë¶€ëª¨ì¸ì§€ í™•ì¸í•œë‹¤
 bool isChild(int parent, int child)
 {
 	if (!encloses(parent, child)) return false;
 	for (int i = 0; i < n; i++)
-		// parent´Â child¸¦ ²À Á÷Á¢ Æ÷ÇÔÇØ¾ß ÇÑ´Ù
+		// parentëŠ” childë¥¼ ê¼­ ì§ì ‘ í¬í•¨í•´ì•¼ í•œë‹¤
 		if (i != parent && i != child && encloses(parent, i) && encloses(i, child))
 			return false;
 	return true;
 }
 
-// root ¼ºº®À» ·çÆ®·Î ÇÏ´Â Æ®¸®¸¦ »ı¼ºÇÑ´Ù
+// root ì„±ë²½ì„ ë£¨íŠ¸ë¡œ í•˜ëŠ” íŠ¸ë¦¬ë¥¼ ìƒì„±í•œë‹¤
 TreeNode* getTree(int root)
 {
 	TreeNode* ret = new TreeNode();
 	for (int ch = 0; ch < n; ch++)
 	{
-		// ch ¼ºº®ÀÌ root ¼ºº®¿¡ Á÷Á¢ÀûÀ¸·Î Æ÷ÇÔµÇ¾î ÀÖ´Ù¸é
-		// Æ®¸®¸¦ ¸¸µé°í ÀÚ¼Õ ¸ñ·Ï¿¡ Ãß°¡ÇÑ´Ù
+		// ch ì„±ë²½ì´ root ì„±ë²½ì— ì§ì ‘ì ìœ¼ë¡œ í¬í•¨ë˜ì–´ ìˆë‹¤ë©´
+		// íŠ¸ë¦¬ë¥¼ ë§Œë“¤ê³  ìì† ëª©ë¡ì— ì¶”ê°€í•œë‹¤
 		if (isChild(root, ch))
 			ret->children.push_back(getTree(ch));
 	}
 	return ret;
 }
 
-// root¸¦ ·çÆ®·Î ÇÏ´Â ¼­ºêÆ®¸®ÀÇ ³ôÀÌ¸¦ ±¸ÇÑ´Ù
+// rootë¥¼ ë£¨íŠ¸ë¡œ í•˜ëŠ” ì„œë¸ŒíŠ¸ë¦¬ì˜ ë†’ì´ë¥¼ êµ¬í•œë‹¤
 int height(TreeNode* root)
 {
-	// °¢ ÀÚ½ÄÀ» ·çÆ®·Î ÇÏ´Â ¼­ºêÆ®¸® ³ôÀÌ¸¦ °è»êÇÑ´Ù
+	// ê° ìì‹ì„ ë£¨íŠ¸ë¡œ í•˜ëŠ” ì„œë¸ŒíŠ¸ë¦¬ ë†’ì´ë¥¼ ê³„ì‚°í•œë‹¤
 	vector<int> heights;
 	for (int i = 0; i < root->children.size(); i++)
 		heights.push_back(height(root->children[i]));
-	// ¸¸¾à ÀÚ½ÄÀÌ ÇÏ³ªµµ ¾ø´Ù¸é ³ôÀÌ´Â 0
+	// ë§Œì•½ ìì‹ì´ í•˜ë‚˜ë„ ì—†ë‹¤ë©´ ë†’ì´ëŠ” 0
 	if (heights.empty()) return 0;
-	// ³ôÀÌ Á¤·Ä
+	// ë†’ì´ ì •ë ¬
 	sort(heights.begin(), heights.end());
 	int k = heights.size();
-	// ¸®ÇÁ°£ ³ëµåÀÇ ÃÖ´ë°ªÀ» °»½ÅÇÑ´Ù
+	// ë¦¬í”„ê°„ ë…¸ë“œì˜ ìµœëŒ€ê°’ì„ ê°±ì‹ í•œë‹¤
 	if (k >= 2)
 		longest = max(longest, 2 + heights[k - 2] + heights[k - 1]);
-	// Æ®¸®ÀÇ ³ôÀÌ´Â ¼­ºêÆ®¸® ³ôÀÌÀÇÃÖ´ëÄ¡¿¡ 1À» ´õÇØ °è»êÇÑ´Ù
+	// íŠ¸ë¦¬ì˜ ë†’ì´ëŠ” ì„œë¸ŒíŠ¸ë¦¬ ë†’ì´ì˜ìµœëŒ€ì¹˜ì— 1ì„ ë”í•´ ê³„ì‚°í•œë‹¤
 	return heights.back() + 1;
 }
 
-// µÎ ³ëµå »çÀÌÀÇ °¡Àå ±ä °æ·ÎÀÇ ±æÀÌ¸¦ °è»êÇÑ´Ù
+// ë‘ ë…¸ë“œ ì‚¬ì´ì˜ ê°€ì¥ ê¸´ ê²½ë¡œì˜ ê¸¸ì´ë¥¼ ê³„ì‚°í•œë‹¤
 int solve(TreeNode* root)
 {
 	longest = 0;
-	// Æ®¸®ÀÇ ³ôÀÌ¿Í ¸®ÇÁ °£ ³ëµå ±æÀÌ Áß Å« °ÍÀ» ¼±ÅÃÇÑ´Ù.
+	// íŠ¸ë¦¬ì˜ ë†’ì´ì™€ ë¦¬í”„ ê°„ ë…¸ë“œ ê¸¸ì´ ì¤‘ í° ê²ƒì„ ì„ íƒí•œë‹¤.
 	int h = height(root);
 	return max(longest, h);
 }
@@ -89,7 +89,7 @@ int main(void)
 		x.resize(n);
 		radius.resize(n);
 		for (int i = 0; i < n; i++) cin >> y[i] >> x[i] >> radius[i];
-		// Æ®¸® »ı¼º
+		// íŠ¸ë¦¬ ìƒì„±
 		TreeNode* root= getTree(0);
 		cout << solve(root) << '\n';
 		y.clear();

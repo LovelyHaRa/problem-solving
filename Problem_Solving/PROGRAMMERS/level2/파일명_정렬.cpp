@@ -13,13 +13,13 @@ string to_lower(string s) {
 }
 
 bool compare(vector<string> a, vector<string> b) {
-	// head ÃßÃâ
-	string h1 = to_lower(a[0]), h2 = to_lower(b[0]); // ¹®ÀÚ¿­ lowercase
-	// °°À¸¸é ¼ıÀÚ ºñ±³
+	// head ì¶”ì¶œ
+	string h1 = to_lower(a[0]), h2 = to_lower(b[0]); // ë¬¸ìì—´ lowercase
+	// ê°™ìœ¼ë©´ ìˆ«ì ë¹„êµ
 	if (h1 == h2) {
 		return stoi(a[1]) < stoi(b[1]);
 	}
-	// ´Ù¸£¸é head ºñ±³
+	// ë‹¤ë¥´ë©´ head ë¹„êµ
 	else return h1 < h2;
 }
 
@@ -27,34 +27,34 @@ vector<string> solution(vector<string> files) {
 	vector<string> answer;
 	// 0, 1, 2 => head, number, tail
 	vector<vector<string>> k(files.size(), vector<string>(3));
-	// 1. ÆÄÀÏ¸í ºĞ¸®
+	// 1. íŒŒì¼ëª… ë¶„ë¦¬
 	for (int i = 0; i < files.size(); i++) {
 		int j = 0;
 		string t;
-		// head ºĞ¸®
+		// head ë¶„ë¦¬
 		while (j < files[i].size()) {
-			// ¼ıÀÚ°¡ Ã³À½ ¹ß°ßµÇ¸é ¸ØÃã
+			// ìˆ«ìê°€ ì²˜ìŒ ë°œê²¬ë˜ë©´ ë©ˆì¶¤
 			if (files[i][j] >= '0' && files[i][j] <= '9') {
 				break;
 			}
-			t += files[i][j++]; // ¹®ÀÚ ´©Àû
+			t += files[i][j++]; // ë¬¸ì ëˆ„ì 
 		}
-		k[i][0] = t; // head »ğÀÔ
-		t = ""; // ÃÊ±âÈ­
-		// number ºĞ¸®
+		k[i][0] = t; // head ì‚½ì…
+		t = ""; // ì´ˆê¸°í™”
+		// number ë¶„ë¦¬
 		while (j < files[i].size()) {
-			// ¼ıÀÚ°¡ ³¡³ª¸é ¸ØÃã
+			// ìˆ«ìê°€ ëë‚˜ë©´ ë©ˆì¶¤
 			if (files[i][j]<'0' || files[i][j]>'9') {
 				break;
 			}
 			t += files[i][j++];
 		}
-		k[i][1] = t; // number »ğÀÔ
-		k[i][2] = files[i].substr(j); // ³ª¸ÓÁö(tail) »ğÀÔ
+		k[i][1] = t; // number ì‚½ì…
+		k[i][2] = files[i].substr(j); // ë‚˜ë¨¸ì§€(tail) ì‚½ì…
 	}
-	// 2. ¾ÈÁ¤ Á¤·Ä: °°Àº °ª¿¡ ´ëÇØ ¼ø¼­°¡ º¸ÀåµÇ´Â Á¤·Ä
+	// 2. ì•ˆì • ì •ë ¬: ê°™ì€ ê°’ì— ëŒ€í•´ ìˆœì„œê°€ ë³´ì¥ë˜ëŠ” ì •ë ¬
 	stable_sort(k.begin(), k.end(), compare);
-	// 3. Á¤·Ä °á°ú Ãâ·Â
+	// 3. ì •ë ¬ ê²°ê³¼ ì¶œë ¥
 	for (int i = 0; i < k.size(); i++) {
 		string t = k[i][0] + k[i][1] + k[i][2];
 		answer.push_back(t);

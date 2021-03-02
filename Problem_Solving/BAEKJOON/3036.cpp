@@ -2,7 +2,7 @@
 
 using namespace std;
 
-/* ÃÖ´ë °ø¾à¼ö */
+/* ìµœëŒ€ ê³µì•½ìˆ˜ */
 int GCD(int a, int b)
 {
 	if (a < b) return GCD(a, b%a);
@@ -19,8 +19,8 @@ int main(void)
 		cin >> r[i];
 	/*
 	  1. i : 1 ~ n-1 
-	     Ã¹¹øÂ° ¸µ°ú i¹øÂ° ¸µÀÇ ÃÖ´ë °ø¾à¼ö¸¦ ±¸ÇÑ´Ù.
-	     2. °¢°¢À» ÃÖ´ë°ø¾à¼ö·Î ³ª´« °ÍÀ» '/'·Î ±¸ºÐÇÏ¿© Ãâ·ÂÇÑ´Ù.
+	     ì²«ë²ˆì§¸ ë§ê³¼ ië²ˆì§¸ ë§ì˜ ìµœëŒ€ ê³µì•½ìˆ˜ë¥¼ êµ¬í•œë‹¤.
+	     2. ê°ê°ì„ ìµœëŒ€ê³µì•½ìˆ˜ë¡œ ë‚˜ëˆˆ ê²ƒì„ '/'ë¡œ êµ¬ë¶„í•˜ì—¬ ì¶œë ¥í•œë‹¤.
 	*/
 	for (i = 1; i < n; i++)
 	{

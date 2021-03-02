@@ -15,16 +15,16 @@ int main(void)
 	{
 		int n, q;
 		cin >> n >> q;
-		vector<int> h(n), maxh(n); // ÃÖ¼Ò³ôÀÌ, ÃÖ´ë³ôÀÌ
+		vector<int> h(n), maxh(n); // ìµœì†Œë†’ì´, ìµœëŒ€ë†’ì´
 		for (int i = 0; i < n; i++)
 		{
 			cin >> h[i];
-			maxh[i] = -h[i]; // À½¼ö·Î ÀúÀåÇØ¼­ ÃÖ´ë°ªÀ» ±¸ÇÒ ¼ö ÀÖµµ·Ï ÇÑ´Ù
+			maxh[i] = -h[i]; // ìŒìˆ˜ë¡œ ì €ìž¥í•´ì„œ ìµœëŒ€ê°’ì„ êµ¬í•  ìˆ˜ ìžˆë„ë¡ í•œë‹¤
 		}
-		// ±¸°£ ÃÖ¼Ò Æ®¸® »ý¼º
+		// êµ¬ê°„ ìµœì†Œ íŠ¸ë¦¬ ìƒì„±
 		range_min_query<int> rngLow(h);
 		range_min_query<int> rngHigh(maxh);
-		// ±¸°£º° Äõ¸®°á°ú Ãâ·Â
+		// êµ¬ê°„ë³„ ì¿¼ë¦¬ê²°ê³¼ ì¶œë ¥
 		for (int i = 0; i < q; i++)
 		{
 			int a, b;

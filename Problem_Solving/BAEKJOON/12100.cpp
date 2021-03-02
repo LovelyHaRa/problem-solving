@@ -4,17 +4,17 @@
 
 using namespace std;
 
-int n; // º¸µå Å©±â
-int maxBlockSize = 0; // ÃÖ´ë ºí·Ï Å©±â
+int n; // ë³´ë“œ í¬ê¸°
+int maxBlockSize = 0; // ìµœëŒ€ ë¸”ë¡ í¬ê¸°
 
 int max(int a, int b) { return a > b ? a : b; }
 
-// ºí·ÏÀ» »óÇÏÁÂ¿ì ÀÌµ¿ ½ÃÅ² °á°ú¸¦ ¹İÈ¯
+// ë¸”ë¡ì„ ìƒí•˜ì¢Œìš° ì´ë™ ì‹œí‚¨ ê²°ê³¼ë¥¼ ë°˜í™˜
 vector<vector<int>> moveBlock(vector<vector<int>> curBoard, int dir)
 {
-	// dir: »ó, ÁÂ, ¿ì, ÇÏ
-	queue<int> q; // ºí·ÏÀ» ÀúÀå½ÃÅ³ Å¥
-	// 1. ºí·ÏÀ» Å¥¿¡ ÀúÀå
+	// dir: ìƒ, ì¢Œ, ìš°, í•˜
+	queue<int> q; // ë¸”ë¡ì„ ì €ì¥ì‹œí‚¬ í
+	// 1. ë¸”ë¡ì„ íì— ì €ì¥
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < n; j++)
@@ -43,7 +43,7 @@ vector<vector<int>> moveBlock(vector<vector<int>> curBoard, int dir)
 				break;
 			}
 		}
-		// 2. Å¥¿¡¼­ ºí·ÏÀ» »©¼­ ÇÕÄ¡±â
+		// 2. íì—ì„œ ë¸”ë¡ì„ ë¹¼ì„œ í•©ì¹˜ê¸°
 		int curBlock = 0, idx = 0;
 		while (!q.empty())
 		{
@@ -52,11 +52,11 @@ vector<vector<int>> moveBlock(vector<vector<int>> curBoard, int dir)
 			switch (dir)
 			{
 			case 0:
-				// ÇöÀç À§Ä¡¿¡ ºí·ÏÀÌ ÀúÀåµÇÁö ¾ÊÀº °æ¿ì
+				// í˜„ì¬ ìœ„ì¹˜ì— ë¸”ë¡ì´ ì €ì¥ë˜ì§€ ì•Šì€ ê²½ìš°
 				if (!curBoard[idx][i]) curBoard[idx][i] = curBlock;
-				// ÇöÀç À§Ä¡¿¡ ºí·ÏÀÌ ÀúÀåµÇ¾î ÀÖ°í ²¨³½ ºí·Ï°ú °ªÀÌ °°Àº °æ¿ì
+				// í˜„ì¬ ìœ„ì¹˜ì— ë¸”ë¡ì´ ì €ì¥ë˜ì–´ ìˆê³  êº¼ë‚¸ ë¸”ë¡ê³¼ ê°’ì´ ê°™ì€ ê²½ìš°
 				else if (curBoard[idx][i] == curBlock) curBoard[idx++][i] *= 2;
-				// À§ µÎ°¡Áö °æ¿ì°¡ ¾Æ´Ñ °æ¿ì
+				// ìœ„ ë‘ê°€ì§€ ê²½ìš°ê°€ ì•„ë‹Œ ê²½ìš°
 				else curBoard[++idx][i] = curBlock;
 				break;
 			case 1:
@@ -80,7 +80,7 @@ vector<vector<int>> moveBlock(vector<vector<int>> curBoard, int dir)
 	return curBoard;
 }
 
-// º¸µå¿¡¼­ ÃÖ´ë ºí·Ï »çÀÌÁî¸¦ Ã£´Â´Ù
+// ë³´ë“œì—ì„œ ìµœëŒ€ ë¸”ë¡ ì‚¬ì´ì¦ˆë¥¼ ì°¾ëŠ”ë‹¤
 int findMaxBlockSize(vector<vector<int>> board)
 {
 	int ret = 0;
@@ -90,20 +90,20 @@ int findMaxBlockSize(vector<vector<int>> board)
 	return ret;
 }
 
-// dfs Å½»öÀ¸·Î ¸ğµç °æ¿ì Á¶»ç
+// dfs íƒìƒ‰ìœ¼ë¡œ ëª¨ë“  ê²½ìš° ì¡°ì‚¬
 void move(vector<vector<int>> curBoard, int cnt, int curMaxBlockSize)
 {
-	// 5¹ø ÀÌµ¿ ÇßÀ¸¸é
+	// 5ë²ˆ ì´ë™ í–ˆìœ¼ë©´
 	if (cnt == 5)
 	{
-		maxBlockSize = max(maxBlockSize, curMaxBlockSize); // ÃÖ´ë ºí·Ï »çÀÌÁî ±¸ÇÏ±â
+		maxBlockSize = max(maxBlockSize, curMaxBlockSize); // ìµœëŒ€ ë¸”ë¡ ì‚¬ì´ì¦ˆ êµ¬í•˜ê¸°
 		return;
 	}
-	// »óÇÏÁÂ¿ì ÀÌµ¿
+	// ìƒí•˜ì¢Œìš° ì´ë™
 	for (int i = 0; i < 4; i++)
 	{
-		vector<vector<int>> nextBoard = moveBlock(curBoard, i); // ºí·Ï ÀÌµ¿ °á°ú ±¸ÇÏ±â
-		move(nextBoard, cnt + 1, findMaxBlockSize(nextBoard)); // dfs Å½»ö
+		vector<vector<int>> nextBoard = moveBlock(curBoard, i); // ë¸”ë¡ ì´ë™ ê²°ê³¼ êµ¬í•˜ê¸°
+		move(nextBoard, cnt + 1, findMaxBlockSize(nextBoard)); // dfs íƒìƒ‰
 	}
 }
 

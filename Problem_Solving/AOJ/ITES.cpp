@@ -3,38 +3,38 @@
 
 using namespace std;
 
-// ³­¼ö »ı¼º±â
+// ë‚œìˆ˜ ìƒì„±ê¸°
 struct RNG
 {
 	unsigned seed;
-	RNG() : seed(1983) {} // »ı¼ºÀÚ
+	RNG() : seed(1983) {} // ìƒì„±ì
 	unsigned next()
 	{
-		unsigned ret = seed; // ½ÇÁ¦·Î ¸®ÅÏÇØ¾ßÇÒ °ªÀº ÀÌÀü°ª
-		seed = ((seed * 214013u) + 2531011u); // ´ÙÀ½ °ª ¹Ì¸® °è»ê
-		return ret % 10000 + 1; // ÀÌÀü°ª ¸®ÅÏ
+		unsigned ret = seed; // ì‹¤ì œë¡œ ë¦¬í„´í•´ì•¼í•  ê°’ì€ ì´ì „ê°’
+		seed = ((seed * 214013u) + 2531011u); // ë‹¤ìŒ ê°’ ë¯¸ë¦¬ ê³„ì‚°
+		return ret % 10000 + 1; // ì´ì „ê°’ ë¦¬í„´
 	}
 };
 
-// ¿Â¶óÀÎ ¾Ë°í¸®Áò È°¿ë
+// ì˜¨ë¼ì¸ ì•Œê³ ë¦¬ì¦˜ í™œìš©
 int countRanges(int k, int n)
 {
-	RNG rng; // ³­¼ö »ı¼º±â
+	RNG rng; // ë‚œìˆ˜ ìƒì„±ê¸°
 	queue<int> range;
 	int ret = 0, rangeSum = 0;
 	for (int i = 0; i < n; i++)
 	{
-		int newSignal = rng.next(); // »õ·Î¿î ³­¼ö¸¦ ¹Ş´Â´Ù
-		rangeSum += newSignal; // ±¸°£ÇÕ¿¡ Ãß°¡
-		range.push(newSignal); // Å¥¿¡ ÇöÀç ³­¼ö »ğÀÔ
+		int newSignal = rng.next(); // ìƒˆë¡œìš´ ë‚œìˆ˜ë¥¼ ë°›ëŠ”ë‹¤
+		rangeSum += newSignal; // êµ¬ê°„í•©ì— ì¶”ê°€
+		range.push(newSignal); // íì— í˜„ì¬ ë‚œìˆ˜ ì‚½ì…
 
-		// ±¸°£ÇÕÀÌ k¸¦ ÃÊ°úÇÏ¸é k ÀÌÇÏ°¡ µÉ ¶§±îÁö Å¥¿¡¼­ ÃßÃâ ÈÄ ±¸°£ÇÕ¿¡¼­ »èÁ¦
+		// êµ¬ê°„í•©ì´ kë¥¼ ì´ˆê³¼í•˜ë©´ k ì´í•˜ê°€ ë  ë•Œê¹Œì§€ íì—ì„œ ì¶”ì¶œ í›„ êµ¬ê°„í•©ì—ì„œ ì‚­ì œ
 		while (rangeSum > k)
 		{
 			rangeSum -= range.front();
 			range.pop();
 		}
-		// ±¸°£ÇÕÀÌ kÀÎ °æ¿ì °æ¿ìÀÇ ¼ö Ãß°¡
+		// êµ¬ê°„í•©ì´ kì¸ ê²½ìš° ê²½ìš°ì˜ ìˆ˜ ì¶”ê°€
 		if (rangeSum == k) ret++;
 	}
 	return ret;

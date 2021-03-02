@@ -6,22 +6,22 @@ int n, r, c, res;
 
 void Z(int x, int y, int size)
 {
-	// À§Ä¡¿¡ µµ´ŞÇÏ¸é
+	// ìœ„ì¹˜ì— ë„ë‹¬í•˜ë©´
 	if (x == r && y == c)
 	{
 		cout << res << '\n';
 		return;
 	}
-	// ¹üÀ§¾È¿¡ ¼ÓÇÏ¸é
+	// ë²”ìœ„ì•ˆì— ì†í•˜ë©´
 	if (r >= x && r < x + size && c >= y && c < y + size)
 	{
-		// Z¸ğ¾ç Àç±Í Å½»ö
-		Z(x, y, size / 2); // ÁÂ»ó´Ü
-		Z(x, y + size / 2, size / 2); // ¿ì»ó´Ü
-		Z(x + size / 2, y, size / 2); // ÁÂÇÏ´Ü
-		Z(x + size / 2, y + size / 2, size / 2); // ¿ìÇÏ´Ü
+		// Zëª¨ì–‘ ì¬ê·€ íƒìƒ‰
+		Z(x, y, size / 2); // ì¢Œìƒë‹¨
+		Z(x, y + size / 2, size / 2); // ìš°ìƒë‹¨
+		Z(x + size / 2, y, size / 2); // ì¢Œí•˜ë‹¨
+		Z(x + size / 2, y + size / 2, size / 2); // ìš°í•˜ë‹¨
 	}
-	else res += size * size; // ±×·¸Áö ¾ÊÀ¸¸é ÇØ´ç »çºĞ¸é °Ç³Ê¶Ù±â
+	else res += size * size; // ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ í•´ë‹¹ ì‚¬ë¶„ë©´ ê±´ë„ˆë›°ê¸°
 }
 
 int main(void)

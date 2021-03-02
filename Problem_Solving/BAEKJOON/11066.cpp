@@ -3,9 +3,9 @@
 
 using namespace std;
 
-int novel[501]; // ÆÄÀÏÀÇ Å©±â
-int sum[501]; // 1~k±îÁöÀÇ ÇÕ
-int dp[501][501]; // µ¿Àû °èÈ¹ ¹è¿­
+int novel[501]; // íŒŒì¼ì˜ í¬ê¸°
+int sum[501]; // 1~kê¹Œì§€ì˜ í•©
+int dp[501][501]; // ë™ì  ê³„íš ë°°ì—´
 
 int main(void)
 {
@@ -17,14 +17,14 @@ int main(void)
 		for (int i = 1; i <= k; i++)
 		{
 			cin >> novel[i];
-			sum[i] = sum[i - 1] + novel[i]; // ÇÕ ÀúÀå
+			sum[i] = sum[i - 1] + novel[i]; // í•© ì €ì¥
 		}
 
 		/*
-		  - Á¡È­½Ä
+		  - ì í™”ì‹
 		  dp[i][i]=novel[i], dp[i][i+1]=novel[i]+novel[i+1]
-		  dp[i][j]=min(i<=mid<j){dp[i][j], dp[i][mid] + dp[mid+1][j] + sum[j] - sum[i-1](iºÎÅÍ j±îÁöÀÇ ºÎºĞÇÕ)}
-		  - »ïÁß for¹® ±¸Á¶
+		  dp[i][j]=min(i<=mid<j){dp[i][j], dp[i][mid] + dp[mid+1][j] + sum[j] - sum[i-1](ië¶€í„° jê¹Œì§€ì˜ ë¶€ë¶„í•©)}
+		  - ì‚¼ì¤‘ forë¬¸ êµ¬ì¡°
 		*/
 		for (int r = 1; r < k; r++)
 		{
@@ -37,7 +37,7 @@ int main(void)
 					dp[i][j] = min(dp[i][j], dp[i][mid] + dp[mid + 1][j] + sum[j] - sum[i - 1]);
 			}
 		}
-		// ¸ğµç ÆäÀÌÁö¸¦ ÇÕÃÄ¾ß ÇÏ¹Ç·Î dp[1][k]ÀÇ °ªÀ» Ãâ·Â
+		// ëª¨ë“  í˜ì´ì§€ë¥¼ í•©ì³ì•¼ í•˜ë¯€ë¡œ dp[1][k]ì˜ ê°’ì„ ì¶œë ¥
 		cout << dp[1][k] << endl;
 	}
 }

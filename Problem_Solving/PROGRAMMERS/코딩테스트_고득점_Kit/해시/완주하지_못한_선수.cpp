@@ -6,18 +6,18 @@ using namespace std;
 
 string solution(vector<string> participant, vector<string> completion) {
 	string answer = "";
-	// ÇØ½Ã-¸Ê ÀÌ¿ë
+	// í•´ì‹œ-ë§µ ì´ìš©
 	unordered_map<string, int> res;
-	// Âü°¡ÀÚ Ä«¿îÆÃ
+	// ì°¸ê°€ì ì¹´ìš´íŒ…
 	for (string p : participant)
 		res[p]++;
-	// Âü°¡ÀÚ Áß ¿ÏÁÖÀÚ Á¦¿Ü (-1 ·Î ±¸Çö)
+	// ì°¸ê°€ì ì¤‘ ì™„ì£¼ì ì œì™¸ (-1 ë¡œ êµ¬í˜„)
 	for (string c : completion)
 		res[c]--;
 	for (auto r : res)
 	{
-		// Ä«¿îÆÃ µÇ¾îÀÖ´Â »óÅÂÀÇ Âü°¡ÀÚ°¡
-		// ¿ÏÁÖ¸¦ ¸øÇÑ Âü°¡ÀÚ
+		// ì¹´ìš´íŒ… ë˜ì–´ìˆëŠ” ìƒíƒœì˜ ì°¸ê°€ìê°€
+		// ì™„ì£¼ë¥¼ ëª»í•œ ì°¸ê°€ì
 		if (r.second)
 		{
 			answer = r.first;

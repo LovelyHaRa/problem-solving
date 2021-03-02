@@ -7,14 +7,14 @@ int n, s;
 vector<int> v;
 int res = 0;
 
-// dfs ÀÌ¿ë
+// dfs ì´ìš©
 void dfs(int i, int sum)
 {
-	if (i == n) return; // ±âÀú Á¶°Ç
+	if (i == n) return; // ê¸°ì € ì¡°ê±´
 	if (sum + v[i] == s) res++;
 	
-	dfs(i + 1, sum); // ÇöÀç ¼ö¸¦ ¼±ÅÃ ¾ÈÇÏ´Â °æ¿ì
-	dfs(i + 1, sum + v[i]); // ÇöÀç ¼ö¸¦ ¼±ÅÃ ÇÏ´Â °æ¿ì
+	dfs(i + 1, sum); // í˜„ì¬ ìˆ˜ë¥¼ ì„ íƒ ì•ˆí•˜ëŠ” ê²½ìš°
+	dfs(i + 1, sum + v[i]); // í˜„ì¬ ìˆ˜ë¥¼ ì„ íƒ í•˜ëŠ” ê²½ìš°
 }
 
 int main(void)

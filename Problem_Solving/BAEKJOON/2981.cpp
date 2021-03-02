@@ -3,7 +3,7 @@
 #include<vector>
 using namespace std;
 
-/* ÃÖ´ë°ø¾à¼ö (À¯Å¬¸®µå È£Á¦¹ý) */
+/* ìµœëŒ€ê³µì•½ìˆ˜ (ìœ í´ë¦¬ë“œ í˜¸ì œë²•) */
 int GCD(int a, int b)
 {
 	if (a < b) return GCD(a, b%a);
@@ -19,11 +19,11 @@ int main(void)
 	for (i = 0; i < n; i++)
 		cin >> a[i];
 	/*
-	  1. ÀÔ·Â µ¥ÀÌÅÍ Á¤·Ä
-	  2. i : 1 ~ n-1 ±îÁö
-	     a[i]-a[i-1], a[i+1]-a[i] ÀÇ ÃÖ´ë °ø¾à¼ö¸¦ ±¸ÇÑ´Ù.
-	  3. ÃÖÁ¾ÀûÀ¸·Î ÃÖ´ë °ø¾à¼öÀÇ ÃÖ´ñ°ªÀÌ ³ª¿Â´Ù.
-	  4. 3¿¡¼­ ³ª¿Â °ªÀÇ ¾à¼ö¸¦ ¸ðµÎ Ãâ·ÂÇÑ´Ù.
+	  1. ìž…ë ¥ ë°ì´í„° ì •ë ¬
+	  2. i : 1 ~ n-1 ê¹Œì§€
+	     a[i]-a[i-1], a[i+1]-a[i] ì˜ ìµœëŒ€ ê³µì•½ìˆ˜ë¥¼ êµ¬í•œë‹¤.
+	  3. ìµœì¢…ì ìœ¼ë¡œ ìµœëŒ€ ê³µì•½ìˆ˜ì˜ ìµœëŒ“ê°’ì´ ë‚˜ì˜¨ë‹¤.
+	  4. 3ì—ì„œ ë‚˜ì˜¨ ê°’ì˜ ì•½ìˆ˜ë¥¼ ëª¨ë‘ ì¶œë ¥í•œë‹¤.
 	*/
 	sort(a, a + n);
 	int gcd = a[1] - a[0];

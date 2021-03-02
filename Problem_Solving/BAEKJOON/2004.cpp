@@ -1,15 +1,15 @@
-// ¼öÇÐ
+// ìˆ˜í•™
 #include<iostream>
 #include<vector>
 #include<algorithm>
 
 using namespace std;
 
-// ÆÑÅä¸®¾óÀÇ 2¿Í 5ÀÇ °³¼ö
+// íŒ©í† ë¦¬ì–¼ì˜ 2ì™€ 5ì˜ ê°œìˆ˜
 pair<long long, long long> countZero(long long k)
 {
 	int two = 0, five = 0;
-	// Á¦°ö ¼ö¸¸Å­ Ãß°¡µÇ´Â°ÍÀ» °í·Á
+	// ì œê³± ìˆ˜ë§Œí¼ ì¶”ê°€ë˜ëŠ”ê²ƒì„ ê³ ë ¤
 	for (long long i = 2; i <= k; i *= 2)
 		two += k / i;
 	for (long long i = 5; i <= k; i *= 5)
@@ -22,10 +22,10 @@ int main(void)
 {
 	long long n, m;
 	cin >> n >> m;
-	// 1. n!ÀÇ 2¿Í 5ÀÇ °³¼ö¸¦ ±¸ÇÑ´Ù.
-	// 2. n! ´ë½Å (n-m)!¿¡ ´ëÇØ¼­ 1À» ¼öÇà
-	// 3. n! ´ë½Å m!¿¡ ´ëÇØ¼­ 1À» ¼öÇà
-	// 4. 2ÀÇ °³¼ö¿Í 5ÀÇ °³¼ö¿¡ ´ëÇØ 1-2-3 À» ÇßÀ» ‹šÀÇ °á°ú°¡ ÃÖ¼ÒÀÎ °Í Ãâ·Â
+	// 1. n!ì˜ 2ì™€ 5ì˜ ê°œìˆ˜ë¥¼ êµ¬í•œë‹¤.
+	// 2. n! ëŒ€ì‹  (n-m)!ì— ëŒ€í•´ì„œ 1ì„ ìˆ˜í–‰
+	// 3. n! ëŒ€ì‹  m!ì— ëŒ€í•´ì„œ 1ì„ ìˆ˜í–‰
+	// 4. 2ì˜ ê°œìˆ˜ì™€ 5ì˜ ê°œìˆ˜ì— ëŒ€í•´ 1-2-3 ì„ í–ˆì„ ë–„ì˜ ê²°ê³¼ê°€ ìµœì†Œì¸ ê²ƒ ì¶œë ¥
 	vector<pair<long long, long long>>res(3);
 	
 	res[0] = countZero(n); // 1

@@ -9,31 +9,31 @@ int main(void)
 {
 	int n, m;
 	cin >> n >> m;
-	vector<string> adj(n); // ÀÎÁ¢ Çà·Ä ±×·¡ÇÁ
-	vector<vector<int>> visited(n, vector<int>(m)); // ¹æ¹® ¿©ºÎ
-	vector<vector<int>> move(n, vector<int>(m)); // ÇØ´ç ÁÂÇ¥±îÁöÀÇ ÀÌµ¿ °æ·Î ´©ÀûÇÕ
+	vector<string> adj(n); // ì¸ì ‘ í–‰ë ¬ ê·¸ë˜í”„
+	vector<vector<int>> visited(n, vector<int>(m)); // ë°©ë¬¸ ì—¬ë¶€
+	vector<vector<int>> move(n, vector<int>(m)); // í•´ë‹¹ ì¢Œí‘œê¹Œì§€ì˜ ì´ë™ ê²½ë¡œ ëˆ„ì í•©
 	for (int i = 0; i < n; i++)
 		cin >> adj[i];
 	int dx[] = { -1,0,0,1 };
 	int dy[] = { 0,-1,1,0 };
-	queue<pair<int,int>> q; // bfs Å½»ö Å¥
-	// ½ÃÀÛ ÁöÁ¡ Å¥¿¡ »ğÀÔ
+	queue<pair<int,int>> q; // bfs íƒìƒ‰ í
+	// ì‹œì‘ ì§€ì  íì— ì‚½ì…
 	q.push(make_pair(0, 0));
 	while (!q.empty())
 	{
 		pair<int, int> cur=q.front();
 		q.pop();
 		int x = cur.first, y = cur.second;
-		visited[x][y] = 1; // ¹æ¹® Ã¼Å©
+		visited[x][y] = 1; // ë°©ë¬¸ ì²´í¬
 		for (int i = 0; i < 4; i++)
 		{
 			int nx = x + dx[i], ny = y + dy[i];
-			// ¹üÀ§ ³»ÀÎÁö, 1ÀÎÁö, ¹Ì¹æ¹®µÇ¾ú´ÂÁö Ã¼Å©
-			// Å¥¿¡ ´ë±âÁßÀÏ ¶§ ´Ù¸¥ Á¤Á¡¿¡ ÀÇÇØ ¹æ¹®µÉ ¼öµµ ÀÖÀ¸¹Ç·Î, move°ªÀÇ °»½Å ¿©ºÎµµ Á¶°Ç¿¡ Ãß°¡
+			// ë²”ìœ„ ë‚´ì¸ì§€, 1ì¸ì§€, ë¯¸ë°©ë¬¸ë˜ì—ˆëŠ”ì§€ ì²´í¬
+			// íì— ëŒ€ê¸°ì¤‘ì¼ ë•Œ ë‹¤ë¥¸ ì •ì ì— ì˜í•´ ë°©ë¬¸ë  ìˆ˜ë„ ìˆìœ¼ë¯€ë¡œ, moveê°’ì˜ ê°±ì‹  ì—¬ë¶€ë„ ì¡°ê±´ì— ì¶”ê°€
 			if (nx >= 0 && nx < n && ny >= 0 && ny < m && !visited[nx][ny] && adj[nx][ny] == '1' && !move[nx][ny])
 			{
-				move[nx][ny] = move[x][y] + 1; // °æ·Î ´©Àû
-				q.push(make_pair(nx, ny)); // Å¥¿¡ Á¤Á¡ Ãß°¡
+				move[nx][ny] = move[x][y] + 1; // ê²½ë¡œ ëˆ„ì 
+				q.push(make_pair(nx, ny)); // íì— ì •ì  ì¶”ê°€
 			}
 		}
 	}

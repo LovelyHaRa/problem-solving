@@ -15,14 +15,14 @@ int play(int left, int right)
 	if (left > right) return 0;
 	int& ret = cache[left][right];
 	if (ret != EMPTY) return ret;
-	// ¿ŞÂÊ ¼ö¸¦ °¡Á®°¡´Â °æ¿ì¿Í ¿À¸¥ÂÊ ¼ö¸¦ °¡Á®°¡´Â °æ¿ì Áß Å« °ªÀ» ÀúÀå
+	// ì™¼ìª½ ìˆ˜ë¥¼ ê°€ì ¸ê°€ëŠ” ê²½ìš°ì™€ ì˜¤ë¥¸ìª½ ìˆ˜ë¥¼ ê°€ì ¸ê°€ëŠ” ê²½ìš° ì¤‘ í° ê°’ì„ ì €ì¥
 	ret = max(board[left] - play(left + 1, right), board[right] - play(left, right - 1));
-	// ¼ö¸¦ Á¦°ÅÇÏ´Â °æ¿ì
+	// ìˆ˜ë¥¼ ì œê±°í•˜ëŠ” ê²½ìš°
 	if (right - left >= 2)
 	{
-		// (¼­ÇÏ Á¡¼ö) - (Çö¿ì Á¡¼ö)¸¦ ±¸ÇÏ±â À§ÇØ ºÎÈ£ ¹İÀü
-		ret = max(ret, -play(left + 2, right)); // ¿ŞÂÊ ¼ö 2°³ Á¦°Å
-		ret = max(ret, -play(left, right - 2)); // ¿À¸¥ ÂÊ ¼ö 2°³ Á¦°Å
+		// (ì„œí•˜ ì ìˆ˜) - (í˜„ìš° ì ìˆ˜)ë¥¼ êµ¬í•˜ê¸° ìœ„í•´ ë¶€í˜¸ ë°˜ì „
+		ret = max(ret, -play(left + 2, right)); // ì™¼ìª½ ìˆ˜ 2ê°œ ì œê±°
+		ret = max(ret, -play(left, right - 2)); // ì˜¤ë¥¸ ìª½ ìˆ˜ 2ê°œ ì œê±°
 	}
 	return ret;
 }

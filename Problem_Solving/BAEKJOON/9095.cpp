@@ -4,34 +4,34 @@ using namespace std;
 
 int cnt;
 
-// Àç±Í ¿ÏÀüÅ½»ö
+// ìž¬ê·€ ì™„ì „íƒìƒ‰
 void func(int x, int n)
 {
-	// n°ú °°À¸¸é Ä«¿îÆ® Áõ°¡ ÈÄ ¸®ÅÏ
+	// nê³¼ ê°™ìœ¼ë©´ ì¹´ìš´íŠ¸ ì¦ê°€ í›„ ë¦¬í„´
 	if (x == n)
 	{
 		cnt++;
 		return;
 	}
-	// nÀ» ÃÊ°úÇÏ¸é ´õÀÌ»ó ÀÇ¹Ì ¾øÀ¸¹Ç·Î ¸®ÅÏ
+	// nì„ ì´ˆê³¼í•˜ë©´ ë”ì´ìƒ ì˜ë¯¸ ì—†ìœ¼ë¯€ë¡œ ë¦¬í„´
 	else if (x > n)
 		return;
-	func(x + 1, n); // 1À» ´õÇØº»´Ù
-	func(x + 2, n); // 2¸¦ ´õÇØº»´Ù
-	func(x + 3, n); // 3À» ´õÇØº»´Ù
+	func(x + 1, n); // 1ì„ ë”í•´ë³¸ë‹¤
+	func(x + 2, n); // 2ë¥¼ ë”í•´ë³¸ë‹¤
+	func(x + 3, n); // 3ì„ ë”í•´ë³¸ë‹¤
 	return;
 }
 
 int main(void)
 {
 	int t;
-	cin >> t; // Å×½ºÆ® ÄÉÀÌ½º
+	cin >> t; // í…ŒìŠ¤íŠ¸ ì¼€ì´ìŠ¤
 	while (t--)
 	{
 		int n;
-		cin >> n; // ÀÔ·Â
-		cnt = 0; // Ä«¿îÆ® ÃÊ±âÈ­
-		func(0, n); // ¿ÏÀü Å½»ö
+		cin >> n; // ìž…ë ¥
+		cnt = 0; // ì¹´ìš´íŠ¸ ì´ˆê¸°í™”
+		func(0, n); // ì™„ì „ íƒìƒ‰
 		cout << cnt << '\n';
 	}
 }

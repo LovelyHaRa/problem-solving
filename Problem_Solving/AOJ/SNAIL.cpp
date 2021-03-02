@@ -6,15 +6,15 @@ using namespace std;
 int n, m;
 vector<vector<double>> cache;
 
-// ³¯Â¥, ±â¾î¿À¸¥ ÇÕ
+// ë‚ ì§œ, ê¸°ì–´ì˜¤ë¥¸ í•©
 double climb(int days, int climbed)
 {
-	// ±âÀú»ç·Ê: mÀÏ±îÁö µµ´ŞÇßÀ» ¶§
-	if (days == m) return climbed >= n ? 1.0 : 0; // ±â¾î¿À¸¥ ÇÕÀÌ nº¸´Ù Å©¸é ¼º°ø
-	// ¸Ş¸ğÀÌÁ¦ÀÌ¼Ç
+	// ê¸°ì €ì‚¬ë¡€: mì¼ê¹Œì§€ ë„ë‹¬í–ˆì„ ë•Œ
+	if (days == m) return climbed >= n ? 1.0 : 0; // ê¸°ì–´ì˜¤ë¥¸ í•©ì´ në³´ë‹¤ í¬ë©´ ì„±ê³µ
+	// ë©”ëª¨ì´ì œì´ì…˜
 	double& ret = cache[days][climbed];
 	if (ret != -1) return ret;
-	// È®·üÀ» ¹Ù·Î ÀúÀå
+	// í™•ë¥ ì„ ë°”ë¡œ ì €ì¥
 	return ret = 0.25*climb(days + 1, climbed + 1) + 0.75*climb(days + 1, climbed + 2);
 }
 
@@ -26,7 +26,7 @@ int main(void)
 	{
 		cin >> n >> m;
 		cache.resize(n, vector<double>(n * 2 + 1, -1));
-		cout.precision(10); // 10ÀÚ¸®±îÁö Ãâ·Â
+		cout.precision(10); // 10ìë¦¬ê¹Œì§€ ì¶œë ¥
 		cout << climb(0, 0) << endl;		
 		cache.clear();
 	}

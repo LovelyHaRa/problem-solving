@@ -6,7 +6,7 @@ using namespace std;
 
 int main(void)
 {
-	// ÀÔ·Â ¼ö°¡ ¸¹¾Æ¼­ ½Ã°£ÃÊ°ú ³µÀ½
+	// ì…ë ¥ ìˆ˜ê°€ ë§ì•„ì„œ ì‹œê°„ì´ˆê³¼ ë‚¬ìŒ
 	ios::sync_with_stdio(false);
 	cin.tie(0);
 	cout.tie(0);
@@ -38,16 +38,16 @@ int main(void)
 		else if (op[0] == 'r' || op[0] == 'c')
 		{
 			cin >> x;
-			// ¿ø¼Ò Æ÷ÇÔ ¿©ºÎ È®ÀÎ
+			// ì›ì†Œ í¬í•¨ ì—¬ë¶€ í™•ì¸
 			if (s.find(x) != s.end())
 			{
-				// remove¸é »èÁ¦, checkÀÌ¸é 1 Ãâ·Â
+				// removeë©´ ì‚­ì œ, checkì´ë©´ 1 ì¶œë ¥
 				if (op[0] == 'r')
 					s.erase(s.find(x));
 				else
 					cout << "1\n";
 			}
-			// check ÀÌ°í ¿ø¼Ò°¡ ¾øÀ¸¸é 0 Ãâ·Â
+			// check ì´ê³  ì›ì†Œê°€ ì—†ìœ¼ë©´ 0 ì¶œë ¥
 			else if (op[0] == 'c')
 				cout << "0\n";
 		}
@@ -55,7 +55,7 @@ int main(void)
 		else if (op[0] == 't')
 		{
 			cin >> x;
-			// ÀÖÀ¸¸é »èÁ¦
+			// ìˆìœ¼ë©´ ì‚­ì œ
 			if (s.find(x) != s.end())
 				s.erase(s.find(x));
 			else

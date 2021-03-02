@@ -10,18 +10,18 @@ vector<int> m, e;
 
 int heat()
 {
-	vector<pair<int, int>> order; // (-¸Ô´Â½Ã°£, ÀÎµ¦½º)¸¦ ½ÖÀ¸·Î °¡Áö´Â¹è¿­
-	// -e[i] °ªÀ» ³Ö¾îÁÜÀ¸·Î½á ÀÚ¿¬½º·´°Ô ¿ª¼ø Á¤·Ä
+	vector<pair<int, int>> order; // (-ë¨¹ëŠ”ì‹œê°„, ì¸ë±ìŠ¤)ë¥¼ ìŒìœ¼ë¡œ ê°€ì§€ëŠ”ë°°ì—´
+	// -e[i] ê°’ì„ ë„£ì–´ì¤Œìœ¼ë¡œì¨ ìžì—°ìŠ¤ëŸ½ê²Œ ì—­ìˆœ ì •ë ¬
 	for (int i = 0; i < n; i++)
 		order.push_back(make_pair(-e[i], i));
-	sort(order.begin(), order.end()); // ¿À¸§Â÷¼ø Á¤·Ä(-°ªÀÌ¹Ç·Î ÀÚ¿¬½º·´°Ô ³»¸²Â÷¼ø Á¤·Ä)
-	int ret = 0, beginEat = 0; // ÃÖ´ë°ª, ¸Ô´Â½Ã°£
-	// ½Ã¹Ä·¹ÀÌ¼Ç
+	sort(order.begin(), order.end()); // ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬(-ê°’ì´ë¯€ë¡œ ìžì—°ìŠ¤ëŸ½ê²Œ ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬)
+	int ret = 0, beginEat = 0; // ìµœëŒ€ê°’, ë¨¹ëŠ”ì‹œê°„
+	// ì‹œë®¬ë ˆì´ì…˜
 	for (int i = 0; i < n; i++)
 	{
-		int box = order[i].second; // °¡Àå ¸Ô´Â½Ã°£ÀÌ ±ä µµ½Ã¶ô ¼±ÅÃ
-		beginEat += m[box]; // µ¥¿ì°í
-		 // ÃÑ ½Ã°£ = ¸ðµçµµ½Ã¶ôÀ» ÀüÀÚ·¹ÀÎÁö¿¡ µ¹¸®´Â ½Ã°£ + ¸Ô´Â½Ã°£ÀÌ °¡Àå ±ä µµ½Ã¶ô ÇÑ°³
+		int box = order[i].second; // ê°€ìž¥ ë¨¹ëŠ”ì‹œê°„ì´ ê¸´ ë„ì‹œë½ ì„ íƒ
+		beginEat += m[box]; // ë°ìš°ê³ 
+		 // ì´ ì‹œê°„ = ëª¨ë“ ë„ì‹œë½ì„ ì „ìžë ˆì¸ì§€ì— ëŒë¦¬ëŠ” ì‹œê°„ + ë¨¹ëŠ”ì‹œê°„ì´ ê°€ìž¥ ê¸´ ë„ì‹œë½ í•œê°œ
 		ret = max(ret, beginEat + e[box]);
 	}
 	return ret;

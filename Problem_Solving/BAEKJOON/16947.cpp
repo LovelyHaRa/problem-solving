@@ -4,29 +4,29 @@
 
 using namespace std;
 
-vector<vector<int>> adj; // ±×·¡ÇÁ ÀÎÁ¢ ¸®½ºÆ® Ç¥Çö
-vector<int> check; //  0: ¹Ì¹æ¹®, 1: ¹æ¹®, 2: »çÀÌÅ¬¿¡ Æ÷ÇÔµÊ
-vector<int> dist; // »çÀÌÅ¬°úÀÇ °Å¸®
+vector<vector<int>> adj; // ê·¸ë˜í”„ ì¸ì ‘ ë¦¬ìŠ¤íŠ¸ í‘œí˜„
+vector<int> check; //  0: ë¯¸ë°©ë¬¸, 1: ë°©ë¬¸, 2: ì‚¬ì´í´ì— í¬í•¨ë¨
+vector<int> dist; // ì‚¬ì´í´ê³¼ì˜ ê±°ë¦¬
 
-// ÇöÀç Á¤Á¡°ú ÀÌÀü Á¤Á¡À» ±â¹İÀ¸·Î dfs Å½»öÀ» ÇÏ¿© »çÀÌÅ¬À» Ã£´Â´Ù.
-// -2: »çÀÌÅ¬ÀÌ Æ÷ÇÔµÈ ³ëµå°¡ ¾Æ´Ô, -1: ¸®ÇÁ ³ëµå, 0ÀÌ»ó: »çÀÌÅ¬ ½ÃÀÛÁ¡ ³ëµå
+// í˜„ì¬ ì •ì ê³¼ ì´ì „ ì •ì ì„ ê¸°ë°˜ìœ¼ë¡œ dfs íƒìƒ‰ì„ í•˜ì—¬ ì‚¬ì´í´ì„ ì°¾ëŠ”ë‹¤.
+// -2: ì‚¬ì´í´ì´ í¬í•¨ëœ ë…¸ë“œê°€ ì•„ë‹˜, -1: ë¦¬í”„ ë…¸ë“œ, 0ì´ìƒ: ì‚¬ì´í´ ì‹œì‘ì  ë…¸ë“œ
 int dfs(int here, int prev)
 {
-	if (check[here]) return here; // ºÎ¸ğ Á¤º¸ ¹İÈ¯
-	check[here] = 1; // ¹æ¹® Ã¼Å©
-	// ¿¬°áµÈ Á¤Á¡ ¸ğµÎ ¹æ¹®
+	if (check[here]) return here; // ë¶€ëª¨ ì •ë³´ ë°˜í™˜
+	check[here] = 1; // ë°©ë¬¸ ì²´í¬
+	// ì—°ê²°ëœ ì •ì  ëª¨ë‘ ë°©ë¬¸
 	for (int i = 0; i < adj[here].size(); i++)
 	{
-		int there = adj[here][i]; // ÇöÀç Á¤Á¡ ÃßÃâ
-		if (there == prev) continue; // ¹Ù·Î Àü¿¡ Å½»öÇÑ ³ëµå(prev)´Â °Ç³Ê¶Ù±â
-		int ret = dfs(there, here); // dfs Å½»ö
-		if (ret == -2) return -2; // »çÀÌÅ¬ÀÌ ¾Æ´Ñ ³ëµåÀÏ ¶§
-		// »çÀÌÅ¬¿¡ Æ÷ÇÔµÉ ¶§
+		int there = adj[here][i]; // í˜„ì¬ ì •ì  ì¶”ì¶œ
+		if (there == prev) continue; // ë°”ë¡œ ì „ì— íƒìƒ‰í•œ ë…¸ë“œ(prev)ëŠ” ê±´ë„ˆë›°ê¸°
+		int ret = dfs(there, here); // dfs íƒìƒ‰
+		if (ret == -2) return -2; // ì‚¬ì´í´ì´ ì•„ë‹Œ ë…¸ë“œì¼ ë•Œ
+		// ì‚¬ì´í´ì— í¬í•¨ë  ë•Œ
 		if (ret >= 0)
 		{
-			check[here] = 2; // »çÀÌÅ¬ Ç¥½Ã
-			if (ret == here) return -2; // ½ÃÀÛÁ¡ÀÏ °æ¿ì »çÀÌÅ¬ÀÌ ¾Æ´Ô
-			return ret; // Á¤Á¡ ¹øÈ£ ¹İÈ¯
+			check[here] = 2; // ì‚¬ì´í´ í‘œì‹œ
+			if (ret == here) return -2; // ì‹œì‘ì ì¼ ê²½ìš° ì‚¬ì´í´ì´ ì•„ë‹˜
+			return ret; // ì •ì  ë²ˆí˜¸ ë°˜í™˜
 		}
 	}
 	return -1;
@@ -43,37 +43,37 @@ int main(void)
 	{
 		int a, b;
 		cin >> a >> b;
-		// ¹«¹æÇâ ±×·¡ÇÁ Ç¥Çö
+		// ë¬´ë°©í–¥ ê·¸ë˜í”„ í‘œí˜„
 		adj[a].push_back(b);
 		adj[b].push_back(a);
 	}
-	// dfs Å½»ö
+	// dfs íƒìƒ‰
 	dfs(1, -1);
-	// bfs Å½»öÀ¸·Î »çÀÌÅ¬°úÀÇ °Å¸® °è»ê
+	// bfs íƒìƒ‰ìœ¼ë¡œ ì‚¬ì´í´ê³¼ì˜ ê±°ë¦¬ ê³„ì‚°
 	queue<int> q;
-	// ÃÊ±â Å¥ »ı¼º
+	// ì´ˆê¸° í ìƒì„±
 	for (int i = 1; i <= n; i++)
 	{
 		if (check[i] == 2)
 			q.push(i);
 	}
-	// bfs Å½»ö
+	// bfs íƒìƒ‰
 	while (!q.empty())
 	{
-		// Á¤Á¡ ÃßÃâ
+		// ì •ì  ì¶”ì¶œ
 		int here = q.front();
 		q.pop();
-		// ¿¬°áµÈ Á¤Á¡ ¸ğµÎ Å½»ö
+		// ì—°ê²°ëœ ì •ì  ëª¨ë‘ íƒìƒ‰
 		for (int i = 0; i < adj[here].size(); i++)
 		{
 			int there = adj[here][i];
-			if (check[there] == 2) continue; // »çÀÌÅ¬ÀÌ¸é °Ç³Ê¶Ü
-			check[there] = 2; // ¹æ¹® Ã¼Å©
-			dist[there] = dist[here] + 1; // °Å¸® °è»ê
-			q.push(there); // Å¥¿¡ »ğÀÔ
+			if (check[there] == 2) continue; // ì‚¬ì´í´ì´ë©´ ê±´ë„ˆëœ€
+			check[there] = 2; // ë°©ë¬¸ ì²´í¬
+			dist[there] = dist[here] + 1; // ê±°ë¦¬ ê³„ì‚°
+			q.push(there); // íì— ì‚½ì…
 		}
 	}
-	// Ãâ·Â
+	// ì¶œë ¥
 	for (int i = 1; i <= n; i++)
 		cout << dist[i] << ' ';
 	cout << '\n';

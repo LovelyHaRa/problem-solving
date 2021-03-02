@@ -8,21 +8,21 @@ int solution(int stock, vector<int> dates, vector<int> supplies, int k) {
 	int answer = 0;
 	priority_queue<int> pq;
 	int supply = 0;
-	// 1. 0ÀÏ ºÎÅÍ kÀÏ±îÁö ¹İº¹
+	// 1. 0ì¼ ë¶€í„° kì¼ê¹Œì§€ ë°˜ë³µ
 	for (int i = 0; i < k; i++) {
-		// 2. ÇöÀç ÀÏÀÚ¿¡ º¸±Ş¹ŞÀ» ¼ö ÀÖÀ¸¸é ¿ì¼±¼øÀ§ Å¥¿¡ ÀúÀå
+		// 2. í˜„ì¬ ì¼ìì— ë³´ê¸‰ë°›ì„ ìˆ˜ ìˆìœ¼ë©´ ìš°ì„ ìˆœìœ„ íì— ì €ì¥
 		if (dates[supply] == i) {
 			pq.push(supplies[supply]);
 			supply < supplies.size() - 1 ? supply++ : supply;
 		}
-		// 3. Àç°í°¡ ´Ù¶³¾îÁö¸é °¡Àå ¸¹Àº Àç°í·®ºÎÅÍ ´©Àû
-		// ±×·¡¾ß º¸±ŞÀ» ÃÖ¼Ò·Î ¹ŞÀ» ¼ö ÀÖ´Ù.
+		// 3. ì¬ê³ ê°€ ë‹¤ë–¨ì–´ì§€ë©´ ê°€ì¥ ë§ì€ ì¬ê³ ëŸ‰ë¶€í„° ëˆ„ì 
+		// ê·¸ë˜ì•¼ ë³´ê¸‰ì„ ìµœì†Œë¡œ ë°›ì„ ìˆ˜ ìˆë‹¤.
 		if (!stock) {
 			stock += pq.top();
 			pq.pop();
 			answer++;
 		}
-		// 4. ÇÏ·çÀÇ ³¡Àº Àç°í¼Òºñ·Î ¸¶¹«¸®
+		// 4. í•˜ë£¨ì˜ ëì€ ì¬ê³ ì†Œë¹„ë¡œ ë§ˆë¬´ë¦¬
 		stock--;
 	}
 	return answer;

@@ -8,19 +8,19 @@ string w;
 
 bool matchMemorize(vector<vector<int>>& cache, const string& s, int wpos, int spos)
 {
-	// ¸Ş¸ğÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì œì´ì…˜
 	int& ret = cache[wpos][spos];
 	if (ret != -1) return ret;
-	// ÆĞÅÏ°ú ¹®ÀÚ¿­ ¸ÅÄª
+	// íŒ¨í„´ê³¼ ë¬¸ìì—´ ë§¤ì¹­
 	while (wpos < w.size() && spos < s.size() && (w[wpos] == '?' || w[wpos] == s[spos]))
 		return ret = matchMemorize(cache, s, wpos + 1, spos + 1);
-	// ÆĞÅÏÀÌ ³¡³µÀ» °æ¿ì ¹®ÀÚ¿­µµ °°ÀÌ ³¡³ª¸é true
+	// íŒ¨í„´ì´ ëë‚¬ì„ ê²½ìš° ë¬¸ìì—´ë„ ê°™ì´ ëë‚˜ë©´ true
 	if (wpos == w.size()) return ret = (spos == s.size());
-	// ÆĞÅÏÀÌ *ÀÏ °æ¿ì ÇöÀç ¹®ÀÚ¸¦ Æ÷ÇÔÇÏ´Â °Í°ú °Ç³Ê¶Ù´Â °Í µÎ°¡Áö¸¦ Àç±ÍÅ½»ö ÇÏ¿© 
-	// µÑ Áß ÇÏ³ª¶óµµ true¸¦ ¹İÈ¯ÇÏ¸é true
+	// íŒ¨í„´ì´ *ì¼ ê²½ìš° í˜„ì¬ ë¬¸ìë¥¼ í¬í•¨í•˜ëŠ” ê²ƒê³¼ ê±´ë„ˆë›°ëŠ” ê²ƒ ë‘ê°€ì§€ë¥¼ ì¬ê·€íƒìƒ‰ í•˜ì—¬ 
+	// ë‘˜ ì¤‘ í•˜ë‚˜ë¼ë„ trueë¥¼ ë°˜í™˜í•˜ë©´ true
 	if (w[wpos] == '*')
 		return ret = (matchMemorize(cache, s, wpos + 1, spos) || (spos < s.size() && matchMemorize(cache, s, wpos, spos + 1)));
-	// ±× ¿ÜÀÇ °æ¿ì false
+	// ê·¸ ì™¸ì˜ ê²½ìš° false
 	return ret = false;
 }
 
@@ -33,7 +33,7 @@ int main(void)
 	{
 		string s;
 		cin >> s;
-		vector<vector<int>> cache(101, vector<int>(101, -1)); // Ä³½Ã
+		vector<vector<int>> cache(101, vector<int>(101, -1)); // ìºì‹œ
 		if (matchMemorize(cache, s, 0, 0)) cout << s << '\n';
 	}
 }

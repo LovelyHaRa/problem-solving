@@ -3,22 +3,22 @@
 
 using namespace std;
 
-int n; // ÇĞ»ı ¼ö
-bool areFriends[10][10]; // Ä£±¸ ½Ö Ç¥Çö
+int n; // í•™ìƒ ìˆ˜
+bool areFriends[10][10]; // ì¹œêµ¬ ìŒ í‘œí˜„
 
-// ¹®Á¦ ÇØ°áÀ» À§ÇÑ Àç±Í È£Ãâ ÄÚµå
+// ë¬¸ì œ í•´ê²°ì„ ìœ„í•œ ì¬ê·€ í˜¸ì¶œ ì½”ë“œ
 int countPairings(bool[10]);
 
 int main(void)
 {
 	//freopen("input.txt", "r", stdin);
-	int C; // Å×½ºÆ®ÄÉÀÌ½º
-	int m; // Ä£±¸ ½ÖÀÇ ¼ö
+	int C; // í…ŒìŠ¤íŠ¸ì¼€ì´ìŠ¤
+	int m; // ì¹œêµ¬ ìŒì˜ ìˆ˜
 	cin.sync_with_stdio(false);
 	cin >> C;
 	while (C > 0)
 	{
-		// taken[i] = i¹øÂ° ÇĞ»ıÀÌ Â¦À» ÀÌ¹Ì Ã£¾ÒÀ¸¸é true, ¾Æ´Ï¸é false
+		// taken[i] = ië²ˆì§¸ í•™ìƒì´ ì§ì„ ì´ë¯¸ ì°¾ì•˜ìœ¼ë©´ true, ì•„ë‹ˆë©´ false
 		bool taken[10] = { false };
 		memset(areFriends, false, sizeof(areFriends));
 		cin >> n >> m;
@@ -35,7 +35,7 @@ int main(void)
 
 int countPairings(bool taken[10])
 {
-	//³²Àº ÇĞ»ıµé Áß °¡Àå ¹øÈ£°¡ ºü¸¥ ÇĞ»ıÀ» Ã£´Â´Ù.
+	//ë‚¨ì€ í•™ìƒë“¤ ì¤‘ ê°€ì¥ ë²ˆí˜¸ê°€ ë¹ ë¥¸ í•™ìƒì„ ì°¾ëŠ”ë‹¤.
 	int firstFree = -1;
 	for (int i = 0; i < n; i++)
 	{
@@ -45,10 +45,10 @@ int countPairings(bool taken[10])
 			break;
 		}
 	}
-	// ±âÀú »ç·Ê : ¸ğµç ÇĞ»ıÀÌ Â¦À» Ã£À¸¸é ÇÑ°¡Áö ¹æ¹ıÀ» Ã£¾ÒÀ¸´Ï Á¾·áÇÑ´Ù.
+	// ê¸°ì € ì‚¬ë¡€ : ëª¨ë“  í•™ìƒì´ ì§ì„ ì°¾ìœ¼ë©´ í•œê°€ì§€ ë°©ë²•ì„ ì°¾ì•˜ìœ¼ë‹ˆ ì¢…ë£Œí•œë‹¤.
 	if (firstFree == -1) return 1;
 	int ret = 0;
-	// ÀÌ ÇĞ»ı°ú Â¦ÁöÀ» ÇĞ»ıÀ» °áÁ¤ÇÑ´Ù.
+	// ì´ í•™ìƒê³¼ ì§ì§€ì„ í•™ìƒì„ ê²°ì •í•œë‹¤.
 	for (int pairWith = firstFree + 1; pairWith < n; pairWith++)
 	{
 		if (!taken[pairWith] && areFriends[firstFree][pairWith])

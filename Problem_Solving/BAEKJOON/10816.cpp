@@ -11,8 +11,8 @@ int main(void)
 	cout.tie(0);
 	int n;
 	cin >> n;
-	unordered_map<int, int> cardCnt; // ÇØ½Ã Å×ÀÌºíÀ» ÀÌ¿ë
-	// ÇØ½Ã ÀúÀå
+	unordered_map<int, int> cardCnt; // í•´ì‹œ í…Œì´ë¸”ì„ ì´ìš©
+	// í•´ì‹œ ì €ì¥
 	for (int i = 0; i < n; i++)
 	{
 		int c;
@@ -21,7 +21,7 @@ int main(void)
 	}
 	int m;
 	cin >> m;
-	// ÇØ½Ã Å½»ö
+	// í•´ì‹œ íƒìƒ‰
 	for (int i = 0; i < m; i++)
 	{
 		int c;

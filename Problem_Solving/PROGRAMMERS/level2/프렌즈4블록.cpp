@@ -6,49 +6,49 @@ using namespace std;
 int solution(int m, int n, vector<string> board) {
 	int answer = 0;
 	while (1) {
-		// 1. 2x2 ºí·Ï Ã£±â
-		vector<pair<int, int>> removeidx; // 2x2ÀÇ ¿ŞÂÊÀ§ ÁÂÇ¥¸¦ ÀúÀå
+		// 1. 2x2 ë¸”ë¡ ì°¾ê¸°
+		vector<pair<int, int>> removeidx; // 2x2ì˜ ì™¼ìª½ìœ„ ì¢Œí‘œë¥¼ ì €ì¥
 		for (int i = 0; i < m - 1; i++) {
 			for (int j = 0; j < n - 1; j++) {
-				// ¾ø¾Ø ºí·ÏÀº °Ç³Ê¶Ù±â
+				// ì—†ì•¤ ë¸”ë¡ì€ ê±´ë„ˆë›°ê¸°
 				if (board[i][j] == ' ') continue;
-				// 2x2 ºí·ÏÀÌ¸é ¸ÂÀ¸¸é Ãß°¡
+				// 2x2 ë¸”ë¡ì´ë©´ ë§ìœ¼ë©´ ì¶”ê°€
 				if (board[i][j] == board[i][j + 1] && board[i][j] == board[i + 1][j] && board[i][j] == board[i + 1][j + 1] && board[i][j])
 					removeidx.push_back(make_pair(i, j));
 			}
 		}
-		// 2. Á¾·áÁ¶°Ç: 2x2 ºí·ÏÀÌ ¾øÀ¸¸é Á¾·á
+		// 2. ì¢…ë£Œì¡°ê±´: 2x2 ë¸”ë¡ì´ ì—†ìœ¼ë©´ ì¢…ë£Œ
 		if (removeidx.empty()) break;
-		// 3. 2x2 ºí·Ï Á¦°Å
+		// 3. 2x2 ë¸”ë¡ ì œê±°
 		for (int i = 0; i < removeidx.size(); i++) {
-			// ÁÂÇ¥ ÃßÃâ
+			// ì¢Œí‘œ ì¶”ì¶œ
 			int x = removeidx[i].first;
 			int y = removeidx[i].second;
 			for (int j = x; j <= x + 1; j++) {
 				for (int k = y; k <= y + 1; k++) {
-					// ÇØ´ç ÁÂÇ¥°¡ ÀÌ¹Ì Á¦°ÅµÇ¾ú´Ù¸é °Ç³Ê¶Ù±â(Áßº¹Ã³¸®)
+					// í•´ë‹¹ ì¢Œí‘œê°€ ì´ë¯¸ ì œê±°ë˜ì—ˆë‹¤ë©´ ê±´ë„ˆë›°ê¸°(ì¤‘ë³µì²˜ë¦¬)
 					if (board[j][k] == ' ')
 						continue;
-					// Á¦°Å ÈÄ Ä«¿îÆÃ
+					// ì œê±° í›„ ì¹´ìš´íŒ…
 					board[j][k] = ' ';
 					answer++;
 				}
 			}
 		}
-		// 3. ºí·Ï ¾Æ·¡·Î ¶³¾î¶ß¸®±â
+		// 3. ë¸”ë¡ ì•„ë˜ë¡œ ë–¨ì–´ëœ¨ë¦¬ê¸°
 		for (int i = 0; i < n; i++) {
-			int flag; // ´õÀÌ»ó ¶³¾îÁú ºí·ÏÀÌ ¾ø´ÂÁö Ã¼Å©ÇÏ±â À§ÇÑ º¯¼ö
+			int flag; // ë”ì´ìƒ ë–¨ì–´ì§ˆ ë¸”ë¡ì´ ì—†ëŠ”ì§€ ì²´í¬í•˜ê¸° ìœ„í•œ ë³€ìˆ˜
 			do {
 				flag = 0;
 				for (int j = 0; j < m - 1; j++) {
-					// ÇöÀç À§Ä¡´Â ºí·ÏÀÌ ÀÖ°í, ´ÙÀ½ À§Ä¡¿¡´Â ¾øÀ» ¶§ À§Ä¡ ¿Å±è
+					// í˜„ì¬ ìœ„ì¹˜ëŠ” ë¸”ë¡ì´ ìˆê³ , ë‹¤ìŒ ìœ„ì¹˜ì—ëŠ” ì—†ì„ ë•Œ ìœ„ì¹˜ ì˜®ê¹€
 					if (board[j][i] != ' ' && board[j + 1][i] == ' ') {
 						board[j + 1][i] = board[j][i];
 						board[j][i] = ' ';
-						flag = 1; // board°¡ °»½ÅµÇ¾úÀ¸¹Ç·Î Ã¼Å©
+						flag = 1; // boardê°€ ê°±ì‹ ë˜ì—ˆìœ¼ë¯€ë¡œ ì²´í¬
 					}
 				}
-			} while (flag); // board°¡ °»½ÅµÇÁö ¾ÊÀ» ¶§ ±îÁö ¹İº¹
+			} while (flag); // boardê°€ ê°±ì‹ ë˜ì§€ ì•Šì„ ë•Œ ê¹Œì§€ ë°˜ë³µ
 		}
 	}
 	return answer;

@@ -4,49 +4,49 @@
 
 using namespace std;
 
-vector<vector<pair<int, int>>> adj; // Á¤Á¡, °¡ÁßÄ¡¸¦ Æä¾î·Î ÇÏ´Â ÀÎÁ¢ ¸®½ºÆ®
-int n; // Á¤Á¡ °³¼ö
-int maxDist = 0; // Ãâ·ÂÇÒ Æ®¸®ÀÇ Áö¸§
+vector<vector<pair<int, int>>> adj; // ì •ì , ê°€ì¤‘ì¹˜ë¥¼ í˜ì–´ë¡œ í•˜ëŠ” ì¸ì ‘ ë¦¬ìŠ¤íŠ¸
+int n; // ì •ì  ê°œìˆ˜
+int maxDist = 0; // ì¶œë ¥í•  íŠ¸ë¦¬ì˜ ì§€ë¦„
 
-// start·ÎºÎÅÍ ÃÖ´ë ±æÀÌÀÇ Á¤Á¡À» ¹İÈ¯
+// startë¡œë¶€í„° ìµœëŒ€ ê¸¸ì´ì˜ ì •ì ì„ ë°˜í™˜
 int bfs(int start)
 {
 	queue<int> q;
-	vector<bool> visited(n + 1); // Á¤Á¡ ¹æ¹® ¿©ºÎ
-	vector<int> dist(n + 1); // dist[v] start ºÎÅÍ Á¤Á¡ v ±îÁöÀÇ °Å¸®
-	int maxIdx = 0; // ¹İÈ¯ÇÒ Á¤Á¡
-	// ÃÊ±â Å¥ ¼¼ÆÃ
+	vector<bool> visited(n + 1); // ì •ì  ë°©ë¬¸ ì—¬ë¶€
+	vector<int> dist(n + 1); // dist[v] start ë¶€í„° ì •ì  v ê¹Œì§€ì˜ ê±°ë¦¬
+	int maxIdx = 0; // ë°˜í™˜í•  ì •ì 
+	// ì´ˆê¸° í ì„¸íŒ…
 	q.push(start);
 	visited[start] = 1;
-	// bfs Å½»ö
+	// bfs íƒìƒ‰
 	while (!q.empty())
 	{
-		// Å¥¿¡¼­ ÃßÃâ
+		// íì—ì„œ ì¶”ì¶œ
 		int here = q.front();
 		q.pop();
-		// ÀÎÁ¢ Á¤Á¡ ¸ğµÎ Å½»ö
+		// ì¸ì ‘ ì •ì  ëª¨ë‘ íƒìƒ‰
 		for (int i = 0; i < adj[here].size(); i++)
 		{
-			// Á¤º¸ ÃßÃâ
-			int v = adj[here][i].first; // Á¤Á¡
-			int w = adj[here][i].second; // °¡ÁßÄ¡
-			// ¹Ì¹æ¹® ½Ã
+			// ì •ë³´ ì¶”ì¶œ
+			int v = adj[here][i].first; // ì •ì 
+			int w = adj[here][i].second; // ê°€ì¤‘ì¹˜
+			// ë¯¸ë°©ë¬¸ ì‹œ
 			if (!visited[v])
 			{
-				visited[v] = 1; // ¹æ¹® Ã¼Å©
-				dist[v] = dist[here] + w; // °¡ÁßÄ¡ ´©Àû
-				// °¡ÁßÄ¡ ÃÖ´ñ°ª °»½Å
+				visited[v] = 1; // ë°©ë¬¸ ì²´í¬
+				dist[v] = dist[here] + w; // ê°€ì¤‘ì¹˜ ëˆ„ì 
+				// ê°€ì¤‘ì¹˜ ìµœëŒ“ê°’ ê°±ì‹ 
 				if (maxDist < dist[v])
 				{
 					maxDist = dist[v];
 					maxIdx = v;
 				}
-				// Å¥¿¡ Á¤Á¡ Ãß°¡
+				// íì— ì •ì  ì¶”ê°€
 				q.push(v);
 			}
 		}
 	}
-	// ÃÖ´ë ±æÀÌ Á¤Á¡ ¹İÈ¯
+	// ìµœëŒ€ ê¸¸ì´ ì •ì  ë°˜í™˜
 	return maxIdx;
 }
 
@@ -54,7 +54,7 @@ int main(void)
 {
 	cin >> n;
 	adj.resize(n + 1);
-	// ÀÔ·Â
+	// ì…ë ¥
 	for (int i = 0; i < n; i++)
 	{
 		int v;
@@ -63,13 +63,13 @@ int main(void)
 		{
 			int nextv, w;
 			cin >> nextv;
-			if (nextv < 0) break; // -1 ÀÔ·Â Ã³¸®
+			if (nextv < 0) break; // -1 ì…ë ¥ ì²˜ë¦¬
 			cin >> w;
-			adj[v].push_back(make_pair(nextv, w)); // ÀÎÁ¢ ¸®½ºÆ® ±¸¼º
+			adj[v].push_back(make_pair(nextv, w)); // ì¸ì ‘ ë¦¬ìŠ¤íŠ¸ êµ¬ì„±
 		}
 	}
-	// 1ºÎÅÍ ½ÃÀÛÇÏ´Â Á¤Á¡À¸·Î bfs ÇÑ µÚ ¹İÈ¯µÇ´Â Á¤Á¡À» ½ÃÀÛÁ¡À¸·Î
-	// ´Ù½Ã bfs Å½»ö ÈÄ ¾òÀº ÃÖ´ë °Å¸®¸¦ ±¸ÇÑ´Ù
+	// 1ë¶€í„° ì‹œì‘í•˜ëŠ” ì •ì ìœ¼ë¡œ bfs í•œ ë’¤ ë°˜í™˜ë˜ëŠ” ì •ì ì„ ì‹œì‘ì ìœ¼ë¡œ
+	// ë‹¤ì‹œ bfs íƒìƒ‰ í›„ ì–»ì€ ìµœëŒ€ ê±°ë¦¬ë¥¼ êµ¬í•œë‹¤
 	bfs(bfs(1));
 	cout << maxDist << '\n';
 }

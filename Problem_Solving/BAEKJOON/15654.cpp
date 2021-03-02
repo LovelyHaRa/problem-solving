@@ -19,6 +19,6 @@ int main(void)
 		for (int i = 0; i < m; i++)
 			cout << a[i] << ' ';
 		cout << '\n';
-		reverse(a.begin() + m, a.end()); // ³ª¸ÓÁö m°³ °Ç³Ê¶Ù±â
+		reverse(a.begin() + m, a.end()); // ë‚˜ë¨¸ì§€ mê°œ ê±´ë„ˆë›°ê¸°
 	} while (next_permutation(a.begin(), a.end()));
 }

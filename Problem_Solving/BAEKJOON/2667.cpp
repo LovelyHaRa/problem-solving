@@ -5,19 +5,19 @@
 
 using namespace std;
 
-// ÀÌµ¿ Áõ°¡·®
+// ì´ë™ ì¦ê°€ëŸ‰
 int dx[] = { 0,-1,0,1 };
 int dy[] = { -1,0,1,0 };
-vector<string> adj; // ÀÎÁ¢ Çà·Ä
-vector<vector<int>> visited; // ¹æ¹® ¿©ºÎ ÀÎÁ¢ Çà·Ä
-vector<int> res; // ´ÜÁöº° ¹øÈ£ °³¼ö
-int n, cnt; // »ç°¢Çü °³¼ö, ´ÜÁöº° Ä«¿îÆÃ º¯¼ö
+vector<string> adj; // ì¸ì ‘ í–‰ë ¬
+vector<vector<int>> visited; // ë°©ë¬¸ ì—¬ë¶€ ì¸ì ‘ í–‰ë ¬
+vector<int> res; // ë‹¨ì§€ë³„ ë²ˆí˜¸ ê°œìˆ˜
+int n, cnt; // ì‚¬ê°í˜• ê°œìˆ˜, ë‹¨ì§€ë³„ ì¹´ìš´íŒ… ë³€ìˆ˜
 
 void dfs(int x, int y)
 {
-	visited[x][y] = 1; // ¹æ¹® Ã¼Å©
-	cnt++; // ´ÜÁö Ä«¿îÆÃ
-	// 4¹æÇâ³»¿¡ ÁıÀÌ ÀÖÀ¸¸é dfs È£Ãâ
+	visited[x][y] = 1; // ë°©ë¬¸ ì²´í¬
+	cnt++; // ë‹¨ì§€ ì¹´ìš´íŒ…
+	// 4ë°©í–¥ë‚´ì— ì§‘ì´ ìˆìœ¼ë©´ dfs í˜¸ì¶œ
 	for (int i = 0; i < 4; i++)
 	{
 		int nextx = x + dx[i], nexty = y + dy[i];
@@ -33,7 +33,7 @@ int main(void)
 	visited.resize(n, vector<int>(n));
 	for (int i = 0; i < n; i++)
 		cin >> adj[i];
-	// ÀÎÁ¢Çà·ÄÀ» Å½»öÇÏ¸é¼­ dfs È£Ãâ
+	// ì¸ì ‘í–‰ë ¬ì„ íƒìƒ‰í•˜ë©´ì„œ dfs í˜¸ì¶œ
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < n; j++)
@@ -42,14 +42,14 @@ int main(void)
 			if (!visited[i][j] && adj[i][j] == '1')
 			{
 				dfs(i, j);
-				// dfs°¡ ³¡³ª¸é ´ÜÁö ÇÏ³ª°¡ »ı¼ºµÊ
+				// dfsê°€ ëë‚˜ë©´ ë‹¨ì§€ í•˜ë‚˜ê°€ ìƒì„±ë¨
 				res.push_back(cnt);
 			}			
 		}
 	}
-	sort(res.begin(), res.end()); // ¿À¸§Â÷¼ø Á¤·Ä
-	cout << res.size() << '\n'; // ´ÜÁö °³¼ö Ãâ·Â
-	// ´ÜÁöº° Ä«¿îÆ® Ãâ·Â
+	sort(res.begin(), res.end()); // ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
+	cout << res.size() << '\n'; // ë‹¨ì§€ ê°œìˆ˜ ì¶œë ¥
+	// ë‹¨ì§€ë³„ ì¹´ìš´íŠ¸ ì¶œë ¥
 	for (int i = 0; i < res.size(); i++)
 		cout << res[i] << '\n';
 }

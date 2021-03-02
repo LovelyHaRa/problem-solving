@@ -4,73 +4,73 @@
 
 using namespace std;
 
-vector<vector<int>> adj; // ÀÎÁ¢ Çà·Ä
-vector<vector<int>> visited; // ¹æ¹® ¿©ºÎ
-// ÁÂÇ¥ ÀÌµ¿ Áõ°¡·®
+vector<vector<int>> adj; // ì¸ì ‘ í–‰ë ¬
+vector<vector<int>> visited; // ë°©ë¬¸ ì—¬ë¶€
+// ì¢Œí‘œ ì´ë™ ì¦ê°€ëŸ‰
 int dx[] = { -1,0,0,1 };
 int dy[] = { 0,-1,1,0 };
 int n;
 
-// dfs Å½»öÀ» ÀÌ¿ëÇØ ¼¶À» ¹øÈ£·Î ±¸ºĞ
+// dfs íƒìƒ‰ì„ ì´ìš©í•´ ì„¬ì„ ë²ˆí˜¸ë¡œ êµ¬ë¶„
 void dfs(int x, int y, int num)
 {
-	visited[x][y] = 1; // ¹æ¹® Ã¼Å©
-	adj[x][y] = num; // ¹øÈ£ ºÎ¿©
-	// »óÇÏÁÂ¿ì ÀÌµ¿
+	visited[x][y] = 1; // ë°©ë¬¸ ì²´í¬
+	adj[x][y] = num; // ë²ˆí˜¸ ë¶€ì—¬
+	// ìƒí•˜ì¢Œìš° ì´ë™
 	for (int i = 0; i < 4; i++)
 	{
 		int nx = x + dx[i], ny = y + dy[i];
-		// dfs Å½»ö
+		// dfs íƒìƒ‰
 		if (nx >= 0 && nx < n && ny >= 0 && ny < n && !visited[nx][ny] && adj[nx][ny])
 			dfs(nx, ny, num);
 	}
 }
 
-// bfs Å½»öÀ» ÀÌ¿ëÇØ Æ¯Á¤ ¼¶¿¡¼­ ´Ù¸¥ ¼¶±îÁöÀÇ ÃÖ¼Ò °Å¸®¸¦ ±¸ÇÔ
+// bfs íƒìƒ‰ì„ ì´ìš©í•´ íŠ¹ì • ì„¬ì—ì„œ ë‹¤ë¥¸ ì„¬ê¹Œì§€ì˜ ìµœì†Œ ê±°ë¦¬ë¥¼ êµ¬í•¨
 int bfs(int num)
 {
-	// ÃÊ±â Å¥ »ı¼º
+	// ì´ˆê¸° í ìƒì„±
 	queue<pair<int, int>> q;
-	// Æ¯Á¤ ¼¶ÀÇ ÁÂÇ¥´Â ¸ğµÎ Å¥¿¡ »ğÀÔ
+	// íŠ¹ì • ì„¬ì˜ ì¢Œí‘œëŠ” ëª¨ë‘ íì— ì‚½ì…
 	for(int i=0;i<n;i++)
 		for(int j=0;j<n;j++)
 			if (adj[i][j] == num)
 			{
-				visited[i][j] = 1; // ¹æ¹® Ã¼Å©
-				q.push(make_pair(i, j)); // Å¥¿¡ »ğÀÔ
+				visited[i][j] = 1; // ë°©ë¬¸ ì²´í¬
+				q.push(make_pair(i, j)); // íì— ì‚½ì…
 			}
-	int dist = 0; // ´Ù¸¥ ¼¶±îÁöÀÇ ÃÖ¼Ò °Å¸®
+	int dist = 0; // ë‹¤ë¥¸ ì„¬ê¹Œì§€ì˜ ìµœì†Œ ê±°ë¦¬
 	while (!q.empty())
 	{
-		int curSize = q.size(); // ÀÌ¹ø ·çÇÁ¿¡¼­ÀÇ Å¥ »çÀÌÁî
-		// Å¥ »çÀÌÁî°¡ 0ÀÌ µÉ¶§ ±îÁö ¹İº¹
+		int curSize = q.size(); // ì´ë²ˆ ë£¨í”„ì—ì„œì˜ í ì‚¬ì´ì¦ˆ
+		// í ì‚¬ì´ì¦ˆê°€ 0ì´ ë ë•Œ ê¹Œì§€ ë°˜ë³µ
 		while (curSize-- > 0)
 		{
-			// Å¥¿¡¼­ ÃßÃâ
+			// íì—ì„œ ì¶”ì¶œ
 			int x = q.front().first;
 			int y = q.front().second;
 			q.pop();
-			// »óÇÏÁÂ¿ì ÀÌµ¿
+			// ìƒí•˜ì¢Œìš° ì´ë™
 			for (int i = 0; i < 4; i++)
 			{
 				int nx = x + dx[i], ny = y + dy[i];
-				// ¹üÀ§¸¦ ¸¸Á·ÇÏ¸é
+				// ë²”ìœ„ë¥¼ ë§Œì¡±í•˜ë©´
 				if (nx >= 0 && nx < n && ny >= 0 && ny < n)
 				{
 					int k = adj[nx][ny];
-					// ´Ù¸¥ ¼¶ÀÎ °æ¿ì
+					// ë‹¤ë¥¸ ì„¬ì¸ ê²½ìš°
 					if (k && k != num)
-						return dist; // °Å¸® ¸®ÅÏ
-					// ¹Ù´ÙÀÎ °æ¿ì
+						return dist; // ê±°ë¦¬ ë¦¬í„´
+					// ë°”ë‹¤ì¸ ê²½ìš°
 					else if (!k && !visited[nx][ny])
 					{
-						visited[nx][ny] = 1; // ¹æ¹® Ã¼Å©
-						q.push(make_pair(nx, ny)); // Å¥¿¡ Ãß°¡
+						visited[nx][ny] = 1; // ë°©ë¬¸ ì²´í¬
+						q.push(make_pair(nx, ny)); // íì— ì¶”ê°€
 					}
 				}
 			}
 		}
-		dist++; //°Å¸® 1 Áõ°¡
+		dist++; //ê±°ë¦¬ 1 ì¦ê°€
 	}
 }
 
@@ -78,29 +78,29 @@ int min(int a, int b) { return a < b ? a : b; }
 
 int main(void)
 {	
-	// ÀÔ·Â
+	// ì…ë ¥
 	cin >> n;
 	adj.resize(n, vector<int>(n));
 	visited.resize(n, vector<int>(n));
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < n; j++)
 			cin >> adj[i][j];
-	// ¼¶ ¹øÈ£
+	// ì„¬ ë²ˆí˜¸
 	int num = 1;
-	// ¼¶¿¡ ¹øÈ£ ºÎ¿©
+	// ì„¬ì— ë²ˆí˜¸ ë¶€ì—¬
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < n; j++)
 			if (!visited[i][j] && adj[i][j])
 				dfs(i, j, num++);
 
-	int res = 198765; // °Å¸®ÀÇ ÃÖ¼Ú°ª
-	// ¸ğµç ¼¶¿¡ ´ëÇÏ¿© bfs Å½»ö
+	int res = 198765; // ê±°ë¦¬ì˜ ìµœì†Ÿê°’
+	// ëª¨ë“  ì„¬ì— ëŒ€í•˜ì—¬ bfs íƒìƒ‰
 	for (int i = 1; i < num; i++)
 	{
-		// ¹æ¹® ¿©ºÎ ¹è¿­ ÃÊ±âÈ­
+		// ë°©ë¬¸ ì—¬ë¶€ ë°°ì—´ ì´ˆê¸°í™”
 		visited.clear();
 		visited.resize(n, vector<int>(n));
-		// bfs Å½»ö ÈÄ ÃÖ¼Ú°ª °»½Å
+		// bfs íƒìƒ‰ í›„ ìµœì†Ÿê°’ ê°±ì‹ 
 		res = min(res, bfs(i));
 	}
 

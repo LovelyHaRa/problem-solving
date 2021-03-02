@@ -5,63 +5,63 @@
 
 using namespace std;
 
-// ±×·¡ÇÁÀÇ ÀÎÁ¢ Çà·Ä Ç¥Çö, adj[i][j]=i¿Í j»çÀÌÀÇ °£¼±ÀÇ ¼ö
+// ê·¸ë˜í”„ì˜ ì¸ì ‘ í–‰ë ¬ í‘œí˜„, adj[i][j]=iì™€ jì‚¬ì´ì˜ ê°„ì„ ì˜ ìˆ˜
 vector<vector<int>> adj;
-// graph[i][j]=i·Î ½ÃÀÛÇØ¼­ j·Î ³¡³ª´Â ´Ü¾îÀÇ ¸ñ·Ï
+// graph[i][j]=ië¡œ ì‹œì‘í•´ì„œ jë¡œ ëë‚˜ëŠ” ë‹¨ì–´ì˜ ëª©ë¡
 vector<string> graph[26][26];
-// indegree[i]=i·Î ½ÃÀÛÇÏ´Â ´Ü¾îÀÇ ¼ö
-// outdegree[i]=i·Î ³¡³ª´Â ´Ü¾îÀÇ ¼ö
+// indegree[i]=ië¡œ ì‹œì‘í•˜ëŠ” ë‹¨ì–´ì˜ ìˆ˜
+// outdegree[i]=ië¡œ ëë‚˜ëŠ” ë‹¨ì–´ì˜ ìˆ˜
 vector<int> indegree, outdegree;
-// ±×·¡ÇÁ »ı¼º
+// ê·¸ë˜í”„ ìƒì„±
 void makeGraph(const vector<string>& words)
 {
-	// Àü¿ª º¯¼ö ÃÊ±âÈ­
+	// ì „ì—­ ë³€ìˆ˜ ì´ˆê¸°í™”
 	for (int i = 0; i < 26; i++)
 		for (int j = 0; j < 26; j++)
 			graph[i][j].clear();
 	adj = vector<vector<int>>(26, vector<int>(26, 0));
 	indegree = outdegree = vector<int>(26, 0);
-	// °¢ ´Ü¾î¸¦ ±×·¡ÇÁ¿Í ÀÎÁ¢Çà·Ä¿¡ Ç¥ÇöÇÑ´Ù
+	// ê° ë‹¨ì–´ë¥¼ ê·¸ë˜í”„ì™€ ì¸ì ‘í–‰ë ¬ì— í‘œí˜„í•œë‹¤
 	for (int i = 0; i < words.size(); i++)
 	{
 		int a = words[i][0] - 'a';
 		int b = words[i][words[i].size() - 1] - 'a';
-		graph[a][b].push_back(words[i]); // ±×·¡ÇÁ¿¡ ´Ü¾î Ãß°¡
-		// ÀÎÁ¢ Çà·Ä¿¡ Ç¥Çö
+		graph[a][b].push_back(words[i]); // ê·¸ë˜í”„ì— ë‹¨ì–´ ì¶”ê°€
+		// ì¸ì ‘ í–‰ë ¬ì— í‘œí˜„
 		adj[a][b]++;
-		// Â÷¼ö °»½Å
+		// ì°¨ìˆ˜ ê°±ì‹ 
 		outdegree[a]++;
 		indegree[b]++;
 	}
 }
 
-// DFS¸¦ ÀÌ¿ëÇÏ¿© ¿ÀÀÏ·¯ ¼­Å¶ È¤Àº Æ®·¹ÀÏÀ» °è»êÇÑ´Ù
+// DFSë¥¼ ì´ìš©í•˜ì—¬ ì˜¤ì¼ëŸ¬ ì„œí‚· í˜¹ì€ íŠ¸ë ˆì¼ì„ ê³„ì‚°í•œë‹¤
 void getEulerCircuit(int here, vector<int>& circuit)
 {
 	for (int there = 0; there < adj.size(); there++)
 		while (adj[here][there] > 0)
 		{
-			adj[here][there]--; // °£¼±À» ÇÏ³ª Áö¿î´Ù
+			adj[here][there]--; // ê°„ì„ ì„ í•˜ë‚˜ ì§€ìš´ë‹¤
 			getEulerCircuit(there, circuit);
 		}
-	circuit.push_back(here); // ¼­Å¶¿¡ Á¤Á¡À» Ãß°¡ÇÑ´Ù
+	circuit.push_back(here); // ì„œí‚·ì— ì •ì ì„ ì¶”ê°€í•œë‹¤
 }
 
-// ÇöÀç ±×·¡ÇÁÀÇ ¿ÀÀÏ·¯ Æ®·¹ÀÏÀÌ³ª ¼­Å¶À» ¹İÈ¯ÇÑ´Ù
+// í˜„ì¬ ê·¸ë˜í”„ì˜ ì˜¤ì¼ëŸ¬ íŠ¸ë ˆì¼ì´ë‚˜ ì„œí‚·ì„ ë°˜í™˜í•œë‹¤
 vector<int> getEulerTrailOrCircuit()
 {
 	vector<int> circuit;
-	// 1. Æ®·¹ÀÏ È®ÀÎ
+	// 1. íŠ¸ë ˆì¼ í™•ì¸
 	for (int i = 0; i < 26; i++)
 	{
-		// Æ®·¹ÀÏ Á¶°Ç: ³ª°¡´Â °£¼±ÀÇ ¼ö°¡ µé¾î¿À´Â °£¼±ÀÇ ¼öº¸´Ù ÇÏ³ª ´õ ¸¹¾Æ¾ßÇÑ´Ù
+		// íŠ¸ë ˆì¼ ì¡°ê±´: ë‚˜ê°€ëŠ” ê°„ì„ ì˜ ìˆ˜ê°€ ë“¤ì–´ì˜¤ëŠ” ê°„ì„ ì˜ ìˆ˜ë³´ë‹¤ í•˜ë‚˜ ë” ë§ì•„ì•¼í•œë‹¤
 		if (outdegree[i] == indegree[i] + 1)
 		{
 			getEulerCircuit(i, circuit);
 			return circuit;
 		}
 	}
-	// 2. Æ®·¹ÀÏÀÌ ¾Æ´Ï¸é ¼­Å¶ÀÌ¹Ç·Î °£¼±¿¡ ÀÎÁ¢ÇÑ ¾Æ¹« Á¤Á¡¿¡¼­ ½ÃÀÛ
+	// 2. íŠ¸ë ˆì¼ì´ ì•„ë‹ˆë©´ ì„œí‚·ì´ë¯€ë¡œ ê°„ì„ ì— ì¸ì ‘í•œ ì•„ë¬´ ì •ì ì—ì„œ ì‹œì‘
 	for (int i = 0; i < 26; i++)
 	{
 		if (outdegree[i])
@@ -73,20 +73,20 @@ vector<int> getEulerTrailOrCircuit()
 	return circuit;
 }
 
-// ÇöÀç ±×·¡ÇÁÀÇ ¿ÀÀÏ·¯ ¼­Å¶/Æ®·¹ÀÏ Á¸Àç ¿©ºÎ¸¦ È®ÀÎÇÑ´Ù
+// í˜„ì¬ ê·¸ë˜í”„ì˜ ì˜¤ì¼ëŸ¬ ì„œí‚·/íŠ¸ë ˆì¼ ì¡´ì¬ ì—¬ë¶€ë¥¼ í™•ì¸í•œë‹¤
 bool checkEuler()
 {
-	// ¿¹ºñ ½ÃÀÛÁ¡°ú ³¡Á¡ÀÇ ¼ö
+	// ì˜ˆë¹„ ì‹œì‘ì ê³¼ ëì ì˜ ìˆ˜
 	int plus1 = 0, minus1 = 0;
 	for (int i = 0; i < 26; i++)
 	{
 		int delta = outdegree[i] - indegree[i];
-		// ¸ğµç Á¤Á¡ÀÇ Â÷¼ö´Â -1, 1 ¶Ç´Â 0ÀÌ¾î¾ß ÇÑ´Ù
+		// ëª¨ë“  ì •ì ì˜ ì°¨ìˆ˜ëŠ” -1, 1 ë˜ëŠ” 0ì´ì–´ì•¼ í•œë‹¤
 		if (delta < -1 || delta > 1) return false;
 		if (delta == 1) plus1++;
 		if (delta == -1) minus1++;
 	}
-	// ½ÃÀÛÁ¡°ú ³¡Á¡Àº °¢ ÇÏ³ª¾¿ ÀÖ°Å³ª ÇÏ³ªµµ ¾ø¾î¾ß ÇÑ´Ù
+	// ì‹œì‘ì ê³¼ ëì ì€ ê° í•˜ë‚˜ì”© ìˆê±°ë‚˜ í•˜ë‚˜ë„ ì—†ì–´ì•¼ í•œë‹¤
 	return (plus1 == 1 && minus1 == 1) || (!plus1 && !minus1);
 }
 
@@ -102,21 +102,21 @@ int main(void)
 		for (int i = 0; i < n; i++)
 			cin >> words[i];
 		makeGraph(words);
-		// ¿ÀÀÏ·¯ ¼­Å¶/Æ®·¹ÀÏÀÌ Á¸ÀçÇÏÁö ¾ÊÀ¸¸é ºÒ°¡´É
+		// ì˜¤ì¼ëŸ¬ ì„œí‚·/íŠ¸ë ˆì¼ì´ ì¡´ì¬í•˜ì§€ ì•Šìœ¼ë©´ ë¶ˆê°€ëŠ¥
 		if (!checkEuler())
 		{
 			cout << "IMPOSSIBLE\n";
 			continue;
 		}
 		vector<int> circuit = getEulerTrailOrCircuit();
-		// ÄÄÆ÷³ÍÆ®°¡ ¿©·¯°³ÀÌ¸é ºÒ°¡´É
-		// ¸ğµç °£¼±À» ¹æ¹®Çß´ÂÁö È®ÀÎ ÇÊ¿ä
+		// ì»´í¬ë„ŒíŠ¸ê°€ ì—¬ëŸ¬ê°œì´ë©´ ë¶ˆê°€ëŠ¥
+		// ëª¨ë“  ê°„ì„ ì„ ë°©ë¬¸í–ˆëŠ”ì§€ í™•ì¸ í•„ìš”
 		if (circuit.size() != words.size() + 1)
 		{
 			cout << "IMPOSSIBLE\n";
 			continue;
 		}
-		// ¹æÇâ ±×·¡ÇÁÀÌ¹Ç·Î Å½»ö °á°ú¸¦ µÚÁıÀ½
+		// ë°©í–¥ ê·¸ë˜í”„ì´ë¯€ë¡œ íƒìƒ‰ ê²°ê³¼ë¥¼ ë’¤ì§‘ìŒ
 		reverse(circuit.begin(), circuit.end());
 		for (int i = 1; i < circuit.size(); i++)
 		{

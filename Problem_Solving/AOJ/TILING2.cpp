@@ -8,12 +8,12 @@ vector<int> cache;
 
 int tiling(int n)
 {
-	// ±âÀú »ç·Ê: 1, 2´Â °æ¿ìÀÇ ¼ö°¡ 1°³»ÓÀÌ´Ù.
+	// ê¸°ì € ì‚¬ë¡€: 1, 2ëŠ” ê²½ìš°ì˜ ìˆ˜ê°€ 1ê°œë¿ì´ë‹¤.
 	if (n <= 1) return 1;
-	// ¸Þ¸ðÀÌÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì´ì œì´ì…˜
 	int& ret = cache[n];
 	if (ret != -1) return ret;
-	// ¼¼·ÎÅ¸ÀÏ 1°³¸¸ ¾²´Â °æ¿ì¿Í °¡·ÎÅ¸ÀÏ 2°³¸¦ ¾²´Â °æ¿ì¸¦ ´õÇÔ
+	// ì„¸ë¡œíƒ€ì¼ 1ê°œë§Œ ì“°ëŠ” ê²½ìš°ì™€ ê°€ë¡œíƒ€ì¼ 2ê°œë¥¼ ì“°ëŠ” ê²½ìš°ë¥¼ ë”í•¨
 	return ret = (tiling(n - 1) + tiling(n - 2)) % 1000000007;
 }
 

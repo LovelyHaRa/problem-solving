@@ -4,44 +4,44 @@
 using namespace std;
 
 int V;
-vector<vector<int>> adj; // ÀÎÁ¢ ¸®½ºÆ® Ç¥Çö
-vector<bool> visited; // ¹æ¹® ¿©ºÎ
-const int UNWATCHED = 0; // ´Ù¸¥ ³ëµå¿¡ Áö¹èµÇÁö ¾ÊÀ½
-const int WATCHED = 1; // ´Ù¸¥ ³ëµå¿¡ Áö¹èµÊ
-const int INSTALLED = 2; // Ä«¸Ş¶ó ¼³Ä¡µÊ
-int installed; // Ä«¸Ş¶ó ¼³Ä¡ ´ë¼ö
+vector<vector<int>> adj; // ì¸ì ‘ ë¦¬ìŠ¤íŠ¸ í‘œí˜„
+vector<bool> visited; // ë°©ë¬¸ ì—¬ë¶€
+const int UNWATCHED = 0; // ë‹¤ë¥¸ ë…¸ë“œì— ì§€ë°°ë˜ì§€ ì•ŠìŒ
+const int WATCHED = 1; // ë‹¤ë¥¸ ë…¸ë“œì— ì§€ë°°ë¨
+const int INSTALLED = 2; // ì¹´ë©”ë¼ ì„¤ì¹˜ë¨
+int installed; // ì¹´ë©”ë¼ ì„¤ì¹˜ ëŒ€ìˆ˜
 
-// here·ÎºÎÅÍ ±íÀÌ ¿ì¼± Å½»öÀ» ÇÏ°í, hereÀÇ Á¤º¸¸¦ ¹İÈ¯ÇÑ´Ù
+// hereë¡œë¶€í„° ê¹Šì´ ìš°ì„  íƒìƒ‰ì„ í•˜ê³ , hereì˜ ì •ë³´ë¥¼ ë°˜í™˜í•œë‹¤
 int dfs(int here)
 {
-	visited[here] = true; // ¹æ¹® Ã¼Å©
-	int children[3] = { 0,0,0 }; // Áö¹è Á¤º¸ ÃÊ±âÈ­
+	visited[here] = true; // ë°©ë¬¸ ì²´í¬
+	int children[3] = { 0,0,0 }; // ì§€ë°° ì •ë³´ ì´ˆê¸°í™”
 	for (int i = 0; i < adj[here].size(); i++)
 	{
 		int there = adj[here][i];
 		if (!visited[there])
-			++children[dfs(there)]; // Áö¹è Á¤º¸ °»½Å
+			++children[dfs(there)]; // ì§€ë°° ì •ë³´ ê°±ì‹ 
 	}
-	// ÀÚ¼Õ ³ëµå Áß °¨½ÃµÇÁö ¾Ê´Â ³ëµå°¡ ÀÖÀ» °æ¿ì Ä«¸Ş¶ó¸¦ ¼³Ä¡
+	// ìì† ë…¸ë“œ ì¤‘ ê°ì‹œë˜ì§€ ì•ŠëŠ” ë…¸ë“œê°€ ìˆì„ ê²½ìš° ì¹´ë©”ë¼ë¥¼ ì„¤ì¹˜
 	if (children[UNWATCHED]) {
 		++installed;
-		return INSTALLED; // Ä«¸Ş¶ó ¼³Ä¡µÆÀ½À» ¹İÈ¯
+		return INSTALLED; // ì¹´ë©”ë¼ ì„¤ì¹˜ëìŒì„ ë°˜í™˜
 	}
-	// ÀÚ¼Õ ³ëµå Áß Ä«¸Ş¶ó°¡ ¼³Ä¡µÈ ³ëµå°¡ ÀÖÀ» °æ¿ì ¼³Ä¡ÇÒ ÇÊ¿ä°¡ ¾ø´Ù
+	// ìì† ë…¸ë“œ ì¤‘ ì¹´ë©”ë¼ê°€ ì„¤ì¹˜ëœ ë…¸ë“œê°€ ìˆì„ ê²½ìš° ì„¤ì¹˜í•  í•„ìš”ê°€ ì—†ë‹¤
 	if (children[INSTALLED]) {
-		return WATCHED; // Áö¹è‰çÀ½À» ¹İÈ¯
+		return WATCHED; // ì§€ë°°ë¬ìŒì„ ë°˜í™˜
 	}
-	// ±× ÀÌ¿ÜÀÇ °æ¿ì Áö¹è´çÇÏÁö ¾ÊÀ½À» ¹İÈ¯
+	// ê·¸ ì´ì™¸ì˜ ê²½ìš° ì§€ë°°ë‹¹í•˜ì§€ ì•ŠìŒì„ ë°˜í™˜
 	return UNWATCHED;
 }
 
-// ±×·¡ÇÁ¸¦ °¨½ÃÇÏ´Â µ¥ ÇÊ¿äÇÑ Ä«¸Ş¶óÀÇ ÃÖ¼Ò ¼ö¸¦ ¹İÈ¯ÇÑ´Ù
+// ê·¸ë˜í”„ë¥¼ ê°ì‹œí•˜ëŠ” ë° í•„ìš”í•œ ì¹´ë©”ë¼ì˜ ìµœì†Œ ìˆ˜ë¥¼ ë°˜í™˜í•œë‹¤
 int installCamera()
 {
-	// ÃÊ±âÈ­
+	// ì´ˆê¸°í™”
 	installed = 0;
 	visited = vector<bool>(V, false);
-	// ¸ğµç Á¤Á¡¿¡ ´ëÇØ dfs Å½»ö
+	// ëª¨ë“  ì •ì ì— ëŒ€í•´ dfs íƒìƒ‰
 	for (int u = 0; u < V; u++)
 		if (!visited[u] && dfs(u) == UNWATCHED)
 			installed++;
@@ -57,7 +57,7 @@ int main()
 		int n;
 		cin >> V >> n;
 		adj = vector<vector<int>>(V, vector<int>());
-		// ¿¬°á ¸®½ºÆ® »ı¼º
+		// ì—°ê²° ë¦¬ìŠ¤íŠ¸ ìƒì„±
 		for (int i = 0; i < n; i++)
 		{
 			int u, v;

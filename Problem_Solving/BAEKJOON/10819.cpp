@@ -13,16 +13,16 @@ int main(void)
 	vector<int>a(n);
 	for (int i = 0; i < n; i++)
 		cin >> a[i];
-	// ¿À¸§Â÷¼ø Á¤·Ä
+	// ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
 	sort(a.begin(), a.end());
 	int res = 0;
-	// ¼ø¿­ ¿ÏÀüÅ½»öÀ» ÀÌ¿ëÇØ¼­ ¸ğµç °æ¿ìÀÇ ¼ö¸¦ Á¶»çÇÑ´Ù
+	// ìˆœì—´ ì™„ì „íƒìƒ‰ì„ ì´ìš©í•´ì„œ ëª¨ë“  ê²½ìš°ì˜ ìˆ˜ë¥¼ ì¡°ì‚¬í•œë‹¤
 	do
 	{
 		int sum = 0;
 		for (int i = 1; i < n; i++)
-			sum += abs(a[i - 1] - a[i]); // Â÷ÀÌÀÇ ´©ÀûÇÕ ÀúÀå
-		res = res < sum ? sum : res; // ÃÖ´ë°ª °»½Å
+			sum += abs(a[i - 1] - a[i]); // ì°¨ì´ì˜ ëˆ„ì í•© ì €ì¥
+		res = res < sum ? sum : res; // ìµœëŒ€ê°’ ê°±ì‹ 
 	} while (next_permutation(a.begin(), a.end()));
 	cout << res << '\n';
 }

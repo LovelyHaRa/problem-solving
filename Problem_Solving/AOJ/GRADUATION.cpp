@@ -6,41 +6,41 @@ using namespace std;
 
 const int INF = 987654321;
 int n, k, m, l;
-vector<int> prerequisite; // ¼±¼ö°ú¸ñ ÁıÇÕ
-vector<int> classes; // ÇĞ±â °³¼³°ú¸ñ ÁıÇÕ
-vector<vector<int>> cache; // Ä³½Ã
+vector<int> prerequisite; // ì„ ìˆ˜ê³¼ëª© ì§‘í•©
+vector<int> classes; // í•™ê¸° ê°œì„¤ê³¼ëª© ì§‘í•©
+vector<vector<int>> cache; // ìºì‹œ
 
-// ÄÑÁø ºñÆ®¼ö ¹İÈ¯
+// ì¼œì§„ ë¹„íŠ¸ìˆ˜ ë°˜í™˜
 int bitCount(int n) { return __popcnt(n); /* __builtin_popcount(n); // g++ */ } 
 int min(int a, int b) { return a < b ? a : b; }
 
-// ÀÌ¹øÇĞ±â°¡ smemsterÀÌ°í Áö±İ±îÁö µéÀº °ú¸ñÀÇ ÁıÇÕÀÌ takenÀÏ ¶§
-// k°³ ÀÌ»ó °ú¸ñÀ» µéÀ»·Á¸é ¸îÇĞ±â³ª ´õ ÀÖ¾î¾ß ÇÏ´Â°¡
+// ì´ë²ˆí•™ê¸°ê°€ smemsterì´ê³  ì§€ê¸ˆê¹Œì§€ ë“¤ì€ ê³¼ëª©ì˜ ì§‘í•©ì´ takenì¼ ë•Œ
+// kê°œ ì´ìƒ ê³¼ëª©ì„ ë“¤ì„ë ¤ë©´ ëª‡í•™ê¸°ë‚˜ ë” ìˆì–´ì•¼ í•˜ëŠ”ê°€
 int graduate(int semester, int taken)
 {
-	// ±âÀú »ç·Ê: ÀÌ¹Ì k°³ ÀÌ»ó µéÀº °æ¿ì
+	// ê¸°ì € ì‚¬ë¡€: ì´ë¯¸ kê°œ ì´ìƒ ë“¤ì€ ê²½ìš°
 	if (bitCount(taken) >= k) return 0;
-	// ±âÀú »ç·Ê: mÇĞ±â°¡ ÀüºÎ Áö³­ °æ¿ì(IMPOSSIBLE)
-	if (semester == m) return INF; // INF°ª ¹İÈ¯
-	// ¸Ş¸ğÀÌÁ¦ÀÌ¼Ç
+	// ê¸°ì € ì‚¬ë¡€: mí•™ê¸°ê°€ ì „ë¶€ ì§€ë‚œ ê²½ìš°(IMPOSSIBLE)
+	if (semester == m) return INF; // INFê°’ ë°˜í™˜
+	// ë©”ëª¨ì´ì œì´ì…˜
 	int& ret = cache[semester][taken];
 	if (ret != -1) return ret;
-	ret = INF; // ÃÊ±â ¼¼ÆÃ
-	// ÀÌ¹øÇĞ±â¿¡ µéÀ» ¼ö ÀÖ´Â °ú¸ñ Áß ¾ÆÁ÷ µèÁö ¾ÊÀº °ú¸ñÀ» Ã£´Â´Ù.
-	int canTake = (classes[semester] & ~taken); // semester¿Í  takenÀÇ Â÷ÁıÇÕÀ» ±¸ÇÑ´Ù.
-	// ¼±¼ö °ú¸ñÀ» ´Ù µèÁö ¾ÊÀº °ú¸ñÀ» º£Á¦ÇÑ´Ù
+	ret = INF; // ì´ˆê¸° ì„¸íŒ…
+	// ì´ë²ˆí•™ê¸°ì— ë“¤ì„ ìˆ˜ ìˆëŠ” ê³¼ëª© ì¤‘ ì•„ì§ ë“£ì§€ ì•Šì€ ê³¼ëª©ì„ ì°¾ëŠ”ë‹¤.
+	int canTake = (classes[semester] & ~taken); // semesterì™€  takenì˜ ì°¨ì§‘í•©ì„ êµ¬í•œë‹¤.
+	// ì„ ìˆ˜ ê³¼ëª©ì„ ë‹¤ ë“£ì§€ ì•Šì€ ê³¼ëª©ì„ ë² ì œí•œë‹¤
 	for (int i = 0; i < n; i++)
-		// ÇöÀç °ú¸ñÀ» ¾Èµé¾ú´Âµ¥ ¼±¼ö°ú¸ñÀ» ¸ğµÎ µèÁö ¾Ê¾ÒÀ¸¸é
+		// í˜„ì¬ ê³¼ëª©ì„ ì•ˆë“¤ì—ˆëŠ”ë° ì„ ìˆ˜ê³¼ëª©ì„ ëª¨ë‘ ë“£ì§€ ì•Šì•˜ìœ¼ë©´
 		if ((canTake&(1 << i)) && (taken&prerequisite[i]) != prerequisite[i])
-			canTake &= ~(1 << i); // ¿ø¼Ò »èÁ¦
-	// canTakeÀÇ ¸ğµç ºÎºĞÁıÇÕ ¼øÈ¸
+			canTake &= ~(1 << i); // ì›ì†Œ ì‚­ì œ
+	// canTakeì˜ ëª¨ë“  ë¶€ë¶„ì§‘í•© ìˆœíšŒ
 	for (int take = canTake; take; take = ((take - 1) & canTake))
 	{
-		if (bitCount(take) > l) continue; // ÇĞ±â´ç l°³ ÀÌÇÏ¸¸ µéÀ» ¼ö ÀÖ´Ù
-		// ÇØ´ç ºÎºĞÁıÇÕÀÇ °ú¸ñµéÀ» ¼ö°­ ÇßÀ» ¶§ ÃÖ¼Ú°ª °»½Å
+		if (bitCount(take) > l) continue; // í•™ê¸°ë‹¹ lê°œ ì´í•˜ë§Œ ë“¤ì„ ìˆ˜ ìˆë‹¤
+		// í•´ë‹¹ ë¶€ë¶„ì§‘í•©ì˜ ê³¼ëª©ë“¤ì„ ìˆ˜ê°• í–ˆì„ ë•Œ ìµœì†Ÿê°’ ê°±ì‹ 
 		ret = min(ret, graduate(semester + 1, taken | take) + 1);
 	}
-	// ÀÌ¹øÇĞ±â ÈŞÇĞ
+	// ì´ë²ˆí•™ê¸° íœ´í•™
 	ret = min(ret, graduate(semester + 1, taken));
 	return ret;
 }

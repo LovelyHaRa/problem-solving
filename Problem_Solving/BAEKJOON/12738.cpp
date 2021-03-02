@@ -15,7 +15,7 @@ int main(void)
 	{
 		int k;
 		cin >> k;
-		// ¼øÁõ°¡ ÇÑ´Ù¸é µÚ¿¡ »ğÀÔ
+		// ìˆœì¦ê°€ í•œë‹¤ë©´ ë’¤ì— ì‚½ì…
 		if (k > A.back())
 		{
 			A.push_back(k);
@@ -23,8 +23,8 @@ int main(void)
 		}
 		else
 		{
-			vector<int>::iterator find = lower_bound(A.begin(), A.end(), k); // ÀÌºĞ Å½»öÀ¸·Î kº¸´Ù Å« Á¤¼öÀÇ À§Ä¡ ¹İÈ¯
-			*find = k; // ¹Ù²ãÄ¡±â
+			vector<int>::iterator find = lower_bound(A.begin(), A.end(), k); // ì´ë¶„ íƒìƒ‰ìœ¼ë¡œ kë³´ë‹¤ í° ì •ìˆ˜ì˜ ìœ„ì¹˜ ë°˜í™˜
+			*find = k; // ë°”ê¿”ì¹˜ê¸°
 		}
 	}
 	cout << cnt;

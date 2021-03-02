@@ -9,22 +9,22 @@ int main(void)
 {
 	int n;
 	cin >> n;
-	vector<int> alpha(26); // alpha[x]: x¹øÂ° ¾ËÆÄºªÀÇ ÀÚ¸´¼ö¸¸À» °¡Áö°í °è»êÇÑ °ª
+	vector<int> alpha(26); // alpha[x]: xë²ˆì§¸ ì•ŒíŒŒë²³ì˜ ìžë¦¿ìˆ˜ë§Œì„ ê°€ì§€ê³  ê³„ì‚°í•œ ê°’
 	for (int i = 0; i < n; i++)
 	{
 		string word;
 		cin >> word;
-		int p = 1; // ÀÚ¸´¼ö(1, 10, 100...)
-		// µÞÀÚ¸®ºÎÅÍ °è»ê
+		int p = 1; // ìžë¦¿ìˆ˜(1, 10, 100...)
+		// ë’·ìžë¦¬ë¶€í„° ê³„ì‚°
 		for (int j = word.size() - 1; j >= 0; j--)
 		{
-			alpha[word[j] - 'A'] += p; // ÇØ´ç ¾ËÆÄÀÇ ÀÚ¸´¼ö¸¦ ´©Àû½ÃÅ´ 
-			p *= 10; // ÀÚ¸´¼ö °»½Å
+			alpha[word[j] - 'A'] += p; // í•´ë‹¹ ì•ŒíŒŒì˜ ìžë¦¿ìˆ˜ë¥¼ ëˆ„ì ì‹œí‚´ 
+			p *= 10; // ìžë¦¿ìˆ˜ ê°±ì‹ 
 		}
 	}
-	sort(alpha.begin(), alpha.end(), greater<int>()); // ¾ËÆÄºª ¹è¿­ ³»¸²Â÷¼ø Á¤·Ä
+	sort(alpha.begin(), alpha.end(), greater<int>()); // ì•ŒíŒŒë²³ ë°°ì—´ ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬
 	int num = 9, res = 0;
-	// 9ºÎÅÍ ½ÃÀÛÇÏ¿© Á¤·ÄµÈ ¹è¿­¿¡ °öÇØÁÖ°í ÇÏ³ª¾¿ °¨¼Ò½ÃÅ²´Ù.
+	// 9ë¶€í„° ì‹œìž‘í•˜ì—¬ ì •ë ¬ëœ ë°°ì—´ì— ê³±í•´ì£¼ê³  í•˜ë‚˜ì”© ê°ì†Œì‹œí‚¨ë‹¤.
 	for (int i = 0; i < alpha.size(); i++)
 		res += alpha[i] * num--;
 	cout << res << '\n';

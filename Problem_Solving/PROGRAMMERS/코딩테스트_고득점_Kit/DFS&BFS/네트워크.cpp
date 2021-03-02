@@ -3,13 +3,13 @@
 
 using namespace std;
 
-int visit[200]; // Á¤Á¡ Å½»ö ¿©ºÎ
+int visit[200]; // ì •ì  íƒìƒ‰ ì—¬ë¶€
 
 // DFS
 void dfs(int start, vector<vector<int>> &computers, int n) {
-	visit[start] = 1; // Á¤Á¡ ¹æ¹® Ã¼Å©
+	visit[start] = 1; // ì •ì  ë°©ë¬¸ ì²´í¬
 	for (int i = 0; i < n; i++) {
-		// ÇØ´ç Á¤Á¡¿¡¼­ °¡Àå »¡¸® Å½»öµÇ´Â °÷ Àç±ÍÈ£Ãâ
+		// í•´ë‹¹ ì •ì ì—ì„œ ê°€ì¥ ë¹¨ë¦¬ íƒìƒ‰ë˜ëŠ” ê³³ ì¬ê·€í˜¸ì¶œ
 		if (computers[start][i] && !visit[i]) {
 			dfs(i, computers, n);
 		}
@@ -18,9 +18,9 @@ void dfs(int start, vector<vector<int>> &computers, int n) {
 
 int solution(int n, vector<vector<int>> computers) {
 	int answer = 0;
-	// 1. ³×Æ®¿öÅ© ¼ö¸¸Å­ Å½»ö
+	// 1. ë„¤íŠ¸ì›Œí¬ ìˆ˜ë§Œí¼ íƒìƒ‰
 	for (int i = 0; i < n; i++) {
-		// 2. DFS ÇÏ³ª´ç ³×Æ®¿öÅ© ÇÏ³ªÀÌ¹Ç·Î ³¡³¯ ¶§¸¶´Ù answer Ãß°¡
+		// 2. DFS í•˜ë‚˜ë‹¹ ë„¤íŠ¸ì›Œí¬ í•˜ë‚˜ì´ë¯€ë¡œ ëë‚  ë•Œë§ˆë‹¤ answer ì¶”ê°€
 		if (!visit[i]) {
 			dfs(i, computers, n);
 			answer++;

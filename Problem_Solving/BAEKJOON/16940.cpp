@@ -8,8 +8,8 @@ int main(void)
 {
 	int n;
 	cin >> n;
-	vector<vector<int>> adj(n + 1, vector<int>()); // ÀÎÁ¢ ¸®½ºÆ®·Î Ç¥Çö(ÀÎÁ¢ Çà·ÄÀº ¸Ş¸ğ¸® ÃÊ°ú)
-	// ÀÔ·Â
+	vector<vector<int>> adj(n + 1, vector<int>()); // ì¸ì ‘ ë¦¬ìŠ¤íŠ¸ë¡œ í‘œí˜„(ì¸ì ‘ í–‰ë ¬ì€ ë©”ëª¨ë¦¬ ì´ˆê³¼)
+	// ì…ë ¥
 	for (int i = 0; i < n-1; i++)
 	{
 		int a, b;
@@ -20,37 +20,37 @@ int main(void)
 	vector<int> ans(n);
 	for (int i = 0; i < n; i++)
 		cin >> ans[i];
-	vector<int> check(n + 1); // ¹æ¹® ¿©ºÎ
-	int pos = 1; // ¹æ¹® ¼ø¼­ ÀÎµ¦½º
-	// ÃÊ±â Å¥ »ı¼º
+	vector<int> check(n + 1); // ë°©ë¬¸ ì—¬ë¶€
+	int pos = 1; // ë°©ë¬¸ ìˆœì„œ ì¸ë±ìŠ¤
+	// ì´ˆê¸° í ìƒì„±
 	queue<int> q;
 	q.push(1);
 	check[1] = 1;
-	// BFS Å½»ö
+	// BFS íƒìƒ‰
 	while (!q.empty())
 	{
-		// Å¥¿¡¼­ ²¨³»±â
+		// íì—ì„œ êº¼ë‚´ê¸°
 		int here = q.front();
 		q.pop();
-		// ±âÀú »ç·Ê: pos<n
+		// ê¸°ì € ì‚¬ë¡€: pos<n
 		while (pos<n)
 		{
 			int there = ans[pos];
 			int i;
-			// ¹æ¹® ¼ø¼­¸¦ ÂüÁ¶ÇÏ¿© ¿¬°áµÈ Á¤Á¡ ¸ğµÎ Å¥¿¡ ³Ö±â
+			// ë°©ë¬¸ ìˆœì„œë¥¼ ì°¸ì¡°í•˜ì—¬ ì—°ê²°ëœ ì •ì  ëª¨ë‘ íì— ë„£ê¸°
 			for (i = 0; i < adj[here].size(); i++)
 			{
 				if (adj[here][i] == there && !check[there])
 				{
 					check[there] = 1;
 					q.push(there);
-					pos++; // ¹æ¹® ¼ø¼­ ÀÎµ¦½º Áõ°¡
+					pos++; // ë°©ë¬¸ ìˆœì„œ ì¸ë±ìŠ¤ ì¦ê°€
 					break;
 				}
 			}
-			// ¿¬°áµÈ Á¤Á¡À» ¸ğµÎ Å¥¿¡ ³Ö¾úÀ¸¸é ¹İº¹¹® Å»Ãâ
+			// ì—°ê²°ëœ ì •ì ì„ ëª¨ë‘ íì— ë„£ì—ˆìœ¼ë©´ ë°˜ë³µë¬¸ íƒˆì¶œ
 			if (i == adj[here].size()) break;
 		}
 	}
-	cout << (pos == n) << '\n'; // BFS Å½»ö Áß¹æ¹® ¼ø¼­ ¹è¿­À» ¸ğµÎ ÂüÁ¶Çß´Ù¸é 1, ¾Æ´Ï¸é 0
+	cout << (pos == n) << '\n'; // BFS íƒìƒ‰ ì¤‘ë°©ë¬¸ ìˆœì„œ ë°°ì—´ì„ ëª¨ë‘ ì°¸ì¡°í–ˆë‹¤ë©´ 1, ì•„ë‹ˆë©´ 0
 }

@@ -1,23 +1,23 @@
-#include<iostream> // ÀÔÃâ·Â »ç¿ë
-#include<vector> // ¹è¿­ ¹éÅÍ »ç¿ë
-#include<queue> // ÀÚ·á±¸Á¶ Å¥ »ç¿ë
-#include<algorithm> //max »ç¿ë
+#include<iostream> // ìž…ì¶œë ¥ ì‚¬ìš©
+#include<vector> // ë°°ì—´ ë°±í„° ì‚¬ìš©
+#include<queue> // ìžë£Œêµ¬ì¡° í ì‚¬ìš©
+#include<algorithm> //max ì‚¬ìš©
 
 using namespace std;
 
 int main(void)
 {
-	int T; //Å×½ºÆ®ÄÉÀÌ½º
+	int T; //í…ŒìŠ¤íŠ¸ì¼€ì´ìŠ¤
 	cin >> T;
 	while (T > 0)
 	{
-		int n, k; // Á¤Á¡, °£¼±°³¼ö
+		int n, k; // ì •ì , ê°„ì„ ê°œìˆ˜
 		cin >> n >> k;
-		vector<vector<int>> graph; // ¹æÇâ±×·¡ÇÁ
-		queue<int> que; // À§»ó Å¥
-		vector<int> count; // ¼±Çà ¿¬°á °³¼ö
-		vector<int> d; // °Ç¼³ºñ¿ë
-		vector<int> res; // ÇØ´ç Á¤Á¡ ÃÖ´ëºñ¿ë
+		vector<vector<int>> graph; // ë°©í–¥ê·¸ëž˜í”„
+		queue<int> que; // ìœ„ìƒ í
+		vector<int> count; // ì„ í–‰ ì—°ê²° ê°œìˆ˜
+		vector<int> d; // ê±´ì„¤ë¹„ìš©
+		vector<int> res; // í•´ë‹¹ ì •ì  ìµœëŒ€ë¹„ìš©
 		graph.resize(n + 1);
 		count.resize(n + 1);
 		d.resize(n + 1);
@@ -31,10 +31,10 @@ int main(void)
 			graph[x].push_back(y);
 			count[y]++;
 		}
-		int w; // Æ¯Á¤ °Ç¹°
+		int w; // íŠ¹ì • ê±´ë¬¼
 		cin >> w;
-		// À§»óÁ¤·Ä ÀÌ¿ë
-		// ¼±Çà ¿¬°á °³¼ö°¡ 0ÀÎ Á¤Á¡À» Å¥¿¡ ³Ö¾î ÃÊ±â ¼¼ÆÃÇÔ
+		// ìœ„ìƒì •ë ¬ ì´ìš©
+		// ì„ í–‰ ì—°ê²° ê°œìˆ˜ê°€ 0ì¸ ì •ì ì„ íì— ë„£ì–´ ì´ˆê¸° ì„¸íŒ…í•¨
 		for (int i = 1; i <= n; i++)
 		{
 			if (!count[i])
@@ -42,17 +42,17 @@ int main(void)
 		}
 		while (count[w] != 0)
 		{
-			// Å¥¿¡¼­ Á¤Á¡À» ²¨³½´Ù.
+			// íì—ì„œ ì •ì ì„ êº¼ë‚¸ë‹¤.
 			int v = que.front();
 			que.pop();
-			// Á¤Á¡ÀÇ ÃÖ´ë °Ç¼³ºñ¿ëÀ» °»½ÅÇÑ´Ù.
+			// ì •ì ì˜ ìµœëŒ€ ê±´ì„¤ë¹„ìš©ì„ ê°±ì‹ í•œë‹¤.
 			for (int next : graph[v])
 			{
 				res[next] = max(res[next], res[v] + d[v]);
 				if (--count[next] == 0) que.push(next);
 			}
 		}
-		cout << res[w] + d[w] << endl; // Æ¯Á¤°Ç¹°ÀÇ °Ç¼³ºñ¿ëÀ» Ãß°¡ÇÏ¿© Ãâ·ÂÇÑ´Ù.
+		cout << res[w] + d[w] << endl; // íŠ¹ì •ê±´ë¬¼ì˜ ê±´ì„¤ë¹„ìš©ì„ ì¶”ê°€í•˜ì—¬ ì¶œë ¥í•œë‹¤.
 		T--;
 	}
 }

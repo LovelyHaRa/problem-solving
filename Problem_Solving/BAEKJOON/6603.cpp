@@ -7,31 +7,31 @@ using namespace std;
 int n;
 vector<int> k, check;
 
-// DFS¸¦ ÀÌ¿ëÇÑ Á¶ÇÕ ±¸Çö
+// DFSë¥¼ ì´ìš©í•œ ì¡°í•© êµ¬í˜„
 void combination(int start, int cnt)
 {
-	// ±âÀú »ç·Ê: ¼ıÀÚ 6°³¸¦ Ã¼Å©ÇÏ¸é
+	// ê¸°ì € ì‚¬ë¡€: ìˆ«ì 6ê°œë¥¼ ì²´í¬í•˜ë©´
 	if (cnt == 6)
 	{
 		for (int i = 0; i < n; i++)
 		{
-			// Ã¼Å© µÈ °Í¸¸ Ãâ·Â
+			// ì²´í¬ ëœ ê²ƒë§Œ ì¶œë ¥
 			if(check[i])
 			cout << k[i] << ' ';
 		}
 		cout << '\n';
 		return;
 	}
-	// startºÎÅÍ ¹è¿­ ±æÀÌ±îÁö ¹İº¹
+	// startë¶€í„° ë°°ì—´ ê¸¸ì´ê¹Œì§€ ë°˜ë³µ
 	for (int i = start; i < n; i++)
 	{
-		// ÀÌ¹Ì Ã¼Å©µÇ¾ú´Ù¸é °Ç³Ê¶Ù±â
+		// ì´ë¯¸ ì²´í¬ë˜ì—ˆë‹¤ë©´ ê±´ë„ˆë›°ê¸°
 		if (check[i]) continue;
-		// Ã¼Å©
+		// ì²´í¬
 		check[i] = 1;
-		// DFS Å½»ö
+		// DFS íƒìƒ‰
 		combination(i, cnt + 1);
-		// ¿ø»óº¹±¸
+		// ì›ìƒë³µêµ¬
 		check[i] = 0;
 	}
 }

@@ -12,10 +12,10 @@ int main(void)
 	cout.tie(0);
 	int n;
 	cin >> n;
-	vector<vector<int>> adj(n + 1); // Æ®¸®¸¦ ÀÎÁ¢ ¸®½ºÆ®·Î Ç¥Çö
-	vector<int> parent(n + 1); // parent[x]: xÀÇ ºÎ¸ğ ³ëµå
-	vector<bool> check(n + 1); // ³ëµå Áßº¹ Å½»ö ¹æÁö ¹è¿­
-	// ÀÎÁ¢ ¸®½ºÆ® ±¸¼º
+	vector<vector<int>> adj(n + 1); // íŠ¸ë¦¬ë¥¼ ì¸ì ‘ ë¦¬ìŠ¤íŠ¸ë¡œ í‘œí˜„
+	vector<int> parent(n + 1); // parent[x]: xì˜ ë¶€ëª¨ ë…¸ë“œ
+	vector<bool> check(n + 1); // ë…¸ë“œ ì¤‘ë³µ íƒìƒ‰ ë°©ì§€ ë°°ì—´
+	// ì¸ì ‘ ë¦¬ìŠ¤íŠ¸ êµ¬ì„±
 	for (int i = 0; i < n - 1; i++)
 	{
 		int x, y;
@@ -23,28 +23,28 @@ int main(void)
 		adj[x].push_back(y);
 		adj[y].push_back(x);
 	}
-	// ÃÊ±â Å¥ ¼¼ÆÃ
+	// ì´ˆê¸° í ì„¸íŒ…
 	queue<int> q;
 	q.push(1);
-	// BFS Å½»ö
+	// BFS íƒìƒ‰
 	while (!q.empty())
 	{
-		// ³ëµå ÃßÃâ
+		// ë…¸ë“œ ì¶”ì¶œ
 		int here = q.front();
 		q.pop();
-		// ¿¬°áµÈ ³ëµå Å½»ö
+		// ì—°ê²°ëœ ë…¸ë“œ íƒìƒ‰
 		for (int there : adj[here])
 		{
-			// ¹Ì¹æ¹® ½Ã
+			// ë¯¸ë°©ë¬¸ ì‹œ
 			if (!check[there])
 			{
-				check[there] = true; // ¹æ¹® Ã¼Å©
-				parent[there] = here; // here³ëµå´Â there ³ëµåÀÇ ºÎ¸ğ
-				q.push(there); // Å¥¿¡ ³ëµå »ğÀÔ
+				check[there] = true; // ë°©ë¬¸ ì²´í¬
+				parent[there] = here; // hereë…¸ë“œëŠ” there ë…¸ë“œì˜ ë¶€ëª¨
+				q.push(there); // íì— ë…¸ë“œ ì‚½ì…
 			}
 		}
 	}
-	// Ãâ·Â
+	// ì¶œë ¥
 	for (int i = 2; i <= n; i++)
 		cout << parent[i] << '\n';
 }

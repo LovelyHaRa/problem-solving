@@ -5,18 +5,18 @@ using namespace std;
 
 int n, m;
 vector<vector<bool>> board, visited;
-int dx[] = { -1,0,0,1 }, dy[] = { 0,-1,1,0 }; // »óÇÏÁÂ¿ì ÀÌµ¿
+int dx[] = { -1,0,0,1 }, dy[] = { 0,-1,1,0 }; // ìƒí•˜ì¢Œìš° ì´ë™
 
 void dfs(int x, int y)
 {
 	visited[x][y] = 1;
-	// »óÇÏÁÂ¿ì Å½»ö
+	// ìƒí•˜ì¢Œìš° íƒìƒ‰
 	for (int i = 0; i < 4; i ++ )
 	{
 		int nx = x + dx[i], ny = y + dy[i];
-		// ¹üÀ§ ¹Û, ÀÌ¹Ì ¹æ¹®Çß´Ù¸é °Ç³Ê¶Ù±â
+		// ë²”ìœ„ ë°–, ì´ë¯¸ ë°©ë¬¸í–ˆë‹¤ë©´ ê±´ë„ˆë›°ê¸°
 		if (nx < 0 || nx >= n || ny < 0 || ny >= m || visited[nx][ny]) continue;
-		if (board[nx][ny]) dfs(nx, ny); // ¹èÃß°¡ ÀÖ´Ù¸é dfsÅ½»ö
+		if (board[nx][ny]) dfs(nx, ny); // ë°°ì¶”ê°€ ìˆë‹¤ë©´ dfsíƒìƒ‰
 	}
 	return;
 }
@@ -46,7 +46,7 @@ int main(void)
 				if (board[i][j] && !visited[i][j])
 				{
 					dfs(i, j);
-					cnt++; // ÄÄÆ÷³ÍÆ® Å½»öÀÌ ³¡³µÀ¸¹Ç·Î ÇÑ¸¶¸® Ãß°¡
+					cnt++; // ì»´í¬ë„ŒíŠ¸ íƒìƒ‰ì´ ëë‚¬ìœ¼ë¯€ë¡œ í•œë§ˆë¦¬ ì¶”ê°€
 				}
 		cout << cnt << '\n';
 		board.clear();

@@ -1,5 +1,5 @@
-// DP ¹®Á¦
-// LIS ÀÀ¿ë¹®Á¦
+// DP ë¬¸ì œ
+// LIS ì‘ìš©ë¬¸ì œ
 #include<iostream>
 #include<algorithm>
 #include<vector>
@@ -18,11 +18,11 @@ int main(void)
 		a[i].resize(2);
 		cin >> a[i][0] >> a[i][1];
 	}
-	// 1. Ã¹¹øÂ° ÁÙ ¿À¸§Â÷¼ø Á¤·Ä
+	// 1. ì²«ë²ˆì§¸ ì¤„ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
 	sort(a.begin(), a.end());
 	int max = 0;
-	// 2. Á¤·ÄµÈ Àü±êÁÙ µÎ¹øÂ°ÁÙÀ» LIS Á¤·Ä
-	// Àü±êÁÙÀÌ °ãÄ¡Áö ¾ÊÀ¸·Á¸é ¼öµéÀÌ ¼øÂ÷ÀûÀ¸·Î Áõ°¡ÇØ¾ßÇÑ´Ù
+	// 2. ì •ë ¬ëœ ì „ê¹ƒì¤„ ë‘ë²ˆì§¸ì¤„ì„ LIS ì •ë ¬
+	// ì „ê¹ƒì¤„ì´ ê²¹ì¹˜ì§€ ì•Šìœ¼ë ¤ë©´ ìˆ˜ë“¤ì´ ìˆœì°¨ì ìœ¼ë¡œ ì¦ê°€í•´ì•¼í•œë‹¤
 	for (int i = 0; i < n; i++)
 	{
 		int count = 0;

@@ -4,7 +4,7 @@
 
 using namespace std;
 
-// ¹®ÀÚ¿­ ¸¸µé±â
+// ë¬¸ìì—´ ë§Œë“¤ê¸°
 //void curve(const string& seed, int generations)
 //{
 //	if (generations == 0)
@@ -24,29 +24,29 @@ using namespace std;
 //}
 
 const int MAX = 1000000000 + 1;
-vector<int> length(51); // N¼¼´ëÀÇ µå·¡°ïÄ¿ºê ±æÀÌ
+vector<int> length(51); // Nì„¸ëŒ€ì˜ ë“œë˜ê³¤ì»¤ë¸Œ ê¸¸ì´
 int min(int a, int b) { return a < b ? a : b; }
 
-// N¼¼´ëÀÇ µå·¡°ïÄ¿ºêÀÇ ±æÀÌ¸¦ ¹Ì¸® ±¸ÇÏ±â
+// Nì„¸ëŒ€ì˜ ë“œë˜ê³¤ì»¤ë¸Œì˜ ê¸¸ì´ë¥¼ ë¯¸ë¦¬ êµ¬í•˜ê¸°
 void precalc()
 {
 	length[0] = 1;
 	for (int i = 1; i <= 50; i++)
 		length[i] = min(MAX, 2 + 2 * length[i - 1]);
 }
-// X, YÀÏ ¶§ Ä¡È¯ÇÒ ¹®ÀÚ¿­
+// X, Yì¼ ë•Œ ì¹˜í™˜í•  ë¬¸ìì—´
 const string EXPAND_X = "X+YF";
 const string EXPAND_Y = "FX-Y";
 
-// k¹øÂ° µå·¡°ïÄ¿ºê ¹®ÀÚ¿­ Ãâ·Â
+// kë²ˆì§¸ ë“œë˜ê³¤ì»¤ë¸Œ ë¬¸ìì—´ ì¶œë ¥
 char expand(const string& dragonCurve, int generations, int skip)
 {
-	// ±âÀú»ç·Ê: 0¼¼´ëÀÏ°æ¿ì
+	// ê¸°ì €ì‚¬ë¡€: 0ì„¸ëŒ€ì¼ê²½ìš°
 	if (generations == 0)
 		return dragonCurve[skip];
 	for (int i = 0; i < dragonCurve.size(); i++)
 	{
-		// ¹®ÀÚ¿­ÀÌ È®ÀåµÇ´Â °æ¿ì
+		// ë¬¸ìì—´ì´ í™•ì¥ë˜ëŠ” ê²½ìš°
 		if (dragonCurve[i] == 'X' || dragonCurve[i] == 'Y')
 		{
 			if (skip >= length[generations])
@@ -56,16 +56,16 @@ char expand(const string& dragonCurve, int generations, int skip)
 			else if (dragonCurve[i] == 'Y')
 				return expand(EXPAND_Y, generations - 1, skip);
 		}
-		// È®ÀåµÇÁø ¾ÊÁö¸¸ °Ç³Ê¶Ù¾î¾ß ÇÒ °æ¿ì
+		// í™•ì¥ë˜ì§„ ì•Šì§€ë§Œ ê±´ë„ˆë›°ì–´ì•¼ í•  ê²½ìš°
 		else if (skip > 0) --skip;
-		// ´äÀ» Ã£Àº °æ¿ì
+		// ë‹µì„ ì°¾ì€ ê²½ìš°
 		else return dragonCurve[i];
 	}	
 }
 
 int main(void)
 {
-	// ±æÀÌ¸¦ ¹Ì¸® ±¸ÇÔ
+	// ê¸¸ì´ë¥¼ ë¯¸ë¦¬ êµ¬í•¨
 	precalc();
 	int c;
 	cin >> c;
@@ -73,7 +73,7 @@ int main(void)
 	{
 		int n, p, l;
 		cin >> n >> p >> l;
-		// k¹øÂ° µå·¡°ïÄ¿ºê ¹®ÀÚ¿­ Ãâ·Â(ÀÎµ¦½º ¶§¹®¿¡ -1) (p-1<=k<p+l-1) 
+		// kë²ˆì§¸ ë“œë˜ê³¤ì»¤ë¸Œ ë¬¸ìì—´ ì¶œë ¥(ì¸ë±ìŠ¤ ë•Œë¬¸ì— -1) (p-1<=k<p+l-1) 
 		for (int i = p - 1; i < p + l - 1; i++)
 			cout << expand("FX", n, i);
 		cout << '\n';

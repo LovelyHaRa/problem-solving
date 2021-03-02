@@ -5,67 +5,67 @@
 
 using namespace std;
 
-// »óÅÂ¸¦ ±¸Á¶È­
+// ìƒíƒœë¥¼ êµ¬ì¡°í™”
 struct State {
-	int x, y, moveCnt, breakCnt; // ÁÂÇ¥, ÀÌµ¿È½¼ö, ºÎ¼ø º®ÀÇ °³¼ö
-	bool isNight; // ¹ãÀÎÁö ¿©ºÎ
+	int x, y, moveCnt, breakCnt; // ì¢Œí‘œ, ì´ë™íšŸìˆ˜, ë¶€ìˆœ ë²½ì˜ ê°œìˆ˜
+	bool isNight; // ë°¤ì¸ì§€ ì—¬ë¶€
 	State(int _x, int _y, int _moveCnt, int _breakCnt, bool _isNight):
 		x(_x),y(_y),moveCnt(_moveCnt), breakCnt(_breakCnt), isNight(_isNight) {}
 };
 
-bool visited[11][1000][1000]; // ºÎ¼øº®ÀÇ °³¼ö, x,y ÁÂÇ¥¸¦ ±â¹İÀ¸·Î ¹æ¹® Ã¼Å©
+bool visited[11][1000][1000]; // ë¶€ìˆœë²½ì˜ ê°œìˆ˜, x,y ì¢Œí‘œë¥¼ ê¸°ë°˜ìœ¼ë¡œ ë°©ë¬¸ ì²´í¬
 
 int main(void)
 {
 	int n, m, k;
 	cin >> n >> m >> k;
-	vector<string> map(n); // ¸Ê Á¤º¸
+	vector<string> map(n); // ë§µ ì •ë³´
 	for (int i = 0; i < n; i++)
 		cin >> map[i];
-	// ÃÊ±â Å¥ »ı¼º
+	// ì´ˆê¸° í ìƒì„±
 	queue<State> q;
 	q.push(State(0, 0, 1, 0, 0));
 	visited[0][0][0] = 1;
-	int dx[] = { -1,0,0,1 }, dy[] = { 0,-1,1,0 }; // »óÇÏÁÂ¿ì ÀÌµ¿ Áõ°¡·®
+	int dx[] = { -1,0,0,1 }, dy[] = { 0,-1,1,0 }; // ìƒí•˜ì¢Œìš° ì´ë™ ì¦ê°€ëŸ‰
 	int res = -1;
-	// BFS Å½»ö
+	// BFS íƒìƒ‰
 	while (!q.empty())
 	{
-		// Å¥¿¡¼­ ÃßÃâ
+		// íì—ì„œ ì¶”ì¶œ
 		State cur = q.front();
 		q.pop();
 		int x = cur.x, y = cur.y, moveCnt = cur.moveCnt, breakCnt = cur.breakCnt;
 		bool isNight = cur.isNight;
-		// µµÂøÇßÀ» ¶§
+		// ë„ì°©í–ˆì„ ë•Œ
 		if (x == n - 1 && y == m - 1)
 		{
-			res = moveCnt; // ÀÌµ¿ È½¼ö °»½Å
+			res = moveCnt; // ì´ë™ íšŸìˆ˜ ê°±ì‹ 
 			break;
 		}
-		// »óÇÏÁÂ¿ì ÀÌµ¿
+		// ìƒí•˜ì¢Œìš° ì´ë™
 		for (int i = 0; i < 4; i++)
 		{
-			int nx = x + dx[i], ny = y + dy[i]; // ÁÂÇ¥ °»½Å
-			// ¹üÀ§ ¹ÛÀÌ¸é °Ç³Ê¶Ù±â
+			int nx = x + dx[i], ny = y + dy[i]; // ì¢Œí‘œ ê°±ì‹ 
+			// ë²”ìœ„ ë°–ì´ë©´ ê±´ë„ˆë›°ê¸°
 			if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
-			// ÀÌµ¿ÇÑ ÁöÁ¡ÀÌ º®ÀÌ°í ¹æ¹®µÇÁö ¾Ê¾Ò´Ù¸é
+			// ì´ë™í•œ ì§€ì ì´ ë²½ì´ê³  ë°©ë¬¸ë˜ì§€ ì•Šì•˜ë‹¤ë©´
 			if (breakCnt < k && map[nx][ny] == '1' && !visited[breakCnt + 1][nx][ny])
 			{
-				// ¹ãÀÌ¸é ÀÌµ¿ÇÏÁö ¾Ê°í ÀÌµ¿°Å¸®¸¦ Áõ°¡ ½ÃÅ°°í ³·À¸·Î ¹Ù²Û µÚ Å¥¿¡ »ğÀÔ
+				// ë°¤ì´ë©´ ì´ë™í•˜ì§€ ì•Šê³  ì´ë™ê±°ë¦¬ë¥¼ ì¦ê°€ ì‹œí‚¤ê³  ë‚®ìœ¼ë¡œ ë°”ê¾¼ ë’¤ íì— ì‚½ì…
 				if (isNight)
 					q.push(State(x, y, moveCnt + 1, breakCnt, !isNight));
-				// ³·ÀÌ¸é º®À» ºÎ¼ö°í ÀÌµ¿°Å¸®¸¦ Áõ°¡½ÃÅ°°í ¹ãÀ¸·Î ¹Ù²Û µÚ Å¥¿¡ »ğÀÔ
+				// ë‚®ì´ë©´ ë²½ì„ ë¶€ìˆ˜ê³  ì´ë™ê±°ë¦¬ë¥¼ ì¦ê°€ì‹œí‚¤ê³  ë°¤ìœ¼ë¡œ ë°”ê¾¼ ë’¤ íì— ì‚½ì…
 				else
 				{
-					visited[breakCnt + 1][nx][ny] = 1; // ¹æ¹® Ã¼Å©
+					visited[breakCnt + 1][nx][ny] = 1; // ë°©ë¬¸ ì²´í¬
 					q.push(State(nx, ny, moveCnt + 1, breakCnt + 1, !isNight));
 				}
 			}
-			// ÀÌµ¿ÇÑ ÁöÁ¡ÀÌ º®ÀÌ ¾Æ´Ï°í ¹æ¹®µÇÁö ¾Ê¾Ò´Ù¸é
+			// ì´ë™í•œ ì§€ì ì´ ë²½ì´ ì•„ë‹ˆê³  ë°©ë¬¸ë˜ì§€ ì•Šì•˜ë‹¤ë©´
 			else if (map[nx][ny] == '0' && !visited[breakCnt][nx][ny])
 			{
-				visited[breakCnt][nx][ny] = 1; // ¹æ¹® Ã¼Å©
-				// Å¥¿¡ ÀÌµ¿°Å¸®¸¦ Áõ°¡½ÃÅ°°í ³·¹ãÀ» ½ºÀ§ÄªÇÑ µÚ Å¥¿¡ »ğÀÔ
+				visited[breakCnt][nx][ny] = 1; // ë°©ë¬¸ ì²´í¬
+				// íì— ì´ë™ê±°ë¦¬ë¥¼ ì¦ê°€ì‹œí‚¤ê³  ë‚®ë°¤ì„ ìŠ¤ìœ„ì¹­í•œ ë’¤ íì— ì‚½ì…
 				q.push(State(nx, ny, moveCnt + 1, breakCnt, !isNight));
 			}
 		}

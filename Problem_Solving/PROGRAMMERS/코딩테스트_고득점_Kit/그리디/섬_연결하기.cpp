@@ -4,36 +4,36 @@
 
 using namespace std;
 
-vector<int> d; // ÇØ´ç ³ëµåÀÇ »óÀ§³ëµå¸¦ ³ªÅ¸³¿
+vector<int> d; // í•´ë‹¹ ë…¸ë“œì˜ ìƒìœ„ë…¸ë“œë¥¼ ë‚˜íƒ€ëƒ„
 
 bool compare(vector<int> &a, vector<int> &b) {
-	return a[2] < b[2]; // °¡ÁßÄ¡¸¦ ±âÁØÀ¸·Î Á¤·Ä
+	return a[2] < b[2]; // ê°€ì¤‘ì¹˜ë¥¼ ê¸°ì¤€ìœ¼ë¡œ ì •ë ¬
 }
 
 int find(int node) {
 	if (node == d[node]) return node;
 	else return d[node] = find(d[node]);
 }
-// Å©·ç½ºÄ® ¾Ë°í¸®ÁòÀ¸·Î ÃÖ¼Ò ½ºÆĞ´× Æ®¸®¸¦ »ı¼ºÇÑ´Ù.
+// í¬ë£¨ìŠ¤ì¹¼ ì•Œê³ ë¦¬ì¦˜ìœ¼ë¡œ ìµœì†Œ ìŠ¤íŒ¨ë‹ íŠ¸ë¦¬ë¥¼ ìƒì„±í•œë‹¤.
 int solution(int n, vector<vector<int>> costs) {
 	int answer = 0;
-	// 1. °¡ÁßÄ¡ ±âÁØÀ¸·Î ¿À¸§Â÷¼ø Á¤·Ä
+	// 1. ê°€ì¤‘ì¹˜ ê¸°ì¤€ìœ¼ë¡œ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
 	sort(costs.begin(), costs.end(), compare);
 	d.resize(n);
-	// 2. »óÀ§³ëµå ÃÊ±âÈ­
+	// 2. ìƒìœ„ë…¸ë“œ ì´ˆê¸°í™”
 	for (int i = 0; i < n; i++) {
-		d[i] = i; // Ã³À½¿¡´Â ÀÚ±â ÀÚ½ÅÀÌ »óÀ§³ëµå °ª
+		d[i] = i; // ì²˜ìŒì—ëŠ” ìê¸° ìì‹ ì´ ìƒìœ„ë…¸ë“œ ê°’
 	}
-	// 3. °£¼± °³¼ö¸¸Å­ Å½»ö
+	// 3. ê°„ì„  ê°œìˆ˜ë§Œí¼ íƒìƒ‰
 	for (int i = 0; i < costs.size(); i++) {
-		// 4. ½ÃÀÛÁ¡°ú ³¡Á¡°ú °¡ÁßÄ¡¸¦ ±¸ÇÑ´Ù.
+		// 4. ì‹œì‘ì ê³¼ ëì ê³¼ ê°€ì¤‘ì¹˜ë¥¼ êµ¬í•œë‹¤.
 		int start = find(costs[i][0]);
 		int end = find(costs[i][1]);
 		int cost = costs[i][2];
-		// 5. start¿Í end°¡ ´Ù¸£¸é ¿¬°áµÇÁö ¾ÊÀ½À» ÀÇ¹Ì
+		// 5. startì™€ endê°€ ë‹¤ë¥´ë©´ ì—°ê²°ë˜ì§€ ì•ŠìŒì„ ì˜ë¯¸
 		if (start != end) {
-			d[start] = end; // ¿¬°áÇÏ°í
-			answer += cost; // °ª Ãß°¡
+			d[start] = end; // ì—°ê²°í•˜ê³ 
+			answer += cost; // ê°’ ì¶”ê°€
 		}
 	}
 	return answer;

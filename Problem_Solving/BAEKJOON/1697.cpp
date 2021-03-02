@@ -11,43 +11,43 @@ int main(void)
 	queue<int> q;
 	vector<bool> check(100001);
 	int sec = 0;
-	// ÃÊ±â Å¥ »ı¼º
+	// ì´ˆê¸° í ìƒì„±
 	q.push(n);
 	check[n] = true;
-	// BFS Å½»ö
+	// BFS íƒìƒ‰
 	while (!q.empty())
 	{
-		int curSize = q.size(); // ÇØ´ç ½Ã°£¿¡ ÀÌµ¿ÇÒ ¼ö ÀÖ´Â À§Ä¡ÀÇ ¼ö
-		// À§Ä¡ ¼ö¸¸Å­ ¹İº¹
+		int curSize = q.size(); // í•´ë‹¹ ì‹œê°„ì— ì´ë™í•  ìˆ˜ ìˆëŠ” ìœ„ì¹˜ì˜ ìˆ˜
+		// ìœ„ì¹˜ ìˆ˜ë§Œí¼ ë°˜ë³µ
 		while (curSize-- > 0)
 		{
 			int x = q.front();
 			q.pop();
-			// µ¿»ıÀÇ À§Ä¡ÀÏ °æ¿ì ¸®ÅÏ
+			// ë™ìƒì˜ ìœ„ì¹˜ì¼ ê²½ìš° ë¦¬í„´
 			if (x == k)
 			{
 				cout << sec << '\n';
 				return 0;
 			}
-			// x-1 ÀÌµ¿
+			// x-1 ì´ë™
 			if (x - 1 >= 0 && !check[x - 1])
 			{
 				check[x - 1] = true;
 				q.push(x - 1);
 			}
-			// x+1 ÀÌµ¿
+			// x+1 ì´ë™
 			if (x + 1 <= 100000 && !check[x + 1])
 			{
 				check[x + 1] = true;
 				q.push(x + 1);
 			}
-			// x*2ÀÌµ¿
+			// x*2ì´ë™
 			if (x * 2 <= 100000 && !check[x * 2])
 			{
 				check[x * 2] = true;
 				q.push(x * 2);
 			}
 		}
-		sec++; // ½Ã°£ Áõ°¡
+		sec++; // ì‹œê°„ ì¦ê°€
 	}
 }

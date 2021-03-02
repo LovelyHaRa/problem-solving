@@ -12,15 +12,15 @@ int main(void)
 	vector<string> tail(s.size());
 	for (int i = 0; i < s.size(); i++)
 	{
-		// 1. Á¢¹Ì»ç ÀúÀå
+		// 1. ì ‘ë¯¸ì‚¬ ì €ìž¥
 		string t;
 		for (int j = i; j < s.size(); j++)
 			t += s[j];
 		tail[i] = t;
 	}
-	// 2. Á¤·Ä
+	// 2. ì •ë ¬
 	sort(tail.begin(), tail.end());
-	// 3. Ãâ·Â
+	// 3. ì¶œë ¥
 	for (int i = 0; i < tail.size(); i++)
 		cout << tail[i] << '\n';
 }

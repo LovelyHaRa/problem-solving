@@ -5,17 +5,17 @@ using namespace std;
 
 int solution(int n) {
 	int answer = 0;
-	vector<int> k(n + 1); // k[i] = 1~i±îÁöÀÇ ÇÕ
-	// 1. k[i] »ı¼º
+	vector<int> k(n + 1); // k[i] = 1~iê¹Œì§€ì˜ í•©
+	// 1. k[i] ìƒì„±
 	for (int i = 1; i <= n; i++) {
 		k[i] = i + k[i - 1];
 	}
-	// i~jÀÇ ÇÕ = (1~jÀÇ ÇÕ) - (1-i) ÇÕÀÓÀ» ÀÌ¿ëÇÏ¿© ÇØ°á
-	// 2. k Å½»ö
+	// i~jì˜ í•© = (1~jì˜ í•©) - (1-i) í•©ì„ì„ ì´ìš©í•˜ì—¬ í•´ê²°
+	// 2. k íƒìƒ‰
 	for (int i = 1; i <= n; i++) {
 		int j = i;
-		// i~jÀÇ ÇÕÀÌ nÀÌ¸é answer Ãß°¡
-		// 3. j¸¦ ´Ã·Á°¡¸é¼­ i~jÀÇ ÇÕÀ» ±¸ÇÔ 
+		// i~jì˜ í•©ì´ nì´ë©´ answer ì¶”ê°€
+		// 3. jë¥¼ ëŠ˜ë ¤ê°€ë©´ì„œ i~jì˜ í•©ì„ êµ¬í•¨ 
 		while (k[j] - k[i - 1] <= n) {
 			if (k[j++] - k[i - 1] == n) {
 				answer++;

@@ -4,22 +4,22 @@
 using namespace std;
 
 int gcd(int a, int b) { return b == 0 ? a : gcd(b, a%b); }
-int ceil(int a, int b) { return (a + b - 1) / b; } // a/b °ªÀ» ¿Ã¸²ÇÑ´Ù.
+int ceil(int a, int b) { return (a + b - 1) / b; } // a/b ê°’ì„ ì˜¬ë¦¼í•œë‹¤.
 int max(int a, int b) { return a > b ? a : b; }
 
 vector<int> solve(const vector<int>& recipe, const vector<int>& put)
 {
 	int n = recipe.size();
-	// recipeÀÇ ¸ğµç ¼ö¿¡ ´ëÇØ ÃÖ´ë °ø¾à¼ö¸¦ ±¸ÇÑ´Ù
+	// recipeì˜ ëª¨ë“  ìˆ˜ì— ëŒ€í•´ ìµœëŒ€ ê³µì•½ìˆ˜ë¥¼ êµ¬í•œë‹¤
 	int b = recipe[0];
 	for (int i = 1; i < n; i++)
 		b = gcd(b, recipe[i]);
-	// ÃÖ¼Ò 1¹è¼ö´Â ¸¸µé¾î¾ßÇÑ´Ù
+	// ìµœì†Œ 1ë°°ìˆ˜ëŠ” ë§Œë“¤ì–´ì•¼í•œë‹¤
 	int a = b;
-	// put[i]*b/recipe[i]ÀÇ ÃÖ´ë°ªÀ» °è»êÇÑ´Ù
+	// put[i]*b/recipe[i]ì˜ ìµœëŒ€ê°’ì„ ê³„ì‚°í•œë‹¤
 	for (int i = 0; i < n; i++)
 		a = max(a, ceil(put[i] * b, recipe[i]));
-	// a/b ¹è·Î ³Ö´Â´Ù
+	// a/b ë°°ë¡œ ë„£ëŠ”ë‹¤
 	vector<int> ret(n);
 	for (int i = 0; i < n; i++)
 		ret[i] = recipe[i] * a / b - put[i];

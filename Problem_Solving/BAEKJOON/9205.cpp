@@ -14,42 +14,42 @@ int main(void)
 	{
 		int n;
 		cin >> n;
-		n += 2; // ÆíÀÇÁ¡ + Áý + ÆæÅ¸Æ÷Æ®
-		// Áý, ÆíÀÇÁ¡, ÆæÅ¸Æ÷Æ® ÁÂÇ¥ Æä¾î ¹è¿­
+		n += 2; // íŽ¸ì˜ì  + ì§‘ + íŽœíƒ€í¬íŠ¸
+		// ì§‘, íŽ¸ì˜ì , íŽœíƒ€í¬íŠ¸ ì¢Œí‘œ íŽ˜ì–´ ë°°ì—´
 		vector<pair<int, int>> pos(n);
-		// ÁÂÇ¥ Æä¾î ¹è¿­ ÀÎµ¦½º¸¦ ±â¹ÝÀ¸·Î ÇÑ ÀÎÁ¢ Çà·Ä
+		// ì¢Œí‘œ íŽ˜ì–´ ë°°ì—´ ì¸ë±ìŠ¤ë¥¼ ê¸°ë°˜ìœ¼ë¡œ í•œ ì¸ì ‘ í–‰ë ¬
 		vector<vector<bool>> adj(n, vector<bool>(n));
-		// À§Ä¡ ÀÔ·Â ¹Þ±â
+		// ìœ„ì¹˜ ìž…ë ¥ ë°›ê¸°
 		for (int i = 0; i < n; i++)
 		{
 			int x, y;
 			cin >> x >> y;
 			pos[i] = { x,y };
-			adj[i][i] = 1; // ÀÚ±â ÀÚ½ÅÀº ¹«Á¶°Ç ¿¬°á
+			adj[i][i] = 1; // ìžê¸° ìžì‹ ì€ ë¬´ì¡°ê±´ ì—°ê²°
 		}
-		// ÁÂÇ¥¸¦ ±â¹ÝÀ¸·Î ÀÎÁ¢ Çà·Ä¿¡ ¿¬°áÇÏ±â
+		// ì¢Œí‘œë¥¼ ê¸°ë°˜ìœ¼ë¡œ ì¸ì ‘ í–‰ë ¬ì— ì—°ê²°í•˜ê¸°
 		for (int i = 0; i < n - 1; i++)
 			for (int j = 1; j < n; j++)
 			{
-				// ¸ÇÇãÆ° °Å¸® ±¸ÇÏ±â
+				// ë§¨í—ˆíŠ¼ ê±°ë¦¬ êµ¬í•˜ê¸°
 				int dx = abs(pos[i].first - pos[j].first);
 				int dy = abs(pos[i].second - pos[j].second);
-				// 50*20 º¸´Ù ÀÛÀ¸¸é ¿¬°á °¡´ÉÇÏ´Ù
+				// 50*20 ë³´ë‹¤ ìž‘ìœ¼ë©´ ì—°ê²° ê°€ëŠ¥í•˜ë‹¤
 				if (dx + dy <= 1000)
 					adj[i][j] = adj[j][i] = 1;
 			}
-		// ÇÃ·ÎÀÌµå ¿Í¼£ ¾Ë°í¸®Áò
-		// Áß°£ÁöÁ¡
+		// í”Œë¡œì´ë“œ ì™€ìƒ¬ ì•Œê³ ë¦¬ì¦˜
+		// ì¤‘ê°„ì§€ì 
 		for (int k = 0; k < n; k++)
-			// ½ÃÀÛÁöÁ¡
+			// ì‹œìž‘ì§€ì 
 			for (int i = 0; i < n; i++)
-				// µµÂøÁöÁ¡
+				// ë„ì°©ì§€ì 
 				for (int j = 0; j < n; j++)
-					// ½ÃÀÛ-Áß°£ ÁöÁ¡°ú Áß°£-µµÂø ÁöÁ¡ÀÌ ¿¬°áµÇ¾î ÀÖ´Ù¸é ½ÃÀÛ-Á¾·áÁöÁ¡µµ ¿¬°á
+					// ì‹œìž‘-ì¤‘ê°„ ì§€ì ê³¼ ì¤‘ê°„-ë„ì°© ì§€ì ì´ ì—°ê²°ë˜ì–´ ìžˆë‹¤ë©´ ì‹œìž‘-ì¢…ë£Œì§€ì ë„ ì—°ê²°
 					if (adj[i][k] && adj[k][j])
 						adj[i][j] = 1;
 
-		// Áý°ú ÆæÅ¸Æ÷Æ® ¶ô Æä½ºÆ¼¹ú Àå¼Ò°¡ ¿¬°áµÇ¾î ÀÖ´Ù¸é happy, ±×·¸Áö ¾Ê´Ù¸é sad Ãâ·Â
+		// ì§‘ê³¼ íŽœíƒ€í¬íŠ¸ ë½ íŽ˜ìŠ¤í‹°ë²Œ ìž¥ì†Œê°€ ì—°ê²°ë˜ì–´ ìžˆë‹¤ë©´ happy, ê·¸ë ‡ì§€ ì•Šë‹¤ë©´ sad ì¶œë ¥
 		cout << (adj[0][n - 1] ? "happy\n" : "sad\n");
 	}
 }

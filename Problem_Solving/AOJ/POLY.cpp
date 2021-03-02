@@ -9,14 +9,14 @@ const int MOD = 10000000;
 
 int poly(int n, int first)
 {
-	// ±âÀú »ç·Ê; nÀÌ Ã¹ÁÙÀÇ »ç°¢Çü ¼ö¿Í °°À» ¶§
+	// ê¸°ì € ì‚¬ë¡€; nì´ ì²«ì¤„ì˜ ì‚¬ê°í˜• ìˆ˜ì™€ ê°™ì„ ë•Œ
 	if (n == first) return 1;
-	// ¸Ş¸ğÀÌÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì´ì œì´ì…˜
 	int& ret = cache[n][first];
 	if (ret != -1) return ret;
-	// ÃÊ±âÈ­
+	// ì´ˆê¸°í™”
 	ret = 0;
-	// Á¡È­½Ä Àû¿ë
+	// ì í™”ì‹ ì ìš©
 	for (int second = 1; second <= n - first; second++)
 	{
 		int add = first + second - 1;
@@ -37,7 +37,7 @@ int main(void)
 		cin >> n;
 		cache.resize(n + 1, vector<int>(n + 1, -1));
 		int sum = 0;
-		// Ã¹ ÁÙ¿¡ ¿Ã ¼ö ÀÖ´Â »ç°¢ÇüÀÇ °³¼ö¸¦ ¸ğµÎ Å½»ö
+		// ì²« ì¤„ì— ì˜¬ ìˆ˜ ìˆëŠ” ì‚¬ê°í˜•ì˜ ê°œìˆ˜ë¥¼ ëª¨ë‘ íƒìƒ‰
 		for (int i = 1; i <= n; i++) {
 			sum += poly(n, i);
 			sum %= MOD;

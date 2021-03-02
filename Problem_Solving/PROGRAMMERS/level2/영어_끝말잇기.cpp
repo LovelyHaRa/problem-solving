@@ -7,23 +7,23 @@ using namespace std;
 
 vector<int> solution(int n, vector<string> words) {
 	vector<int> answer;
-	// set ÀÌ¿ë
+	// set ì´ìš©
 	set<string> s;
 	s.insert(words[0]);
 	for (int i = 1; i < words.size(); i++) {
-		// Å»¶ôÀÚ Â÷·Ê : ÇöÀç ´Ü¾î À§Ä¡ / Âü°¡ÀÚ¼ö + 1
-		// Å»¶ôÀÚ ¹øÈ£ : ÇöÀç ´Ü¾î À§Ä¡ % Âü°¡ÀÚ¼ö + 1
-		// 1. Áßº¹ ´Ü¾î È£Ãâ ½Ã Å»¶ô
+		// íƒˆë½ì ì°¨ë¡€ : í˜„ì¬ ë‹¨ì–´ ìœ„ì¹˜ / ì°¸ê°€ììˆ˜ + 1
+		// íƒˆë½ì ë²ˆí˜¸ : í˜„ì¬ ë‹¨ì–´ ìœ„ì¹˜ % ì°¸ê°€ììˆ˜ + 1
+		// 1. ì¤‘ë³µ ë‹¨ì–´ í˜¸ì¶œ ì‹œ íƒˆë½
 		if (s.count(words[i])) {
 			answer.push_back(i%n + 1);
 			answer.push_back(i / n + 1);
 			return answer;
 		}
-		// 2. Á¤»ó ´Ü¾îÀÌ¸é set¿¡ Ãß°¡
+		// 2. ì •ìƒ ë‹¨ì–´ì´ë©´ setì— ì¶”ê°€
 		if (words[i - 1][words[i - 1].size() - 1] == words[i][0]) {
 			s.insert(words[i]);
 		}
-		// 3. ³¡¸»ÀÕ±â ·ê À§¹İ½Ã Å»¶ô
+		// 3. ëë§ì‡ê¸° ë£° ìœ„ë°˜ì‹œ íƒˆë½
 		else {
 			answer.push_back(i%n + 1);
 			answer.push_back(i / n + 1);

@@ -6,11 +6,11 @@ using namespace std;
 
 bool solution(vector<string> phone_book) {
 	bool answer = true;
-	// 1. Á¤·Ä
-	// 2. ÀÔ·Â ÀüÈ­¹øÈ£ °³¼ö -1 ¸¸Å­ Å½»ö
-	// 3. ÇöÀç ÀüÈ­¹øÈ£ ±æÀÌ°¡ ´ÙÀ½ ÀüÈ­¹øÈ£ ±æÀÌ º¸´Ù ÀÛÀ» ¶§
-	// 4. find¸¦ ÀÌ¿ëÇØ ¹®ÀÚ¿­À» °Ë»ö, ½ÃÀÛ ÀÎµ¦½º°¡ 0ÀÌ¸é break
-	// 5. ³¡±îÁö Å½»öÇÏ¸é YES ¾Æ´Ï¸é NO
+	// 1. ì •ë ¬
+	// 2. ìž…ë ¥ ì „í™”ë²ˆí˜¸ ê°œìˆ˜ -1 ë§Œí¼ íƒìƒ‰
+	// 3. í˜„ìž¬ ì „í™”ë²ˆí˜¸ ê¸¸ì´ê°€ ë‹¤ìŒ ì „í™”ë²ˆí˜¸ ê¸¸ì´ ë³´ë‹¤ ìž‘ì„ ë•Œ
+	// 4. findë¥¼ ì´ìš©í•´ ë¬¸ìžì—´ì„ ê²€ìƒ‰, ì‹œìž‘ ì¸ë±ìŠ¤ê°€ 0ì´ë©´ break
+	// 5. ëê¹Œì§€ íƒìƒ‰í•˜ë©´ YES ì•„ë‹ˆë©´ NO
 
 	// 1
 	sort(phone_book.begin(), phone_book.end());

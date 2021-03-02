@@ -1,4 +1,4 @@
-// ½Ã¹Ä·¹ÀÌ¼Ç ¹®Á¦
+// ì‹œë®¬ë ˆì´ì…˜ ë¬¸ì œ
 #include <string>
 #include <vector>
 #include <queue>
@@ -10,11 +10,11 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
 	queue<int> q;
 	int sum = 0;
 	
-	// 1. Å¥°¡ ºñ¾úÀ» ¶§ : Å¥¿¡ Æ®·° Ãß°¡, ¹«°Ô ´©Àû, ½Ã°£ Ãß°¡
-	// 2. Å¥°¡ ²ËÃ¡À» ¶§ : Å¥¿¡¼­ Æ®·° Á¦°Å, ¹«°Ô °¨¼Ò
-	// 3. 1,2°¡ ¾Æ´Ñ°æ¿ì
-	// 4. ¹«°Ô°¡ ÃÊ°úÇÒ °æ¿ì : Å¥¿¡ 0À» Ãß°¡(¹«°Ô ¿µÇâ¾øÀ½), ½Ã°£ Ãß°¡
-	// 5. 4°¡ ¾Æ´Ñ °æ¿ì : 1°ú °°Àº ÀÛ¾÷
+	// 1. íê°€ ë¹„ì—ˆì„ ë•Œ : íì— íŠ¸ëŸ­ ì¶”ê°€, ë¬´ê²Œ ëˆ„ì , ì‹œê°„ ì¶”ê°€
+	// 2. íê°€ ê½‰ì°¼ì„ ë•Œ : íì—ì„œ íŠ¸ëŸ­ ì œê±°, ë¬´ê²Œ ê°ì†Œ
+	// 3. 1,2ê°€ ì•„ë‹Œê²½ìš°
+	// 4. ë¬´ê²Œê°€ ì´ˆê³¼í•  ê²½ìš° : íì— 0ì„ ì¶”ê°€(ë¬´ê²Œ ì˜í–¥ì—†ìŒ), ì‹œê°„ ì¶”ê°€
+	// 5. 4ê°€ ì•„ë‹Œ ê²½ìš° : 1ê³¼ ê°™ì€ ìž‘ì—…
 
 	for (int i = 0; i < truck_weights.size(); i++) {
 		int k = truck_weights[i];
@@ -48,7 +48,7 @@ int solution(int bridge_length, int weight, vector<int> truck_weights) {
 			}
 		}
 	}
-	// ÃÑ ½Ã°£ = Áö±Ý±îÁö ±¸ÇÑ½Ã°£ + ¸¶Áö¸· Æ®·°ÀÌ °Ç³Ê´Â ½Ã°£(´Ù¸® ±æÀÌ)
+	// ì´ ì‹œê°„ = ì§€ê¸ˆê¹Œì§€ êµ¬í•œì‹œê°„ + ë§ˆì§€ë§‰ íŠ¸ëŸ­ì´ ê±´ë„ˆëŠ” ì‹œê°„(ë‹¤ë¦¬ ê¸¸ì´)
 	answer += bridge_length;
 	return answer;
 }

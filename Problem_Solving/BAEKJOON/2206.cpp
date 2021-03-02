@@ -4,7 +4,7 @@
 #include<vector>
 
 using namespace std;
-// º®À» ºÎ¼ú¼ö ÀÖ´Â ¿©ºÎ, x, yÀÇ Á¤º¸¸¦ ±â¹İÀ¸·Î ÀÌµ¿ È½¼ö ±¸ÇÏ±â
+// ë²½ì„ ë¶€ìˆ ìˆ˜ ìˆëŠ” ì—¬ë¶€, x, yì˜ ì •ë³´ë¥¼ ê¸°ë°˜ìœ¼ë¡œ ì´ë™ íšŸìˆ˜ êµ¬í•˜ê¸°
 int moveCount[2][1000][1000];
 
 int main(void)
@@ -14,46 +14,46 @@ int main(void)
 	vector<string> map(n);
 	for (int i = 0; i < n; i++)
 		cin >> map[i];
-	// »óÇÏÁÂ¿ì ÀÌµ¿ Áõ°¡·®
+	// ìƒí•˜ì¢Œìš° ì´ë™ ì¦ê°€ëŸ‰
 	int dx[] = { -1,0,0,1 }, dy[] = { 0,-1,1,0 };
-	// ÃÊ±â Å¥ »ı¼º
-	queue<pair<int, pair<int, int>>> q; // ºÎ¼ú ¼ö ÀÖ´Â ¿©ºÎ, x, yÀÇ Á¤º¸¸¦ ±â¹İÀ¸·Î Å¥ »ı¼º
+	// ì´ˆê¸° í ìƒì„±
+	queue<pair<int, pair<int, int>>> q; // ë¶€ìˆ  ìˆ˜ ìˆëŠ” ì—¬ë¶€, x, yì˜ ì •ë³´ë¥¼ ê¸°ë°˜ìœ¼ë¡œ í ìƒì„±
 	q.push(make_pair(1, make_pair(0, 0)));
 	moveCount[1][0][0] = 1;
 	int res = -1;
-	// BFS Å½»ö
+	// BFS íƒìƒ‰
 	while (!q.empty())
 	{
 		pair<int, pair<int, int>> cur = q.front();
-		int isBreakable = cur.first; // ºÎ¼ú¼ö ÀÖ´Â ¿©ºÎ
-		int x = cur.second.first, y = cur.second.second; // ÇöÀç ÁÂÇ¥
+		int isBreakable = cur.first; // ë¶€ìˆ ìˆ˜ ìˆëŠ” ì—¬ë¶€
+		int x = cur.second.first, y = cur.second.second; // í˜„ì¬ ì¢Œí‘œ
 		q.pop();
-		// µµÂøÇÏ¸é
+		// ë„ì°©í•˜ë©´
 		if (x == n - 1 && y == m - 1)
 		{
-			res = moveCount[isBreakable][x][y]; // ÀúÀå
+			res = moveCount[isBreakable][x][y]; // ì €ì¥
 			break;
 		}
-		// »óÇÏÁÂ¿ì ÀÌµ¿
+		// ìƒí•˜ì¢Œìš° ì´ë™
 		for (int i = 0; i < 4; i++)
 		{
 			int nx = x + dx[i], ny = y + dy[i];
-			// ¹üÀ§ È®ÀÎ
+			// ë²”ìœ„ í™•ì¸
 			if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
-			// º®À» ºÎ¼ú ¼ö ÀÖ°í ÀÌµ¿ÇÑ ÁÂÇ¥°¡ º®ÀÎ °æ¿ì
+			// ë²½ì„ ë¶€ìˆ  ìˆ˜ ìˆê³  ì´ë™í•œ ì¢Œí‘œê°€ ë²½ì¸ ê²½ìš°
 			if (isBreakable && map[nx][ny]=='1')
 			{
-				// º®À» ºÎ¼ö°í ÀÌµ¿ È½¼ö °è»ê
+				// ë²½ì„ ë¶€ìˆ˜ê³  ì´ë™ íšŸìˆ˜ ê³„ì‚°
 				moveCount[isBreakable - 1][nx][ny] = moveCount[isBreakable][x][y] + 1;
-				// Å¥¿¡ »ğÀÔ
+				// íì— ì‚½ì…
 				q.push(make_pair(isBreakable - 1, make_pair(nx, ny)));
 			}
-			// ÀÌµ¿ÇÑ ÁÂÇ¥°¡ º®ÀÌ ¾Æ´Ï°í Ã³À½ ¹æ¹®ÇÑ °æ¿ì
+			// ì´ë™í•œ ì¢Œí‘œê°€ ë²½ì´ ì•„ë‹ˆê³  ì²˜ìŒ ë°©ë¬¸í•œ ê²½ìš°
 			else if (map[nx][ny]=='0' && !moveCount[isBreakable][nx][ny])
 			{
-				// ÀÌµ¿ È½¼ö °è»ê
+				// ì´ë™ íšŸìˆ˜ ê³„ì‚°
 				moveCount[isBreakable][nx][ny] = moveCount[isBreakable][x][y] + 1;
-				// Å¥¿¡ »ğÀÔ
+				// íì— ì‚½ì…
 				q.push(make_pair(isBreakable, make_pair(nx, ny)));
 			}
 		}

@@ -3,24 +3,24 @@
 using namespace std;
 int solution(string s)
 {
-	int answer = 1; // Á¤´äÀÇ ÃÖ¼Ò°ªÀº ¹Ýµå½Ã 1(1ÀÚ¸® ¹®ÀÚ¿­)
-	int n = s.size(); // ºÎºÐ ¹®ÀÚ¿­ ±æÀÌ
+	int answer = 1; // ì •ë‹µì˜ ìµœì†Œê°’ì€ ë°˜ë“œì‹œ 1(1ìžë¦¬ ë¬¸ìžì—´)
+	int n = s.size(); // ë¶€ë¶„ ë¬¸ìžì—´ ê¸¸ì´
 	while (n > 0) {
 		int i;
-		// ºÎºÐ ¹®ÀÚ¿­ Å½»ö
+		// ë¶€ë¶„ ë¬¸ìžì—´ íƒìƒ‰
 		for (i = 0; i <= s.size() - n; i++) {
 			int j;
-			// Æç¸°µå·Ò °Ë»ç(¾ç »çÀÌµå°¡ ¶È°°À¸¸é ¹Ýº¹¹®ÀÌ ³¡±îÁö ¼öÇàµÊ)
+			// íŽ ë¦°ë“œë¡¬ ê²€ì‚¬(ì–‘ ì‚¬ì´ë“œê°€ ë˜‘ê°™ìœ¼ë©´ ë°˜ë³µë¬¸ì´ ëê¹Œì§€ ìˆ˜í–‰ë¨)
 			for (j = 0; j < n / 2; j++) {
 				if (s[i + j] != s[i + n - j - 1]) break;
 			}
-			// ¹Ýº¹¹®ÀÌ ³¡±îÁö ¼öÇàµÇ¸é ÇöÀç nÀÌ ÃÖ´ñ°ªÀÌ¹Ç·Î ¸®ÅÏ
+			// ë°˜ë³µë¬¸ì´ ëê¹Œì§€ ìˆ˜í–‰ë˜ë©´ í˜„ìž¬ nì´ ìµœëŒ“ê°’ì´ë¯€ë¡œ ë¦¬í„´
 			if (j == n / 2) {
 				return n;
 			}
 		}
-		n--; // Â¦¼öµµ °¡´ÉÇÏ¹Ç·Î 1¾¿ °¨¼Ò
+		n--; // ì§ìˆ˜ë„ ê°€ëŠ¥í•˜ë¯€ë¡œ 1ì”© ê°ì†Œ
 	}
-	// ÃÖ¼Ò°ª ¹ÝÈ¯
+	// ìµœì†Œê°’ ë°˜í™˜
 	return answer;
 }

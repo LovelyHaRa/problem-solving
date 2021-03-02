@@ -9,18 +9,18 @@ vector<int> shifted, a;
 
 void solve()
 {
-	// Æ®¸³ »ı¼º
+	// íŠ¸ë¦½ ìƒì„±
 	TripNode<int>* candidates = NULL;
 	for (int i = 0; i < n; i++)
 		candidates = insert(candidates, new TripNode<int>(i + 1));
-	// ¿ª¼øÀ¸·Î A[i]¸¦ ÀúÀå
+	// ì—­ìˆœìœ¼ë¡œ A[i]ë¥¼ ì €ì¥
 	for (int i = n - 1; i >= 0; i--)
 	{
-		int larger = shifted[i]; // A[i]º¸´Ù Å« ¼ö°¡ larger°³ ÀÖ´Ù
-		// i+1-larger¹øÂ° ³ëµå¸¦ Ã£´Â´Ù
+		int larger = shifted[i]; // A[i]ë³´ë‹¤ í° ìˆ˜ê°€ largerê°œ ìˆë‹¤
+		// i+1-largerë²ˆì§¸ ë…¸ë“œë¥¼ ì°¾ëŠ”ë‹¤
 		TripNode<int>* k = kth(candidates, i + 1 - larger);
-		a[i] = k->key; // ³ëµå¸¦ ÀúÀåÇÑ´Ù
-		// ÀúÀåµÈ ³ëµå¸¦ »èÁ¦ÇÑ´Ù
+		a[i] = k->key; // ë…¸ë“œë¥¼ ì €ì¥í•œë‹¤
+		// ì €ì¥ëœ ë…¸ë“œë¥¼ ì‚­ì œí•œë‹¤
 		candidates = erase(candidates, k->key);
 	}
 }

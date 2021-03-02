@@ -5,18 +5,18 @@
 
 using namespace std;
 
-// ÃÖ¼Ò°ªÀÇ À§Ä¡¸¦ ÀúÀåÇÏ´Â ¼¼±×¸ÕÆ® Æ®¸® ÃÊ±âÈ­
+// ìµœì†Œê°’ì˜ ìœ„ì¹˜ë¥¼ ì €ì¥í•˜ëŠ” ì„¸ê·¸ë¨¼íŠ¸ íŠ¸ë¦¬ ì´ˆê¸°í™”
 void init(vector<int> &a, vector<int> &tree, int node, int start, int end)
 {
-	// ¸®ÇÁ ³ëµåÀÇ °æ¿ì
+	// ë¦¬í”„ ë…¸ë“œì˜ ê²½ìš°
 	if (start == end)
 		tree[node] = start;
 	else
 	{
-		// ÁÂ,¿ì¸¦ µû·Î ÃÊ±âÈ­
+		// ì¢Œ,ìš°ë¥¼ ë”°ë¡œ ì´ˆê¸°í™”
 		init(a, tree, node * 2, start, (start + end) / 2);
 		init(a, tree, node * 2 + 1, (start + end) / 2 + 1, end);
-		// ÃÖ¼Ú°ªÀÇ À§Ä¡ ÀúÀå
+		// ìµœì†Ÿê°’ì˜ ìœ„ì¹˜ ì €ì¥
 		if (a[tree[node * 2]] <= a[tree[node * 2 + 1]])
 			tree[node] = tree[node * 2];
 		else
@@ -24,49 +24,49 @@ void init(vector<int> &a, vector<int> &tree, int node, int start, int end)
 	}
 }
 
-// °¡Àå ³ôÀÌ°¡ ³·Àº »ç°¢ÇüÀ» Ã£´Â ÇÔ¼ö
+// ê°€ì¥ ë†’ì´ê°€ ë‚®ì€ ì‚¬ê°í˜•ì„ ì°¾ëŠ” í•¨ìˆ˜
 int query(vector<int> &a, vector<int> &tree, int node, int start, int end, int i, int j)
 {
-	// [i, j]°¡ [start, end]¿Í °ãÄ¡Áö ¾Ê´Â °æ¿ì
+	// [i, j]ê°€ [start, end]ì™€ ê²¹ì¹˜ì§€ ì•ŠëŠ” ê²½ìš°
 	if (i > end || j < start)
-		return -1; // Å½»öÀ» ÀÌ¾î³ª°¥ ÇÊ¿ä°¡ ¾øÀ½
-	// [i, j]°¡ [start, end]¸¦ ¿ÏÀüÈ÷ Æ÷ÇÔÇÏ´Â °æ¿ì
+		return -1; // íƒìƒ‰ì„ ì´ì–´ë‚˜ê°ˆ í•„ìš”ê°€ ì—†ìŒ
+	// [i, j]ê°€ [start, end]ë¥¼ ì™„ì „íˆ í¬í•¨í•˜ëŠ” ê²½ìš°
 	if (i <= start && j >= end)
 		return tree[node];
-	// À§ °æ¿ì°¡ ¾Æ´Ñ °æ¿ì ¿ŞÂÊ ¿À¸¥ÂÊ ³ª´²¼­ ´Ù½Ã Å½»ö
+	// ìœ„ ê²½ìš°ê°€ ì•„ë‹Œ ê²½ìš° ì™¼ìª½ ì˜¤ë¥¸ìª½ ë‚˜ëˆ ì„œ ë‹¤ì‹œ íƒìƒ‰
 	int m1 = query(a, tree, 2 * node, start, (start + end) / 2, i, j);
 	int m2 = query(a, tree, 2 * node + 1, (start + end) / 2 + 1, end, i, j);
-	// °ãÄ¡Áö ¾Ê´Â °æ¿ì Á¦¿Ü
+	// ê²¹ì¹˜ì§€ ì•ŠëŠ” ê²½ìš° ì œì™¸
 	if (m1 == -1)
 		return m2;
 	else if (m2 == -1)
 		return m1;
-	// Å½»ö °á°ú Áß ³ôÀÌ°¡ ÀÛÀº ÀÎµ¦½º ¹İÈ¯
+	// íƒìƒ‰ ê²°ê³¼ ì¤‘ ë†’ì´ê°€ ì‘ì€ ì¸ë±ìŠ¤ ë°˜í™˜
 	else
 		return a[m1] <= a[m2] ? m1 : m2;
 }
 
-// ÃÖ´ë ³ĞÀÌ¸¦ ±¸ÇÏ´Â ÇÔ¼ö
+// ìµœëŒ€ ë„“ì´ë¥¼ êµ¬í•˜ëŠ” í•¨ìˆ˜
 long long largest(vector<int> &a, vector<int> &tree, int start, int end)
 {
 	int n = a.size();
-	// ¹üÀ§ ³» ÃÖ¼Ò »ç°¢Çü ³ôÀÌ¸¦ Ã£À½
+	// ë²”ìœ„ ë‚´ ìµœì†Œ ì‚¬ê°í˜• ë†’ì´ë¥¼ ì°¾ìŒ
 	int m = query(a, tree, 1, 0, n - 1, start, end);
-	// ³ĞÀÌ = »ç°¢Çü ³ôÀÌ * ¹üÀ§
+	// ë„“ì´ = ì‚¬ê°í˜• ë†’ì´ * ë²”ìœ„
 	long long area = (long long)(end - start + 1)*(long long)a[m];
-	// ÇØ´ç »ç°¢Çü ¿ŞÂÊ ºÎºĞ Å½»öÀÌ °¡´ÉÇÒ ¶§
+	// í•´ë‹¹ ì‚¬ê°í˜• ì™¼ìª½ ë¶€ë¶„ íƒìƒ‰ì´ ê°€ëŠ¥í•  ë•Œ
 	if (start <= m - 1)
 	{
 		long long temp = largest(a, tree, start, m - 1);
-		// ÃÖ´ñ°ª °»½Å
+		// ìµœëŒ“ê°’ ê°±ì‹ 
 		if (temp > area)
 			area = temp;
 	}
-	// ÇØ´ç »ç°¢Çü ¿À¸¥ÂÊ ºÎºĞ Å½»öÀÌ °¡´ÉÇÒ ¶§
+	// í•´ë‹¹ ì‚¬ê°í˜• ì˜¤ë¥¸ìª½ ë¶€ë¶„ íƒìƒ‰ì´ ê°€ëŠ¥í•  ë•Œ
 	if (end >= m + 1)
 	{
 		long long temp = largest(a, tree, m + 1, end);
-		// ÃÖ´ñ°ª °»½Å
+		// ìµœëŒ“ê°’ ê°±ì‹ 
 		if (temp > area)
 			area = temp;
 	}
@@ -83,10 +83,10 @@ int main()
 		vector<int> a(n);
 		for (int i = 0; i < n; i++)
 			cin >> a[i];
-		// Æ®¸® ³ôÀÌ °è»ê
+		// íŠ¸ë¦¬ ë†’ì´ ê³„ì‚°
 		int h = (int)(ceil(log2(n)) + 1e-9);
 		int tree_size = (1 << (h + 1));
-		// Æ®¸® ¹è¿­ ¼±¾ğ
+		// íŠ¸ë¦¬ ë°°ì—´ ì„ ì–¸
 		vector<int> tree(tree_size);
 		init(a, tree, 1, 0, n - 1);
 		cout << largest(a, tree, 0, n - 1) << '\n';

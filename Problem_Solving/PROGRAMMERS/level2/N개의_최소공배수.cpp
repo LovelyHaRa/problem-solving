@@ -3,7 +3,7 @@
 
 using namespace std;
 
-// ÃÖ´ë°ø¾à¼ö
+// ìµœëŒ€ê³µì•½ìˆ˜
 int gcd(int a, int b) {
 	if (a > b) return gcd(a%b, b);
 	if (!a) return b;
@@ -11,9 +11,9 @@ int gcd(int a, int b) {
 }
 
 int solution(vector<int> arr) {
-	// Ã¹¹ø¤Š¿Í µÎ¹øÂ° ¿ø¼ÒÀÇ ÃÖ¼Ò°ø¹è¼ö¸¦ ±¸ÇÏ°í
-	// ±× ÃÖ¼Ò°ø¹è¼ö¿Í ´ÙÀ½ ¿ø¼ÒÀÇ ÃÖ¼Ò°ø¹è¼ö¸¦ ±¸ÇÏ´Â ÀÛ¾÷À»
-	// ¸¶Áö¸· ¿ø¼Ò±îÁö ±¸ÇÏ¸é N°³ÀÇ ÃÖ¼Ò°ø¹è¼ö¸¦ ±¸ÇÒ ¼ö ÀÖ´Ù.
+	// ì²«ë²ˆì¨°ì™€ ë‘ë²ˆì§¸ ì›ì†Œì˜ ìµœì†Œê³µë°°ìˆ˜ë¥¼ êµ¬í•˜ê³ 
+	// ê·¸ ìµœì†Œê³µë°°ìˆ˜ì™€ ë‹¤ìŒ ì›ì†Œì˜ ìµœì†Œê³µë°°ìˆ˜ë¥¼ êµ¬í•˜ëŠ” ìž‘ì—…ì„
+	// ë§ˆì§€ë§‰ ì›ì†Œê¹Œì§€ êµ¬í•˜ë©´ Nê°œì˜ ìµœì†Œê³µë°°ìˆ˜ë¥¼ êµ¬í•  ìˆ˜ ìžˆë‹¤.
 	int lcm = arr[0];
 	for (int i = 1; i < arr.size(); i++) {
 		lcm = lcm * arr[i] / gcd(lcm, arr[i]);

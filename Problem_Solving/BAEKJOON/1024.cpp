@@ -5,7 +5,7 @@ int main(void)
 {
 	int N, L, t, x = -1;
 	cin >> N >> L;
-	/* µîÂ÷¼ö¿­ ÀÌ¿ë
+	/* ë“±ì°¨ìˆ˜ì—´ ì´ìš©
 	   N = x+(x+1)+...*(x+(L-1))
 	       Lx+(1+2+,,,+L-1)
 		   Lx+t

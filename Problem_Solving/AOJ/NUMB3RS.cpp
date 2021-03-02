@@ -8,33 +8,33 @@ vector<vector<int>> connected;
 vector<int> deg;
 vector<vector<double>> cache;
 
-// daysÀÏ Â°¿¡ here¹ø ¸¶À»¿¡ ¼û¾îÀÖ´Ù°í °¡Á¤ÇÏ°í
-// ¸¶Áö¸· ³¯¿¡ q¹ø ¸¶À»¿¡ ¼û¾îÀÖÀ» Á¶°ÇºÎ È®·üÀ» ¹İÈ¯
+// daysì¼ ì§¸ì— hereë²ˆ ë§ˆì„ì— ìˆ¨ì–´ìˆë‹¤ê³  ê°€ì •í•˜ê³ 
+// ë§ˆì§€ë§‰ ë‚ ì— që²ˆ ë§ˆì„ì— ìˆ¨ì–´ìˆì„ ì¡°ê±´ë¶€ í™•ë¥ ì„ ë°˜í™˜
 double search(int here, int days)
 {
-	// ±âÀú »ç·Ê: days°¡ d¿¡ µµ´ŞÇßÀ» ¶§
+	// ê¸°ì € ì‚¬ë¡€: daysê°€ dì— ë„ë‹¬í–ˆì„ ë•Œ
 	if (days == d) return (here == q ? 1.0 : 0.0);
-	// ¸Ş¸ğÀÌÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì´ì œì´ì…˜
 	double& ret = cache[here][days];
 	if (ret > -0.5) return ret;
 	ret = 0.0;
-	// Á¶°ÇºÎ È®·ü ±¸ÇÏ±â
+	// ì¡°ê±´ë¶€ í™•ë¥  êµ¬í•˜ê¸°
 	for (int there = 0; there < n; there++)
 		if (connected[here][there])
 			ret += search(there, days + 1) / deg[here];
 	return ret;
 }
 
-// °³¼±µÈ ¹öÀü: µÚ¿¡¼­ ºÎÅÍ °è»ê
+// ê°œì„ ëœ ë²„ì „: ë’¤ì—ì„œ ë¶€í„° ê³„ì‚°
 double optSearch(int here, int days)
 {
-	// ±âÀú »ç·Ê: days°¡ 0¿¡ µµ´ŞÇßÀ» ¶§
+	// ê¸°ì € ì‚¬ë¡€: daysê°€ 0ì— ë„ë‹¬í–ˆì„ ë•Œ
 	if (days == 0) return (here == p ? 1.0 : 0.0);
-	// ¸Ş¸ğÀÌÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì´ì œì´ì…˜
 	double& ret = cache[here][days];
 	if (ret > -0.5) return ret;
 	ret = 0.0;
-	// Á¶°ÇºÎ È®·ü ±¸ÇÏ±â
+	// ì¡°ê±´ë¶€ í™•ë¥  êµ¬í•˜ê¸°
 	for (int there = 0; there < n; there++)
 		if (connected[here][there])
 			ret += optSearch(there, days - 1) / deg[here];
@@ -56,18 +56,18 @@ int main(void)
 			for (int j = 0; j < n; j++)
 			{
 				cin >> connected[i][j];
-				if (connected[i][j]) deg[i]++; // Â÷¼ö ±¸ÇÏ±â
+				if (connected[i][j]) deg[i]++; // ì°¨ìˆ˜ êµ¬í•˜ê¸°
 			}
 		}
 		int t;
 		cin >> t;
 		vector<double> ans(t);
-		// °³¼±µÈ ¹öÀü
+		// ê°œì„ ëœ ë²„ì „
 		for (int i = 0; i < t; i++)
 		{
 			cin >> q;
-			//ans[i] = search(p, 0); // ¸¶Áö¸· ³¯¿¡ q¿¡ ¼û¾îÀÖÀ» È®·üÀ» ±¸ÇÑ´Ù.
-			//// Ä³½Ã ÃÊ±âÈ­
+			//ans[i] = search(p, 0); // ë§ˆì§€ë§‰ ë‚ ì— qì— ìˆ¨ì–´ìˆì„ í™•ë¥ ì„ êµ¬í•œë‹¤.
+			//// ìºì‹œ ì´ˆê¸°í™”
 			//cache.clear();
 			//cache.resize(n + 1, vector<double>(d + 1, -1));
 			ans[i] = optSearch(q, d);

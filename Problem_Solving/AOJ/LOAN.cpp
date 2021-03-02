@@ -2,34 +2,34 @@
 
 using namespace std;
 
-// ÀÜ±İ Ã³¸®¸¦ ½Ã¹Ä·¹ÀÌ¼Ç ÇÑ´Ù.
+// ì”ê¸ˆ ì²˜ë¦¬ë¥¼ ì‹œë®¬ë ˆì´ì…˜ í•œë‹¤.
 double balance(double amount, int duration, double rates, double monthlyPayment)
 {
-	double balance = amount; // ´ëÃâ ±İ¾×ºÎÅÍ ½ÃÀÛ
-	// ¿ù¸¶´Ù »óÈ¯
+	double balance = amount; // ëŒ€ì¶œ ê¸ˆì•¡ë¶€í„° ì‹œì‘
+	// ì›”ë§ˆë‹¤ ìƒí™˜
 	for (int i = 0; i < duration; i++)
 	{
-		balance *= (1.0 + (rates / 12) / 100); // ÀÜ±İ ºÒ¸®±â
-		balance -= monthlyPayment; // »óÈ¯ÇÏ±â
+		balance *= (1.0 + (rates / 12) / 100); // ì”ê¸ˆ ë¶ˆë¦¬ê¸°
+		balance -= monthlyPayment; // ìƒí™˜í•˜ê¸°
 	}
-	return balance; // ³²Àº ´ëÃâ±İ
+	return balance; // ë‚¨ì€ ëŒ€ì¶œê¸ˆ
 }
 
-// ÀÌºĞ Å½»öÀ¸·Î ÇÑ´Ş¿¡ »óÈ¯ÇØ¾ßÇÒ ±İ¾×À» ±¸ÇÑ´Ù
+// ì´ë¶„ íƒìƒ‰ìœ¼ë¡œ í•œë‹¬ì— ìƒí™˜í•´ì•¼í•  ê¸ˆì•¡ì„ êµ¬í•œë‹¤
 double payment(double amount, int duration, double rates)
 {
-	// ÃÖ¼Ò: ¾Æ¿¹ °±Áö ¾Ê´Â °æ¿ì(0), ÃÖ´ë: ´ÙÀ½´Ş¿¡ ¸ğµç µ·À» »óÈ¯ÇÏ´Â °æ¿ì
+	// ìµœì†Œ: ì•„ì˜ˆ ê°šì§€ ì•ŠëŠ” ê²½ìš°(0), ìµœëŒ€: ë‹¤ìŒë‹¬ì— ëª¨ë“  ëˆì„ ìƒí™˜í•˜ëŠ” ê²½ìš°
 	double lo = 0, hi = amount * (1.0 + (rates / 12) / 100);
 	for (int i = 0; i < 100; i++)
 	{
 		double mid = (lo + hi) / 2.0;
-		// ´ëÃâ±İÀ» ¸ğµÎ °±À» ¼ö ÀÖÀ¸¸é
+		// ëŒ€ì¶œê¸ˆì„ ëª¨ë‘ ê°šì„ ìˆ˜ ìˆìœ¼ë©´
 		if (balance(amount, duration, rates, mid) <= 0)
-			hi = mid; // ÃÖ¼Ú°ª Å½»ö
+			hi = mid; // ìµœì†Ÿê°’ íƒìƒ‰
 		else
-			lo = mid; // ÃÖ´ñ°ª Å½»ö
+			lo = mid; // ìµœëŒ“ê°’ íƒìƒ‰
 	}
-	return hi; // °±À» ¼ö ÀÖ´Â °ªÀ» ¹İÈ¯
+	return hi; // ê°šì„ ìˆ˜ ìˆëŠ” ê°’ì„ ë°˜í™˜
 }
 
 int main(void)

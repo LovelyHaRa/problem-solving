@@ -3,7 +3,7 @@
 
 using namespace std;
 
-// ¼Ò¼ö ÆÇº° ÇÔ¼ö
+// ì†Œìˆ˜ íŒë³„ í•¨ìˆ˜
 bool isPrime(int k) {
 	if (k == 1) return false;
 	for (int i = 2; i*i <= k; i++) {
@@ -14,7 +14,7 @@ bool isPrime(int k) {
 
 int solution(vector<int> nums) {
 	int answer = 0;
-	// 3°³ÀÇ ¼ö ¼±ÅÃÀ» »ïÁß ¹İº¹¹®À¸·Î ¼±ÅÃ
+	// 3ê°œì˜ ìˆ˜ ì„ íƒì„ ì‚¼ì¤‘ ë°˜ë³µë¬¸ìœ¼ë¡œ ì„ íƒ
 	for (int i = 0; i < nums.size() - 2; i++) {
 		for (int j = i + 1; j < nums.size() - 1; j++) {
 			for (int k = j + 1; k < nums.size(); k++) {

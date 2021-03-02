@@ -3,39 +3,39 @@
 #include <queue>
 
 using namespace std;
-// Å¥¿¡ Áı¾î³ÖÀ» Á¤º¸
+// íì— ì§‘ì–´ë„£ì„ ì •ë³´
 class Word {
 	public:
 	string s;
 	int count;
 };
-// ¹æ¹® ¿©ºÎ
+// ë°©ë¬¸ ì—¬ë¶€
 int visit[50];
-// BFS ÀÌ¿ë
+// BFS ì´ìš©
 int solution(string begin, string target, vector<string> words) {
 	int answer = 0;
-	// 1. ½ÃÀÛ°ª ¼¼ÆÃ
+	// 1. ì‹œì‘ê°’ ì„¸íŒ…
 	queue<Word> q;
 	Word w;
 	w.s = begin;
 	w.count = 0;
 	q.push(w);
-	// 2. Å¥°¡ °ø¹éÀÏ¶§±îÁö ¹İº¹
+	// 2. íê°€ ê³µë°±ì¼ë•Œê¹Œì§€ ë°˜ë³µ
 	while (!q.empty()) {
-		// 3. Å¥¾Ö¼­ ÇÏ³ª ²¨³»±â
+		// 3. íì• ì„œ í•˜ë‚˜ êº¼ë‚´ê¸°
 		w = q.front();
 		q.pop();
-		// 4. target°ú °°À¸¸é Ä«¿îÆ® ¸®ÅÏ
+		// 4. targetê³¼ ê°™ìœ¼ë©´ ì¹´ìš´íŠ¸ ë¦¬í„´
 		if (w.s == target) {
 			return w.count;
 		}
-		// 5. ´Ü¾î ¼ö¸¸Å­ ¹İº¹
+		// 5. ë‹¨ì–´ ìˆ˜ë§Œí¼ ë°˜ë³µ
 		for (int i = 0; i < words.size(); i++) {
-			// 6. ÇØ´ç´Ü¾î°¡ ¹æ¹®µÇ¾ú´Ù¸é °Ç³Ê¶Ù±â
+			// 6. í•´ë‹¹ë‹¨ì–´ê°€ ë°©ë¬¸ë˜ì—ˆë‹¤ë©´ ê±´ë„ˆë›°ê¸°
 			if (visit[i] == 1) {
 				continue;
 			}
-			// 7. Ã¶ÀÚ 1°³ »©°í ÀÏÄ¡¿©ºÎ °Ë»ç
+			// 7. ì² ì 1ê°œ ë¹¼ê³  ì¼ì¹˜ì—¬ë¶€ ê²€ì‚¬
 			int count = 0;
 			for (int j = 0; j < words[i].size(); j++) {
 				if (w.s[j] != words[i][j]) {
@@ -44,20 +44,20 @@ int solution(string begin, string target, vector<string> words) {
 				if (count > 1)
 					break;
 			}
-			// 8. 2°³ ÀÌ»ó ÀÏÄ¡ ÇÏ¸é °Ç³Ê¶Ù±â (º¯È¯ÇÒ ¼ö ¾øÀ¸¹Ç·Î)
+			// 8. 2ê°œ ì´ìƒ ì¼ì¹˜ í•˜ë©´ ê±´ë„ˆë›°ê¸° (ë³€í™˜í•  ìˆ˜ ì—†ìœ¼ë¯€ë¡œ)
 			if (count > 1) {
 				continue;
 			}
-			// 9. º¯È¯ °¡´ÉÇÏ¸é Å¥¿¡ »ğÀÔÇÏ°í ¹æ¹®¿©ºÎ °»½Å
+			// 9. ë³€í™˜ ê°€ëŠ¥í•˜ë©´ íì— ì‚½ì…í•˜ê³  ë°©ë¬¸ì—¬ë¶€ ê°±ì‹ 
 			else {
 				Word tmp;
 				tmp.s = words[i];
-				tmp.count = w.count + 1; // Ä«¿îÆ® Áõ°¡
+				tmp.count = w.count + 1; // ì¹´ìš´íŠ¸ ì¦ê°€
 				q.push(tmp);
 				visit[i] = 1;
 			}
 		}
 	}
-	// ¸¸µé ¼ö ¾ø´Ù¸é 0 ¸®ÅÏ
+	// ë§Œë“¤ ìˆ˜ ì—†ë‹¤ë©´ 0 ë¦¬í„´
 	return answer;
 }

@@ -27,31 +27,31 @@ int solution(string str1, string str2) {
 	vector<string> s1;
 	vector<string> s2;
 
-	// 1. ´ÙÁßÁıÇÕ ¸¸µé±â
+	// 1. ë‹¤ì¤‘ì§‘í•© ë§Œë“¤ê¸°
 	s1 = getUnion(str1);
 	s2 = getUnion(str2);
 
-	// 2. °øÁıÇÕÀÌ¸é 1*65536 ¸®ÅÏ
+	// 2. ê³µì§‘í•©ì´ë©´ 1*65536 ë¦¬í„´
 	if (s1.empty() && s2.empty()) {
 		return 65536;
 	}
 
-	// 3. ±³ÁıÇÕ, ÇÕÁıÇÕ °³¼ö ±¸ÇÏ±â
-	set<int> check; // Áßº¹µÇ´Â ÀÎµ¦½º Ã¼Å©
-	int count = 0; // ±³ÁıÇÕ °³¼ö
+	// 3. êµì§‘í•©, í•©ì§‘í•© ê°œìˆ˜ êµ¬í•˜ê¸°
+	set<int> check; // ì¤‘ë³µë˜ëŠ” ì¸ë±ìŠ¤ ì²´í¬
+	int count = 0; // êµì§‘í•© ê°œìˆ˜
 	for (int i = 0; i < s1.size(); i++) {
 		for (int j = 0; j < s2.size(); j++) {
-			// ¿ø¼Ò°¡ ¶È°°À¸¸é ±³ÁıÇÕ °³¼ö Áõ°¡
+			// ì›ì†Œê°€ ë˜‘ê°™ìœ¼ë©´ êµì§‘í•© ê°œìˆ˜ ì¦ê°€
 			if (!s1[i].compare(s2[j]) && !check.count(j)) {
 				count++;
-				check.insert(j); // Áßº¹ Ã¼Å©
+				check.insert(j); // ì¤‘ë³µ ì²´í¬
 				break;
 			}
 		}
 	}
-	// ÇÕÁıÇÕ °³¼ö °ø½ÄÀ» ÀÌ¿ë
+	// í•©ì§‘í•© ê°œìˆ˜ ê³µì‹ì„ ì´ìš©
 	int ucount = s1.size() + s2.size() - count;
-	// 4. ÀÚÄ«µå À¯»çµµ °è»ê
+	// 4. ìì¹´ë“œ ìœ ì‚¬ë„ ê³„ì‚°
 	double j = count / (double)ucount * 65536;
 	answer = (int)j;
 	return answer;

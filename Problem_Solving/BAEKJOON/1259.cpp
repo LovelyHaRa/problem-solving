@@ -17,7 +17,7 @@ int main(void)
 			int j = len - 1 - i;
 			if (s[i] != s[j]) break;
 		}
-		// ³¡±îÁö Å½»öµÇ¸é Æç¸°µå·Ò¼ö
+		// ëê¹Œì§€ íƒìƒ‰ë˜ë©´ íŽ ë¦°ë“œë¡¬ìˆ˜
 		i >= len / 2 ? cout << "yes\n" : cout << "no\n";
 	}
 }

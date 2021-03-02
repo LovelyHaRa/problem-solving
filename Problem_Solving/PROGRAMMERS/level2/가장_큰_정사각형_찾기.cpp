@@ -9,20 +9,20 @@ int min(int a, int b, int c) {
 int solution(vector<vector<int>> board)
 {
 	int answer = board[0][0];
-	// dp·Î ÇØ°á
-	// 1. Á¡È­½Ä => board[i][j]>0, i>0,j>0, board[i][j]=min(board[i-1][j-1],board[i-1][j],board[i][j-1])+1
-	//              ÁÂ»ó´Ü, ÁÂÃø, »óÃø °ªÁß ÃÖ¼Ú°ª¿¡ 1À» ´õÇØ ÀúÀå
-	//              board[i][j] = ¸¸µé ¼ö ÀÖ´Â Á¤»ç°¢ÇüÀÇ ÇÑº¯ÀÇ ±æÀÌ
+	// dpë¡œ í•´ê²°
+	// 1. ì í™”ì‹ => board[i][j]>0, i>0,j>0, board[i][j]=min(board[i-1][j-1],board[i-1][j],board[i][j-1])+1
+	//              ì¢Œìƒë‹¨, ì¢Œì¸¡, ìƒì¸¡ ê°’ì¤‘ ìµœì†Ÿê°’ì— 1ì„ ë”í•´ ì €ì¥
+	//              board[i][j] = ë§Œë“¤ ìˆ˜ ìˆëŠ” ì •ì‚¬ê°í˜•ì˜ í•œë³€ì˜ ê¸¸ì´
 	for (int i = 0; i < board.size(); i++) {
 		for (int j = 0; j < board[i].size(); j++) {
-			// 1. Á¡È­½Ä Àû¿ë
+			// 1. ì í™”ì‹ ì ìš©
 			if (i && j) {
 				board[i][j] = board[i][j] > 0 ? min(board[i - 1][j - 1], board[i - 1][j], board[i][j - 1]) + 1 : 0;
 			}
-			// 2. ÃÖ´ñ°ª °»½Å
+			// 2. ìµœëŒ“ê°’ ê°±ì‹ 
 			answer = answer < board[i][j] ? board[i][j] : answer;
 		}
 	}
-	// 3. ³ĞÀÌ ¸®ÅÏ
+	// 3. ë„“ì´ ë¦¬í„´
 	return answer * answer;
 }

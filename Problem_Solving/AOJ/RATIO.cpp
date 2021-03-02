@@ -4,7 +4,7 @@ using namespace std;
 
 long long L = 2000000000;
 
-// ½Â·ü ±¸ÇÏ±â
+// ìŠ¹ë¥  êµ¬í•˜ê¸°
 int ratio(long long games, long long wins)
 {
 	return (wins * 100) / games;
@@ -12,9 +12,9 @@ int ratio(long long games, long long wins)
 
 int needGames(long long games, long long wins)
 {
-	// ºÒ°¡´ÉÇÑ °æ¿ì¸¦ ¹Ì¸® ÆÄ¾ÇÇÑ´Ù
+	// ë¶ˆê°€ëŠ¥í•œ ê²½ìš°ë¥¼ ë¯¸ë¦¬ íŒŒì•…í•œë‹¤
 	if (ratio(games, wins) == ratio(games + L, wins + L)) return -1;
-	// ÀÌºĞÅ½»ö
+	// ì´ë¶„íƒìƒ‰
 	long long lo = 0, hi = L;
 	for (int i = 0; i < 100; i++)
 	{

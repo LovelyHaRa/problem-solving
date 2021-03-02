@@ -31,7 +31,7 @@ vector<int> getPartialMatch(const string& N)
 	return pi;
 }
 
-// aÀÇ Á¢¹Ì»çÀÌ¸é¼­ bÀÇ Á¢µÎ»çÀÎ ¹®ÀÚ¿­ÀÇ ÃÖ´ë ±æÀÌ¸¦ ±¸ÇÑ´Ù
+// aì˜ ì ‘ë¯¸ì‚¬ì´ë©´ì„œ bì˜ ì ‘ë‘ì‚¬ì¸ ë¬¸ìì—´ì˜ ìµœëŒ€ ê¸¸ì´ë¥¼ êµ¬í•œë‹¤
 int maxOverlap(const string& a, const string& b)
 {
 	int n = a.size(), m = b.size();
@@ -39,7 +39,7 @@ int maxOverlap(const string& a, const string& b)
 	int begin = 0, matched = 0;
 	while (begin < n)
 	{
-		// Â¤´õ¹ÌÀÇ ÇØ´ç ±ÛÀÚ°¡ ¹Ù´ÃÀÇ ÇØ´ç ±ÛÀÚ¿Í °°´Ù¸é
+		// ì§šë”ë¯¸ì˜ í•´ë‹¹ ê¸€ìê°€ ë°”ëŠ˜ì˜ í•´ë‹¹ ê¸€ìì™€ ê°™ë‹¤ë©´
 		if (matched < m && a[begin + matched] == b[matched])
 		{
 			matched++;

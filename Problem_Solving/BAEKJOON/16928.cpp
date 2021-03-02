@@ -7,7 +7,7 @@ int main(void)
 {
 	int n, m;
 	cin >> n >> m;
-	// ¹ã, »ç´Ù¸® ±¸ºÐ¾øÀÌ mapÀ¸·Î ÀúÀå
+	// ë°¤, ì‚¬ë‹¤ë¦¬ êµ¬ë¶„ì—†ì´ mapìœ¼ë¡œ ì €ìž¥
 	map<int, int> laddersnake;
 	for (int i = 0; i < n + m; i++)
 	{
@@ -15,44 +15,44 @@ int main(void)
 		cin >> key >> value;
 		laddersnake[key] = value;
 	}
-	// ¹æ¹® ¿©ºÎ
+	// ë°©ë¬¸ ì—¬ë¶€
 	bool visited[101] = { false, };
-	// ÃÊ±â Å¥ »ý¼º
+	// ì´ˆê¸° í ìƒì„±
 	queue<int> q;
 	q.push(1);
-	int moveCnt = 0; // ÀÌµ¿ È½¼ö
-	// BFS Å½»ö
+	int moveCnt = 0; // ì´ë™ íšŸìˆ˜
+	// BFS íƒìƒ‰
 	while (!q.empty())
 	{
-		// ÇöÀç ÀÌµ¿ È½¼ö¿¡¼­ ´ÙÀ½À¸·Î ÀÌµ¿ÇÒ ¼ö ÀÖ´Â ¸ðµç °æ¿ìÀÇ ¼ö
+		// í˜„ìž¬ ì´ë™ íšŸìˆ˜ì—ì„œ ë‹¤ìŒìœ¼ë¡œ ì´ë™í•  ìˆ˜ ìžˆëŠ” ëª¨ë“  ê²½ìš°ì˜ ìˆ˜
 		int turnSize = q.size();
-		// ¸ðµç °æ¿ì Å½»ö
+		// ëª¨ë“  ê²½ìš° íƒìƒ‰
 		while (turnSize--)
 		{
-			// Å¥¿¡¼­ ÃßÃâ
+			// íì—ì„œ ì¶”ì¶œ
 			int cur = q.front();
 			q.pop();
-			// ¸ñÇ¥Ä­ÀÎ 100¹ø¿¡ µµÂøÇÏ¸é Ãâ·ÂÇÏ°í Á¾·á
+			// ëª©í‘œì¹¸ì¸ 100ë²ˆì— ë„ì°©í•˜ë©´ ì¶œë ¥í•˜ê³  ì¢…ë£Œ
 			if (cur == 100)
 			{
 				cout << moveCnt << '\n';
 				return 0;
 			}
-			// ÁÖ»çÀ§´Â 1ºÎÅÍ 6±îÁö °¡´É
+			// ì£¼ì‚¬ìœ„ëŠ” 1ë¶€í„° 6ê¹Œì§€ ê°€ëŠ¥
 			for (int i = 1; i <= 6; i++)
 			{
-				int next = cur + i; // ÁÖ»çÀ§ °ª ´õÇÏ±â
-				// ¹ì ¶Ç´Â »ç´Ù¸®¸¦ ¸¸³µÀ» °æ¿ì
+				int next = cur + i; // ì£¼ì‚¬ìœ„ ê°’ ë”í•˜ê¸°
+				// ë±€ ë˜ëŠ” ì‚¬ë‹¤ë¦¬ë¥¼ ë§Œë‚¬ì„ ê²½ìš°
 				if (laddersnake.find(next) != laddersnake.end())
-					next = laddersnake[next]; // Ä­ ¹øÈ£ °»½Å
-				// ¹æ¹® ¿©ºÎ È®ÀÎ
+					next = laddersnake[next]; // ì¹¸ ë²ˆí˜¸ ê°±ì‹ 
+				// ë°©ë¬¸ ì—¬ë¶€ í™•ì¸
 				if (!visited[next])
 				{
-					visited[next] = 1; // ¹æ¹® Ã¼Å©
-					q.push(next); // Å¥¿¡ »ðÀÔ
+					visited[next] = 1; // ë°©ë¬¸ ì²´í¬
+					q.push(next); // íì— ì‚½ìž…
 				}
 			}
 		}
-		moveCnt++; // ÀÌµ¿ È½¼ö Áõ°¡
+		moveCnt++; // ì´ë™ íšŸìˆ˜ ì¦ê°€
 	}
 }

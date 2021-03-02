@@ -12,25 +12,25 @@ int main(void)
 	{
 		int a, b;
 		cin >> a >> b;
-		bool visited[10000] = { false, }; // ¹æ¹® ¿©ºÎ
-		queue<pair<int, string>> q; // ¼ıÀÚ, Áö±İ±îÁö ÀÔ·ÂµÈ ¸í·É¾î¸¦ Æä¾î·Î ÇÏ´Â Å¥ »ı¼º
-		// ÃÊ±â Å¥ »ı¼º
+		bool visited[10000] = { false, }; // ë°©ë¬¸ ì—¬ë¶€
+		queue<pair<int, string>> q; // ìˆ«ì, ì§€ê¸ˆê¹Œì§€ ì…ë ¥ëœ ëª…ë ¹ì–´ë¥¼ í˜ì–´ë¡œ í•˜ëŠ” í ìƒì„±
+		// ì´ˆê¸° í ìƒì„±
 		q.push(make_pair(a, ""));
 		visited[a] = 1;
-		// BFS Å½»ö
+		// BFS íƒìƒ‰
 		while (!q.empty())
 		{
-			// Å¥¿¡¼­ ÃßÃâ
+			// íì—ì„œ ì¶”ì¶œ
 			int curNum = q.front().first;
 			string curCmd = q.front().second;
 			q.pop();
-			// ¸ñÇ¥ ¼ıÀÚ¿¡ µµ´ŞÇÏ¸é
+			// ëª©í‘œ ìˆ«ìì— ë„ë‹¬í•˜ë©´
 			if (curNum == b) {
-				//Ãâ·Â ÈÄ Å½»ö Á¾·á
+				//ì¶œë ¥ í›„ íƒìƒ‰ ì¢…ë£Œ
 				cout << curCmd << '\n';
 				break;
 			}
-			// ´ÙÀ½ ¹øÈ£ °è»ê
+			// ë‹¤ìŒ ë²ˆí˜¸ ê³„ì‚°
 			int next = curNum * 2 % 10000;
 			if (!visited[next])
 			{
@@ -43,13 +43,13 @@ int main(void)
 				visited[next] = 1;
 				q.push(make_pair(next, curCmd + 'S'));
 			}
-			next = (curNum % 1000) * 10 + curNum / 1000; // ¿ŞÂÊ ½ÃÇÁÆ®
+			next = (curNum % 1000) * 10 + curNum / 1000; // ì™¼ìª½ ì‹œí”„íŠ¸
 			if (!visited[next])
 			{
 				visited[next] = 1;
 				q.push(make_pair(next, curCmd + 'L'));
 			}
-			next = curNum % 10 * 1000 + curNum / 10; // ¿À¸¥ÂÊ ½ÃÇÁÆ®
+			next = curNum % 10 * 1000 + curNum / 10; // ì˜¤ë¥¸ìª½ ì‹œí”„íŠ¸
 			if (!visited[next])
 			{
 				visited[next] = 1;

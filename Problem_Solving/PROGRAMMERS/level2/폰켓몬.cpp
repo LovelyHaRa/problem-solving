@@ -11,10 +11,10 @@ int solution(vector<int> nums)
 {
 	int answer = 0;
 	map<int, int> m;
-	// Á¾·ù¸¸ ÀúÀå
+	// ì¢…ë¥˜ë§Œ ì €ì¥
 	for (int i = 0; i < nums.size(); i++) {
 		m[nums[i]]++;
 	}
-	// Á¾·ùÀÇ ¼ö, ÀüÃ¼ °³¼ö/2 Áß ÃÖ¼Ú°ª ¸®ÅÏ
+	// ì¢…ë¥˜ì˜ ìˆ˜, ì „ì²´ ê°œìˆ˜/2 ì¤‘ ìµœì†Ÿê°’ ë¦¬í„´
 	return min(m.size(), nums.size() / 2);
 }

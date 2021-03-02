@@ -6,39 +6,39 @@
 
 using namespace std;
 
-map<vector<int>, int> toSort; // ¹è¿­ÀÇ ±³È¯È½¼ö¸¦ ÀúÀå
-// ¸ğµç ¼ø¿­¿¡ ´ëÇØ toSort[]¸¦ ¹Ì¸® °è»ê
+map<vector<int>, int> toSort; // ë°°ì—´ì˜ êµí™˜íšŸìˆ˜ë¥¼ ì €ì¥
+// ëª¨ë“  ìˆœì—´ì— ëŒ€í•´ toSort[]ë¥¼ ë¯¸ë¦¬ ê³„ì‚°
 void bfs(int n)
 {
-	// ¼ø¿­ »ı¼º
+	// ìˆœì—´ ìƒì„±
 	vector<int> perm(n);
 	for (int i = 0; i < n; i++) perm[i] = i;
-	// bfs¸¦ À§ÇÑ Å¥ »ı¼º
+	// bfsë¥¼ ìœ„í•œ í ìƒì„±
 	queue<vector<int>> q;
-	// ½ÃÀÛÁ¡ Å¥¿¡ »ğÀÔ
+	// ì‹œì‘ì  íì— ì‚½ì…
 	toSort[perm] = 0;
 	q.push(perm);
-	// bfs Å½»ö
+	// bfs íƒìƒ‰
 	while (!q.empty())
 	{
-		// Å¥¿¡¼­ ²¨³½´Ù
+		// íì—ì„œ êº¼ë‚¸ë‹¤
 		vector<int> here = q.front();
 		q.pop();
-		// ºñ¿ë ºÒ·¯¿À±â
+		// ë¹„ìš© ë¶ˆëŸ¬ì˜¤ê¸°
 		int cost = toSort[here];
-		// °¡´ÉÇÑ ¸ğµç ±¸°£À» µÚÁı¾î º»´Ù
+		// ê°€ëŠ¥í•œ ëª¨ë“  êµ¬ê°„ì„ ë’¤ì§‘ì–´ ë³¸ë‹¤
 		for(int i=0;i<n;i++)
 			for (int j = i + 2; j <= n; j++)
 			{
-				// µÚÁı±â
+				// ë’¤ì§‘ê¸°
 				reverse(here.begin() + i, here.begin() + j);
-				// Å½»ö¿©ºÎ È®ÀÎ
+				// íƒìƒ‰ì—¬ë¶€ í™•ì¸
 				if (toSort.count(here) == 0)
 				{
 					toSort[here] = cost + 1;
 					q.push(here);
 				}
-				// ¿ø»ó º¹±¸
+				// ì›ìƒ ë³µêµ¬
 				reverse(here.begin() + i, here.begin() + j);
 			}
 	}
@@ -47,7 +47,7 @@ void bfs(int n)
 int solve(const vector<int>& perm)
 {
 	int n = perm.size();
-	// permÀ» [0~n-1]ÀÇ ¼ø¿­·Î º¯È¯
+	// permì„ [0~n-1]ì˜ ìˆœì—´ë¡œ ë³€í™˜
 	vector<int> fixed(n);
 	for (int i = 0; i < n; i++)
 	{
@@ -57,13 +57,13 @@ int solve(const vector<int>& perm)
 				smaller++;
 		fixed[i] = smaller;
 	}
-	// ÇØ´ç ¹è¿­ÀÇ ºñ¿ë ¹İÈ¯
+	// í•´ë‹¹ ë°°ì—´ì˜ ë¹„ìš© ë°˜í™˜
 	return toSort[fixed];
 }
 
 int main(void)
 {
-	// ¸ğµç °æ¿ì¿¡ ´ëÇØ ¹Ì¸® °è»ê
+	// ëª¨ë“  ê²½ìš°ì— ëŒ€í•´ ë¯¸ë¦¬ ê³„ì‚°
 	for (int i = 1; i <= 8; i++)
 		bfs(i);
 	int c;

@@ -3,17 +3,17 @@
 #include<vector>
 
 using namespace std;
-// N���� �ڱ� �ڽ��� ã���鼭 ��Ÿ���� �κ� ��ġ�� �̿���
-// pi[]�� ����Ѵ�
-// pi[i]=N[..i]�� ���̻絵 �ǰ� ���λ絵 �Ǵ� ���ڿ��� �ִ� ����
+// N에서 자기 자신을 찾으면서 나타나는 부분 일치를 이용해
+// pi[]를 계산한다
+// pi[i]=N[..i]의 접미사도 되고 접두사도 되는 문자열의 최대 길이
 vector<int> getPartialMatch(const string& N)
 {
 	int m = N.size();
 	vector<int> pi(m, 0);
-	// KMP�� �ڱ� �ڽ��� ã�´�.
-	// N�� N���� ã�´�. begin=0�̸� �ڱ� �ڽ��� ã�ƹ����ϱ� �ȵȴ�!
+	// KMP로 자기 자신을 찾는다.
+	// N을 N에서 찾는다. begin=0이면 자기 자신을 찾아버리니깐 안된다!
 	int begin = 1, matched = 0;
-	// ���� ���ڰ� N�� ���� ������ ������ ã���鼭 �κ� ��ġ�� ��� ����Ѵ�.
+	// 비교할 문자가 N의 끝에 도달할 때까지 찾으면서 부분 일치를 모두 기록한다.
 	while (begin + matched < m)
 	{
 		if (N[begin + matched] == N[matched])
@@ -41,9 +41,9 @@ vector<int> getPrefixSuffix(const string& s)
 	int k = s.size();
 	while (k > 0)
 	{
-		// s[..k-1]�� ���̴�.
+		// s[..k-1]는 답이다.
 		ret.push_back(k);
-		// s[..k-1]�� ���̻絵 �ǰ� �����ٵ� �Ǵ� ���ڿ��� ���̴�.
+		// s[..k-1]의 접미사도 되고 접수다도 되는 문자열도 답이다.
 		k = pi[k - 1];
 	}
 	return ret;
@@ -54,7 +54,7 @@ int main(void)
 	string f, m;
 	cin >> f >> m;
 	vector<int> res = getPrefixSuffix(f + m);
-	// �������� ���
+	// 오름차순 출력
 	for (auto i = res.rbegin(); i != res.rend(); i++)
 		cout << *i << ' ';
 	cout << endl;

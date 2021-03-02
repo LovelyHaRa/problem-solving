@@ -4,11 +4,11 @@
 
 using namespace std;
 
-vector <vector<int>> bino(201, vector<int>(201)); // ÀÌÇ×°è¼ö ÀúÀå
-const int M = 1000000000 + 100; // ¿À¹öÇÃ·Î ¹æÁö 
+vector <vector<int>> bino(201, vector<int>(201)); // ì´í•­ê³„ìˆ˜ ì €ì¥
+const int M = 1000000000 + 100; // ì˜¤ë²„í”Œë¡œ ë°©ì§€ 
 int min(int a, int b) { return a < b ? a : b; }
 
-// ÀÌÇ×°è¼ö ±¸ÇÏ±â
+// ì´í•­ê³„ìˆ˜ êµ¬í•˜ê¸°
 void calcBino()
 {
 	for (int i = 0; i <= 200; i++)
@@ -23,21 +23,21 @@ void calcBino()
 int skip;
 void generate(int n, int m, string s)
 {
-	if (skip < 0) return; // ¹®ÀÚ¿­À» Ãâ·ÂÇÑ µÚÀÌ¹Ç·Î ¹Ù·Î Á¾·á
-	// ±âÀú»ç·Ê: m==n==0
+	if (skip < 0) return; // ë¬¸ìì—´ì„ ì¶œë ¥í•œ ë’¤ì´ë¯€ë¡œ ë°”ë¡œ ì¢…ë£Œ
+	// ê¸°ì €ì‚¬ë¡€: m==n==0
 	if (n == 0 && m == 0)
 	{
-		if (skip == 0)	cout << s << '\n'; // k¹øÂ°ÀÌ¸é Ãâ·Â
+		if (skip == 0)	cout << s << '\n'; // kë²ˆì§¸ì´ë©´ ì¶œë ¥
 		skip--;
 		return;
 	}
-	// k°¡ (n+m,n)º¸´Ù Å©¸é ÇØ´ç ÀÌÇ×°è¼ö¸¸Å­ ¹«½Ã
+	// kê°€ (n+m,n)ë³´ë‹¤ í¬ë©´ í•´ë‹¹ ì´í•­ê³„ìˆ˜ë§Œí¼ ë¬´ì‹œ
 	if (bino[n + m][n] <= skip)
 	{
 		skip -= bino[n + m][n];
 		return;
 	}
-	// ¸ğ½ººÎÈ£ ºÙÀÌ±â
+	// ëª¨ìŠ¤ë¶€í˜¸ ë¶™ì´ê¸°
 	if (n > 0) generate(n - 1, m, s + "-");
 	if (m > 0) generate(n, m - 1, s + "o");
 }
@@ -45,8 +45,8 @@ void generate(int n, int m, string s)
 // O(n+m)
 string kth(int n, int m, int skip)
 {
-	if (n == 0) return string(m, 'o'); // nÀÌ 0ÀÌ¸é ³ª¸ÓÁö´Â oÀÏ¼ö ¹Û¿¡ ¾ø´Ù
-	// ¹İÀ¸·Î ³ª´² »ı°¢ÇÏ±â
+	if (n == 0) return string(m, 'o'); // nì´ 0ì´ë©´ ë‚˜ë¨¸ì§€ëŠ” oì¼ìˆ˜ ë°–ì— ì—†ë‹¤
+	// ë°˜ìœ¼ë¡œ ë‚˜ëˆ  ìƒê°í•˜ê¸°
 	if (n > 0 && skip < bino[n + m - 1][n - 1])
 		return "-" + kth(n - 1, m, skip);
 	return "o" + kth(n, m - 1, skip - bino[n + m - 1][n - 1]);

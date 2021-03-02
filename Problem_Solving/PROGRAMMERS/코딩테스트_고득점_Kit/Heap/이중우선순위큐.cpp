@@ -5,36 +5,36 @@ using namespace std;
 
 vector<int> solution(vector<string> operations) {
 	vector<int> answer;
-	// ÃÖ¼Ò Èü, ÃÖ´ë Èü, Å¥ ¼±¾ğ
+	// ìµœì†Œ í™, ìµœëŒ€ í™, í ì„ ì–¸
 	priority_queue<int> max_heap;
 	priority_queue<int, vector<int>, greater<int>> min_heap;
 	queue<int> q;
 	int i = 0;
-	// 1. ¿¬»ê È½¼ö ¸¸Å­ Å½»ö
+	// 1. ì—°ì‚° íšŸìˆ˜ ë§Œí¼ íƒìƒ‰
 	while (i != operations.size()) {
 		string oper = operations[i];
-		// 2. »ğÀÔ ¿¬»êÀÏ ¶§
+		// 2. ì‚½ì… ì—°ì‚°ì¼ ë•Œ
 		if (oper[0] == 'I') {
-			// 3. ¼ıÀÚ ÃßÃâ(3¹øÁöºÎÅÍ ¼ıÀÚ)
+			// 3. ìˆ«ì ì¶”ì¶œ(3ë²ˆì§€ë¶€í„° ìˆ«ì)
 			string num = operations[i].substr(2);
 			int n = stoi(num);
-			// 4. Èü¿¡ »ğÀÔ
+			// 4. í™ì— ì‚½ì…
 			max_heap.push(n);
 			min_heap.push(n);
 		}
-		// 5. »èÁ¦ ¿¬»êÀÏ ¶§
+		// 5. ì‚­ì œ ì—°ì‚°ì¼ ë•Œ
 		else {
 			char n = oper[2];
-			// 6. ÃÖ¼Ú°ª »èÁ¦ ¿¬»êÀÏ ¶§
+			// 6. ìµœì†Ÿê°’ ì‚­ì œ ì—°ì‚°ì¼ ë•Œ
 			if (n == '-') {
-				// 7. ÈüÀÌ ºñ¾îÀÖÁö ¾ÊÀ¸¸é
+				// 7. í™ì´ ë¹„ì–´ìˆì§€ ì•Šìœ¼ë©´
 				if (!min_heap.empty()) {
-					// 8. ÃÖ¼Ò Èü¿¡¼­ Á¦°Å
+					// 8. ìµœì†Œ í™ì—ì„œ ì œê±°
 					int j = min_heap.top();
 					min_heap.pop();
-					// 9. ÃÖ´ë Èü¿¡¼­µµ °°Àº °ª Á¦°Å
+					// 9. ìµœëŒ€ í™ì—ì„œë„ ê°™ì€ ê°’ ì œê±°
 					while (1) {
-						// 9-1. ÀÓ½Ã Å¥¿¡ ¸ğµÎ Áı¾î³Ö°í ´Ù½Ã »ğÀÔÇÏ´Â ½ÄÀ¸·Î ÁøÇà
+						// 9-1. ì„ì‹œ íì— ëª¨ë‘ ì§‘ì–´ë„£ê³  ë‹¤ì‹œ ì‚½ì…í•˜ëŠ” ì‹ìœ¼ë¡œ ì§„í–‰
 						int k = max_heap.top();
 						max_heap.pop();
 						if (j == k) {
@@ -48,9 +48,9 @@ vector<int> solution(vector<string> operations) {
 					}
 				}
 			}
-			// 10. ÃÖ´ñ°ª »èÁ¦ ¿¬»êÀÏ ¶§
+			// 10. ìµœëŒ“ê°’ ì‚­ì œ ì—°ì‚°ì¼ ë•Œ
 			else {
-				// 11. 7~9°úÁ¤À» ÃÖ´ë Èü¿¡ ´ëÇØ ¼öÇà
+				// 11. 7~9ê³¼ì •ì„ ìµœëŒ€ í™ì— ëŒ€í•´ ìˆ˜í–‰
 				if (!max_heap.empty()) {
 					int j = max_heap.top();
 					max_heap.pop();
@@ -71,7 +71,7 @@ vector<int> solution(vector<string> operations) {
 		}
 		i++;
 	}
-	// °á°ú »ğÀÔ
+	// ê²°ê³¼ ì‚½ì…
 	if (!max_heap.empty())
 		answer.push_back(max_heap.top());
 	else

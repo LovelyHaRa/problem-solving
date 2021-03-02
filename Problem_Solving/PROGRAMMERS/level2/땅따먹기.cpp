@@ -5,26 +5,26 @@ using namespace std;
 int solution(vector<vector<int> > land)
 {
 	int answer = 0;
-	// dp ÀÌ¿ë
-	// Á¡È­½Ä => land[i][j]=(i-1)!=j, max(land[i-1][j=0~3])+land[i][j]
-	//            ÀÌÀü ¿­ÀÇ À§Ä¡¸¦ Á¦¿ÜÇÑ °ªµé Áß ÃÖ´ë°ªÀ» ´©Àû
-	// 1. 1Çà¿¡¼­ ÃÖ´ë°ª ±¸ÇÏ±â
+	// dp ì´ìš©
+	// ì í™”ì‹ => land[i][j]=(i-1)!=j, max(land[i-1][j=0~3])+land[i][j]
+	//            ì´ì „ ì—´ì˜ ìœ„ì¹˜ë¥¼ ì œì™¸í•œ ê°’ë“¤ ì¤‘ ìµœëŒ€ê°’ì„ ëˆ„ì 
+	// 1. 1í–‰ì—ì„œ ìµœëŒ€ê°’ êµ¬í•˜ê¸°
 	for (int i = 0; i < land[0].size(); i++) {
 		answer = answer < land[0][i] ? land[0][i] : answer;
 	}
 	for (int i = 1; i < land.size(); i++) {
 		for (int j = 0; j < 4; j++) {
-			// 2. Á¡È­½Ä
+			// 2. ì í™”ì‹
 			int max = 0;
 			for (int k = 0; k < 4; k++) {
 				if (j == k) continue;
 				max = max < land[i - 1][k] ? land[i - 1][k] : max;
 			}
 			land[i][j] += max;
-			// 3. ÃÖ´ë°ª °»½Å
+			// 3. ìµœëŒ€ê°’ ê°±ì‹ 
 			answer = answer < land[i][j] ? land[i][j] : answer;
 		}
 	}
-	// 4. ÃÖ´ë°ª ¸®ÅÏ
+	// 4. ìµœëŒ€ê°’ ë¦¬í„´
 	return answer;
 }

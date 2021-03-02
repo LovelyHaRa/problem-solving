@@ -12,24 +12,24 @@ int main(void)
 		int n, k;
 		cin >> n >> k;
 		list<int> survivors;
-		for (int i = 1; i <= n; i++) survivors.push_back(i); // ¹øÈ£ »ğÀÔ
-		list<int>::iterator kill = survivors.begin(); // 1¹ø »ç¶÷ºÎÅÍ ÀÚ°á
-		// µÎ¸í »ì¾Æ ³²À» ¶§ ±îÁö ¹İº¹
+		for (int i = 1; i <= n; i++) survivors.push_back(i); // ë²ˆí˜¸ ì‚½ì…
+		list<int>::iterator kill = survivors.begin(); // 1ë²ˆ ì‚¬ëŒë¶€í„° ìê²°
+		// ë‘ëª… ì‚´ì•„ ë‚¨ì„ ë•Œ ê¹Œì§€ ë°˜ë³µ
 		while (n > 2)
 		{
-			kill = survivors.erase(kill); // ÇöÀç »ç¶÷ ÀÚ°á, Æ÷ÀÎÅÍ´Â ´ÙÀ½ »ç¶÷À» °¡¸®Å²´Ù
-			// ¿øÇü ¸®½ºÆ® Ã³·³ µ¿ÀÛ
+			kill = survivors.erase(kill); // í˜„ì¬ ì‚¬ëŒ ìê²°, í¬ì¸í„°ëŠ” ë‹¤ìŒ ì‚¬ëŒì„ ê°€ë¦¬í‚¨ë‹¤
+			// ì›í˜• ë¦¬ìŠ¤íŠ¸ ì²˜ëŸ¼ ë™ì‘
 			if (kill == survivors.end()) kill = survivors.begin();
-			n--; // »ç¶÷ ¼ö °¨¼Ò
-			// k-1»ç¶÷±îÁö Æ÷ÀÎÅÍ Áõ°¡(´ÙÀ½»ç¶÷À» ÀÌ¹Ì °¡¸®Å°°í ÀÖÀ¸¹Ç·Î)
+			n--; // ì‚¬ëŒ ìˆ˜ ê°ì†Œ
+			// k-1ì‚¬ëŒê¹Œì§€ í¬ì¸í„° ì¦ê°€(ë‹¤ìŒì‚¬ëŒì„ ì´ë¯¸ ê°€ë¦¬í‚¤ê³  ìˆìœ¼ë¯€ë¡œ)
 			for (int i = 0; i < k - 1; i++)
 			{
-				kill++; // Æ÷ÀÎÅÍ Áõ°¡
-				// ¿øÇü ¸®½ºÆ® Ã³·³ µ¿ÀÛ
+				kill++; // í¬ì¸í„° ì¦ê°€
+				// ì›í˜• ë¦¬ìŠ¤íŠ¸ ì²˜ëŸ¼ ë™ì‘
 				if (kill == survivors.end()) kill = survivors.begin();
 			}
 		}
-		// ³²¾ÆÀÖ´Â µÎ»ç¶÷ Ãâ·Â
+		// ë‚¨ì•„ìˆëŠ” ë‘ì‚¬ëŒ ì¶œë ¥
 		cout << survivors.front() << ' ' << survivors.back() << '\n';
 	}
 }

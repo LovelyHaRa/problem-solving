@@ -4,15 +4,15 @@
 
 using namespace std;
 
-// ½ºÅÃ ÀÌ¿ë
+// ìŠ¤íƒ ì´ìš©
 vector<int> solution(vector<int> progresses, vector<int> speeds) {
 	vector<int> answer;
 	stack<int> s;
-	// 1. ÀÛ¾÷ ¹è¿­ ÀÎµ¦½º ½ºÅÃ¿¡ ½×±â
-	// 2. ½ºÅÃÀÌ ºô¶§±îÁö ¾Æ·¡ ³»¿ë ¹Ýº¹
-	// 3. ÀÛ¾÷ÁøÇà
-	// 4. ½ºÅÃ°ªÀ» ÀÎµ¦½º·Î ÇØ¼­ 100¹Ì¸¸ÀÇ °ªÀÌ ³ª¿Ã¶§ ±îÁö Ä«¿îÆ® ¹× pop
-	// 5. ÇÑ¹øÀÌ¶óµµ pop ÇßÀ¸¸é answer¿¡ Ãß°¡
+	// 1. ìž‘ì—… ë°°ì—´ ì¸ë±ìŠ¤ ìŠ¤íƒì— ìŒ“ê¸°
+	// 2. ìŠ¤íƒì´ ë¹Œë•Œê¹Œì§€ ì•„ëž˜ ë‚´ìš© ë°˜ë³µ
+	// 3. ìž‘ì—…ì§„í–‰
+	// 4. ìŠ¤íƒê°’ì„ ì¸ë±ìŠ¤ë¡œ í•´ì„œ 100ë¯¸ë§Œì˜ ê°’ì´ ë‚˜ì˜¬ë•Œ ê¹Œì§€ ì¹´ìš´íŠ¸ ë° pop
+	// 5. í•œë²ˆì´ë¼ë„ pop í–ˆìœ¼ë©´ answerì— ì¶”ê°€
 	
 	// 1
 	int n = progresses.size() - 1;

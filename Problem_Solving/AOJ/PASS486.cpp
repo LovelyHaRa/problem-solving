@@ -6,7 +6,7 @@ using namespace std;
 const int M = 1000 * 1000 * 10;
 vector<int> factors(M + 1, 0);
 
-// ¾à¼ö °³¼ö ±¸ÇÏ±â(´Ü¼ø ¾Ë°í¸®Áò)
+// ì•½ìˆ˜ ê°œìˆ˜ êµ¬í•˜ê¸°(ë‹¨ìˆœ ì•Œê³ ë¦¬ì¦˜)
 void getFactors()
 {
 	for (int div = 1; div <= M; div++)
@@ -24,7 +24,7 @@ int main(void)
 		int n, lo, hi;
 		cin >> n >> lo >> hi;
 		int cnt = 0;
-		// ¹üÀ§³»¿¡ Á¶°ÇÀ» ¸¸Á·ÇÏ¸é Ä«¿îÆÃ
+		// ë²”ìœ„ë‚´ì— ì¡°ê±´ì„ ë§Œì¡±í•˜ë©´ ì¹´ìš´íŒ…
 		for(int i=lo;i<=hi;i++)
 			if (n == factors[i])
 				cnt++;

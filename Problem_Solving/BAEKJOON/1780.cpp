@@ -1,5 +1,5 @@
-// ºÐÇÒ Á¤º¹
-// ÄõµåÆ®¸®
+// ë¶„í•  ì •ë³µ
+// ì¿¼ë“œíŠ¸ë¦¬
 #include<iostream>
 
 using namespace std;
@@ -47,8 +47,8 @@ int main(void)
 {
 	int n;
 	cin >> n;
-	// ÄõµåÆ®¸®¶û Ç®ÀÌ¹ý °°À½
-	// ºÐÇÒÀ» 9°³·Î ÇØÁÖ¸é µÊ
+	// ì¿¼ë“œíŠ¸ë¦¬ëž‘ í’€ì´ë²• ê°™ìŒ
+	// ë¶„í• ì„ 9ê°œë¡œ í•´ì£¼ë©´ ë¨
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < n; j++)

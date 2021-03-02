@@ -1,4 +1,4 @@
-// ¼öÇÐ ¹®Á¦
+// ìˆ˜í•™ ë¬¸ì œ
 #include<iostream>
 
 using namespace std;
@@ -8,7 +8,7 @@ int main(void)
 	int a[50];
 	int n, min = 1987654, max = 1;
 	cin >> n;
-	// ÃÖ´ë°ª * ÃÖ¼Ò°ª = ¾à¼ö
+	// ìµœëŒ€ê°’ * ìµœì†Œê°’ = ì•½ìˆ˜
 	for (int i = 0; i < n; i++)
 	{
 		cin >> a[i];

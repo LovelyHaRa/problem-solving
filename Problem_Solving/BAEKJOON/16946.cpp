@@ -6,37 +6,37 @@
 using namespace std;
 
 int n, m;
-vector<string> map; // ¸Ê Á¤º¸
-vector<vector<int>> moveableGroup; // ¸Ê¿¡¼­ ÀÌµ¿°¡´ÉÇÑ Áö¿ªµéÀ» ±×·ìÈ­ÇÑ Á¤º¸
-vector<int> moveableCnt; // ±×·ìº° ÀÌµ¿°¡´ÉÇÑ Áö¿ª °³¼ö
-vector<vector<bool>> visited; // BFS ¹æ¹® ¿©ºÎ
-int dx[] = { -1,0,0,1 }, dy[] = { 0,-1,1,0 }; // »óÇÏÁÂ¿ì Áõ°¡·®
+vector<string> map; // ë§µ ì •ë³´
+vector<vector<int>> moveableGroup; // ë§µì—ì„œ ì´ë™ê°€ëŠ¥í•œ ì§€ì—­ë“¤ì„ ê·¸ë£¹í™”í•œ ì •ë³´
+vector<int> moveableCnt; // ê·¸ë£¹ë³„ ì´ë™ê°€ëŠ¥í•œ ì§€ì—­ ê°œìˆ˜
+vector<vector<bool>> visited; // BFS ë°©ë¬¸ ì—¬ë¶€
+int dx[] = { -1,0,0,1 }, dy[] = { 0,-1,1,0 }; // ìƒí•˜ì¢Œìš° ì¦ê°€ëŸ‰
 
-// BFS Å½»ö ÈÄ ÀÌµ¿°¡´ÉÇÑ Áö¿ª °³¼ö¸¦ ¹İÈ¯
+// BFS íƒìƒ‰ í›„ ì´ë™ê°€ëŠ¥í•œ ì§€ì—­ ê°œìˆ˜ë¥¼ ë°˜í™˜
 int BFS(int startX, int startY, int groupIdx)
 {
 	int cnt = 1;
-	// ÃÊ±â Å¥ »ı¼º
+	// ì´ˆê¸° í ìƒì„±
 	queue<pair<int, int>> q;
 	visited[startX][startY] = 1;
 	moveableGroup[startX][startY] = groupIdx;
 	q.push(make_pair(startX, startY));
-	// BFS Å½»ö
+	// BFS íƒìƒ‰
 	while (!q.empty())
 	{
-		// Å¥¿¡¼­ ÃßÃâ
+		// íì—ì„œ ì¶”ì¶œ
 		int x = q.front().first, y = q.front().second;
 		q.pop();
-		// »óÇÏÁÂ¿ì ÀÌµ¿
+		// ìƒí•˜ì¢Œìš° ì´ë™
 		for (int i = 0; i < 4; i++)
 		{
-			int nx = x + dx[i], ny = y + dy[i]; // ´ÙÀ½ ÁÂÇ¥
-			// ¹üÀ§ ¹Û, ÀÌ¹Ì ¹æ¹®, º®ÀÌ¸é °Ç³Ê¶Ù±â
+			int nx = x + dx[i], ny = y + dy[i]; // ë‹¤ìŒ ì¢Œí‘œ
+			// ë²”ìœ„ ë°–, ì´ë¯¸ ë°©ë¬¸, ë²½ì´ë©´ ê±´ë„ˆë›°ê¸°
 			if (nx < 0 || nx >= n || ny < 0 || ny >= m || visited[nx][ny] || map[nx][ny] == '1') continue;
-			visited[nx][ny] = 1; // ¹æ¹® Ã¼Å©
-			moveableGroup[nx][ny] = groupIdx; // ±×·ì ¹øÈ£ ºÎ¿©
-			q.push(make_pair(nx, ny)); // Å¥¿¡ Ãß°¡
-			cnt++; // ÀÌµ¿ °¡´ÉÇÑ È½¼ö Áõ°¡
+			visited[nx][ny] = 1; // ë°©ë¬¸ ì²´í¬
+			moveableGroup[nx][ny] = groupIdx; // ê·¸ë£¹ ë²ˆí˜¸ ë¶€ì—¬
+			q.push(make_pair(nx, ny)); // íì— ì¶”ê°€
+			cnt++; // ì´ë™ ê°€ëŠ¥í•œ íšŸìˆ˜ ì¦ê°€
 		}
 	}
 	return cnt;
@@ -54,37 +54,37 @@ int main(void)
 	for (int i = 0; i < n; i++)
 		cin >> map[i];
 	int groupIdx = 1;
-	// 1. ÀÌµ¿°¡´ÉÇÑ Áö¿ª ±×·ì ¹øÈ£ ºÎ¿©
+	// 1. ì´ë™ê°€ëŠ¥í•œ ì§€ì—­ ê·¸ë£¹ ë²ˆí˜¸ ë¶€ì—¬
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < m; j++)
 			if (!visited[i][j] && map[i][j] == '0')
 				moveableCnt.push_back(BFS(i, j, groupIdx++));
-	// 2. º® ºÎ¼ö°í ÀÌµ¿ °¡´ÉÇÑ È½¼ö °è»ê
+	// 2. ë²½ ë¶€ìˆ˜ê³  ì´ë™ ê°€ëŠ¥í•œ íšŸìˆ˜ ê³„ì‚°
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < m; j++)
 		{
-			// º®ÀÎ °æ¿ì
+			// ë²½ì¸ ê²½ìš°
 			if (map[i][j] == '1')
 			{
-				vector<bool> checked(moveableCnt.size()); // ±×·ì Áßº¹ È®ÀÎ ¹è¿­
-				int cnt = 1; // º®À» Á¦°ÅÇÏ¹Ç·Î ÃÊ±â »óÅÂ´Â 1
-				// »óÇÏÁË¿ì Å½»ö
+				vector<bool> checked(moveableCnt.size()); // ê·¸ë£¹ ì¤‘ë³µ í™•ì¸ ë°°ì—´
+				int cnt = 1; // ë²½ì„ ì œê±°í•˜ë¯€ë¡œ ì´ˆê¸° ìƒíƒœëŠ” 1
+				// ìƒí•˜ì£„ìš° íƒìƒ‰
 				for (int k = 0; k < 4; k++)
 				{
-					int nx = i + dx[k], ny = j + dy[k]; // ´ÙÀ½ ÁÂÇ¥
-					// ¹üÀ§ ¹ÛÀÌ¸é °Ç³Ê¶Ù±â
+					int nx = i + dx[k], ny = j + dy[k]; // ë‹¤ìŒ ì¢Œí‘œ
+					// ë²”ìœ„ ë°–ì´ë©´ ê±´ë„ˆë›°ê¸°
 					if (nx < 0 || nx >= n || ny < 0 || ny >= m) continue;
-					// ±×·ì ¹øÈ£ ÃßÃâ
+					// ê·¸ë£¹ ë²ˆí˜¸ ì¶”ì¶œ
 					groupIdx = moveableGroup[nx][ny];
-					// º®ÀÌ°Å³ª ÀÌ¹Ì Ã¼Å©ÇÑ ±×·ìÀÌ¸é °Ç³Ê¶Ù±â
+					// ë²½ì´ê±°ë‚˜ ì´ë¯¸ ì²´í¬í•œ ê·¸ë£¹ì´ë©´ ê±´ë„ˆë›°ê¸°
 					if (!groupIdx || checked[groupIdx - 1]) continue;
-					checked[groupIdx - 1] = 1; // Ã¼Å©
-					cnt += moveableCnt[groupIdx - 1]; // Ä«¿îÆÃ
+					checked[groupIdx - 1] = 1; // ì²´í¬
+					cnt += moveableCnt[groupIdx - 1]; // ì¹´ìš´íŒ…
 				}
-				cout << cnt % 10; // 10À¸·Î ³ª´« ³ª¸ÓÁö Ãâ·Â
+				cout << cnt % 10; // 10ìœ¼ë¡œ ë‚˜ëˆˆ ë‚˜ë¨¸ì§€ ì¶œë ¥
 			}
-			else cout << 0; // ¾Æ´Ï¸é 0 Ãâ·Â
+			else cout << 0; // ì•„ë‹ˆë©´ 0 ì¶œë ¥
 		}
 		cout << '\n';
 	}

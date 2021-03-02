@@ -6,11 +6,11 @@
 
 using namespace std;
 
-// pair ºñ±³ÇÔ¼ö ÀÛ¼º¹ı
+// pair ë¹„êµí•¨ìˆ˜ ì‘ì„±ë²•
 template<template <typename> class P = less>
 struct compare_pair_second {
 	template<class T1, class T2> bool operator()(const pair<T1, T2>&left, const pair<T1, T2>&right) {
-		// ºñ±³ °ªÀÌ °°À¸¸é ÀÎµ¦½º°¡ ³·Àº °ªÀ¸·Î Á¤·Ä
+		// ë¹„êµ ê°’ì´ ê°™ìœ¼ë©´ ì¸ë±ìŠ¤ê°€ ë‚®ì€ ê°’ìœ¼ë¡œ ì •ë ¬
 		if (left.second == right.second)
 			return less<T1>()(left.first, right.first);
 		return P<T2>()(left.second, right.second);
@@ -19,26 +19,26 @@ struct compare_pair_second {
 
 vector<int> solution(vector<string> genres, vector<int> plays) {
 	vector<int> answer;
-	// 1. Àå¸£º° ÀüÃ¼ Àç»ı ¼ö¸¦ mapÀ¸·Î ÀúÀå
+	// 1. ì¥ë¥´ë³„ ì „ì²´ ì¬ìƒ ìˆ˜ë¥¼ mapìœ¼ë¡œ ì €ì¥
 	map<string, int> total_play;
 	for (int i = 0; i < plays.size(); i++) {
 		total_play[genres[i]] += plays[i];
 	}
-	// 2. ³»¸²Â÷¼ø Á¤·Ä (mapÀº Á¤·ÄÀÌ ¾ÈµÇ±â ¶§¹®¿¡ vector ¹è¿­·Î ¿Å±ä µÚ Á¤·Ä)
+	// 2. ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬ (mapì€ ì •ë ¬ì´ ì•ˆë˜ê¸° ë•Œë¬¸ì— vector ë°°ì—´ë¡œ ì˜®ê¸´ ë’¤ ì •ë ¬)
 	vector<pair<string, int>> total(total_play.begin(), total_play.end());
 	sort(total.begin(), total.end(), compare_pair_second<greater>());
-	// 3. Á¤·Ä ÈÄ Å½»ö
+	// 3. ì •ë ¬ í›„ íƒìƒ‰
 	for (int i = 0; i < total.size(); i++) {
-		// 4. ÇöÀç Àå¸£ °ª ÃßÃâ
+		// 4. í˜„ì¬ ì¥ë¥´ ê°’ ì¶”ì¶œ
 		vector<pair<int, int>> genre;
 		for (int j = 0; j < plays.size(); j++) {
 			if (genres[j] == total[i].first) {
 				genre.push_back({ j, plays[j] });
 			}
 		}
-		// 5. ÇöÀç Àå¸£ Àç»ı ¼ö ³»¸²Â÷¼ø Á¤·Ä
+		// 5. í˜„ì¬ ì¥ë¥´ ì¬ìƒ ìˆ˜ ë‚´ë¦¼ì°¨ìˆœ ì •ë ¬
 		sort(genre.begin(), genre.end(), compare_pair_second<greater>());
-		// 6. ÃÖ´ë 2°³ »Ì¾Æ¼­ ÀÎµ¦½º¸¸ »ğÀÔ
+		// 6. ìµœëŒ€ 2ê°œ ë½‘ì•„ì„œ ì¸ë±ìŠ¤ë§Œ ì‚½ì…
 		for (int j = 0; j < genre.size() && j < 2; j++) {
 			answer.push_back(genre[j].first);
 		}

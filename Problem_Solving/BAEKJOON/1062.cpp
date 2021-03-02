@@ -6,41 +6,41 @@ using namespace std;
 string words[50];
 int n, k, res;
 
-// ÇöÀç ¾ËÆÄºª »çÀü, ¹è¿ö¾ßÇÒ ¾ËÆÄºª, Áö±Ý±îÁö ¹è¿î ¾ËÆÄºª ¼öÀÇ Á¤º¸¸¦ °¡Áö°í
-// ±ÛÀÚ¸¦ ÀÐÀ» ¼ö ÀÖ´ÂÁö È®ÀÎÇÑ´Ù 
+// í˜„ìž¬ ì•ŒíŒŒë²³ ì‚¬ì „, ë°°ì›Œì•¼í•  ì•ŒíŒŒë²³, ì§€ê¸ˆê¹Œì§€ ë°°ìš´ ì•ŒíŒŒë²³ ìˆ˜ì˜ ì •ë³´ë¥¼ ê°€ì§€ê³ 
+// ê¸€ìžë¥¼ ì½ì„ ìˆ˜ ìžˆëŠ”ì§€ í™•ì¸í•œë‹¤ 
 void readWord(int dic, int alpha, int cnt)
 {	
-	// ±ÛÀÚ¸¦ ¹è¿ï ¼ö ÀÖÀ»¸¸Å­ ¹è¿ü´Ù¸é
+	// ê¸€ìžë¥¼ ë°°ìš¸ ìˆ˜ ìžˆì„ë§Œí¼ ë°°ì› ë‹¤ë©´
 	if (cnt == k)
 	{
-		int canRead = 0; // ÀÐÀ» ¼ö ÀÖ´Â ´Ü¾î °³¼ö
+		int canRead = 0; // ì½ì„ ìˆ˜ ìžˆëŠ” ë‹¨ì–´ ê°œìˆ˜
 		for (int i = 0; i < n; i++)
 		{
 			int j;
 			for (j = 4; j < words[i].size() - 4; j++)
 			{
-				// ÇØ´ç ±ÛÀÚ°¡ »çÀü¿¡ ¾ø´Ù¸é ºê·¹ÀÌÅ©
+				// í•´ë‹¹ ê¸€ìžê°€ ì‚¬ì „ì— ì—†ë‹¤ë©´ ë¸Œë ˆì´í¬
 				if (!(dic & 1 << words[i][j] - 97))
 					break;
 			}
-			// ³¡±îÁö ¼öÇàÇÏ¸é ÀÐÀ» ¼ö ÀÖÀ½À» ÀÇ¹Ì
+			// ëê¹Œì§€ ìˆ˜í–‰í•˜ë©´ ì½ì„ ìˆ˜ ìžˆìŒì„ ì˜ë¯¸
 			if (j == words[i].size() - 4) canRead++;
 		}
-		// ÃÖ´ë°ª °»½Å
+		// ìµœëŒ€ê°’ ê°±ì‹ 
 		res = res < canRead ? canRead : res;
 		return;
 	}
-	// ¿ÏÀü Å½»ö
+	// ì™„ì „ íƒìƒ‰
 	for (int i = alpha; i < 26; i++)
 	{
-		// ¾ËÆÄºªÀ» ¹è¿ìÁö ¾ÊÀº »óÅÂ¶ó¸é
+		// ì•ŒíŒŒë²³ì„ ë°°ìš°ì§€ ì•Šì€ ìƒíƒœë¼ë©´
 		if (!(dic & 1 << i))
 		{
-			// »çÀü¿¡ Ãß°¡
+			// ì‚¬ì „ì— ì¶”ê°€
 			dic |= 1 << i;
-			// ´ÙÀ½ÁöÁ¡ Å½»ö
+			// ë‹¤ìŒì§€ì  íƒìƒ‰
 			readWord(dic, i + 1, cnt + 1);
-			// ¿ø»óº¹±¸
+			// ì›ìƒë³µêµ¬
 			dic &= ~(1 << i);
 		}
 	}
@@ -48,25 +48,25 @@ void readWord(int dic, int alpha, int cnt)
 
 int main(void)
 {
-	int dic = 0; // ºñÆ®¸¶½ºÅ© ¾ËÆÄºª »çÀü
-	// »çÀü¿¡ Á¢µÎ»ç, Á¢¹Ì»ç ¾ËÆÄºª Ãß°¡
+	int dic = 0; // ë¹„íŠ¸ë§ˆìŠ¤í¬ ì•ŒíŒŒë²³ ì‚¬ì „
+	// ì‚¬ì „ì— ì ‘ë‘ì‚¬, ì ‘ë¯¸ì‚¬ ì•ŒíŒŒë²³ ì¶”ê°€
 	for (char c : {'a', 'n', 't', 'i', 'c'})
 		dic |= 1 << c - 97;
 	cin >> n >> k;
-	// k°¡ 5 ¹Ì¸¸ÀÌ¸é ±ÛÀÚ¸¦ ¹è¿ï ¼ö ¾ø´Ù
+	// kê°€ 5 ë¯¸ë§Œì´ë©´ ê¸€ìžë¥¼ ë°°ìš¸ ìˆ˜ ì—†ë‹¤
 	if (k - 5 < 0)
 	{
 		cout << 0 << '\n';
 		return 0;
 	}
-	// k°¡ 26ÀÌ¸é ¸ðµç ±ÛÀÚ¸¦ ¹è¿ï ¼ö ÀÖ´Ù
+	// kê°€ 26ì´ë©´ ëª¨ë“  ê¸€ìžë¥¼ ë°°ìš¸ ìˆ˜ ìžˆë‹¤
 	if (k == 26)
 	{
 		cout << n << '\n';
 		return 0;
 	}
-	k -= 5; // ÀÌ¹Ì Á¢µÎ»ç, Á¢¹Ì»ç ¾ËÆÄºªÀ» ¹è¿ü´Ù
-	// ´Ü¾î ÀÔ·Â
+	k -= 5; // ì´ë¯¸ ì ‘ë‘ì‚¬, ì ‘ë¯¸ì‚¬ ì•ŒíŒŒë²³ì„ ë°°ì› ë‹¤
+	// ë‹¨ì–´ ìž…ë ¥
 	for (int i = 0; i < n; i++)
 		cin >> words[i];
 	readWord(dic, 0, 0);

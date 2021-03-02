@@ -5,62 +5,62 @@
 using namespace std;
 
 const int INF = 1987654321;
-string N; // ÀÔ·Â ¹®ÀÚ¿­
-vector<int> cache; // ¸Ş¸ğÀÌÁ¦ÀÌ¼Ç Ä³½Ì
+string N; // ì…ë ¥ ë¬¸ìì—´
+vector<int> cache; // ë©”ëª¨ì´ì œì´ì…˜ ìºì‹±
 
 int min(int a, int b) { return a < b ? a : b; }
 int abs(int a, int b) { return a > b ? a - b : b - a; }
 
 int classify(int a, int b)
 {
-	// ºÎºĞ ¼ö¿­ ÀúÀå
+	// ë¶€ë¶„ ìˆ˜ì—´ ì €ì¥
 	string M = N.substr(a, b - a + 1);
-	// ¸ğµç ¼ıÀÚ°¡ °°À» ¶§: 1
+	// ëª¨ë“  ìˆ«ìê°€ ê°™ì„ ë•Œ: 1
 	if (M == string(M.size(), M[0])) return 1;
-	// µîÂ÷¼ö¿­ È®ÀÎ
+	// ë“±ì°¨ìˆ˜ì—´ í™•ì¸
 	bool progressive = true;
 	for (int i = 1; i < M.size() - 1; i++)
 	{
-		// µîÂ÷¼ö¿­ Á¶°Ç
+		// ë“±ì°¨ìˆ˜ì—´ ì¡°ê±´
 		if (M[i + 1] - M[i] != M[1] - M[0])
 		{
 			progressive = false;
 			break;
 		}
 	}
-	// °øÂ÷°¡ 1ÀÎ µîÂ÷¼ö¿­: 2
+	// ê³µì°¨ê°€ 1ì¸ ë“±ì°¨ìˆ˜ì—´: 2
 	if (progressive && abs(M[1] - M[0]) == 1) return 2;
-	// ¹İº¹ ¼ıÀÚ È®ÀÎ
+	// ë°˜ë³µ ìˆ«ì í™•ì¸
 	int alternating = true;
 	for (int i = 2; i < M.size(); i++)
 	{
-		// µÎ°³ÀÇ ¼ıÀÚ°¡ ¹ø°¥¾Æ °¡¸é¼­ ³ªÅ¸³ª´ÂÁö È®ÀÎ
+		// ë‘ê°œì˜ ìˆ«ìê°€ ë²ˆê°ˆì•„ ê°€ë©´ì„œ ë‚˜íƒ€ë‚˜ëŠ”ì§€ í™•ì¸
 		if (M[i] != M[i % 2])
 		{
 			alternating = false;
 			break;
 		}
 	}
-	// ¹ø°¥¾Æ °¡¸é¼­ ³ªÅ¸³ª¸é: 4
+	// ë²ˆê°ˆì•„ ê°€ë©´ì„œ ë‚˜íƒ€ë‚˜ë©´: 4
 	if (alternating) return 4;
-	// µîÂ÷¼ö¿­ÀÌ¸é: 5
+	// ë“±ì°¨ìˆ˜ì—´ì´ë©´: 5
 	if (progressive) return 5;
-	// ±× ¿ÜÀÇ °æ¿ì: 10
+	// ê·¸ ì™¸ì˜ ê²½ìš°: 10
 	return 10;
 }
 
 int memorize(int begin)
 {
-	// ±âÀú »ç·Ê: beginÀÌ ³¡¿¡ µµ´ŞÇßÀ» ¶§
+	// ê¸°ì € ì‚¬ë¡€: beginì´ ëì— ë„ë‹¬í–ˆì„ ë•Œ
 	if (begin == N.size()) return 0;
-	// ¸Ş¸ğÀÌÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì´ì œì´ì…˜
 	int& ret = cache[begin];
 	if (ret != -1) return ret;
-	ret = INF; // ÃÖ¼Ú°ª ÀúÀåÀ» À§ÇÑ ÃÊ±âÈ­
-	// 3~5±ÛÀÚ ²÷¾î ¾²±â
+	ret = INF; // ìµœì†Ÿê°’ ì €ì¥ì„ ìœ„í•œ ì´ˆê¸°í™”
+	// 3~5ê¸€ì ëŠì–´ ì“°ê¸°
 	for (int i = 3; i <= 5; i++)
 	{
-		// (iÁ¶°¢ •û°í ³ª¸ÓÁö ¼ö¿­¿¡ ´ëÇÑ ÃÖÀûÇØ + ±æÀÌ iÀÎ Á¶°¢ÀÇ ³­ÀÌµµ)µé Áß ÃÖ¼Ò°ª ÀúÀå
+		// (iì¡°ê° ëº´ê³  ë‚˜ë¨¸ì§€ ìˆ˜ì—´ì— ëŒ€í•œ ìµœì í•´ + ê¸¸ì´ iì¸ ì¡°ê°ì˜ ë‚œì´ë„)ë“¤ ì¤‘ ìµœì†Œê°’ ì €ì¥
 		if (begin + i <= N.size())
 			ret = min(ret, memorize(begin + i) + classify(begin, begin + i - 1));
 	}

@@ -1,5 +1,5 @@
-// DP ¹®Á¦
-// LIS ¹®Á¦
+// DP ë¬¸ì œ
+// LIS ë¬¸ì œ
 #include<iostream>
 #define N 1001
 
@@ -14,9 +14,9 @@ int main(void)
 	for(int i = 1; i <= n; i++)
 		cin >> a[i];
 	int count, max = 0;
-	// Áö³­ ¼öµé Áß¿¡¼­ ÇöÀç À§Ä¡º¸´Ù ÀÛÀº ¼ö¸¸ Ã¼Å©
-	// Ã¼Å©µÈ ¼öµé Áß DP °ªÀÌ °¡Àå Å« ¼ö + 1À» ÇöÀç À§Ä¡ DP°ª¿¡ ÀúÀå
-	// DPÀÇ ÃÖ´ë°ª Ãâ·Â
+	// ì§€ë‚œ ìˆ˜ë“¤ ì¤‘ì—ì„œ í˜„ìž¬ ìœ„ì¹˜ë³´ë‹¤ ìž‘ì€ ìˆ˜ë§Œ ì²´í¬
+	// ì²´í¬ëœ ìˆ˜ë“¤ ì¤‘ DP ê°’ì´ ê°€ìž¥ í° ìˆ˜ + 1ì„ í˜„ìž¬ ìœ„ì¹˜ DPê°’ì— ì €ìž¥
+	// DPì˜ ìµœëŒ€ê°’ ì¶œë ¥
 	for (int i = 1; i <= n; i++)
 	{
 		count = 0;

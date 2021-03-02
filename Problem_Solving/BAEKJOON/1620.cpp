@@ -12,9 +12,9 @@ int main(void)
 	cout.tie(0);
 	int n, m;
 	cin >> n >> m;
-	unordered_map<string, int> dic; // key: Æ÷ÄÏ¸ó, value: ¹øÈ£
-	vector<string> dic2; // key: ¹øÈ£, value: Æ÷ÄÏ¸ó
-	// »çÀü »ı¼º
+	unordered_map<string, int> dic; // key: í¬ì¼“ëª¬, value: ë²ˆí˜¸
+	vector<string> dic2; // key: ë²ˆí˜¸, value: í¬ì¼“ëª¬
+	// ì‚¬ì „ ìƒì„±
 	for (int i = 0; i < n; i++)
 	{
 		string s;
@@ -22,15 +22,15 @@ int main(void)
 		dic[s] = i + 1;
 		dic2.push_back(s);
 	}
-	// »çÀü °Ë»ö
+	// ì‚¬ì „ ê²€ìƒ‰
 	while(m--)
 	{
 		string s;
 		cin >> s;
-		// ¼ıÀÚÀÌ¸é
+		// ìˆ«ìì´ë©´
 		if (s[0] >= '0' && s[0] <= '9')
 			cout << dic2[stoi(s) - 1] << '\n';
-		// Æ÷ÄÏ¸óÀÌ¸é
+		// í¬ì¼“ëª¬ì´ë©´
 		else
 			cout << dic[s] << '\n';
 	}

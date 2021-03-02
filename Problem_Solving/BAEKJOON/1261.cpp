@@ -13,59 +13,59 @@ int main(void)
 	cin >> m >> n;
 	vector<string> adj(n);
 	for (int i = 0; i < n; i++)
-		cin >> adj[i]; // string ÀÔ·Â(ºÙ¾î¼­ ÀÔ·ÂµÊ)
+		cin >> adj[i]; // string ìž…ë ¥(ë¶™ì–´ì„œ ìž…ë ¥ë¨)
 	queue<pair<int, int>> q;
-	// broken[x][y] (x, y)±îÁö µµ´ÞÇÒ ¶§ ±îÁö ºÎ¼ø º®ÀÇ ÃÖ¼Ò °³¼ö
+	// broken[x][y] (x, y)ê¹Œì§€ ë„ë‹¬í•  ë•Œ ê¹Œì§€ ë¶€ìˆœ ë²½ì˜ ìµœì†Œ ê°œìˆ˜
 	vector<vector<int>> broken(n, vector<int>(m, 123456));
-	// »óÇÏÁÂ¿ì ÀÌµ¿ Áõ°¡·®
+	// ìƒí•˜ì¢Œìš° ì´ë™ ì¦ê°€ëŸ‰
 	int dx[] = { 1,0,-1,0 };
 	int dy[] = { 0,1,0,-1 };
-	// ÃÊ±â Å¥
+	// ì´ˆê¸° í
 	q.push(make_pair(0, 0));
 	broken[0][0] = 0;
-	// BFS Å½»ö
+	// BFS íƒìƒ‰
 	while (!q.empty())
 	{
-		// Å¥¿¡¼­ ÃßÃâ
+		// íì—ì„œ ì¶”ì¶œ
 		int x = q.front().first;
 		int y = q.front().second;
 		q.pop();
-		// »óÇÏÁÂ¿ì ÀÌµ¿
+		// ìƒí•˜ì¢Œìš° ì´ë™
 		for (int i = 0; i < 4; i++)
 		{
-			// ÀÌµ¿ ÈÄ À§Ä¡°ª
+			// ì´ë™ í›„ ìœ„ì¹˜ê°’
 			int nx = x + dx[i];
 			int ny = y + dy[i];
-			// ¹üÀ§ ¾È¿¡ ¼ÓÇÏ´Â Áö È®ÀÎ
+			// ë²”ìœ„ ì•ˆì— ì†í•˜ëŠ” ì§€ í™•ì¸
 			if (nx >= 0 && nx < n && ny >= 0 && ny < m)
 			{
-				// ÀÌµ¿ ÇÑ °÷¿¡ º®ÀÌ ÀÖÀ¸¸é
+				// ì´ë™ í•œ ê³³ì— ë²½ì´ ìžˆìœ¼ë©´
 				if (adj[nx][ny] == '1')
 				{
-					// Áö±Ý ±îÁö ºÎ¼ø º®ÀÇ ÃÖ¼Ò °³¼ö °»½Å(´ÙÀÍ½ºÆ®¶ó)
-					// º®ÀÌ ÀÖ±â ¶§¹®¿¡ ÀÌÀü À§Ä¡¿¡¼­ 1 Áõ°¡µÈ °ª°ú ºñ±³
+					// ì§€ê¸ˆ ê¹Œì§€ ë¶€ìˆœ ë²½ì˜ ìµœì†Œ ê°œìˆ˜ ê°±ì‹ (ë‹¤ìµìŠ¤íŠ¸ë¼)
+					// ë²½ì´ ìžˆê¸° ë•Œë¬¸ì— ì´ì „ ìœ„ì¹˜ì—ì„œ 1 ì¦ê°€ëœ ê°’ê³¼ ë¹„êµ
 					if (broken[nx][ny] > broken[x][y] + 1)
 					{
 						broken[nx][ny] = broken[x][y] + 1;
-						// Å¥¿¡ Ãß°¡(Áßº¹À¸·Î Ãß°¡µÉ ¼öµµ ÀÖÁö¸¸ ¿¬»ê·®ÀÌ ÀûÀ¸¹Ç·Î ¹«½Ã)
+						// íì— ì¶”ê°€(ì¤‘ë³µìœ¼ë¡œ ì¶”ê°€ë  ìˆ˜ë„ ìžˆì§€ë§Œ ì—°ì‚°ëŸ‰ì´ ì ìœ¼ë¯€ë¡œ ë¬´ì‹œ)
 						q.push(make_pair(nx, ny));
 					}
 				}
-				// º®ÀÌ ¾øÀ¸¸é
+				// ë²½ì´ ì—†ìœ¼ë©´
 				else
 				{
-					// Áö±Ý ±îÁö ºÎ¼ø º®ÀÇ ÃÖ¼Ò °³¼ö °»½Å(´ÙÀÍ½ºÆ®¶ó)
-					// º®ÀÌ ¾ø±â ¶§¹®¿¡ ÀÌÀü À§Ä¡°ª ±×´ë·Î ºñ±³
+					// ì§€ê¸ˆ ê¹Œì§€ ë¶€ìˆœ ë²½ì˜ ìµœì†Œ ê°œìˆ˜ ê°±ì‹ (ë‹¤ìµìŠ¤íŠ¸ë¼)
+					// ë²½ì´ ì—†ê¸° ë•Œë¬¸ì— ì´ì „ ìœ„ì¹˜ê°’ ê·¸ëŒ€ë¡œ ë¹„êµ
 					if (broken[nx][ny] > broken[x][y])
 					{
 						broken[nx][ny] = broken[x][y];
-						// Å¥¿¡ Ãß°¡(Áßº¹À¸·Î Ãß°¡µÉ ¼öµµ ÀÖÁö¸¸ ¿¬»ê·®ÀÌ ÀûÀ¸¹Ç·Î ¹«½Ã)
+						// íì— ì¶”ê°€(ì¤‘ë³µìœ¼ë¡œ ì¶”ê°€ë  ìˆ˜ë„ ìžˆì§€ë§Œ ì—°ì‚°ëŸ‰ì´ ì ìœ¼ë¯€ë¡œ ë¬´ì‹œ)
 						q.push(make_pair(nx, ny));
 					}
 				}
 			}
 		}
 	}
-	// Å½»ö ÈÄ ºÎ¼ø º®ÀÇ ÃÖ¼Ú°ª Ãâ·Â
+	// íƒìƒ‰ í›„ ë¶€ìˆœ ë²½ì˜ ìµœì†Ÿê°’ ì¶œë ¥
 	cout << broken[n - 1][m - 1] << '\n';
 }

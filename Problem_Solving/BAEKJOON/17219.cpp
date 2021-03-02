@@ -11,16 +11,16 @@ int main(void)
 	cout.tie(0);
 	int n, m;
 	cin >> n >> m;
-	unordered_map<string, string> pw; // ÇØ½Ã Å×ÀÌºí »ı¼º
+	unordered_map<string, string> pw; // í•´ì‹œ í…Œì´ë¸” ìƒì„±
 	string key;
-	// µ¥ÀÌÅÍ Ãß°¡
+	// ë°ì´í„° ì¶”ê°€
 	while(n--)
 	{
 		string value;
 		cin >> key >> value;
 		pw[key] = value;
 	}
-	// µ¥ÀÌÅÍ °Ë»ö
+	// ë°ì´í„° ê²€ìƒ‰
 	while(m--)
 	{
 		cin >> key;

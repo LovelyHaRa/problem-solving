@@ -3,55 +3,55 @@
 
 using namespace std;
 
-// ÇØ´ç ·Î±× ¶óÀÎÀÇ ³¡³ª´Â ½Ã°£(ms), Ã³¸®½Ã°£(ms)À» º¯È¯ÇÏ¿© ¹İÈ¯
+// í•´ë‹¹ ë¡œê·¸ ë¼ì¸ì˜ ëë‚˜ëŠ” ì‹œê°„(ms), ì²˜ë¦¬ì‹œê°„(ms)ì„ ë³€í™˜í•˜ì—¬ ë°˜í™˜
 pair<int, int> getTime(string line) {
-	// ·Î±× ½Ã°£(³¡³ª´Â ½Ã°£) string ÃßÃâ
+	// ë¡œê·¸ ì‹œê°„(ëë‚˜ëŠ” ì‹œê°„) string ì¶”ì¶œ
 	string hh = line.substr(11, 2);
 	string mm = line.substr(14, 2);
 	string ss = line.substr(17, 6);
 	ss.erase(ss.begin() + 2);
-	// ·Î±× ½Ã°£ º¯È¯
+	// ë¡œê·¸ ì‹œê°„ ë³€í™˜
 	int h = stoi(hh) * 60 * 60 * 1000;
 	int m = stoi(mm) * 60 * 1000;
 	int s = stoi(ss);
-	// ³¡³ª´Â ½Ã°£ ÃßÃâ
+	// ëë‚˜ëŠ” ì‹œê°„ ì¶”ì¶œ
 	string p = line.substr(24);
 	p.pop_back();
-	// ³¡³ª´Â ½Ã°£ º¯È¯
+	// ëë‚˜ëŠ” ì‹œê°„ ë³€í™˜
 	int ptime = stod(p) * 1000;
-	// ¸®ÅÏ
+	// ë¦¬í„´
 	return make_pair(h + m + s, ptime);
 }
 
 int solution(vector<string> lines) {
 	int answer = 0;
-	vector<int> start, end; // ½ÃÀÛ ½Ã°£, ³¡³ª´Â ½Ã°£ ¹è¿­
-	// ·Î±× Å½»ö
+	vector<int> start, end; // ì‹œì‘ ì‹œê°„, ëë‚˜ëŠ” ì‹œê°„ ë°°ì—´
+	// ë¡œê·¸ íƒìƒ‰
 	for (int i = 0; i < lines.size(); i++) {
-		// ½Ã°£ º¯È¯
+		// ì‹œê°„ ë³€í™˜
 		pair<int, int> t = getTime(lines[i]);
-		// ½ÃÀÛ ½Ã°£ ±¸ÇÏ±â
+		// ì‹œì‘ ì‹œê°„ êµ¬í•˜ê¸°
 		int startTime = t.first - t.second + 1;
-		// ½ÃÀÛ ½Ã°£ÀÌ ¾îÁ¦¶ó¸é 0À¸·Î ¸¸µé±â
+		// ì‹œì‘ ì‹œê°„ì´ ì–´ì œë¼ë©´ 0ìœ¼ë¡œ ë§Œë“¤ê¸°
 		if (startTime < 0) startTime = 0;
-		// ¹è¿­¿¡ »ğÀÔ
+		// ë°°ì—´ì— ì‚½ì…
 		start.push_back(startTime);
 		end.push_back(t.first);
 	}
-	// °¢ ·Î±× º°·Î ³¡³ª´Â ½Ã°£À» ±âÁØÀ¸·Î 1ÃÊ µ¿¾È Ã³¸®µÈ ¾çÀ» ±¸ÇÑ´Ù
+	// ê° ë¡œê·¸ ë³„ë¡œ ëë‚˜ëŠ” ì‹œê°„ì„ ê¸°ì¤€ìœ¼ë¡œ 1ì´ˆ ë™ì•ˆ ì²˜ë¦¬ëœ ì–‘ì„ êµ¬í•œë‹¤
 	for (int i = 0; i < lines.size(); i++) {
-		int cnt = 1; // ÇØ´ç ½Ã°£ Ã³¸®·®
-		int effectTime = end[i] + 999; // ½Ã°£ ¹üÀ§
-		// ¿À´ÃÀ» ³Ñ±â¸é ´çÀÏ ¸¶Áö¸· ÃÊ ÀúÀå
+		int cnt = 1; // í•´ë‹¹ ì‹œê°„ ì²˜ë¦¬ëŸ‰
+		int effectTime = end[i] + 999; // ì‹œê°„ ë²”ìœ„
+		// ì˜¤ëŠ˜ì„ ë„˜ê¸°ë©´ ë‹¹ì¼ ë§ˆì§€ë§‰ ì´ˆ ì €ì¥
 		if (effectTime > 60 * 60 * 24 * 1000) effectTime = 60 * 60 * 24 * 1000;
-		// ÇöÀç ·Î±× ±âÁØ ºÎÅÍ ·Î±× ³¡±îÁö Å½»ö
+		// í˜„ì¬ ë¡œê·¸ ê¸°ì¤€ ë¶€í„° ë¡œê·¸ ëê¹Œì§€ íƒìƒ‰
 		for (int j = i + 1; j < lines.size(); j++) {
-			// ½ÃÀÛ ½Ã°£ÀÌ ½Ã°£ ¹üÀ§ ³»¿¡ ÀÖÀ¸¸é Ã³¸®·® Áõ°¡
+			// ì‹œì‘ ì‹œê°„ì´ ì‹œê°„ ë²”ìœ„ ë‚´ì— ìˆìœ¼ë©´ ì²˜ë¦¬ëŸ‰ ì¦ê°€
 			if (start[j] <= effectTime) {
 				cnt++;
 			}
 		}
-		// Ã³¸®·® ÃÖ´ë°ª °»½Å
+		// ì²˜ë¦¬ëŸ‰ ìµœëŒ€ê°’ ê°±ì‹ 
 		answer = answer < cnt ? cnt : answer;
 	}
 	return answer;

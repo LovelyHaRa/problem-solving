@@ -16,25 +16,25 @@ int main(void)
 	sort(a.begin(), a.end());
 	do
 	{
-		vector<int> t; // ÀÓ½Ã ¼ö¿­
+		vector<int> t; // ì„ì‹œ ìˆ˜ì—´
 		t.push_back(a[0]);
 		int i;
-		// m°³¸¸Å­ Ãß°¡
+		// mê°œë§Œí¼ ì¶”ê°€
 		for (i = 1; i < m; i++)
 		{
-			// ¿À¸§Â÷¼øÀ» ¸¸Á·ÇÏ¸é ÀúÀå
+			// ì˜¤ë¦„ì°¨ìˆœì„ ë§Œì¡±í•˜ë©´ ì €ì¥
 			if (t.back() < a[i])
 				t.push_back(a[i]);
 			else
 				break;
 		}
-		// ¹İº¹¹®ÀÌ ³¡±îÁö ¼öÇàµÇ¸é Á¶°ÇÀ» ÃæÁ·ÇÑ ¼ö¿­
+		// ë°˜ë³µë¬¸ì´ ëê¹Œì§€ ìˆ˜í–‰ë˜ë©´ ì¡°ê±´ì„ ì¶©ì¡±í•œ ìˆ˜ì—´
 		if (i == m)
 		{
 			for (int i = 0; i < t.size(); i++)
 				cout << t[i] << ' ';
 			cout << '\n';
 		}
-		reverse(a.begin() + m, a.end()); // ³ª¸ÓÁö m°³ °Ç³Ê¶Ù±â
+		reverse(a.begin() + m, a.end()); // ë‚˜ë¨¸ì§€ mê°œ ê±´ë„ˆë›°ê¸°
 	} while (next_permutation(a.begin(), a.end()));
 }

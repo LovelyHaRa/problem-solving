@@ -5,14 +5,14 @@ using namespace std;
 
 int jump(const vector<vector<int>>& board, vector<vector<int>>& cache, int n, int y, int x)
 {
-	// ±âÀú »ç·Ê: ¿µ¿ªÀ» ¹ş¾î³ª¸é ¶Û ¼ö ¾øÀ½
+	// ê¸°ì € ì‚¬ë¡€: ì˜ì—­ì„ ë²—ì–´ë‚˜ë©´ ë›¸ ìˆ˜ ì—†ìŒ
 	if (y >= n || x >= n) return 0;
-	// ±âÀú »ç·Ê: ¸¶Áö¸· Ä­¿¡ µµ´ŞÇÏ¸é °¡´ÉÇÑ °ÍÀÌ¹Ç·Î 1 ¸®ÅÏ
+	// ê¸°ì € ì‚¬ë¡€: ë§ˆì§€ë§‰ ì¹¸ì— ë„ë‹¬í•˜ë©´ ê°€ëŠ¥í•œ ê²ƒì´ë¯€ë¡œ 1 ë¦¬í„´
 	if (y == n - 1 && x == n - 1) return 1;
-	int& ref = cache[y][x]; // ÂüÁ¶º¯¼ö
-	if (ref != -1) return ref; // Ä³½ÌµÇ¾îÀÖÀ¸¸é Ä³½Ì °ª ¸®ÅÏ
-	int jumpSize = board[y][x]; // ÁÂÇ¥°ª=Á¡ÇÁ°¡´ÉÄ­
-	// Àç±ÍÅ½»ö°ú µ¿½Ã¿¡ Ä³½Ì
+	int& ref = cache[y][x]; // ì°¸ì¡°ë³€ìˆ˜
+	if (ref != -1) return ref; // ìºì‹±ë˜ì–´ìˆìœ¼ë©´ ìºì‹± ê°’ ë¦¬í„´
+	int jumpSize = board[y][x]; // ì¢Œí‘œê°’=ì í”„ê°€ëŠ¥ì¹¸
+	// ì¬ê·€íƒìƒ‰ê³¼ ë™ì‹œì— ìºì‹±
 	return ref = jump(board, cache, n, y + jumpSize, x) || jump(board, cache, n, y, x + jumpSize);
 }
 
@@ -27,8 +27,8 @@ int main(void)
 	{
 		int n;
 		cin >> n;
-		vector<vector<int>> cache(n, vector<int>(n, -1)); // ¸Ş¸ğÁ¦ÀÌ¼Ç Ä³½Ã
-		vector<vector<int>> board(n, vector<int>(n)); // º¸µå
+		vector<vector<int>> cache(n, vector<int>(n, -1)); // ë©”ëª¨ì œì´ì…˜ ìºì‹œ
+		vector<vector<int>> board(n, vector<int>(n)); // ë³´ë“œ
 		for (int i = 0; i < n; i++)
 		{
 			for (int j = 0; j < n; j++)

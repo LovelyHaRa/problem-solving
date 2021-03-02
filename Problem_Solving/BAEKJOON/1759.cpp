@@ -8,13 +8,13 @@ int l, c;
 vector<char> pw, selected;
 vector<int> visited;
 
-// ¼ø¿­ »ı¼º
+// ìˆœì—´ ìƒì„±
 void permutation(int cnt)
 {
-	// ±âÀú »ç·Ê: ¸ñÇ¥ ±æÀÌ¿¡ µµ´ŞÇßÀ» ¶§
+	// ê¸°ì € ì‚¬ë¡€: ëª©í‘œ ê¸¸ì´ì— ë„ë‹¬í–ˆì„ ë•Œ
 	if (cnt == l)
 	{
-		// ÀÚ/¸ğÀ½ Ã¼Å©
+		// ì/ëª¨ìŒ ì²´í¬
 		int con = 0, vow = 0;
 		for (int i = 0; i < l; i++)
 		{
@@ -24,9 +24,9 @@ void permutation(int cnt)
 				con++;
 			if (con > 1 && vow > 0) break;
 		}
-		// ÀÚÀ½ 2°³¹Ì¸¸ ¶Ç´Â ¸ğÀ½ÀÌ ¾øÀ¸¸é Ãâ·Â ¾ÈÇÔ
+		// ììŒ 2ê°œë¯¸ë§Œ ë˜ëŠ” ëª¨ìŒì´ ì—†ìœ¼ë©´ ì¶œë ¥ ì•ˆí•¨
 		if (con <= 1 || vow == 0) return;
-		// ¼ø¿­ Ãâ·Â
+		// ìˆœì—´ ì¶œë ¥
 		for (int i = 0; i < l; i++)
 			cout << selected[i];
 		cout << '\n';
@@ -34,12 +34,12 @@ void permutation(int cnt)
 	}
 	for (int i = 0; i < c; i++)
 	{
-		// ¼ø¿­Àº ¿À¸§Â÷¼øÀÌ¾î¾ß ÇÑ´Ù
+		// ìˆœì—´ì€ ì˜¤ë¦„ì°¨ìˆœì´ì–´ì•¼ í•œë‹¤
 		if (visited[i] || (cnt > 0 && selected[cnt - 1] > pw[i])) continue;
-		visited[i] = 1; // ¹æ¹® Ã¼Å©
-		selected[cnt] = pw[i]; // ¼ø¿­ ¿ø¼Ò Ãß°¡
-		permutation(cnt + 1); // ´ÙÀ½ ÁöÁ¡ Å½»ö
-		visited[i] = 0; // ¿ø»ó º¹±¸
+		visited[i] = 1; // ë°©ë¬¸ ì²´í¬
+		selected[cnt] = pw[i]; // ìˆœì—´ ì›ì†Œ ì¶”ê°€
+		permutation(cnt + 1); // ë‹¤ìŒ ì§€ì  íƒìƒ‰
+		visited[i] = 0; // ì›ìƒ ë³µêµ¬
 	}
 }
 
@@ -51,7 +51,7 @@ int main(void)
 	selected.resize(l);
 	for (int i = 0; i < c; i++)
 		cin >> pw[i];
-	// Á¤·Ä
+	// ì •ë ¬
 	sort(pw.begin(), pw.end());
 	permutation(0);
 }

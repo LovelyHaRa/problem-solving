@@ -2,20 +2,20 @@
 #include<cstring>
 
 using namespace std;
-void printDecimal(int a, int b); // ºĞ¼ö¸¦ ¼Ò¼ö·Î º¯È¯ÇÏ´Â ÇÔ¼ö
+void printDecimal(int a, int b); // ë¶„ìˆ˜ë¥¼ ì†Œìˆ˜ë¡œ ë³€í™˜í•˜ëŠ” í•¨ìˆ˜
 
 int main(void)
 {
 	freopen("input.txt", "r", stdin);
 	//freopen("output.txt", "w", stdout);
-	int T; // Å×½ºÆ®ÄÉÀÌ½º
-	int a, b; // ºĞÀÚ, ºĞ¸ğ
+	int T; // í…ŒìŠ¤íŠ¸ì¼€ì´ìŠ¤
+	int a, b; // ë¶„ì, ë¶„ëª¨
 	cin.sync_with_stdio(false);
 	cin >> T;
 	while (T > 0)
 	{
-		cin >> a >> b; // ÀÔ·Â ¹ŞÀ½
-		printDecimal(a, b); // ÇÔ¼ö È£Ãâ
+		cin >> a >> b; // ì…ë ¥ ë°›ìŒ
+		printDecimal(a, b); // í•¨ìˆ˜ í˜¸ì¶œ
 		T--;
 	}
 
@@ -23,32 +23,32 @@ int main(void)
 
 void printDecimal(int a, int b)
 {
-	int p[10240 + 1]; // key : ³ª¸ÓÁö°ª, value : ¼Ò¼öÁ¡ À§Ä¡
-	int nature = a / b; // ¼Ò¼öÁ¡ À­ºÎºĞ	
-	int k = 0; // ¼Ò¼öÁ¡ ÀÌÇÏ À§Ä¡
-	int start = 0, end = 0; // ¼øÈ¯ ½ÃÀÛ, ³¡ ÁöÁ¡
-	int res = (a%b) * 10; // °á°ú ÃÊ±â°ª
-	memset(p, -1, sizeof(p)); // ¹è¿­ -1·Î ÃÊ±âÈ­
+	int p[10240 + 1]; // key : ë‚˜ë¨¸ì§€ê°’, value : ì†Œìˆ˜ì  ìœ„ì¹˜
+	int nature = a / b; // ì†Œìˆ˜ì  ìœ—ë¶€ë¶„	
+	int k = 0; // ì†Œìˆ˜ì  ì´í•˜ ìœ„ì¹˜
+	int start = 0, end = 0; // ìˆœí™˜ ì‹œì‘, ë ì§€ì 
+	int res = (a%b) * 10; // ê²°ê³¼ ì´ˆê¸°ê°’
+	memset(p, -1, sizeof(p)); // ë°°ì—´ -1ë¡œ ì´ˆê¸°í™”
 	while (1)
 	{
-		a = (a%b) * 10; // ÀÚ¸´¼ö °è»ê
-		// ¼øÈ¯ÁöÁ¡ ÆÄ¾Ç
+		a = (a%b) * 10; // ìë¦¿ìˆ˜ ê³„ì‚°
+		// ìˆœí™˜ì§€ì  íŒŒì•…
 		if (p[a] != -1)
 		{
-			start = p[a]; //½ÃÀÛÁöÁ¡ ÀúÀå
-			end = k; // ³¡ÁöÁ¡ ÀúÀå
-			break; // ¹İº¹¹® Á¾·á
+			start = p[a]; //ì‹œì‘ì§€ì  ì €ì¥
+			end = k; // ëì§€ì  ì €ì¥
+			break; // ë°˜ë³µë¬¸ ì¢…ë£Œ
 		}
 		p[a] = k++; //
 	}
-	cout << nature << '.'; // ¼Ò¼öÁ¡ À­ºÎºĞ Ãâ·Â
-	// ¼øÈ¯µÇ±â Àü ¼Ò¼öºÎºĞ Ãâ·Â
+	cout << nature << '.'; // ì†Œìˆ˜ì  ìœ—ë¶€ë¶„ ì¶œë ¥
+	// ìˆœí™˜ë˜ê¸° ì „ ì†Œìˆ˜ë¶€ë¶„ ì¶œë ¥
 	for (int i = 0; i < start; i++)
 	{
 		cout << res / b;
 		res = (res%b) * 10;
 	}
-	// ¼øÈ¯ºÎºĞ Ãâ·Â
+	// ìˆœí™˜ë¶€ë¶„ ì¶œë ¥
 	cout << '(';
 	for (int i = start; i < end; i++)
 	{

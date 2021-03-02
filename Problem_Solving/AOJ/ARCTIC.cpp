@@ -8,15 +8,15 @@ using namespace std;
 vector<vector<double>> dist;
 int n;
 
-// °áÁ¤ ¹®Á¦: °Å¸® dÀÌÇÏÀÎ ±âÁöµéÀ» ¿¬°á ÇßÀ» ¶§ ¸ğµÎ ¿¬°áÇÒ ¼ö ÀÖ´ÂÁö ¿©ºÎ ¹İÈ¯
+// ê²°ì • ë¬¸ì œ: ê±°ë¦¬ dì´í•˜ì¸ ê¸°ì§€ë“¤ì„ ì—°ê²° í–ˆì„ ë•Œ ëª¨ë‘ ì—°ê²°í•  ìˆ˜ ìˆëŠ”ì§€ ì—¬ë¶€ ë°˜í™˜
 bool decision(double d)
 {
-	// BFS Å½»ö
+	// BFS íƒìƒ‰
 	vector<bool> visited(n, false);
 	visited[0] = true;
 	queue<int> q;
 	q.push(0);
-	int seen = 0; // ¿¬°á °³¼ö
+	int seen = 0; // ì—°ê²° ê°œìˆ˜
 	while (!q.empty())
 	{
 		int here = q.front();
@@ -24,7 +24,7 @@ bool decision(double d)
 		seen++;
 		for (int there = 0; there < n; there++)
 		{
-			// °Å¸®°¡ d ÀÌÇÏÀÌ¸é Å¥¿¡ Ãß°¡
+			// ê±°ë¦¬ê°€ d ì´í•˜ì´ë©´ íì— ì¶”ê°€
 			if (!visited[there] && dist[here][there] <= d)
 			{
 				visited[there] = true;
@@ -32,23 +32,23 @@ bool decision(double d)
 			}
 		}
 	}
-	// ¸ğµç ±âÁö°¡ ¿¬°á µÇ¾úÀ¸¸é true
+	// ëª¨ë“  ê¸°ì§€ê°€ ì—°ê²° ë˜ì—ˆìœ¼ë©´ true
 	return seen == n;
 }
 
-// ÃÖÀûÈ­ ¹®Á¦: °Å¸®¸¦ ±â¹İÀ¸·Î ÀÌºĞ¹ı Å½»ö
+// ìµœì í™” ë¬¸ì œ: ê±°ë¦¬ë¥¼ ê¸°ë°˜ìœ¼ë¡œ ì´ë¶„ë²• íƒìƒ‰
 double optimize()
 {
-	double lo = 0, hi = 1416; // ÃÖ´ë °Å¸®+1
+	double lo = 0, hi = 1416; // ìµœëŒ€ ê±°ë¦¬+1
 	for (int i = 0; i < 100; i++)
 	{
 		double mid = (lo + hi) / 2;
-		// ÇØ´ç °Å¸®³»¿¡ ¸ğµç ÁöÁ¡À» ¿¬°á °¡´ÉÇÏ¸é
+		// í•´ë‹¹ ê±°ë¦¬ë‚´ì— ëª¨ë“  ì§€ì ì„ ì—°ê²° ê°€ëŠ¥í•˜ë©´
 		if (decision(mid))
-			hi = mid; // ´õ ÀÛÀº °ªÀ» Ã£´Â´Ù
-		// ¿¬°á ºÒ°¡´É ÇÏ¸é
+			hi = mid; // ë” ì‘ì€ ê°’ì„ ì°¾ëŠ”ë‹¤
+		// ì—°ê²° ë¶ˆê°€ëŠ¥ í•˜ë©´
 		else
-			lo = mid; // ´õ Å« °ªÀ» Ã£´Â´Ù
+			lo = mid; // ë” í° ê°’ì„ ì°¾ëŠ”ë‹¤
 	}
 	return hi;
 }
@@ -60,7 +60,7 @@ int main(void)
 	while (c--)
 	{
 		cin >> n;
-		vector<pair<double, double>> g(n); // ÁÂÇ¥°ª ÀúÀå
+		vector<pair<double, double>> g(n); // ì¢Œí‘œê°’ ì €ì¥
 		for (int i = 0; i < n; i++)
 		{
 			double x, y;
@@ -68,19 +68,19 @@ int main(void)
 			g[i] = make_pair(x, y);
 		}
 		dist.resize(n, vector<double>(n));
-		// °Å¸® ÀúÀå
+		// ê±°ë¦¬ ì €ì¥
 		for (int i = 0; i < n; i++)
 		{
 			for (int j = i + 1; j < n; j++)
 			{
-				// °Å¸® ±¸ÇÏ±â
+				// ê±°ë¦¬ êµ¬í•˜ê¸°
 				double d = sqrt(pow(g[i].first - g[j].first, 2) + pow(g[i].second - g[j].second, 2));
-				// ¹«¹æÇâ ±×·¡ÇÁ ÀúÀå
+				// ë¬´ë°©í–¥ ê·¸ë˜í”„ ì €ì¥
 				dist[i][j] = d;
 				dist[j][i] = d;
 			}
 		}
-		// ¼Ò¼öÁ¡ 3¹øÂ° ÀÚ¸®¿¡¼­ ¹İ¿Ã¸² ÇÏ¿© Ãâ·Â
+		// ì†Œìˆ˜ì  3ë²ˆì§¸ ìë¦¬ì—ì„œ ë°˜ì˜¬ë¦¼ í•˜ì—¬ ì¶œë ¥
 		cout.precision(2);
 		cout << fixed << optimize() << '\n';
 		dist.clear();

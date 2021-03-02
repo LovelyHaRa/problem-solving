@@ -8,19 +8,19 @@ vector<int> cache, a, choices;
 
 int lis(int start)
 {
-	// ¸Ş¸ğÀÌÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì´ì œì´ì…˜
 	int& ret = cache[start + 1];
 	if (ret != -1) return ret;
-	// ±æÀÌ´Â ¹«Á¶°Ç 1ºÎÅÍ ½ÃÀÛ(ÀÚ±âÀÚ½Å)
+	// ê¸¸ì´ëŠ” ë¬´ì¡°ê±´ 1ë¶€í„° ì‹œì‘(ìê¸°ìì‹ )
 	ret = 1;
 	int bestNext = -1;
 	for (int next = start+1; next < n; next++)
 	{
 		if (start == -1 || a[start] < a[next])
 		{
-			// ´ÙÀ½ ¿ø¼ÒÀÇ ¼ö¿­ ±æÀÌ ±¸ÇÏ±â
+			// ë‹¤ìŒ ì›ì†Œì˜ ìˆ˜ì—´ ê¸¸ì´ êµ¬í•˜ê¸°
 			int c = lis(next) + 1;
-			// ±æÀÌ ÃÖ´ë°ª °»½Å
+			// ê¸¸ì´ ìµœëŒ€ê°’ ê°±ì‹ 
 			if (ret < c)
 			{
 				ret = c;
@@ -28,18 +28,18 @@ int lis(int start)
 			}
 		}
 	}
-	// ÃÖ´ë°ª ÀÎµ¦½º ÀúÀå
+	// ìµœëŒ€ê°’ ì¸ë±ìŠ¤ ì €ì¥
 	choices[start + 1] = bestNext;
 	return ret;
 }
 
-// choices¸¦ ±â¹İÀ¸·Î LIS ¼ö¿­À» ¸¸µç´Ù.
+// choicesë¥¼ ê¸°ë°˜ìœ¼ë¡œ LIS ìˆ˜ì—´ì„ ë§Œë“ ë‹¤.
 void reconstruct(int start, vector<int>& seq)
 {
-	// choices[i] = ´ÙÀ½ ÃÖ´ë ±æÀÌ ¼ö¿­ °ª À§Ä¡
-	if (start != -1) seq.push_back(a[start]); // ÀÖÀ¸¸é LIS ¼ö¿­¿¡ ÀúÀå
-	int next = choices[start + 1]; // ´ÙÀ½ À§Ä¡ ±¸ÇÏ±â
-	if (next != -1) reconstruct(next, seq); // Àç±Í Å½»ö
+	// choices[i] = ë‹¤ìŒ ìµœëŒ€ ê¸¸ì´ ìˆ˜ì—´ ê°’ ìœ„ì¹˜
+	if (start != -1) seq.push_back(a[start]); // ìˆìœ¼ë©´ LIS ìˆ˜ì—´ì— ì €ì¥
+	int next = choices[start + 1]; // ë‹¤ìŒ ìœ„ì¹˜ êµ¬í•˜ê¸°
+	if (next != -1) reconstruct(next, seq); // ì¬ê·€ íƒìƒ‰
 }
 
 int main(void)
@@ -50,7 +50,7 @@ int main(void)
 	choices.resize(n + 1);
 	for (int i = 0; i < n; i++)
 		cin >> a[i];
-	lis(-1); // ¸ğµç ½ÃÀÛÁöÁ¡ Å½»ö
+	lis(-1); // ëª¨ë“  ì‹œì‘ì§€ì  íƒìƒ‰
 	vector<int> seq;
 	reconstruct(choices[0], seq);
 	int cnt = seq.size();

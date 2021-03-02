@@ -2,22 +2,22 @@
 
 using namespace std;
 
-int p, q; // m, n Àü¿ªÀ¸·Î »ç¿ë
+int p, q; // m, n ì „ì—­ìœ¼ë¡œ ì‚¬ìš©
 
 int area(int location, int x, int y, vector<vector<int>>& picture) {
-	int sum = 1; // ¿µ¿ª ³ĞÀÌ, 1¾¿ ´©Àû½ÃÅ´
-	// ÁÂÇ¥°¡ ¿µ¿ªÀ» ³Ñ¾î°¡´Â °æ¿ì, »öÀÌ ÀÏÄ¡ÇÏÁö ¾Ê´Â °æ¿ì 0À» ¸®ÅÏ
+	int sum = 1; // ì˜ì—­ ë„“ì´, 1ì”© ëˆ„ì ì‹œí‚´
+	// ì¢Œí‘œê°€ ì˜ì—­ì„ ë„˜ì–´ê°€ëŠ” ê²½ìš°, ìƒ‰ì´ ì¼ì¹˜í•˜ì§€ ì•ŠëŠ” ê²½ìš° 0ì„ ë¦¬í„´
 	if (x < 0 || y < 0 || x >= p || y >= q || picture[x][y] != location)
 		return 0;
 	else {
-		// Ã¼Å©ÀÇ ÀÇ¹Ì·Î 0À» ´ëÀÔ
+		// ì²´í¬ì˜ ì˜ë¯¸ë¡œ 0ì„ ëŒ€ì…
 		picture[x][y] = 0;
-		// 4¹æÇâ Àç±ÍÅ½»ö
+		// 4ë°©í–¥ ì¬ê·€íƒìƒ‰
 		sum += area(location, x, y + 1, picture);
 		sum += area(location, x, y - 1, picture);
 		sum += area(location, x + 1, y, picture);
 		sum += area(location, x - 1, y, picture);
-		// ´©Àû ¿µ¿ªÇÕ ¹İÈ¯
+		// ëˆ„ì  ì˜ì—­í•© ë°˜í™˜
 		return sum;
 	}
 }
@@ -28,15 +28,15 @@ vector<int> solution(int m, int n, vector<vector<int>> picture) {
 	vector<int> answer(2);
 	p = m;
 	q = n;
-	// 1. ºê·çÆ® Æ÷½º Å½»ö
+	// 1. ë¸Œë£¨íŠ¸ í¬ìŠ¤ íƒìƒ‰
 	for (int i = 0; i < m; i++) {
 		for (int j = 0; j < n; j++) {
-			// 2. Ã¼Å©µÇÁö ¾Ê¾Ò°Å³ª »öÀÌ ¾ø´Â °æ¿ì °Ç³Ê¶Ü
+			// 2. ì²´í¬ë˜ì§€ ì•Šì•˜ê±°ë‚˜ ìƒ‰ì´ ì—†ëŠ” ê²½ìš° ê±´ë„ˆëœ€
 			if (!picture[i][j]) continue;
-			// 3. ¿µ¿ªÀÇ ÇÕÀ» ±¸ÇÏ±â À§ÇØ Àç±ÍÅ½»ö
+			// 3. ì˜ì—­ì˜ í•©ì„ êµ¬í•˜ê¸° ìœ„í•´ ì¬ê·€íƒìƒ‰
 			int sum = area(picture[i][j], i, j, picture);
-			number_of_area++; // ¿µ¿ª¼ö Áõ°¡
-			// ÃÖ´ñ°ª °»½Å
+			number_of_area++; // ì˜ì—­ìˆ˜ ì¦ê°€
+			// ìµœëŒ“ê°’ ê°±ì‹ 
 			max_size_of_one_area = max_size_of_one_area < sum ? sum : max_size_of_one_area;
 		}
 	}

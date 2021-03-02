@@ -1,4 +1,4 @@
-// ½ºÅÃ ¹®Á¦
+// ìŠ¤íƒ ë¬¸ì œ
 #include<iostream>
 #include<stack>
 
@@ -9,20 +9,20 @@ int main(void)
 	stack<int> s;
 	int k;
 	cin >> k;
-	// ½ÃÅ°´Â´ë·Î ÇÏ¸é µÊ
+	// ì‹œí‚¤ëŠ”ëŒ€ë¡œ í•˜ë©´ ë¨
 	int res = 0;
 	for (int i = 0; i < k; i++)
 	{
 		int n;
 		cin >> n;
-		if (!n) // 0ÀÏ ¶§
+		if (!n) // 0ì¼ ë•Œ
 		{
-			res -= s.top(); // ½ºÅÃ°ª »©ÁÜ
+			res -= s.top(); // ìŠ¤íƒê°’ ë¹¼ì¤Œ
 			s.pop();
 		}
 		else
 		{
-			// ½ºÅÃ ´©Àû
+			// ìŠ¤íƒ ëˆ„ì 
 			res += n;
 			s.push(n);
 		}

@@ -12,20 +12,20 @@ int main(void)
 		cin >> k[i];
 	int res = 0;
 	int t = 1;
-	// 1. ÁÖ¾îÁø ¼ö¸¦ 10Áø¼ö·Î º¯È¯
+	// 1. ì£¼ì–´ì§„ ìˆ˜ë¥¼ 10ì§„ìˆ˜ë¡œ ë³€í™˜
 	for (int i = k.size() - 1; i >= 0; i--)
 	{
 		res += t * k[i];
 		t *= a;
 	}
-	// 2. 10Áø¼ö·Î º¯È¯µÈ ¼ö¸¦ BÁø¼ö·Î º¯È¯
+	// 2. 10ì§„ìˆ˜ë¡œ ë³€í™˜ëœ ìˆ˜ë¥¼ Bì§„ìˆ˜ë¡œ ë³€í™˜
 	vector<int> kk;
 	while (res > 0)
 	{
 		kk.push_back(res%b);
 		res /= b;
 	}
-	// 3. Ãâ·Â
+	// 3. ì¶œë ¥
 	for (auto it = kk.rbegin(); it != kk.rend(); it++)
 		cout << *it << ' ';
 }

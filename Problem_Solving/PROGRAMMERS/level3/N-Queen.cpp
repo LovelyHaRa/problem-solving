@@ -4,23 +4,23 @@
 using namespace std;
 
 int N;
-vector<int> col(15); // ¿­À» ±âÁØÀ¸·Î Çà°ªÀ» ÀúÀå
+vector<int> col(15); // ì—´ì„ ê¸°ì¤€ìœ¼ë¡œ í–‰ê°’ì„ ì €ì¥
 int cnt = 0;
 
-// Àı´ë°ª
+// ì ˆëŒ€ê°’
 int abs(int a, int b) {
 	return a < b ? b - a : a - b;
 }
 
 bool isPossible(int row) {
-	// °°Àº Çà¿¡ ÀÖ°Å³ª ´ë°¢¼±¿¡ Á¸ÀçÇÏ¸é false
+	// ê°™ì€ í–‰ì— ìˆê±°ë‚˜ ëŒ€ê°ì„ ì— ì¡´ì¬í•˜ë©´ false
 	for (int i = 0; i < row; i++) {
 		if (col[row] == col[i] || (abs(col[row], col[i]) == abs(row, i))) return false;
 	}
 	return true;
 }
 
-// ¹éÆ®·¡Å·
+// ë°±íŠ¸ë˜í‚¹
 void queen(int row) {
 	if (row == N) {
 		cnt++;

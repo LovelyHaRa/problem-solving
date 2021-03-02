@@ -5,26 +5,26 @@
 using namespace std;
 
 int n, m;
-vector<int>A, B; // ¼ö¿­
-vector<vector<int>> cache; // Ä³½Ì
-const long long NEGINF = numeric_limits<long long>::min(); // 64ºñÆ® ÃÖ¼Ò°ª
+vector<int>A, B; // ìˆ˜ì—´
+vector<vector<int>> cache; // ìºì‹±
+const long long NEGINF = numeric_limits<long long>::min(); // 64ë¹„íŠ¸ ìµœì†Œê°’
 
 long long max(long long a, long long b) { return a > b ? a : b; }
 int jlis(int indexA, int indexB)
 {
-	// ¸Ş¸ğÀÌÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì´ì œì´ì…˜
 	int& ret = cache[indexA + 1][indexB + 1];
 	if (ret != -1) return ret;
-	// Ä«¿îÆ®´Â A, B ½ÃÀÛÁöÁ¡À» ¹İµå½Ã Æ÷ÇÔÇÏ¹Ç·Î 2ºÎÅÍ ½ÃÀÛ
+	// ì¹´ìš´íŠ¸ëŠ” A, B ì‹œì‘ì§€ì ì„ ë°˜ë“œì‹œ í¬í•¨í•˜ë¯€ë¡œ 2ë¶€í„° ì‹œì‘
 	ret = 2;
-	// a, b Áß ÃÖ´ë°ªÀ» ±¸ÇÔ, -1ÀÏ ¶§ -INF°ªÀ» ÀúÀå
+	// a, b ì¤‘ ìµœëŒ€ê°’ì„ êµ¬í•¨, -1ì¼ ë•Œ -INFê°’ì„ ì €ì¥
 	long long a = (indexA == -1 ? NEGINF : A[indexA]);
 	long long b = (indexB == -1 ? NEGINF : B[indexB]); 
 	long long maxElement = max(a, b);
-	// A ¼ö¿­ Áß¿¡¼­ Áõ°¡ ¼ö¿­À» Àç±Í Å½»öÇÑ´Ù.
+	// A ìˆ˜ì—´ ì¤‘ì—ì„œ ì¦ê°€ ìˆ˜ì—´ì„ ì¬ê·€ íƒìƒ‰í•œë‹¤.
 	for (int i = indexA + 1; i < n; i++)
 		if (maxElement < A[i]) ret = max(ret, jlis(i, indexB) + 1);
-	// B ¼ö¿­ Áß¿¡¼­ Áõ°¡ ¼ö¿­À» Àç±Í Å½»öÇÑ´Ù.
+	// B ìˆ˜ì—´ ì¤‘ì—ì„œ ì¦ê°€ ìˆ˜ì—´ì„ ì¬ê·€ íƒìƒ‰í•œë‹¤.
 	for (int i = indexB + 1; i < m; i++)
 		if (maxElement < B[i]) ret = max(ret, jlis(indexA, i) + 1);
 	return ret;
@@ -39,12 +39,12 @@ int main(void)
 		cin >> n >> m;
 		A.resize(n);
 		B.resize(m);
-		cache.resize(n + 1, vector<int>(m + 1, -1)); // -1 ÀÎµ¦½º¸¦ »ç¿ëÇÒ °ÍÀÌ¹Ç·Î size+1
+		cache.resize(n + 1, vector<int>(m + 1, -1)); // -1 ì¸ë±ìŠ¤ë¥¼ ì‚¬ìš©í•  ê²ƒì´ë¯€ë¡œ size+1
 		for (int i = 0; i < n; i++)
 			cin >> A[i];
 		for (int i = 0; i < m; i++)
 			cin >> B[i];
-		cout << jlis(-1, -1) - 2 << '\n'; // -1 ºÎÅÍ ½ÃÀÛÇßÀ¸¹Ç·Î ±¸ÇÑ °ª¿¡¼­ -2 ÇØÁà¾ß ÇÑ´Ù.
+		cout << jlis(-1, -1) - 2 << '\n'; // -1 ë¶€í„° ì‹œì‘í–ˆìœ¼ë¯€ë¡œ êµ¬í•œ ê°’ì—ì„œ -2 í•´ì¤˜ì•¼ í•œë‹¤.
 		A.clear();
 		B.clear();
 		cache.clear();

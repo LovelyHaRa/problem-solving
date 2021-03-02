@@ -3,8 +3,8 @@
 
 using namespace std;
 
-vector<vector<int>> adj; // ÀÎÁ¢ Çà·Ä
-vector<vector<int>> visited; // °¢ ÁöÁ¡¿¡ ´ëÇÑ ¹æ¹® ¿©ºÎ
+vector<vector<int>> adj; // ì¸ì ‘ í–‰ë ¬
+vector<vector<int>> visited; // ê° ì§€ì ì— ëŒ€í•œ ë°©ë¬¸ ì—¬ë¶€
 int w, h;
 
 void dfs(int x, int y)
@@ -14,7 +14,7 @@ void dfs(int x, int y)
 	{
 		for (int j = -1; j <= 1; j++)
 		{
-			// ¿µ¿ª ³»ÀÇ °ªÀÎÁö, ¹Ì¹æ¹®Áö¿ªÀÎÁö, ¼¶ÀÎÁö ÆÇ´ÜÇÏ°í dfsÅ½»ö
+			// ì˜ì—­ ë‚´ì˜ ê°’ì¸ì§€, ë¯¸ë°©ë¬¸ì§€ì—­ì¸ì§€, ì„¬ì¸ì§€ íŒë‹¨í•˜ê³  dfsíƒìƒ‰
 			if ((x + i) >= 0 && (x + i) < h && (y + j) >= 0 && (y + j) < w && !visited[x + i][y + j] && adj[x + i][y + j])
 				dfs(x + i, y + j);
 		}
@@ -34,16 +34,16 @@ int main(void)
 			for (int j = 0; j < w; j++)
 				cin >> adj[i][j];
 		int cnt = 0;
-		// ¸ğµç Áö¿ª Å½»ö
+		// ëª¨ë“  ì§€ì—­ íƒìƒ‰
 		for (int i = 0; i < h; i++)
 		{
 			for (int j = 0; j < w; j++)
 			{
-				// ¹æ¹®µÇÁö ¾ÊÀº °÷ÀÇ dfs Å½»ö
+				// ë°©ë¬¸ë˜ì§€ ì•Šì€ ê³³ì˜ dfs íƒìƒ‰
 				if (!visited[i][j] && adj[i][j])
 				{
 					dfs(i, j);
-					cnt++; // dfs°¡ È£ÃâµÈ È½¼ö°¡ ÄÄÆ÷³ÍÆ®ÀÇ °³¼ö
+					cnt++; // dfsê°€ í˜¸ì¶œëœ íšŸìˆ˜ê°€ ì»´í¬ë„ŒíŠ¸ì˜ ê°œìˆ˜
 				}
 
 			}

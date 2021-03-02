@@ -4,12 +4,12 @@
 
 using namespace std;
 
-// NÀÇ ±æÀÌº° Á¢µÎ»ç¿Í Á¢¹Ì»ç°¡ ÀÏÄ¡ÇÏ´Â ÃÖ´ë ±æÀÌ¸¦ ¹İÈ¯
+// Nì˜ ê¸¸ì´ë³„ ì ‘ë‘ì‚¬ì™€ ì ‘ë¯¸ì‚¬ê°€ ì¼ì¹˜í•˜ëŠ” ìµœëŒ€ ê¸¸ì´ë¥¼ ë°˜í™˜
 vector<int> getPartialMatch(const string& N)
 {
 	int m = N.size();
-	// KMP Å½»öÀ» ÀÌ¿ë
-	// ÀÚ±â ÀÚ½ÅÀÇ ÀÏÄ¡ÇÏ´Â ¹®ÀÚ¿­À» ±¸ÇÑ´Ù
+	// KMP íƒìƒ‰ì„ ì´ìš©
+	// ìê¸° ìì‹ ì˜ ì¼ì¹˜í•˜ëŠ” ë¬¸ìì—´ì„ êµ¬í•œë‹¤
 	vector<int> pi(m, 0);
 	int begin = 1, matched = 0;
 	while (begin + matched < m)
@@ -33,26 +33,26 @@ vector<int> getPartialMatch(const string& N)
 	return pi;
 }
 
-// KMP ¾Ë°í¸®ÁòÀ» ÀÌ¿ëÇØ ÀÏÄ¡ÇÏ´Â ÃÖÃÊ ÀÎµ¦½º ¹è¿­À» ¹İÈ¯
+// KMP ì•Œê³ ë¦¬ì¦˜ì„ ì´ìš©í•´ ì¼ì¹˜í•˜ëŠ” ìµœì´ˆ ì¸ë±ìŠ¤ ë°°ì—´ì„ ë°˜í™˜
 vector<int> kmpSearch(const string& H, const string& N)
 {
 	int n = H.size(), m = N.size();
 	vector<int> ret;
-	vector<int> pi = getPartialMatch(N); // ¹Ì¸® Á¢¹Ì»ç=Á¢µÎ»ç ±æÀÌ¸¦ ±¸ÇÑ´Ù
+	vector<int> pi = getPartialMatch(N); // ë¯¸ë¦¬ ì ‘ë¯¸ì‚¬=ì ‘ë‘ì‚¬ ê¸¸ì´ë¥¼ êµ¬í•œë‹¤
 	int matched = 0;
 	for (int i = 0; i < n; i++)
 	{
-		// ¹®ÀÚ°¡ ÀÏÄ¡ÇÏÁö ¾ÊÀ¸¸é pi[matched-1]¸¸Å­ °Ç³Ê¶Ú´Ù
+		// ë¬¸ìê°€ ì¼ì¹˜í•˜ì§€ ì•Šìœ¼ë©´ pi[matched-1]ë§Œí¼ ê±´ë„ˆë›´ë‹¤
 		while (matched > 0 && H[i] != N[matched])
 			matched = pi[matched - 1];
-		// ¹®ÀÚ°¡ ÀÏÄ¡ÇÏ¸é
+		// ë¬¸ìê°€ ì¼ì¹˜í•˜ë©´
 		if (H[i] == N[matched])
 		{
 			matched++;
-			// ¹®ÀÚ¿­ÀÌ ÀÏÄ¡ÇÏ¸é
+			// ë¬¸ìì—´ì´ ì¼ì¹˜í•˜ë©´
 			if (matched == m)
 			{
-				ret.push_back(i - m + 1); // ÀÎµ¦½º Ãß°¡
+				ret.push_back(i - m + 1); // ì¸ë±ìŠ¤ ì¶”ê°€
 				matched = pi[matched - 1];
 			}
 		}

@@ -3,8 +3,8 @@
 
 using namespace std;
 
-int adj[100][100][100]; // ³ôÀÌ, ¼¼·Î, °¡·Î ÀÎÁ¢ Çà·Ä
-bool visited[100][100][100]; // ³ôÀÌ, ¼¼·Î, °¡·Î ¹æ¹®¿©ºÎ
+int adj[100][100][100]; // ë†’ì´, ì„¸ë¡œ, ê°€ë¡œ ì¸ì ‘ í–‰ë ¬
+bool visited[100][100][100]; // ë†’ì´, ì„¸ë¡œ, ê°€ë¡œ ë°©ë¬¸ì—¬ë¶€
 
 int main(void)
 {
@@ -12,61 +12,61 @@ int main(void)
 	cin.tie(0);
 	int n, m, h;
 	cin >> m >> n >> h;
-	queue<pair<int, pair<int, int>>> q; // ³ôÀÌ, ¼¼·Î, °¡·Î Æä¾î ÀúÀå
-	int seq = 0, curSeq, day = 0; // Å¥¿¡ ÀúÀåµÈ È½¼ö, °á°úÀÏ ¼ö
-	// ÀÔ·Â
+	queue<pair<int, pair<int, int>>> q; // ë†’ì´, ì„¸ë¡œ, ê°€ë¡œ íŽ˜ì–´ ì €ìž¥
+	int seq = 0, curSeq, day = 0; // íì— ì €ìž¥ëœ íšŸìˆ˜, ê²°ê³¼ì¼ ìˆ˜
+	// ìž…ë ¥
 	for (int i = h - 1; i >= 0; i--)
 		for (int j = 0; j < n; j++)
 			for (int k = 0; k < m; k++)
 			{
 				cin >> adj[i][j][k];
-				// ÀÍÀº Åä¸¶ÅäÀÏ ½Ã Å¥¿¡ ÃÊ±â°ªÀ¸·Î Ãß°¡
+				// ìµì€ í† ë§ˆí† ì¼ ì‹œ íì— ì´ˆê¸°ê°’ìœ¼ë¡œ ì¶”ê°€
 				if (adj[i][j][k] == 1)
 				{
-					// Å¥¿¡ »ðÀÔ
+					// íì— ì‚½ìž…
 					q.push(make_pair(i, make_pair(j, k)));
-					seq++; // Å¥¿¡ ÀúÀåµÈ È½¼ö Áõ°¡
+					seq++; // íì— ì €ìž¥ëœ íšŸìˆ˜ ì¦ê°€
 				}
 			}
-	// 6¹æÇâ Áõ°¡·®
+	// 6ë°©í–¥ ì¦ê°€ëŸ‰
 	int dx[] = { -1,0,0,1,0,0 }, dy[] = { 0,-1,1,0,0,0 }, dz[] = { 0,0,0,0,-1,1 };
-	// BFS Å½»ö
+	// BFS íƒìƒ‰
 	while (!q.empty())
 	{
-		curSeq = 0; // ÇöÀç ÅÏ¿¡¼­ Å¥¿¡ ÀúÀåµÈ È½¼ö¸¦ Ä«¿îÆÃÇÏ±âÀ§ÇØ ÃÊ±âÈ­
-		bool flag = 0; // ÇÏ³ª¶óµµ ¾ÈÀÍÀº Åä¸¶Åä¸¦ ÀÍ°ÔÇß´ÂÁö ¿©ºÎ
-		// ÀÌÀü¿¡ Å¥¿¡ ÀúÀåµÈ È½¼ö¸¸Å­ Å¥¿¡¼­ ÃßÃâ(ÇÏ·ç)
+		curSeq = 0; // í˜„ìž¬ í„´ì—ì„œ íì— ì €ìž¥ëœ íšŸìˆ˜ë¥¼ ì¹´ìš´íŒ…í•˜ê¸°ìœ„í•´ ì´ˆê¸°í™”
+		bool flag = 0; // í•˜ë‚˜ë¼ë„ ì•ˆìµì€ í† ë§ˆí† ë¥¼ ìµê²Œí–ˆëŠ”ì§€ ì—¬ë¶€
+		// ì´ì „ì— íì— ì €ìž¥ëœ íšŸìˆ˜ë§Œí¼ íì—ì„œ ì¶”ì¶œ(í•˜ë£¨)
 		for (int i = 0; i < seq; i++)
 		{
-			// Å¥¿¡¼­ ÃßÃâ
+			// íì—ì„œ ì¶”ì¶œ
 			int x = q.front().second.first, y = q.front().second.second, z = q.front().first;
 			q.pop();
-			// 6¹æÇâ Å½»ö
+			// 6ë°©í–¥ íƒìƒ‰
 			for (int j = 0; j < 6; j++)
 			{
-				// ÁÂÇ¥ °»½Å
+				// ì¢Œí‘œ ê°±ì‹ 
 				int nx = x + dx[j], ny = y + dy[j], nz = z + dz[j];
-				// ÀÌµ¿ °¡´É ¿©ºÎ ÆÇ´Ü
+				// ì´ë™ ê°€ëŠ¥ ì—¬ë¶€ íŒë‹¨
 				if (nx < 0 || nx >= n || ny < 0 || ny >= m || nz < 0 || nz >= h || visited[nz][nx][ny] || adj[nz][nx][ny])
 					continue;
-				curSeq++; // Å¥¿¡ ÀúÀåµÈ È½¼ö Áõ°¡
-				flag = 1; // Åä¸¶Åä¸¦ ÀÍ°Ô ÇßÀ¸¹Ç·Î true·Î º¯°æ
-				visited[nz][nx][ny] = 1; // ¹æ¹®¿©ºÎ °»½Å
-				q.push(make_pair(nz, make_pair(nx, ny))); // Å¥¿¡ »ðÀÔ
+				curSeq++; // íì— ì €ìž¥ëœ íšŸìˆ˜ ì¦ê°€
+				flag = 1; // í† ë§ˆí† ë¥¼ ìµê²Œ í–ˆìœ¼ë¯€ë¡œ trueë¡œ ë³€ê²½
+				visited[nz][nx][ny] = 1; // ë°©ë¬¸ì—¬ë¶€ ê°±ì‹ 
+				q.push(make_pair(nz, make_pair(nx, ny))); // íì— ì‚½ìž…
 			}
 		}
-		if (flag) day++; // Åä¸¶Åä¸¦ ÀÍ°Ô ÇßÀ¸¸é ³¯Â¥ Áõ°¡
-		seq = curSeq; // Å¥¿¡ ÀúÀåµÈ È½¼ö °»½Å
+		if (flag) day++; // í† ë§ˆí† ë¥¼ ìµê²Œ í–ˆìœ¼ë©´ ë‚ ì§œ ì¦ê°€
+		seq = curSeq; // íì— ì €ìž¥ëœ íšŸìˆ˜ ê°±ì‹ 
 	}
-	// ÀÎÁ¢ Çà·Ä Å½»ö
+	// ì¸ì ‘ í–‰ë ¬ íƒìƒ‰
 	for (int i = 0; i < h; i++)
 		for (int j = 0; j < n; j++)
 			for(int k = 0; k < m; k++)
-				// ¹Ì¹æ¹®µÇ°í ¾ÈÀÍÀº Åä¸¶Åä ¹ß°ß ½Ã
+				// ë¯¸ë°©ë¬¸ë˜ê³  ì•ˆìµì€ í† ë§ˆí†  ë°œê²¬ ì‹œ
 				if (!visited[i][j][k] && !adj[i][j][k])
 				{
-					cout << "-1\n"; // ¸ðµÎ ÀÍÁö ¸øÇÏ´Â »óÈ²
+					cout << "-1\n"; // ëª¨ë‘ ìµì§€ ëª»í•˜ëŠ” ìƒí™©
 					return 0;
 				}
-	cout << day << '\n'; // ¸ðµÎ ÀÍ¾ú´Ù¸é °É¸° ÀÏ ¼ö Ãâ·Â
+	cout << day << '\n'; // ëª¨ë‘ ìµì—ˆë‹¤ë©´ ê±¸ë¦° ì¼ ìˆ˜ ì¶œë ¥
 }

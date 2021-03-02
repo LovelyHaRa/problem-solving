@@ -2,7 +2,7 @@
 
 using namespace std;
 
-// ÃÖ´ë°ø¾à¼ö ±¸ÇÏ±â
+// ìµœëŒ€ê³µì•½ìˆ˜ êµ¬í•˜ê¸°
 int gcd(int a, int b)
 {
 	if (a > b) return gcd(a%b, b);
@@ -14,19 +14,19 @@ int main(void)
 {
 	int n, s;
 	cin >> n >> s;
-	// ÃÊ±â°ª °áÁ¤
+	// ì´ˆê¸°ê°’ ê²°ì •
 	int min;
 	cin >> min;
-	min = min > s ? min - s : s - min; // Â÷ÀÌÀÇ Àý´ë°ª ÀúÀå
+	min = min > s ? min - s : s - min; // ì°¨ì´ì˜ ì ˆëŒ€ê°’ ì €ìž¥
 	n--;
 	while (n--)
 	{
-		// µÎ¹øÂ° ºÎÅÍ ºñ±³
+		// ë‘ë²ˆì§¸ ë¶€í„° ë¹„êµ
 		int a;
 		cin >> a;
-		int k = a > s ? a - s : s - a; // Â÷ÀÌÀÇ Àý´ë°ª ÀúÀå
-		int g = gcd(min, k); // ÃÖ¼Ò°ª°ú ÇöÀç °ªÀÇ ÃÖ´ë°ø¾à¼ö ±¸ÇÏ±â
-		min = min > g ? g : min; // ÃÖ¼Ò°ª °»½Å
+		int k = a > s ? a - s : s - a; // ì°¨ì´ì˜ ì ˆëŒ€ê°’ ì €ìž¥
+		int g = gcd(min, k); // ìµœì†Œê°’ê³¼ í˜„ìž¬ ê°’ì˜ ìµœëŒ€ê³µì•½ìˆ˜ êµ¬í•˜ê¸°
+		min = min > g ? g : min; // ìµœì†Œê°’ ê°±ì‹ 
 	}
 	cout << min;
 }

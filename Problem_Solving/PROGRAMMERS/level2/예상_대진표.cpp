@@ -6,15 +6,15 @@ int solution(int n, int a, int b)
 {
 	int answer = 1;
 	while (n > 1) {
-		// 1. ´ë¼Ò ÆÇº°
+		// 1. ëŒ€ì†Œ íŒë³„
 		int min = a < b ? a : b;
 		int max = a > b ? a : b;
-		// 2. ÀÛÀº °ªÀÌ È¦¼ö ÀÌ°í µÎ ¼öÀÇ Â÷°¡ 1ÀÌ¸é ´ëÁø È®Á¤
+		// 2. ìž‘ì€ ê°’ì´ í™€ìˆ˜ ì´ê³  ë‘ ìˆ˜ì˜ ì°¨ê°€ 1ì´ë©´ ëŒ€ì§„ í™•ì •
 		if (min % 2 && max - min == 1) break;
-		// 3. ´ÙÀ½ ¶ó¿îµå ¹øÈ£ ¹èÁ¤
+		// 3. ë‹¤ìŒ ë¼ìš´ë“œ ë²ˆí˜¸ ë°°ì •
 		a = (a + 1) / 2;
 		b = (b + 1) / 2;
-		// 4. ¶ó¿îµå Áõ°¡
+		// 4. ë¼ìš´ë“œ ì¦ê°€
 		answer++;
 		n /= 2;
 	}

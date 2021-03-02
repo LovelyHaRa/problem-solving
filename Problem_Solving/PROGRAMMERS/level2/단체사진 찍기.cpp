@@ -6,36 +6,36 @@ using namespace std;
 
 int solution(int n, vector<string> data) {
 	int answer = 0;
-	// 1. Ä£±¸µé ¹è¿­À» ¸¸µç´Ù.
+	// 1. ì¹œêµ¬ë“¤ ë°°ì—´ì„ ë§Œë“ ë‹¤.
 	vector<char> photo = { 'A','C','F','J','M','N','R','T' };
-	// 2. ¼ø¿­ ¿ÏÀüÅ½»ö (8! ÀÌ¶ó¼­ °¡´É)
+	// 2. ìˆœì—´ ì™„ì „íƒìƒ‰ (8! ì´ë¼ì„œ ê°€ëŠ¥)
 	do {
 		int i;
-		// 3 Á¶°Ç °³¼ö¸¸Å­ ¹İº¹
+		// 3 ì¡°ê±´ ê°œìˆ˜ë§Œí¼ ë°˜ë³µ
 		for (i = 0; i < n; i++) {
-			// 4. µ¥ÀÌÅÍ ÃßÃâ
-			char a = data[i][0], b = data[i][2]; // Ä£±¸ a, b
-			char c = data[i][3]; // ºñ±³ Á¶°Ç
-			int interval = data[i][4] - '0'; // a, b »çÀÌÀÇ Ä£±¸ ¼ö
-			// 5. Ä£±¸ À§Ä¡ Ã£±â
-			int idx_a = -1, idx_b = -1; // a, b ÀÎµ¦½º
+			// 4. ë°ì´í„° ì¶”ì¶œ
+			char a = data[i][0], b = data[i][2]; // ì¹œêµ¬ a, b
+			char c = data[i][3]; // ë¹„êµ ì¡°ê±´
+			int interval = data[i][4] - '0'; // a, b ì‚¬ì´ì˜ ì¹œêµ¬ ìˆ˜
+			// 5. ì¹œêµ¬ ìœ„ì¹˜ ì°¾ê¸°
+			int idx_a = -1, idx_b = -1; // a, b ì¸ë±ìŠ¤
 			for (int j = 0; j < 8; j++) {
 				if (a == photo[j])
 					idx_a = j;
 				else if (b == photo[j])
 					idx_b = j;
 			}
-			// 6. a-bÀÇ Àı´ë°ª ±¸ÇÏ±â
+			// 6. a-bì˜ ì ˆëŒ€ê°’ êµ¬í•˜ê¸°
 			int max = idx_a > idx_b ? idx_a : idx_b;
 			int min = idx_a < idx_b ? idx_a : idx_b;
 			int ab = max - min - 1;
-			// 7. ºñ±³Á¶°ÇÀ» ¸¸Á· ¾ÈÇÏ¸é break
-			if (c == '=' && ab != interval) break; // °°¾Æ¾ßÇÏ´Âµ¥ °°Áö ¾ÊÀ¸¸é break
-			else if (c == '>' && ab <= interval) break; // ÃÊ°úÇØ¾ßÇÏ´Âµ¥ ÀÌÇÏÀÌ¸é break
-			else if (c == '<' && ab >= interval) break; // ¹Ì¸¸ÀÌ¾î¾ßÇÏ´Âµ¥ ÀÌ»óÀÌ¸é break
+			// 7. ë¹„êµì¡°ê±´ì„ ë§Œì¡± ì•ˆí•˜ë©´ break
+			if (c == '=' && ab != interval) break; // ê°™ì•„ì•¼í•˜ëŠ”ë° ê°™ì§€ ì•Šìœ¼ë©´ break
+			else if (c == '>' && ab <= interval) break; // ì´ˆê³¼í•´ì•¼í•˜ëŠ”ë° ì´í•˜ì´ë©´ break
+			else if (c == '<' && ab >= interval) break; // ë¯¸ë§Œì´ì–´ì•¼í•˜ëŠ”ë° ì´ìƒì´ë©´ break
 		}
-		// 8. ¸ğµç Á¶°ÇÀ» ¸¸Á·ÇÏ¸é Á¤´ä ¼ö Áõ°¡
+		// 8. ëª¨ë“  ì¡°ê±´ì„ ë§Œì¡±í•˜ë©´ ì •ë‹µ ìˆ˜ ì¦ê°€
 		if (i == n) answer++;
-	} while (next_permutation(photo.begin(), photo.end())); // ¸ğµç ¼ø¿­ »ı¼º
+	} while (next_permutation(photo.begin(), photo.end())); // ëª¨ë“  ìˆœì—´ ìƒì„±
 	return answer;
 }

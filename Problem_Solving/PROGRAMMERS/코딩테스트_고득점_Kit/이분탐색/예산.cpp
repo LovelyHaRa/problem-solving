@@ -3,7 +3,7 @@
 #include <algorithm>
 
 using namespace std;
-// ¹éÁØ 2512 Ç®ÀÌ ÂüÁ¶
+// ë°±ì¤€ 2512 í’€ì´ ì°¸ì¡°
 int solution(vector<int> budgets, int M) {
 	int answer = 0;
 	int low = 0, high = 0;

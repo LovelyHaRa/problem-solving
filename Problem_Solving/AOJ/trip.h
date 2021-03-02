@@ -5,17 +5,17 @@
 template<typename T>
 struct TripNode
 {
-	// ³ëµå¿¡ ÀúÀåµÈ ¿ø¼Ò
+	// ë…¸ë“œì— ì €ì¥ëœ ì›ì†Œ
 	T key;
-	// ÀÌ ³ëµå¸¦ ·çÆ®·Î ÇÏ´Â ¼­ºêÆ®¸®ÀÇ Å©±â
+	// ì´ ë…¸ë“œë¥¼ ë£¨íŠ¸ë¡œ í•˜ëŠ” ì„œë¸ŒíŠ¸ë¦¬ì˜ í¬ê¸°
 	int priority, size;
-	// µÎ ÀÚ½Ä ³ëµåÀÇ Æ÷ÀÎÅÍ
+	// ë‘ ìì‹ ë…¸ë“œì˜ í¬ì¸í„°
 	TripNode *left, *right;
-	// »ı¼ºÀÚ¿¡¼­ ³­¼ö ¿ì¼±¼øÀ§¸¦ »ı¼ºÇÏ°í size¿Í left/right¸¦ ÃÊ±âÈ­ÇÑ´Ù
+	// ìƒì„±ìì—ì„œ ë‚œìˆ˜ ìš°ì„ ìˆœìœ„ë¥¼ ìƒì„±í•˜ê³  sizeì™€ left/rightë¥¼ ì´ˆê¸°í™”í•œë‹¤
 	TripNode(const T& _key) : key(_key), priority(rand()), size(1), left(NULL), right(NULL) {}
 	void setLeft(TripNode* newLeft) { left = newLeft; calcSize(); }
 	void setRight(TripNode* newRight) { right= newRight; calcSize(); }
-	// size ¸â¹ö¸¦ °»½ÅÇÑ´Ù
+	// size ë©¤ë²„ë¥¼ ê°±ì‹ í•œë‹¤
 	void calcSize()
 	{
 		size = 1;
@@ -25,29 +25,29 @@ struct TripNode
 };
 
 template<typename T>
-// root¸¦ ·çÆ®·Î ÇÏ´Â Æ®¸³À» key ¹Ì¸¸ÀÇ °ª°ú ÀÌ»óÀÇ °ªÀ» °®´Â µÎ °³ÀÇ Æ®¸³À¸·Î ºĞ¸®ÇÑ´Ù
+// rootë¥¼ ë£¨íŠ¸ë¡œ í•˜ëŠ” íŠ¸ë¦½ì„ key ë¯¸ë§Œì˜ ê°’ê³¼ ì´ìƒì˜ ê°’ì„ ê°–ëŠ” ë‘ ê°œì˜ íŠ¸ë¦½ìœ¼ë¡œ ë¶„ë¦¬í•œë‹¤
 std::pair<TripNode<T>*, TripNode<T>*> split(TripNode<T>* root, T key)
 {
 	if (root == NULL) return std::pair<TripNode<T>*, TripNode<T>*>(NULL, NULL);
-	// ·çÆ®°¡ key ¹Ì¸¸ÀÌ¸é ¿À¸¥ÂÊ ¼­ºêÆ®¸®¸¦ ÂÉ°µ´Ù
+	// ë£¨íŠ¸ê°€ key ë¯¸ë§Œì´ë©´ ì˜¤ë¥¸ìª½ ì„œë¸ŒíŠ¸ë¦¬ë¥¼ ìª¼ê° ë‹¤
 	if (root->key < key)
 	{
 		std::pair<TripNode<T>*, TripNode<T>*> rs = split(root->right, key);
 		root->setRight(rs.first);
 		return std::pair<TripNode<T>*, TripNode<T>*>(root, rs.second);
 	}
-	// ·çÆ®°¡ key ÀÌ»óÀÌ¸é ¿ŞÂÊ ¼­ºêÆ®¸®¸¦ ÂÉ°µ´Ù
+	// ë£¨íŠ¸ê°€ key ì´ìƒì´ë©´ ì™¼ìª½ ì„œë¸ŒíŠ¸ë¦¬ë¥¼ ìª¼ê° ë‹¤
 	std::pair<TripNode<T>*, TripNode<T>*> ls = split(root->left, key);
 	root->setLeft(ls.second);
 	return std::pair<TripNode<T>*, TripNode<T>*>(ls.first, root);
 }
 
 template<typename T>
-//  root¸¦ ·çÆ®·Î ÇÏ´Â Æ®¸³¿¡ »õ ³ëµå node¸¦ »ğÀÔÇÑ µÚ °á°ú Æ®¸³ÀÇ ·çÆ®¸¦ ¹İÈ¯ÇÑ´Ù
+//  rootë¥¼ ë£¨íŠ¸ë¡œ í•˜ëŠ” íŠ¸ë¦½ì— ìƒˆ ë…¸ë“œ nodeë¥¼ ì‚½ì…í•œ ë’¤ ê²°ê³¼ íŠ¸ë¦½ì˜ ë£¨íŠ¸ë¥¼ ë°˜í™˜í•œë‹¤
 TripNode<T>* insert(TripNode<T>* root, TripNode<T>* node)
 {
 	if (root == NULL) return node;
-	// node°¡ ·çÆ®¸¦ ´ëÃ¼ÇØ¾ß ÇÑ´Ù. ÇØ´ç ¼­ºêÆ®¸®¸¦ ¹İÀ¸·Î Àß¶ó °¢°¢ ÀÚ¼ÕÀ¸·Î ÇÑ´Ù
+	// nodeê°€ ë£¨íŠ¸ë¥¼ ëŒ€ì²´í•´ì•¼ í•œë‹¤. í•´ë‹¹ ì„œë¸ŒíŠ¸ë¦¬ë¥¼ ë°˜ìœ¼ë¡œ ì˜ë¼ ê°ê° ìì†ìœ¼ë¡œ í•œë‹¤
 	if (root->priority < node->priority)
 	{
 		std::pair<TripNode<T>*, TripNode<T>*> splitted = split(root, node->key);
@@ -63,7 +63,7 @@ TripNode<T>* insert(TripNode<T>* root, TripNode<T>* node)
 }
 
 template<typename T>
-// a¿Í b°¡ µÎ °³ÀÇ Æ®¸³ÀÌ°í, max(a) < min(b)ÀÏ ¶§ ÀÌ µÑÀ» ÇÕÄ£´Ù
+// aì™€ bê°€ ë‘ ê°œì˜ íŠ¸ë¦½ì´ê³ , max(a) < min(b)ì¼ ë•Œ ì´ ë‘˜ì„ í•©ì¹œë‹¤
 TripNode<T>* merge(TripNode<T>* a, TripNode<T>* b)
 {
 	if (a == NULL) return b;
@@ -77,11 +77,11 @@ TripNode<T>* merge(TripNode<T>* a, TripNode<T>* b)
 }
 
 template<typename T>
-// root¸¦ ·çÆ®·Î ÇÏ´Â Æ®¸³¿¡¼­ key¸¦ Áö¿ì°í °á°ú Æ®¸³ÀÇ ·çÆ®¸¦ ¹İÈ¯ÇÑ´Ù
+// rootë¥¼ ë£¨íŠ¸ë¡œ í•˜ëŠ” íŠ¸ë¦½ì—ì„œ keyë¥¼ ì§€ìš°ê³  ê²°ê³¼ íŠ¸ë¦½ì˜ ë£¨íŠ¸ë¥¼ ë°˜í™˜í•œë‹¤
 TripNode<T>* erase(TripNode<T>* root, T key)
 {
 	if (root == NULL) return root;
-	// root¸¦ Áö¿ì°í ¾ç ¼­ºêÆ®¸®¸¦ ÇÕÄ£ µÚ ¹İÈ¯ÇÑ´Ù
+	// rootë¥¼ ì§€ìš°ê³  ì–‘ ì„œë¸ŒíŠ¸ë¦¬ë¥¼ í•©ì¹œ ë’¤ ë°˜í™˜í•œë‹¤
 	if (root->key == key)
 	{
 		TripNode<T>* ret = merge(root->left, root->right);
@@ -96,10 +96,10 @@ TripNode<T>* erase(TripNode<T>* root, T key)
 }
 
 template<typename T>
-// root¸¦ ·çÆ®·Î ÇÏ´Â Æ®¸® Áß¿¡¼­ k¹øÂ° ¿ø¼Ò¸¦ ¹İÈ¯ÇÑ´Ù
+// rootë¥¼ ë£¨íŠ¸ë¡œ í•˜ëŠ” íŠ¸ë¦¬ ì¤‘ì—ì„œ kë²ˆì§¸ ì›ì†Œë¥¼ ë°˜í™˜í•œë‹¤
 TripNode<T>* kth(TripNode<T>* root, int k)
 {
-	// ¿ŞÂÊ ¼­ºêÆ®¸®ÀÇ Å©±â¸¦ ¿ì¼± °è»êÇÑ´Ù
+	// ì™¼ìª½ ì„œë¸ŒíŠ¸ë¦¬ì˜ í¬ê¸°ë¥¼ ìš°ì„  ê³„ì‚°í•œë‹¤
 	int leftSize = 0;
 	if (root->left != NULL) leftSize = root->left->size;
 	if (k <= leftSize) return kth(root->left, k);
@@ -108,7 +108,7 @@ TripNode<T>* kth(TripNode<T>* root, int k)
 }
 
 template<typename T>
-// keyº¸´Ù ÀÛÀº Å°°ªÀÇ ¼ö¸¦ ¹İÈ¯ÇÑ´Ù
+// keyë³´ë‹¤ ì‘ì€ í‚¤ê°’ì˜ ìˆ˜ë¥¼ ë°˜í™˜í•œë‹¤
 int countLessThan(TripNode<T>* root, T key)
 {
 	if (root == NULL) return0;

@@ -3,19 +3,19 @@
 
 using namespace std;
 
-vector<vector<int>>cache; // ¸Ş¸ğÀÌÁ¦ÀÌ¼Ç Ä³½Ã(y,x¿¡¼­ ¸Ç ¾Æ·¡±îÁöÀÇ ºÎºĞ °æ·ÎÀÇ ÇÕ)
+vector<vector<int>>cache; // ë©”ëª¨ì´ì œì´ì…˜ ìºì‹œ(y,xì—ì„œ ë§¨ ì•„ë˜ê¹Œì§€ì˜ ë¶€ë¶„ ê²½ë¡œì˜ í•©)
 int n;
 
 int max(int a, int b) { return a > b ? a : b; }
 
 int path(const vector<vector<int>>& triangle, int y, int x)
 {
-	// ±âÀú Á¶°Ç: »ï°¢Çü ¹Ø¹Ù´Ú¿¡ µµ´ŞÇßÀ» ¶§
+	// ê¸°ì € ì¡°ê±´: ì‚¼ê°í˜• ë°‘ë°”ë‹¥ì— ë„ë‹¬í–ˆì„ ë•Œ
 	if (y == n - 1) return triangle[y][x];
-	// ¸Ş¸ğÀÌÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì´ì œì´ì…˜
 	int& ret = cache[y][x];
 	if (ret != -1) return ret;
-	// ºÎºĞ °æ·ÎÀÇ ÃÖ´ë°ª¿¡ ÇöÀç ÁÂÇ¥ÀÇ °ªÀ» ´õÇÑ´Ù.
+	// ë¶€ë¶„ ê²½ë¡œì˜ ìµœëŒ€ê°’ì— í˜„ì¬ ì¢Œí‘œì˜ ê°’ì„ ë”í•œë‹¤.
 	return ret = max(path(triangle, y + 1, x), path(triangle, y + 1, x + 1)) + triangle[y][x];
 }
 
@@ -27,7 +27,7 @@ int main(void)
 	{
 		cin >> n;
 		vector<vector<int>> triangle(n, vector<int>(n));
-		cache.resize(n, vector<int>(n, -1)); // Ä³½Ã ÃÊ±âÈ­
+		cache.resize(n, vector<int>(n, -1)); // ìºì‹œ ì´ˆê¸°í™”
 		for (int i = 0; i < n; i++)
 		{
 			for (int j = 0; j <= i; j++)

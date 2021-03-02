@@ -4,30 +4,30 @@
 #include<algorithm>
 
 using namespace std;
-// -1 : ´äÀÌ °è»ê ¾ÈµÊ
-// 1: ÇØ´ç ÀÔ·ÂµéÀÌ ¼­·Î ´ëÀÀµÊ
-// 0: ÇØ´ç ÀÔ·ÂµéÀÌ ¼­·Î ´ëÀÀµÇÁö ¾ÊÀ½
+// -1 : ë‹µì´ ê³„ì‚° ì•ˆë¨
+// 1: í•´ë‹¹ ì…ë ¥ë“¤ì´ ì„œë¡œ ëŒ€ì‘ë¨
+// 0: í•´ë‹¹ ì…ë ¥ë“¤ì´ ì„œë¡œ ëŒ€ì‘ë˜ì§€ ì•ŠìŒ
 bool matchMemoized(vector<vector<int>>& cache, const string& w, const string& s, int wpos, int spos)
 {
-	// ¸Ş¸ğÀÌÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì´ì œì´ì…˜
 	int& ret = cache[wpos][spos];
 	if (ret != -1) return ret;
-	// w[wpos]¿Í s[spos]¸¦ ¸ÂÃç³ª°£´Ù
+	// w[wpos]ì™€ s[spos]ë¥¼ ë§ì¶°ë‚˜ê°„ë‹¤
 	while (wpos < w.size() && spos < s.size() && (w[wpos] == '?' || w[wpos] == s[spos]))
 	{
 		wpos++;
 		spos++;
 	}
-	// 1. w[wpos]¿Í s[spos] °¡ ´ëÀÀµÇÁö ¾Ê´Â´Ù: return false
-	// 2. ÆĞÅÏ ³¡¿¡ µµ´ŞÇØ¼­ ³¡³­ °æ¿ì(wpos==w.size()): sµµ ³¡³µ¾î¾ß true
+	// 1. w[wpos]ì™€ s[spos] ê°€ ëŒ€ì‘ë˜ì§€ ì•ŠëŠ”ë‹¤: return false
+	// 2. íŒ¨í„´ ëì— ë„ë‹¬í•´ì„œ ëë‚œ ê²½ìš°(wpos==w.size()): së„ ëë‚¬ì–´ì•¼ true
 	if (wpos == w.size()) return ret = (spos == s.size());
-	// 3. s°¡ ³¡¿¡ µµ´ŞÇßÀ» °æ¿ì: ³²Àº ÆĞÅÏÀÌ *ÀÏ °æ¿ì trueÀÏ ¼öµµ ÀÖÀ¸¹Ç·Î 4¿¡¼­ Ã³¸®
-	// 4. w[wpos]=='*' ÀÎ °æ¿ì: 0ºÎÅÍ s.size()-1 ±îÁö ¹İº¹ÇÏ´Â skipÀ» ÅëÇØ
-	//                          wpos+1ºÎÅÍÀÇ ÆĞÅÏ°ú spos+skip ÆĞÅÏÀ» ºñ±³ÇØ¼­ ÇÏ³ª·Î trueÀÌ¸é ture ¸®ÅÏ
+	// 3. sê°€ ëì— ë„ë‹¬í–ˆì„ ê²½ìš°: ë‚¨ì€ íŒ¨í„´ì´ *ì¼ ê²½ìš° trueì¼ ìˆ˜ë„ ìˆìœ¼ë¯€ë¡œ 4ì—ì„œ ì²˜ë¦¬
+	// 4. w[wpos]=='*' ì¸ ê²½ìš°: 0ë¶€í„° s.size()-1 ê¹Œì§€ ë°˜ë³µí•˜ëŠ” skipì„ í†µí•´
+	//                          wpos+1ë¶€í„°ì˜ íŒ¨í„´ê³¼ spos+skip íŒ¨í„´ì„ ë¹„êµí•´ì„œ í•˜ë‚˜ë¡œ trueì´ë©´ ture ë¦¬í„´
 	if (w[wpos] == '*')
 		for (int skip = 0; skip+spos <= s.size(); skip++)
 			if (matchMemoized(cache, w, s, wpos + 1, spos + skip)) return ret = 1;
-	// ±× ¿ÜÀÇ °æ¿ì false ¸®ÅÏ
+	// ê·¸ ì™¸ì˜ ê²½ìš° false ë¦¬í„´
 	return ret = 0;
 }
 
@@ -46,10 +46,10 @@ int main(void)
 		{
 			string s;
 			cin >> s;
-			vector<vector<int>> cache(101, vector<int>(101, -1)); // Ä³½Ã, -1·Î ÃÊ±âÈ­
+			vector<vector<int>> cache(101, vector<int>(101, -1)); // ìºì‹œ, -1ë¡œ ì´ˆê¸°í™”
 			if (matchMemoized(cache, w, s, 0, 0)) res.push_back(s);
 		}
-		sort(res.begin(), res.end()); // Á¤·Ä
+		sort(res.begin(), res.end()); // ì •ë ¬
 		for (int i = 0; i < res.size(); i++) cout << res[i] << '\n';
 
 	}

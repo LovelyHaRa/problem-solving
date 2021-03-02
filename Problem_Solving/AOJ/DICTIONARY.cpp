@@ -5,9 +5,9 @@
 
 using namespace std;
 
-// ±×·¡ÇÁ Ç¥Çö
+// ê·¸ë˜í”„ í‘œí˜„
 vector<vector<int>> adj;
-// ÁÖ¾îÁø ´Ü¾îµé·ÎºÎÅÍ ¾ËÆÄºª °£ÀÇ ¼±ÈÄ°ü°è ±×·¡ÇÁ¸¦ »ı¼ºÇÑ´Ù
+// ì£¼ì–´ì§„ ë‹¨ì–´ë“¤ë¡œë¶€í„° ì•ŒíŒŒë²³ ê°„ì˜ ì„ í›„ê´€ê³„ ê·¸ë˜í”„ë¥¼ ìƒì„±í•œë‹¤
 void makeGraph(const vector<string>& words)
 {
 	adj = vector<vector<int>>(26, vector<int>(26, 0));
@@ -15,8 +15,8 @@ void makeGraph(const vector<string>& words)
 	{
 		int i = j - 1, len = min(words[i].size(), words[j].size());
 		for (int k = 0; k < len; k++)
-			// word[i]°¡ word[j]¸¦ ÇÑ±ÛÀÚ¾¿ ºñ±³ÇÑ´Ù
-			// ´Ù¸£¸é ÇØ´ç ¾ËÆÄºªÀ» ¹æÇâ±×·¡ÇÁ¿¡ Ç¥ÇöÇÑ´Ù
+			// word[i]ê°€ word[j]ë¥¼ í•œê¸€ìì”© ë¹„êµí•œë‹¤
+			// ë‹¤ë¥´ë©´ í•´ë‹¹ ì•ŒíŒŒë²³ì„ ë°©í–¥ê·¸ë˜í”„ì— í‘œí˜„í•œë‹¤
 			if (words[i][k] != words[j][k])
 			{
 				int a = words[i][k] - 'a';
@@ -34,25 +34,25 @@ void dfs(int here)
 	for (int there = 0; there < adj.size(); there++)
 		if (adj[here][there] && !seen[there])
 			dfs(there);
-	order.push_back(here); // À§»ó Á¤·ÄÀ» À§ÇÑ Ã¼Å©
+	order.push_back(here); // ìœ„ìƒ ì •ë ¬ì„ ìœ„í•œ ì²´í¬
 }
-// ÁÖ¾îÁø ±×·¡ÇÁ¸¦ À§»ó Á¤·ÄÇÑ °á°ú¸¦ ¹İÃT³ª´Ù.
-// ±×·¡ÇÁ°¡ DAG°¡ ¾Æ´Ï¶ó¸é ºó º¤ÅÍ¸¦ ¹İÈ¯ÇÑ´Ù
+// ì£¼ì–´ì§„ ê·¸ë˜í”„ë¥¼ ìœ„ìƒ ì •ë ¬í•œ ê²°ê³¼ë¥¼ ë°˜í™šë‚˜ë‹¤.
+// ê·¸ë˜í”„ê°€ DAGê°€ ì•„ë‹ˆë¼ë©´ ë¹ˆ ë²¡í„°ë¥¼ ë°˜í™˜í•œë‹¤
 vector<int> topologicalSort()
 {
 	int n = adj.size();
 	seen = vector<int>(n, 0);
 	order.clear();
-	// ¸ğµç ¾ËÆÄºª¿¡ ´ëÇØ DFS Å½»ö
+	// ëª¨ë“  ì•ŒíŒŒë²³ì— ëŒ€í•´ DFS íƒìƒ‰
 	for (int i = 0; i < n; i++) if (!seen[i]) dfs(i);
-	// Å½»ö °á°ú µÚÁı±â(À§»ó Á¤·Ä °á°ú)
+	// íƒìƒ‰ ê²°ê³¼ ë’¤ì§‘ê¸°(ìœ„ìƒ ì •ë ¬ ê²°ê³¼)
 	reverse(order.begin(), order.end());
-	// DAG°¡ ¾Æ´Ï¶ó¸é Á¤·Ä °á°ú¿¡ ¿ª¹æÇâ °£¼±ÀÌ ÀÖ´Ù.
+	// DAGê°€ ì•„ë‹ˆë¼ë©´ ì •ë ¬ ê²°ê³¼ì— ì—­ë°©í–¥ ê°„ì„ ì´ ìˆë‹¤.
 	for (int i = 0; i < n; i++)
 		for (int j = i + 1; j < n; j++)
 			if (adj[order[j]][order[i]])
 				return vector<int>();
-	// ¾ø´Â °æ¿ì¶ó¸é À§»ó Á¤·Ä °á°ú ¹İÈ¯
+	// ì—†ëŠ” ê²½ìš°ë¼ë©´ ìœ„ìƒ ì •ë ¬ ê²°ê³¼ ë°˜í™˜
 	return order;
 }
 

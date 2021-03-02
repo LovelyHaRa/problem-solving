@@ -4,41 +4,41 @@
 
 using namespace std;
 
-int n, capacity; // ¹°Ç° °³¼ö, ¹«°è ÇÑ°è
-vector<vector<int>> cache; // Ä³½Ã
-vector<int> volume, need; // ¹«°Ô ¸®½ºÆ®, Àı¹Úµµ ¸®½ºÆ®
-vector<string> name; // ¹°Ç° ÀÌ¸§ ¸®½ºÆ®
+int n, capacity; // ë¬¼í’ˆ ê°œìˆ˜, ë¬´ê³„ í•œê³„
+vector<vector<int>> cache; // ìºì‹œ
+vector<int> volume, need; // ë¬´ê²Œ ë¦¬ìŠ¤íŠ¸, ì ˆë°•ë„ ë¦¬ìŠ¤íŠ¸
+vector<string> name; // ë¬¼í’ˆ ì´ë¦„ ë¦¬ìŠ¤íŠ¸
 
 int max(int a, int b) { return a > b ? a : b; }
 
 int pack(int capacity, int item)
 {
-	// ±âÀú »ç·Ê: ¾ÆÀÌÅÛÀ» ¸ğµÎ Å½»öÇßÀ» ¶§
+	// ê¸°ì € ì‚¬ë¡€: ì•„ì´í…œì„ ëª¨ë‘ íƒìƒ‰í–ˆì„ ë•Œ
 	if (item == n) return 0;
-	// ¸Ş¸ğÀÌÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì´ì œì´ì…˜
 	int& ret = cache[capacity][item];
 	if (ret != -1)return ret;
-	// 1. ÇöÀç ¾ÆÀÌÅÛÀ» ¼±ÅÃÇÏÁö ¾Ê¾ÒÀ» ¶§
+	// 1. í˜„ì¬ ì•„ì´í…œì„ ì„ íƒí•˜ì§€ ì•Šì•˜ì„ ë•Œ
 	ret = pack(capacity, item + 1);
-	// 2. ÇöÀç ¾ÆÀÌÅÛÀ» ¼±ÅÃÇßÀ» ¶§
+	// 2. í˜„ì¬ ì•„ì´í…œì„ ì„ íƒí–ˆì„ ë•Œ
 	if (capacity >= volume[item])
-		// 1°ú ºñ±³ÇÏ¿© ÃÖ´ë°ª ÀúÀå
+		// 1ê³¼ ë¹„êµí•˜ì—¬ ìµœëŒ€ê°’ ì €ì¥
 		ret = max(ret, pack(capacity - volume[item], item + 1) + need[item]);
 	return ret;
 }
 
 void reconstruct(int capacity, int item, vector<string>& picked)
 {
-	// ±âÀú »ç·Ê: ¾ÆÀÌÅÛÀ» ¸ğµÎ Å½»öÇßÀ» ¶§
+	// ê¸°ì € ì‚¬ë¡€: ì•„ì´í…œì„ ëª¨ë‘ íƒìƒ‰í–ˆì„ ë•Œ
 	if (item == n) return;
-	// ÇöÀç ¾ÆÀÌÅÛÀ» ¼±ÅÃÇÏÁö ¾ÊÀº °æ¿ì: ¹«½ÃÇÏ°í ´ÙÀ½ ¾ÆÀÌÅÛ Å½»ö
+	// í˜„ì¬ ì•„ì´í…œì„ ì„ íƒí•˜ì§€ ì•Šì€ ê²½ìš°: ë¬´ì‹œí•˜ê³  ë‹¤ìŒ ì•„ì´í…œ íƒìƒ‰
 	if (pack(capacity, item) == pack(capacity, item + 1))
 		reconstruct(capacity, item + 1, picked);
-	// ÇöÀç ¾ÆÀÌÅÛÀ» ¼±ÅÃÇÑ °æ¿ì
+	// í˜„ì¬ ì•„ì´í…œì„ ì„ íƒí•œ ê²½ìš°
 	else
 	{
-		picked.push_back(name[item]); // ¾ÆÀÌÅÛ ÀúÀå
-		// ´ÙÀ½ ¾ÆÀÌÅÛ Å½»ö
+		picked.push_back(name[item]); // ì•„ì´í…œ ì €ì¥
+		// ë‹¤ìŒ ì•„ì´í…œ íƒìƒ‰
 		reconstruct(capacity - volume[item], item + 1, picked);
 	}
 }
@@ -49,7 +49,7 @@ int main(void)
 	cin >> c;
 	while (c--)
 	{
-		// ÀÔ·Â
+		// ì…ë ¥
 		cin >> n >> capacity;
 		cache.resize(1001, vector<int>(n, -1));
 		volume.resize(n);
@@ -57,17 +57,17 @@ int main(void)
 		name.resize(n);
 		for (int i = 0; i < n; i++)
 			cin >> name[i] >> volume[i] >> need[i];
-		// Àı¹Úµµ ÃÖ´ë°ª ±¸ÇÏ±â
+		// ì ˆë°•ë„ ìµœëŒ€ê°’ êµ¬í•˜ê¸°
 		pack(capacity, 0);
-		// ¼±ÅÃÇÑ ¾ÆÀÌÅÛ ¸®½ºÆ® ¸¸µé±â
+		// ì„ íƒí•œ ì•„ì´í…œ ë¦¬ìŠ¤íŠ¸ ë§Œë“¤ê¸°
 		vector<string> picked;
 		reconstruct(capacity, 0, picked);
-		// Ãâ·Â
+		// ì¶œë ¥
 		int cnt = picked.size();
 		cout << pack(capacity, 0) << ' ' << cnt << '\n';
 		for (int i = 0; i < cnt; i++)
 			cout << picked[i] << '\n';
-		// ÃÊ±âÈ­
+		// ì´ˆê¸°í™”
 		cache.clear();
 		volume.clear();
 		need.clear();

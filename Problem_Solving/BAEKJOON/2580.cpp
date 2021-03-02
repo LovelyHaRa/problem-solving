@@ -1,5 +1,5 @@
-// ¹éÆ®·¡Å· ¹®Á¦
-// DFS ÀÌ¿ë
+// ë°±íŠ¸ë˜í‚¹ ë¬¸ì œ
+// DFS ì´ìš©
 
 #include<iostream>
 #include<vector>
@@ -9,9 +9,9 @@
 using namespace std;
 
 int sudoku[9][9] = { 0 };
-vector<pair<int, int>> blank; // ºñ¾îÀÖ´Â Ä­ ÁÂÇ¥ ÀúÀå
+vector<pair<int, int>> blank; // ë¹„ì–´ìˆëŠ” ì¹¸ ì¢Œí‘œ ì €ì¥
 
-// °¡·Î ¼ıÀÚ °Ë»ç
+// ê°€ë¡œ ìˆ«ì ê²€ì‚¬
 bool check_horizontal(int r, int num)
 {
 	for (int c = 0; c < 9; c++)
@@ -22,7 +22,7 @@ bool check_horizontal(int r, int num)
 	return true;
 }
 
-// ¼¼·Î ¼ıÀÚ °Ë»ç
+// ì„¸ë¡œ ìˆ«ì ê²€ì‚¬
 bool check_vertical(int c, int num)
 {
 	for (int r = 0; r < 9; r++)
@@ -33,10 +33,10 @@ bool check_vertical(int c, int num)
 	return true;
 }
 
-// »ç°¢Çü ¼ıÀÚ °Ë»ç
+// ì‚¬ê°í˜• ìˆ«ì ê²€ì‚¬
 bool check_square(int r, int c, int num)
 {
-	// ÇØ´ç ÁÂÇ¥°¡ ¼ÓÇÏ´Â »ç°¢Çü ¿µ¿ª ½ÃÀÛÁ¡ ±¸ÇÏ±â
+	// í•´ë‹¹ ì¢Œí‘œê°€ ì†í•˜ëŠ” ì‚¬ê°í˜• ì˜ì—­ ì‹œì‘ì  êµ¬í•˜ê¸°
 	int x = (r / 3) * 3;
 	int y = (c / 3) * 3;
 	for (int i = x; i < x + 3; i++)
@@ -50,7 +50,7 @@ bool check_square(int r, int c, int num)
 
 void dfs(int idx)
 {
-	// Ä­ÀÌ ¸ğµÎ Ã¤¿öÁö¸é Ãâ·Â
+	// ì¹¸ì´ ëª¨ë‘ ì±„ì›Œì§€ë©´ ì¶œë ¥
 	if (idx == blank.size())
 	{
 		for (int i = 0; i < 9; i++)
@@ -62,7 +62,7 @@ void dfs(int idx)
 		exit(0);
 	}
 
-	// 1ºÎÅÍ 9±îÁö Â÷·Ê´ë·Î ³Ö¾îº¸¸é¼­ °¡´É¿©ºÎ Ã¼Å©
+	// 1ë¶€í„° 9ê¹Œì§€ ì°¨ë¡€ëŒ€ë¡œ ë„£ì–´ë³´ë©´ì„œ ê°€ëŠ¥ì—¬ë¶€ ì²´í¬
 	for (int i = 1; i <= 9; i++)
 	{
 		int r = blank[idx].first;
@@ -71,7 +71,7 @@ void dfs(int idx)
 		{
 			sudoku[r][c] = i;
 			dfs(idx + 1);
-			sudoku[r][c] = 0; // ¹éÆ®·¡Å·
+			sudoku[r][c] = 0; // ë°±íŠ¸ë˜í‚¹
 		}
 	}
 }
@@ -83,7 +83,7 @@ int main(void)
 		for (int j = 0; j < 9; j++)
 		{
 			cin >> sudoku[i][j];
-			// ºñ¾îÀÖ´Â Ä­Àº µû·Î °ü¸®
+			// ë¹„ì–´ìˆëŠ” ì¹¸ì€ ë”°ë¡œ ê´€ë¦¬
 			if (!sudoku[i][j])
 				blank.push_back({ i,j });
 		}

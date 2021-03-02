@@ -3,7 +3,7 @@
 
 using namespace std;
 
-// ÃÖ´ë°ø¾à¼ö(À¯Å¬¸®µå È£Á¦¹ı)
+// ìµœëŒ€ê³µì•½ìˆ˜(ìœ í´ë¦¬ë“œ í˜¸ì œë²•)
 int gcd(int a, int b)
 {
 	if (a > b) return gcd(a%b, b);

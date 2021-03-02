@@ -7,12 +7,12 @@ int main(void)
 {
 	string s;
 	cin >> s;
-	string res; // °á°ú ÀÌÁø¼ö
-	// ÀÌÁø¼ö º¯È¯ ¹è¿­
+	string res; // ê²°ê³¼ ì´ì§„ìˆ˜
+	// ì´ì§„ìˆ˜ ë³€í™˜ ë°°ì—´
 	string nonZeroBin[] = { "0","1","10","11","100","101","110","111" };
 	string zeroBin[] = { "000","001","010","011","100","101","110","111" };
-	res += nonZeroBin[s[0]-'0']; // ¸Ç ¾ÕÀÚ¸® ¼ýÀÚ´Â º¯È¯ ÈÄ¿¡ 0À¸·Î ½ÃÀÛÇÏ¸é ¾ÈµÊ
-	// ³ª¸ÓÁö ¼ýÀÚ´Â ¾ÕÀÚ¸®¸¦ 0À¸·Î Ã¤¿î ÀÌÁø¼ö¸¦ °á°ú ¹è¿­¿¡ ´©Àû
+	res += nonZeroBin[s[0]-'0']; // ë§¨ ì•žìžë¦¬ ìˆ«ìžëŠ” ë³€í™˜ í›„ì— 0ìœ¼ë¡œ ì‹œìž‘í•˜ë©´ ì•ˆë¨
+	// ë‚˜ë¨¸ì§€ ìˆ«ìžëŠ” ì•žìžë¦¬ë¥¼ 0ìœ¼ë¡œ ì±„ìš´ ì´ì§„ìˆ˜ë¥¼ ê²°ê³¼ ë°°ì—´ì— ëˆ„ì 
 	for (int i = 1; i < s.size(); i++)
 		res += zeroBin[s[i]-'0'];
 	cout << res;

@@ -3,30 +3,30 @@
 
 using namespace std;
 
-// Æ®¸® ³ëµå Á¤º¸(·çÆ®, ¿ŞÂÊ, ¿À¸¥ÂÊ, ºÎ¸ğ ³ëµå)
+// íŠ¸ë¦¬ ë…¸ë“œ ì •ë³´(ë£¨íŠ¸, ì™¼ìª½, ì˜¤ë¥¸ìª½, ë¶€ëª¨ ë…¸ë“œ)
 struct TreeNode {
 	int root, left, right, parent;
 };
-vector<TreeNode> T; // Æ®¸® ¹è¿­
+vector<TreeNode> T; // íŠ¸ë¦¬ ë°°ì—´
 
-// ¿­ ¹øÈ£, Æ®¸® ±íÀÌ
+// ì—´ ë²ˆí˜¸, íŠ¸ë¦¬ ê¹Šì´
 int colCount = 1, depth = 1;
-vector<int> minLev, maxLev; // (min/max)Lev[x]: x ·¹º§ ÀÏ ¶§, ¿­ÀÇ ÃÖ¼Ò/ÃÖ´ñ°ª
+vector<int> minLev, maxLev; // (min/max)Lev[x]: x ë ˆë²¨ ì¼ ë•Œ, ì—´ì˜ ìµœì†Œ/ìµœëŒ“ê°’
 
 int min(int a, int b) { return a < b ? a : b; }
 
-// ÁßÀ§ ¼øÈ¸
+// ì¤‘ìœ„ ìˆœíšŒ
 void inorder(int node, int level)
 {
 	TreeNode t = T[node];
-	if (depth < level) depth = level; // Æ®¸® ±íÀÌ °»½Å
-	// ¿ŞÂÊ ¼­ºêÆ®¸® Å½»ö
+	if (depth < level) depth = level; // íŠ¸ë¦¬ ê¹Šì´ ê°±ì‹ 
+	// ì™¼ìª½ ì„œë¸ŒíŠ¸ë¦¬ íƒìƒ‰
 	if(t.left>0)
 		inorder(t.left, level + 1);
-	// ·¹º§º° ¿­ÀÇ ÃÖ¼Ò/ÃÖ´ñ°ª °»½Å
+	// ë ˆë²¨ë³„ ì—´ì˜ ìµœì†Œ/ìµœëŒ“ê°’ ê°±ì‹ 
 	minLev[level] = min(minLev[level], colCount);
 	maxLev[level] = colCount++;
-	// ¿À¸¥ÂÊ ¼­ºêÆ®¸® Å½»ö
+	// ì˜¤ë¥¸ìª½ ì„œë¸ŒíŠ¸ë¦¬ íƒìƒ‰
 	if (t.right > 0)
 		inorder(t.right, level + 1);
 }
@@ -36,52 +36,52 @@ int main(void)
 	int n;
 	cin >> n;
 	T.resize(n + 1);
-	// ÃÊ±â ¼¼ÆÃ
+	// ì´ˆê¸° ì„¸íŒ…
 	for (int i = 1; i <= n; i++)
-		T[i] = { i,-1,-1,-1 }; // root¸¦ i·Î ÇÏ¿© ¼¼ÆÃ
+		T[i] = { i,-1,-1,-1 }; // rootë¥¼ ië¡œ í•˜ì—¬ ì„¸íŒ…
 	minLev.resize(n + 1, n + 1);
 	maxLev.resize(n + 1);
-	// Æ®¸® ³ëµå Ãß°¡
+	// íŠ¸ë¦¬ ë…¸ë“œ ì¶”ê°€
 	for (int i = 0; i < n; i++)
 	{
 		int r, a, b;
 		cin >> r >> a >> b;
-		// ¿ŞÂÊ ³ëµå°¡ ÀÖÀ» ½Ã
+		// ì™¼ìª½ ë…¸ë“œê°€ ìˆì„ ì‹œ
 		if (a > 0)
 		{
-			T[r].left = a; // ¿ŞÂÊ ³ëµå ÀúÀå
-			T[a].parent = r; // ºÎ¸ğ Á¤º¸ °»½Å
+			T[r].left = a; // ì™¼ìª½ ë…¸ë“œ ì €ì¥
+			T[a].parent = r; // ë¶€ëª¨ ì •ë³´ ê°±ì‹ 
 		}
-		// ¿À¸¥ÂÊ ³ëµå°¡ ÀÖÀ» ½Ã
+		// ì˜¤ë¥¸ìª½ ë…¸ë“œê°€ ìˆì„ ì‹œ
 		if (b > 0)
 		{
-			T[r].right= b; // ¿À¸¥ÂÊ ³ëµå ÀúÀå
-			T[b].parent = r; // ºÎ¸ğ Á¤º¸ °»½Å
+			T[r].right= b; // ì˜¤ë¥¸ìª½ ë…¸ë“œ ì €ì¥
+			T[b].parent = r; // ë¶€ëª¨ ì •ë³´ ê°±ì‹ 
 		}
 	}
 	int root = -1;
-	// ÃÖ»ó´Ü ·çÆ® ³ëµå Ã£±â
+	// ìµœìƒë‹¨ ë£¨íŠ¸ ë…¸ë“œ ì°¾ê¸°
 	for (int i = 1; i <= n; i++)
 	{
-		// ºÎ¸ğ°¡ ¾ø´Â ³ëµå°¡ ·çÆ® ³ëµå
+		// ë¶€ëª¨ê°€ ì—†ëŠ” ë…¸ë“œê°€ ë£¨íŠ¸ ë…¸ë“œ
 		if (T[i].parent == -1)
 		{
 			root = T[i].root;
 			break;
 		}
 	}
-	// ÁßÀ§ ¼øÈ¸
+	// ì¤‘ìœ„ ìˆœíšŒ
 	inorder(root, 1);
-	// ·çÆ® ³ëµå´Â Ç×»ó 1·¹º§, 1ÀÇ ³Êºñ¸¦ °¡Áø´Ù
+	// ë£¨íŠ¸ ë…¸ë“œëŠ” í•­ìƒ 1ë ˆë²¨, 1ì˜ ë„ˆë¹„ë¥¼ ê°€ì§„ë‹¤
 	int lev = 1, width = 1;
-	// 2·¹º§ ºÎÅÍ Æ®¸® ÃÖ´ë ³ôÀÌ±îÁö Å½»öÇÏ¸é¼­ ÃÖ´ë ³Êºñ °»½Å
+	// 2ë ˆë²¨ ë¶€í„° íŠ¸ë¦¬ ìµœëŒ€ ë†’ì´ê¹Œì§€ íƒìƒ‰í•˜ë©´ì„œ ìµœëŒ€ ë„ˆë¹„ ê°±ì‹ 
 	for (int i = 2; i <= depth; i++)
 	{
-		int cur = maxLev[i] - minLev[i] + 1; // ³Êºñ °è»ê
-		// ÃÖ´ñ°ª °»½Å
+		int cur = maxLev[i] - minLev[i] + 1; // ë„ˆë¹„ ê³„ì‚°
+		// ìµœëŒ“ê°’ ê°±ì‹ 
 		if (width < cur)
 		{
-			lev = i; // ·¹º§ °»½Å
+			lev = i; // ë ˆë²¨ ê°±ì‹ 
 			width = cur;
 		}
 	}

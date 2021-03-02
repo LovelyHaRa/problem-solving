@@ -6,14 +6,14 @@ using namespace std;
 
 string solution(string s) {
 	string answer = "";
-	// stringstream »ç¿ë
+	// stringstream ì‚¬ìš©
 	stringstream st;
-	st.str(s); // ¹®ÀÚ¿­ º¹»ç
+	st.str(s); // ë¬¸ìžì—´ ë³µì‚¬
 	int min = 1987654321, max = -1987654321, k;
-	// °ø¹éÀº ¹«½ÃÇÏ°í stÀÇ °ªÀÌ kÀÇ ÀÚ·áÇü(int)ÀÌ ¾Æ´Ò ¶§ ±îÁö ¹Ýº¹
+	// ê³µë°±ì€ ë¬´ì‹œí•˜ê³  stì˜ ê°’ì´ kì˜ ìžë£Œí˜•(int)ì´ ì•„ë‹ ë•Œ ê¹Œì§€ ë°˜ë³µ
 	while (st >> k) {
-		// k´Â stÀÇ ºÎºÐ ¹®ÀÚ¿­ÀÌ Çüº¯È¯ µÈ »óÅÂ
-		// ÃÖ¼Ú°ª, ÃÖ´ë°ªÀ» ÆÇº°
+		// këŠ” stì˜ ë¶€ë¶„ ë¬¸ìžì—´ì´ í˜•ë³€í™˜ ëœ ìƒíƒœ
+		// ìµœì†Ÿê°’, ìµœëŒ€ê°’ì„ íŒë³„
 		min = min > k ? k : min;
 		max = max < k ? k : max;
 	}

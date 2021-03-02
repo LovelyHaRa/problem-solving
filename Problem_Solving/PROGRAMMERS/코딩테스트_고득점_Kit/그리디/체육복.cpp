@@ -5,8 +5,8 @@ using namespace std;
 
 int solution(int n, vector<int> lost, vector<int> reserve) {
 	int answer = 0;
-	// 1. lost, reserve¿¡ µÑ´Ù Æ÷ÇÔµÈ »ç¶÷ Á¦¿Ü
-	answer = n - lost.size(); // ÃÊ±â°ª: ÀüÃ¼-¾ø´Â»ç¶÷
+	// 1. lost, reserveì— ë‘˜ë‹¤ í¬í•¨ëœ ì‚¬ëŒ ì œì™¸
+	answer = n - lost.size(); // ì´ˆê¸°ê°’: ì „ì²´-ì—†ëŠ”ì‚¬ëŒ
 	for (int i = 0; i < lost.size(); i++)
 	{
 		for (int j = 0; j < reserve.size(); j++)
@@ -14,24 +14,24 @@ int solution(int n, vector<int> lost, vector<int> reserve) {
 			if (reserve[j] == lost[i])
 			{
 				answer++;
-				//  -1·Î ¼³Á¤ÇØ¼­ Á¦¿Ü½ÃÅ´
+				//  -1ë¡œ ì„¤ì •í•´ì„œ ì œì™¸ì‹œí‚´
 				reserve[j] = -1;
 				lost[i] = -1;
 				break;
 			}
 		}
 	}
-	// 2. ¾ø´Â»ç¶÷ Ã³À½ºÎÅÍ ¼øÂ÷ÀûÀ¸·Î Á¶°ÇÅ½»ö
+	// 2. ì—†ëŠ”ì‚¬ëŒ ì²˜ìŒë¶€í„° ìˆœì°¨ì ìœ¼ë¡œ ì¡°ê±´íƒìƒ‰
 	for (int i = 0; i < lost.size(); i++)
 	{
 		for (int j = 0; j < reserve.size(); j++)
 		{
-			// Á¶°Ç ÀÏÄ¡ÇÏ¸é 
+			// ì¡°ê±´ ì¼ì¹˜í•˜ë©´ 
 			if (reserve[j] == lost[i] - 1 ||
 				reserve[j] == lost[i] + 1)
 			{
 				answer++;
-				// ¹Ş´Â»ç¶÷ Á¦¿Ü½ÃÅ´
+				// ë°›ëŠ”ì‚¬ëŒ ì œì™¸ì‹œí‚´
 				reserve[j] = -1;
 				break;
 			}

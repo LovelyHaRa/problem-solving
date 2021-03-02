@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// ´ÜÀÏ º¯¼ö ´ÙÇ×½Ä pÀÇ °è¼÷ ¤¿ÁÖ¾îÁú ¶§ ¹ÌºĞÇÑ °á°úÀÇ °è¼ö¸¦ ¹İÈ¯ÇÑ´Ù
+// ë‹¨ì¼ ë³€ìˆ˜ ë‹¤í•­ì‹ pì˜ ê³„ìˆ™ ã…ì£¼ì–´ì§ˆ ë•Œ ë¯¸ë¶„í•œ ê²°ê³¼ì˜ ê³„ìˆ˜ë¥¼ ë°˜í™˜í•œë‹¤
 vector<double> differentiate(const vector<double>& poly)
 {
 	vector<double> ret;
@@ -14,7 +14,7 @@ vector<double> differentiate(const vector<double>& poly)
 		ret.push_back((n - i)*poly[i]);
 	return ret;
 }
-// 1Â÷ or 2Â÷ ¹æÁ¤½ÄÀÇ ÇØ¸¦ ±¸ÇÑ´Ù
+// 1ì°¨ or 2ì°¨ ë°©ì •ì‹ì˜ í•´ë¥¼ êµ¬í•œë‹¤
 vector<double> solveNative(const vector<double>& poly)
 {
 	int n = poly.size() - 1;
@@ -33,7 +33,7 @@ vector<double> solveNative(const vector<double>& poly)
 	sort(ret.begin(), ret.end());
 	return ret;
 }
-//  ´ÙÇ×½Ä f(x)ÀÇ °è¼ö poly°¡ ÁÖ¾îÁú ¶§, f(x0)À» ¹İÈ¯ÇÑ´Ù.
+//  ë‹¤í•­ì‹ f(x)ì˜ ê³„ìˆ˜ polyê°€ ì£¼ì–´ì§ˆ ë•Œ, f(x0)ì„ ë°˜í™˜í•œë‹¤.
 double evaluate(const vector<double>& poly, double x0)
 {
 	int n = poly.size() - 1;
@@ -42,18 +42,18 @@ double evaluate(const vector<double>& poly, double x0)
 		ret += poly[i] * pow(x0, (n - i));
 	return ret;
 }
-// ¾ç ³¡Á¡
+// ì–‘ ëì 
 const double L = 25;
-// ´ÙÇ×½ÄÀÇ ±ÙÀ» ¹İÈ¯ÇÑ´Ù.
+// ë‹¤í•­ì‹ì˜ ê·¼ì„ ë°˜í™˜í•œë‹¤.
 vector<double> solve(const vector<double>& poly)
 {
 	int n = poly.size() - 1;
-	// ±âÀú »ç·Ê: 2Â÷ ÀÌÇÏ ´ÙÇ×½ÄÀº ÇØ°á °¡´É
+	// ê¸°ì € ì‚¬ë¡€: 2ì°¨ ì´í•˜ ë‹¤í•­ì‹ì€ í•´ê²° ê°€ëŠ¥
 	if (n <= 2) return solveNative(poly);
-	// ¹æÁ¤½ÄÀ» ¹ÌºĞÇØ¼­ n-1Â÷ ¹æÁ¤½ÄÀ» ¾ò´Â´Ù
+	// ë°©ì •ì‹ì„ ë¯¸ë¶„í•´ì„œ n-1ì°¨ ë°©ì •ì‹ì„ ì–»ëŠ”ë‹¤
 	vector<double> derivative = differentiate(poly);
 	vector<double> sols = solve(derivative);
-	// ÀÌ ±ØÁ¡µé »çÀÌ¸¦ ÇÏ³ªÇÏ³ª °Ë»çÇÏ¸ç±ÙÀÌÀÖ³ª È®ÀÎÇÑ´Ù.
+	// ì´ ê·¹ì ë“¤ ì‚¬ì´ë¥¼ í•˜ë‚˜í•˜ë‚˜ ê²€ì‚¬í•˜ë©°ê·¼ì´ìˆë‚˜ í™•ì¸í•œë‹¤.
 	sols.insert(sols.begin(), -L - 1);
 	sols.insert(sols.end(), L + 1);
 	vector<double> ret;
@@ -61,11 +61,11 @@ vector<double> solve(const vector<double>& poly)
 	{
 		double x1 = sols[i], x2 = sols[i + 1];
 		double y1 = evaluate(poly, x1), y2 = evaluate(poly, x2);
-		// ºÎÈ£°¡ °°Àº °æ¿ì ´äÀÌ ¾ø´Ù
+		// ë¶€í˜¸ê°€ ê°™ì€ ê²½ìš° ë‹µì´ ì—†ë‹¤
 		if (y1*y2 > 0) continue;
-		// ºÒº¯ Á¶°Ç ÃæÁ·
+		// ë¶ˆë³€ ì¡°ê±´ ì¶©ì¡±
 		if (y1>y2) { swap(y1, y2); swap(x1, x2); }
-		// ÀÌºĞ¹ı »ç¿ë
+		// ì´ë¶„ë²• ì‚¬ìš©
 		for (int iter = 0; iter < 100; iter++)
 		{
 			double mx = (x1 + x2) / 2;

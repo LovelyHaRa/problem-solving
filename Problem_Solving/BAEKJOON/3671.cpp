@@ -1,5 +1,5 @@
-// ���Ʈ����
-// ���α׷��ӽ� Ǯ�� ����
+// 브루트포스
+// 프로그래머스 풀이 참조
 #include<iostream>
 #include<vector>
 #include<algorithm>

@@ -1,26 +1,26 @@
-// ±×¸®µð ¾Ë°í¸®Áò
+// ê·¸ë¦¬ë”” ì•Œê³ ë¦¬ì¦˜
 #include<iostream>
 #include<algorithm>
 using namespace std;
 
 int main(void)
 {
-	int a[1000], b[1000]; // µ¥ÀÌÅÍ, Áß°£°ª ÀúÀå
+	int a[1000], b[1000]; // ë°ì´í„°, ì¤‘ê°„ê°’ ì €ìž¥
 	int n, min = 0;
 	cin >> n;
 	for (int i = 0; i < n; i++)
 		cin >> a[i];
 	/*
-	1. ¿À¸§Â÷¼ø Á¤·Ä
-	2. °¢°¢ ¹è¿­¿ä¼ÒÀÇ ´©ÀûÇÕÀ» ÀúÀå(b)
-	3. bÀÇ ¿ä¼Ò¸¦ ¸ðµÎ ´õÇÔ(min)
+	1. ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
+	2. ê°ê° ë°°ì—´ìš”ì†Œì˜ ëˆ„ì í•©ì„ ì €ìž¥(b)
+	3. bì˜ ìš”ì†Œë¥¼ ëª¨ë‘ ë”í•¨(min)
 	*/
 	sort(a, a + n);
 	min = b[0] = a[0];
 	for (int i = 1; i < n; i++)
 	{
-		b[i] = b[i-1] + a[i]; // ´©ÀûÇÕ °è»ê
-		min += b[i]; // °á°ú°ª °è»ê
+		b[i] = b[i-1] + a[i]; // ëˆ„ì í•© ê³„ì‚°
+		min += b[i]; // ê²°ê³¼ê°’ ê³„ì‚°
 	}
 	cout << min << '\n';
 }

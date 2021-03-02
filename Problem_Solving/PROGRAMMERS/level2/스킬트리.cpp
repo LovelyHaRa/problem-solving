@@ -6,28 +6,28 @@ using namespace std;
 
 int solution(string skill, vector<string> skill_trees) {
 	int answer = 0;
-	// 1. ½ºÅ³Æ®¸® °³¼ö¸¸Å­ ¹İº¹
+	// 1. ìŠ¤í‚¬íŠ¸ë¦¬ ê°œìˆ˜ë§Œí¼ ë°˜ë³µ
 	for (int i = 0; i < skill_trees.size(); i++) {
-		int impossible = 0; // ½ºÅ³Æ®¸® ºÒ°¡´É ¿©ºÎ
+		int impossible = 0; // ìŠ¤í‚¬íŠ¸ë¦¬ ë¶ˆê°€ëŠ¥ ì—¬ë¶€
 		int j = 0;
-		queue<char> q, tq; // ½ºÅ³»óÅÂ
-		// 2. ½ºÅ³»óÅÂ ¾÷µ¥ÀÌÆ®
+		queue<char> q, tq; // ìŠ¤í‚¬ìƒíƒœ
+		// 2. ìŠ¤í‚¬ìƒíƒœ ì—…ë°ì´íŠ¸
 		while (j < skill.size()) {
 			q.push(skill[j++]);
 		}
-		// 3. ½ºÅ³Æ®¸® ¼øÈ¸
+		// 3. ìŠ¤í‚¬íŠ¸ë¦¬ ìˆœíšŒ
 		for (j = 0; j < skill_trees[i].size(); j++) {
-			int flag = 0; // Ã¹¹øÂ° ½ºÅ³ ÀÏÄ¡¿©ºÎ
-			// 4. ½ºÅ³Æ®¸® »óÅÂ¸¦ ÀÓ½Ã·Î ÀúÀå
+			int flag = 0; // ì²«ë²ˆì§¸ ìŠ¤í‚¬ ì¼ì¹˜ì—¬ë¶€
+			// 4. ìŠ¤í‚¬íŠ¸ë¦¬ ìƒíƒœë¥¼ ì„ì‹œë¡œ ì €ì¥
 			tq = q;
-			// 5. ÀÓ½Ã ½ºÅ³Æ®¸® ¼øÈ¸
+			// 5. ì„ì‹œ ìŠ¤í‚¬íŠ¸ë¦¬ ìˆœíšŒ
 			while (!tq.empty()) {
-				// 6. Ã¹¹øÂ° ¼øÈ¸¶§ ÀÏÄ¡ÇÏÁö ¾Ê°í µÎ¹øÂ° ¼øÈ¸ºÎÅÍ ÀÏÄ¡ÇÏ¸é ºÒ°¡´É
+				// 6. ì²«ë²ˆì§¸ ìˆœíšŒë•Œ ì¼ì¹˜í•˜ì§€ ì•Šê³  ë‘ë²ˆì§¸ ìˆœíšŒë¶€í„° ì¼ì¹˜í•˜ë©´ ë¶ˆê°€ëŠ¥
 				if (flag && tq.front() == skill_trees[i][j]) {
 					impossible = 1;
 					break;
 				}
-				// 7. Ã¹¹øÂ° ¼øÈ¸¶§ ÀÏÄ¡ÇÏ¸é ½ºÅ³»óÅÂ¿¡¼­ pop
+				// 7. ì²«ë²ˆì§¸ ìˆœíšŒë•Œ ì¼ì¹˜í•˜ë©´ ìŠ¤í‚¬ìƒíƒœì—ì„œ pop
 				else if (tq.front() == skill_trees[i][j]) {
 					q.pop();
 					break;
@@ -35,12 +35,12 @@ int solution(string skill, vector<string> skill_trees) {
 				tq.pop();
 				flag = 1;
 			}
-			// 8 ºÒ°¡´É½Ã Å½»ö Áß´Ü
+			// 8 ë¶ˆê°€ëŠ¥ì‹œ íƒìƒ‰ ì¤‘ë‹¨
 			if (impossible) {
 				break;
 			}
 		}
-		// 9 °¡´É ºÒ°¡´É ¿©ºÎ¿¡ µû¶ó Á¤´ä Áõ°¡
+		// 9 ê°€ëŠ¥ ë¶ˆê°€ëŠ¥ ì—¬ë¶€ì— ë”°ë¼ ì •ë‹µ ì¦ê°€
 		answer = impossible ? answer : answer + 1;
 	}
 	return answer;

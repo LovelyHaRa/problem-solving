@@ -9,36 +9,36 @@ int main(void)
 {
 	int n;
 	cin >> n;
-	// rgb°ª, Ä³½Ã¹è¿­
+	// rgbê°’, ìºì‹œë°°ì—´
 	vector<vector<int>> rgb(n, vector<int>(3)), cache(n, vector<int>(3));
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < 3; j++)
 			cin >> rgb[i][j];
-	int res = M; // ÃÖ¼Ú°ª ±¸ÇÏ´Â º¯¼ö
-	// ½ÃÀÛÁýÀÇ ¸ðµç °æ¿ì¸¦ Å½»ö
+	int res = M; // ìµœì†Ÿê°’ êµ¬í•˜ëŠ” ë³€ìˆ˜
+	// ì‹œìž‘ì§‘ì˜ ëª¨ë“  ê²½ìš°ë¥¼ íƒìƒ‰
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
 		{
-			// Ã¹¹øÂ° ÁýÀÌ ÇØ´ç Â÷·ÊÀÇ ÁýÀÏ °æ¿ì¿¡¸¸ Ä³½Ã¿¡ ÀúÀå
+			// ì²«ë²ˆì§¸ ì§‘ì´ í•´ë‹¹ ì°¨ë¡€ì˜ ì§‘ì¼ ê²½ìš°ì—ë§Œ ìºì‹œì— ì €ìž¥
 			if (i == j)
 				cache[0][j] = rgb[0][j];
-			// ±×·¸Áö ¾ÊÀº °æ¿ì´Â ¾ÆÁÖ Å« °ª ÀúÀå
+			// ê·¸ë ‡ì§€ ì•Šì€ ê²½ìš°ëŠ” ì•„ì£¼ í° ê°’ ì €ìž¥
 			else
 				cache[0][j] = M;
 		}
-		// DP Å½»ö
+		// DP íƒìƒ‰
 		for (int j = 1; j < n; j++)
 		{
 			for (int k = 0; k < 3; k++)
 				cache[j][k] = min(cache[j - 1][(k + 1) % 3], cache[j - 1][(k + 2) % 3]) + rgb[j][k];
 		}
-		// Ã¹¹øÂ° Áý°ú ¶È°°Àº »ö±òÀÇ ÁýÀº ÃÖ¼Ú°ª °»½ÅÀÌ ºÒ°¡
+		// ì²«ë²ˆì§¸ ì§‘ê³¼ ë˜‘ê°™ì€ ìƒ‰ê¹”ì˜ ì§‘ì€ ìµœì†Ÿê°’ ê°±ì‹ ì´ ë¶ˆê°€
 		for (int j = 0; j < 3; j++)
 		{
-			// ÃÖ¼Ú°ª °»½ÅÀÌ ºÒ°¡´ÉÇÑ °æ¿ì
+			// ìµœì†Ÿê°’ ê°±ì‹ ì´ ë¶ˆê°€ëŠ¥í•œ ê²½ìš°
 			if (i == j) continue;
-			// ±×·¸Áö ¾ÊÀº °æ¿ì
+			// ê·¸ë ‡ì§€ ì•Šì€ ê²½ìš°
 			res = min(res, cache[n - 1][j]);
 		}
 	}

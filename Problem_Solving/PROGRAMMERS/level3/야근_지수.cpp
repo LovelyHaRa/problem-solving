@@ -7,19 +7,19 @@ using namespace std;
 
 long long solution(int n, vector<int> works) {
 	long long answer = 0;
-	// ¿ì¼± ¼øÀ§ Å¥¸¦ »ç¿ëÇÏ¿© ÇØ°á
+	// ìš°ì„  ìˆœìœ„ íë¥¼ ì‚¬ìš©í•˜ì—¬ í•´ê²°
 	priority_queue<int> pq;
 	for (int i = 0; i < works.size(); i++) {
-		pq.push(works[i]); // Å¥¿¡ ¿ø¼Ò »ğÀÔ
+		pq.push(works[i]); // íì— ì›ì†Œ ì‚½ì…
 	}
 	int t = n;
 	while (t--) {
 		int x = pq.top();
-		if (x == 0) return 0; // ÃÖ´ë°ªÀÌ 0ÀÌ¶ó´Â ÀÇ¹ÌÀÌ¹Ç·Î ¹Ù·Î 0 ¸®ÅÏ
+		if (x == 0) return 0; // ìµœëŒ€ê°’ì´ 0ì´ë¼ëŠ” ì˜ë¯¸ì´ë¯€ë¡œ ë°”ë¡œ 0 ë¦¬í„´
 		pq.pop();
-		pq.push(--x); // -1ÇÑ °ªÀ» ´Ù½Ã Å¥¿¡ »ğÀÔ
+		pq.push(--x); // -1í•œ ê°’ì„ ë‹¤ì‹œ íì— ì‚½ì…
 	}
-	// Å¥¿¡ ³²Àº °ªµéÀ» Á¦°öÇÏ¿© ´õÇÑ µÚ ¸®ÅÏ
+	// íì— ë‚¨ì€ ê°’ë“¤ì„ ì œê³±í•˜ì—¬ ë”í•œ ë’¤ ë¦¬í„´
 	while (!pq.empty()) {
 		int x = pq.top();
 		answer += x * x;

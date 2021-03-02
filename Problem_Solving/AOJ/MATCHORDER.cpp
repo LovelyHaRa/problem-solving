@@ -7,17 +7,17 @@ using namespace std;
 int order(const vector<int>& russian, const vector<int>& korean)
 {
 	int n = korean.size(), wins = 0;
-	multiset<int> ratings(korean.begin(), korean.end()); // ÀÌÁø Å½»ö Æ®¸®¿¡ ÀúÀå
+	multiset<int> ratings(korean.begin(), korean.end()); // ì´ì§„ íƒìƒ‰ íŠ¸ë¦¬ì— ì €ì¥
 	for (int rus = 0; rus < n; rus++)
 	{
-		// ¾î¶² ¼±¼öµµ ÀÌ±æ ¼ö ¾ø´Â °æ¿ì
+		// ì–´ë–¤ ì„ ìˆ˜ë„ ì´ê¸¸ ìˆ˜ ì—†ëŠ” ê²½ìš°
 		if (*ratings.rbegin() < russian[rus])
-			ratings.erase(ratings.begin()); // °¡Àå ³·Àº ·¹ÀÌÆÃ ¼±¼ö ÃâÀü
+			ratings.erase(ratings.begin()); // ê°€ì¥ ë‚®ì€ ë ˆì´íŒ… ì„ ìˆ˜ ì¶œì „
 		else
 		{
-			// ÀÌ±æ ¼ö ÀÖ´Â ¼±¼ö Áß ÃÖ¼Ò°ªÀÇ ·¹ÀÌÆÃÀ» °¡Áø ¼±¼ö¸¦ ÃâÀü
+			// ì´ê¸¸ ìˆ˜ ìˆëŠ” ì„ ìˆ˜ ì¤‘ ìµœì†Œê°’ì˜ ë ˆì´íŒ…ì„ ê°€ì§„ ì„ ìˆ˜ë¥¼ ì¶œì „
 			ratings.erase(ratings.lower_bound(russian[rus]));
-			wins++; // ½Â¼ö Ãß°¡
+			wins++; // ìŠ¹ìˆ˜ ì¶”ê°€
 		}
 	}
 	return wins;

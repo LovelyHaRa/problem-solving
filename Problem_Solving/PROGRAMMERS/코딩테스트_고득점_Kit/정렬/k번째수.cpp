@@ -14,12 +14,12 @@ vector<int> solution(vector<int> array, vector<vector<int>> commands) {
 		j = commands[c][1];
 		k = commands[c][2];
 		vector<int> tmp;
-		// 1. ¹è¿­ ÂÉ°³±â
+		// 1. ë°°ì—´ ìª¼ê°œê¸°
 		for (int x = i - 1; x < j; x++)
 			tmp.push_back(array[x]);
-		// 2. Á¤·Ä ÇÔ¼ö¸¦ ÀÌ¿ëÇÑ Á¤·Ä
+		// 2. ì •ë ¬ í•¨ìˆ˜ë¥¼ ì´ìš©í•œ ì •ë ¬
 		sort(tmp.begin(), tmp.end());
-		// 3. ÇØ´ç À§Ä¡ ¿ø¼Ò Çª½Ã
+		// 3. í•´ë‹¹ ìœ„ì¹˜ ì›ì†Œ í‘¸ì‹œ
 		answer.push_back(tmp[k - 1]);
 		c++;
 	}

@@ -6,41 +6,41 @@ using namespace std;
 
 vector<int> cache(19683, -2);
 
-// ÇÑ ÁÙ ¶Ç´Â ´ë°¢¼±ÀÌ o ¶Ç´Â x·Î Ã¤¿öÁø °æ¿ì true
+// í•œ ì¤„ ë˜ëŠ” ëŒ€ê°ì„ ì´ o ë˜ëŠ” xë¡œ ì±„ì›Œì§„ ê²½ìš° true
 bool isFinished(const vector<string>& board, char turn)
 {
 	int i, j;
 	for (i = 0; i < 3; i++)
 	{
-		// °¡·ÎÁÙ
+		// ê°€ë¡œì¤„
 		for (j = 0; j < 3; j++)
 			if (board[i][j] == turn) continue;
 			else break;
 		if (j == 3) return true;
-		// ¼¼·ÎÁÙ
+		// ì„¸ë¡œì¤„
 		for (j = 0; j < 3; j++)
 			if (board[j][i] == turn) continue;
 			else break;
 		if (j == 3) return true;
 	}
-	// ¿ŞÂÊÀ§ ´ë°¢¼±
+	// ì™¼ìª½ìœ„ ëŒ€ê°ì„ 
 	for (i = 0; i < 3; i++)
 	{
 		if (board[i][i] == turn) continue;
 		else break;
 	}
 	if (i == 3) return true;
-	// ¿À¸¥ÂÊÀ§ ´ë°¢¼±
+	// ì˜¤ë¥¸ìª½ìœ„ ëŒ€ê°ì„ 
 	for (i = 0; i < 3; i++)
 	{
 		if (board[i][2 - i] == turn) continue;
 		else break;
 	}
 	if (i == 3) return true;
-	return false; // ¸ğµÎ ÇØ´ç¾ÈµÇ¸é false
+	return false; // ëª¨ë‘ í•´ë‹¹ì•ˆë˜ë©´ false
 }
 
-// °ÔÀÓÆÇÀÇ »óÈ²À» 3Áø¼ö·Î º¯È¯ÈÄ 10Áø¼ö·Î ÀúÀå
+// ê²Œì„íŒì˜ ìƒí™©ì„ 3ì§„ìˆ˜ë¡œ ë³€í™˜í›„ 10ì§„ìˆ˜ë¡œ ì €ì¥
 int bijection(const vector<string>& board) {
 	int ret = 0, k = 1;
 	for (int i = 0; i < 3; i++)
@@ -60,16 +60,16 @@ int bijection(const vector<string>& board) {
 
 int min(int a, int b) { return a < b ? a : b; }
 
-// turnÀÌ ÀÌ±æ ¼ö ÀÖ´Â °æ¿ì 1, ºñ±â´Â °æ¿ì 0, Áö´Â °æ¿ì -1
+// turnì´ ì´ê¸¸ ìˆ˜ ìˆëŠ” ê²½ìš° 1, ë¹„ê¸°ëŠ” ê²½ìš° 0, ì§€ëŠ” ê²½ìš° -1
 int canWin(vector<string>& board, char turn)
 {
-	// ±âÀú»ç·Ê: ´ÙÀ½ ÅÏ »ó´ë°¡ °ÔÀÓÀ» ³¡³¾ ¼ö ÀÖ´Â °æ¿ì
+	// ê¸°ì €ì‚¬ë¡€: ë‹¤ìŒ í„´ ìƒëŒ€ê°€ ê²Œì„ì„ ëë‚¼ ìˆ˜ ìˆëŠ” ê²½ìš°
 	if (isFinished(board, 'o' + 'x' - turn)) return -1;
-	// ¸Ş¸ğÀÌÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì´ì œì´ì…˜
 	int& ret = cache[bijection(board)];
 	if (ret != -2) return ret;
 	int minValue = 2;
-	// °ÔÀÓÆÇÀ» ¸ğµÎ Å½»öÇÏ¸é¼­ ÃÖ¼Ú°ª °»½Å
+	// ê²Œì„íŒì„ ëª¨ë‘ íƒìƒ‰í•˜ë©´ì„œ ìµœì†Ÿê°’ ê°±ì‹ 
 	for (int i = 0; i < 3; i++)
 	{
 		for (int j = 0; j < 3; j++)
@@ -82,9 +82,9 @@ int canWin(vector<string>& board, char turn)
 			}
 		}
 	}
-	// ºñ±â°Å³ª °»½ÅÀÌ ¾ÈµÈ °æ¿ì
+	// ë¹„ê¸°ê±°ë‚˜ ê°±ì‹ ì´ ì•ˆëœ ê²½ìš°
 	if (minValue == 2 || !minValue) return ret = 0;
-	// »ó´ë¹æÀÌ Áö¸é ³»°¡ ÀÌ±â°í, »ó´ë¹æÀÌ ÀÌ±â¸é ³»°¡ Áø´Ù.
+	// ìƒëŒ€ë°©ì´ ì§€ë©´ ë‚´ê°€ ì´ê¸°ê³ , ìƒëŒ€ë°©ì´ ì´ê¸°ë©´ ë‚´ê°€ ì§„ë‹¤.
 	return ret = -minValue;
 }
 
@@ -105,7 +105,7 @@ int main(void)
 					turnCount++;
 			}
 		}
-		// Â÷·Ê °áÁ¤
+		// ì°¨ë¡€ ê²°ì •
 		char turn = (turnCount % 2) ? 'o' : 'x';
 		int res = canWin(board, turn);
 		if (res == -1)

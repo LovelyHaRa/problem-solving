@@ -8,37 +8,37 @@ using namespace std;
 
 int solution(int cacheSize, vector<string> cities) {
 	int answer = 0;
-	// linked list ·Î Ä³½Ã ±¸Çö
+	// linked list ë¡œ ìºì‹œ êµ¬í˜„
 	list<string> l;
 	map<string, list<string>::iterator> m;
-	// 1. Ä³½Ã »çÀÌÁî°¡ 0 ÀÌ¸é Ä³½Ã ÀúÀå ºÒ°¡´É ÀÌ¹Ç·Î »çÀÌÁî*5 ¸®ÅÏ
+	// 1. ìºì‹œ ì‚¬ì´ì¦ˆê°€ 0 ì´ë©´ ìºì‹œ ì €ì¥ ë¶ˆê°€ëŠ¥ ì´ë¯€ë¡œ ì‚¬ì´ì¦ˆ*5 ë¦¬í„´
 	if (!cacheSize) { return cities.size() * 5; }
-	// 2. cities Å½»ö
+	// 2. cities íƒìƒ‰
 	for (int i = 0; i < cities.size(); i++) {
-		// 3. ÇöÀç cities uppercase
+		// 3. í˜„ì¬ cities uppercase
 		transform(cities[i].begin(), cities[i].end(), cities[i].begin(), (int(*)(int))toupper);
-		// 4. Ä³½Ã miss ½Ã
+		// 4. ìºì‹œ miss ì‹œ
 		if (m.find(cities[i]) == m.end()) {
-			// 4-1. Ä³½Ã°¡ ²Ë Â÷¸é
+			// 4-1. ìºì‹œê°€ ê½‰ ì°¨ë©´
 			if (cacheSize == l.size()) {
-				// 4-2. ¸®½ºÆ® ¸¶Áö¸· ¿ø¼Ò¸¦ Á¦°Å
+				// 4-2. ë¦¬ìŠ¤íŠ¸ ë§ˆì§€ë§‰ ì›ì†Œë¥¼ ì œê±°
 				string last = l.back();
 				l.pop_back();
 				m.erase(last);
 			}
-			// ½Ã°£ Ãß°¡
+			// ì‹œê°„ ì¶”ê°€
 			answer += 5;
 		}
-		// 5. Ä³½Ã ÀûÁß ½Ã
+		// 5. ìºì‹œ ì ì¤‘ ì‹œ
 		else {
-			// 5-1. ¸®½ºÆ®¿¡¼­ ÇØ´ç Ä³½Ã°ª »èÁ¦ (LRU °»½ÅÀ» À§ÇØ)
+			// 5-1. ë¦¬ìŠ¤íŠ¸ì—ì„œ í•´ë‹¹ ìºì‹œê°’ ì‚­ì œ (LRU ê°±ì‹ ì„ ìœ„í•´)
 			l.erase(m[cities[i]]);
-			// ½Ã°£ Ãß°¡
+			// ì‹œê°„ ì¶”ê°€
 			answer += 1;
 		}
-		// 6. ¸®½ºÆ® ¿ŞÂÊ¿¡ ÇöÀç °ª Ãß°¡ (Ä³½Ã ¹Ì½º, ÀûÁß °øÅëÀûÀ¸·Î µ¿ÀÛ)
+		// 6. ë¦¬ìŠ¤íŠ¸ ì™¼ìª½ì— í˜„ì¬ ê°’ ì¶”ê°€ (ìºì‹œ ë¯¸ìŠ¤, ì ì¤‘ ê³µí†µì ìœ¼ë¡œ ë™ì‘)
 		l.push_front(cities[i]);
-		// iterator °»½Å
+		// iterator ê°±ì‹ 
 		m[cities[i]] = l.begin();
 	}
 	return answer;

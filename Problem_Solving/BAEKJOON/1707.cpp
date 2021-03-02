@@ -3,11 +3,11 @@
 
 using namespace std;
 
-vector<vector<int>> adj; // ÀÎÁ¢ ¸®½ºÆ®
-vector<int> visited; // 0: ¹Ì¹æ¹® // 1,2 // Á¤Á¡À» ±¸ºĞÇÏ´Â ¼ıÀÚ
+vector<vector<int>> adj; // ì¸ì ‘ ë¦¬ìŠ¤íŠ¸
+vector<int> visited; // 0: ë¯¸ë°©ë¬¸ // 1,2 // ì •ì ì„ êµ¬ë¶„í•˜ëŠ” ìˆ«ì
 int n;
 
-// DFS Å½»ö
+// DFS íƒìƒ‰
 void dfs(int here, int color)
 {
 	for (int i = 0; i < adj[here].size(); i++)
@@ -16,12 +16,12 @@ void dfs(int here, int color)
 		if (!visited[v])
 		{
 			visited[v] = color;
-			dfs(v, 3 - color); // ´Ù¸¥ »ö±ò·Î »öÄ¥
+			dfs(v, 3 - color); // ë‹¤ë¥¸ ìƒ‰ê¹”ë¡œ ìƒ‰ì¹ 
 		}
 	}
 }
 
-// ±×·¡ÇÁ°¡ ÀÌºĞ ±×·¡ÇÁÀÎÁö È®ÀÎ
+// ê·¸ë˜í”„ê°€ ì´ë¶„ ê·¸ë˜í”„ì¸ì§€ í™•ì¸
 bool isBipartite()
 {
 	for (int i = 1; i <= n; i++)
@@ -29,7 +29,7 @@ bool isBipartite()
 		for (int j = 0; j < adj[i].size(); j++)
 		{
 			int v = adj[i][j];
-			// ¸®½ºÆ®Áß »ö±òÀÌ °°Àº °ÍÀÌ ÀÖÀ¸¸é ÀÌºĞ±×·¡ÇÁ°¡ ¾Æ´Ï´Ù
+			// ë¦¬ìŠ¤íŠ¸ì¤‘ ìƒ‰ê¹”ì´ ê°™ì€ ê²ƒì´ ìˆìœ¼ë©´ ì´ë¶„ê·¸ë˜í”„ê°€ ì•„ë‹ˆë‹¤
 			if (visited[i] == visited[v])
 				return false;
 		}
@@ -47,7 +47,7 @@ int main(void)
 		cin >> n >> m;
 		adj.resize(n + 1, vector<int>());
 		visited.resize(n + 1);
-		// ÀÎÁ¢ ¸®½ºÆ®¿¡ ±×·¡ÇÁ Ç¥Çö
+		// ì¸ì ‘ ë¦¬ìŠ¤íŠ¸ì— ê·¸ë˜í”„ í‘œí˜„
 		for (int i = 0; i < m; i++)
 		{
 			int a, b;
@@ -55,7 +55,7 @@ int main(void)
 			adj[a].push_back(b);
 			adj[b].push_back(a);
 		}
-		// ¸ğµç Á¤Á¡¿¡ ´ëÇØ DFS Å½»ö
+		// ëª¨ë“  ì •ì ì— ëŒ€í•´ DFS íƒìƒ‰
 		for (int i = 1; i <= n; i++)
 		{
 			if (!visited[i])

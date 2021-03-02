@@ -6,22 +6,22 @@ using namespace std;
 
 vector<int> inorder, postorder, position;
 
-// Æ®¸®ÀÇ ÁßÀ§Å½»ö °á°ú¿Í ÈÄÀ§Å½»ö °á°ú°¡ ÁÖ¾îÁú ¶§ ÀüÀ§Å½»ö °á°ú¸¦ Ãâ·ÂÇÑ´Ù.
+// íŠ¸ë¦¬ì˜ ì¤‘ìœ„íƒìƒ‰ ê²°ê³¼ì™€ í›„ìœ„íƒìƒ‰ ê²°ê³¼ê°€ ì£¼ì–´ì§ˆ ë•Œ ì „ìœ„íƒìƒ‰ ê²°ê³¼ë¥¼ ì¶œë ¥í•œë‹¤.
 void printPreOrder(int inStart, int inEnd, int postStart, int postEnd)
 {
-	// ±âÀú »ç·Ê: ÅÖ ºó Æ®¸®¸é °ğÀå Á¾·á
+	// ê¸°ì € ì‚¬ë¡€: í…… ë¹ˆ íŠ¸ë¦¬ë©´ ê³§ì¥ ì¢…ë£Œ
 	if (inStart > inEnd || postStart > postEnd) return;
-	// ·çÆ®´Â ÈÄÀ§¼øÈ¸ ¹è¿­ ¸Ç µŞÀÚ¸®
+	// ë£¨íŠ¸ëŠ” í›„ìœ„ìˆœíšŒ ë°°ì—´ ë§¨ ë’·ìë¦¬
 	const int root = postorder[postEnd];
-	// ÁßÀ§Å½»ö °á°ú¿¡¼­ ·çÆ® À§Ä¡ °Ë»ö
+	// ì¤‘ìœ„íƒìƒ‰ ê²°ê³¼ì—ì„œ ë£¨íŠ¸ ìœ„ì¹˜ ê²€ìƒ‰
 	int p = position[root];
-	// ¿ŞÂÊ ¼­ºêÆ®¸® Å©±â ±¸ÇÏ±â
+	// ì™¼ìª½ ì„œë¸ŒíŠ¸ë¦¬ í¬ê¸° êµ¬í•˜ê¸°
 	int L = p - inStart;
-	// ·çÆ® Ãâ·Â
+	// ë£¨íŠ¸ ì¶œë ¥
 	cout << root << ' ';
-	// ¿ŞÂÊ ¼­ºêÆ®¸® Å½»ö
+	// ì™¼ìª½ ì„œë¸ŒíŠ¸ë¦¬ íƒìƒ‰
 	printPreOrder(inStart, p - 1, postStart, postStart + L - 1);
-	// ¿À¸¥ÂÊ ¼­ºêÆ®¸® Å½»ö
+	// ì˜¤ë¥¸ìª½ ì„œë¸ŒíŠ¸ë¦¬ íƒìƒ‰
 	printPreOrder(p + 1, inEnd, postStart + L, postEnd - 1);
 }
 
@@ -36,7 +36,7 @@ int main(void)
 	position.resize(n+1);
 	for (int i = 1; i <= n; i++) cin >> inorder[i];
 	for (int i = 1; i <= n; i++) cin >> postorder[i];
-	// position[i]= ÁßÀ§Å½»ö °á°ú i³ëµåÀÇ À§Ä¡
+	// position[i]= ì¤‘ìœ„íƒìƒ‰ ê²°ê³¼ ië…¸ë“œì˜ ìœ„ì¹˜
 	for (int i = 1; i <= n; i++) position[inorder[i]] = i;
 	printPreOrder(1, n, 1, n);
 	cout << '\n';

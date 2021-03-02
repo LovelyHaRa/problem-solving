@@ -7,20 +7,20 @@ struct TreeNode {
 	TreeNode *left, *right;
 };
 
-// Æ®¸®¿¡ ³ëµå Ãß°¡
+// íŠ¸ë¦¬ì— ë…¸ë“œ ì¶”ê°€
 void add(TreeNode* t, char r, char left, char right)
 {
 	if (t == NULL) return;
-	// ³ëµå¸¦ Ã£¾ÒÀ¸¸é ¼­ºêÆ®¸® »ı¼º
+	// ë…¸ë“œë¥¼ ì°¾ì•˜ìœ¼ë©´ ì„œë¸ŒíŠ¸ë¦¬ ìƒì„±
 	if (t->label == r)
 	{
-		// ¿ŞÂÊ ¼­ºêÆ®¸® »ı¼º
+		// ì™¼ìª½ ì„œë¸ŒíŠ¸ë¦¬ ìƒì„±
 		if (left != '.')
 		{
 			t->left = new TreeNode();
 			t->left->label = left;
 		}
-		// ¿À¸¥ÂÊ ¼­ºêÆ®¸® »ı¼º
+		// ì˜¤ë¥¸ìª½ ì„œë¸ŒíŠ¸ë¦¬ ìƒì„±
 		if (right != '.')
 		{
 			t->right = new TreeNode();
@@ -28,7 +28,7 @@ void add(TreeNode* t, char r, char left, char right)
 		}
 		return;
 	}
-	// ¼­ºê Æ®¸® Å½»ö
+	// ì„œë¸Œ íŠ¸ë¦¬ íƒìƒ‰
 	else
 	{
 		add(t->left, r, left, right);
@@ -62,15 +62,15 @@ void postorder(TreeNode* T)
 
 int main(void)
 {
-	TreeNode* T = new TreeNode(); // Æ®¸® ÃÊ±âÈ­
-	T->label = 'A'; // ·çÆ®´Â Ç×»ó A
+	TreeNode* T = new TreeNode(); // íŠ¸ë¦¬ ì´ˆê¸°í™”
+	T->label = 'A'; // ë£¨íŠ¸ëŠ” í•­ìƒ A
 	int n;
 	cin >> n;
 	while (n--)
 	{
 		char r, a, b;
 		cin >> r >> a >> b;
-		add(T, r, a, b); // Æ®¸®¿¡ ³ëµå Ãß°¡
+		add(T, r, a, b); // íŠ¸ë¦¬ì— ë…¸ë“œ ì¶”ê°€
 	}
 	preorder(T);
 	cout << '\n';

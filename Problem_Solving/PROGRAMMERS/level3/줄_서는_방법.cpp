@@ -5,17 +5,17 @@ using namespace std;
 
 vector<int> solution(int n, long long k) {
 	vector<int> answer, people;
-	long long fac = 1; // n! ÀúÀå
+	long long fac = 1; // n! ì €ìž¥
 	for (int i = 1; i <= n; i++) {
 		fac *= i;
 		people.push_back(i);
 	}
-	k--; // ÀÎµ¦½ºÈ­
+	k--; // ì¸ë±ìŠ¤í™”
 	while (n) {
 		fac /= n--; 
-		answer.push_back(people[k / fac]); // k/facÀÇ ¸òÀÌ ÇöÀç ÀÚ¸®¿¡ ÀúÀåµÉ ¼ýÀÚÀÇ À§Ä¡
-		people.erase(people.begin() + k / fac); // ¼ýÀÚ Á¦°Å
-		k %= fac; // ³ª¸ÓÁö °»½Å
+		answer.push_back(people[k / fac]); // k/facì˜ ëª«ì´ í˜„ìž¬ ìžë¦¬ì— ì €ìž¥ë  ìˆ«ìžì˜ ìœ„ì¹˜
+		people.erase(people.begin() + k / fac); // ìˆ«ìž ì œê±°
+		k %= fac; // ë‚˜ë¨¸ì§€ ê°±ì‹ 
 	}
 	return answer;
 }

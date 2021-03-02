@@ -4,51 +4,51 @@
 #include <algorithm>
 
 using namespace std;
-// BFS Å½»ö È°¿ë
+// BFS íƒìƒ‰ í™œìš©
 void bfs(int n, vector<vector <int>>& g, queue<int>& q, vector<int>& visit, int count) {
-	// 3. Á¾·áÁ¶°Ç: Å¥°¡ ºñ¾îÀÖÀ» ¶§ Á¾·á
+	// 3. ì¢…ë£Œì¡°ê±´: íê°€ ë¹„ì–´ìžˆì„ ë•Œ ì¢…ë£Œ
 	if (q.empty()) {
 		return;
 	}
-	// 4. Å¥¿¡¼­ °ªÀ» ²¨³¿
+	// 4. íì—ì„œ ê°’ì„ êº¼ëƒ„
 	int t = q.front();
 	q.pop();
-	// 5. ³ëµå ¼ö¸¸Å­ Å½»ö
+	// 5. ë…¸ë“œ ìˆ˜ë§Œí¼ íƒìƒ‰
 	for (int i = 1; i <= n; i++) {
-		// 6. ³ëµå »çÀÌ°¡ ¿¬°áµÇ¾îÀÖ°í ¹æ¹®ÇÑÀûÀÌ ¾øÀ¸¸é
+		// 6. ë…¸ë“œ ì‚¬ì´ê°€ ì—°ê²°ë˜ì–´ìžˆê³  ë°©ë¬¸í•œì ì´ ì—†ìœ¼ë©´
 		if (g[t][i] && visit[i] < 0) {
-			// 7. ÇöÀç °Å¸®ÀÇ +1À» ¹æ¹® ¿©ºÎ ¹è¿­¿¡ ÀúÀå 
+			// 7. í˜„ìž¬ ê±°ë¦¬ì˜ +1ì„ ë°©ë¬¸ ì—¬ë¶€ ë°°ì—´ì— ì €ìž¥ 
 			visit[i] = visit[t] + 1;
-			// 8. Å¥¿¡ »ðÀÔ
+			// 8. íì— ì‚½ìž…
 			q.push(i);
 		}
 	}
-	// 9. Å¥°¡ ºô ¶§±îÁö Àç±Í Å½»ö
+	// 9. íê°€ ë¹Œ ë•Œê¹Œì§€ ìž¬ê·€ íƒìƒ‰
 	bfs(n, g, q, visit, count + 1);
 }
 
 int solution(int n, vector<vector<int>> edge) {
 	int answer = 0;
-	// 1. ±×·¡ÇÁ Å×ÀÌºí »ý¼º
+	// 1. ê·¸ëž˜í”„ í…Œì´ë¸” ìƒì„±
 	vector<vector<int>> g(n + 1, vector<int>(n + 1, 0));
 	for (int i = 0; i < edge.size(); i++) {
-		// ¿¡Áö¸¦ Ç¥ÇöÇÏ±â À§ÇØ 1·Î ¼³Á¤ÇÑ´Ù
+		// ì—ì§€ë¥¼ í‘œí˜„í•˜ê¸° ìœ„í•´ 1ë¡œ ì„¤ì •í•œë‹¤
 		g[edge[i][0]][edge[i][1]] = g[edge[i][1]][edge[i][0]] = 1;
 	}
-	// BFS Å¥
+	// BFS í
 	queue<int> q;
-	// ³ëµå 1°úÀÇ °Å¸®¸¦ ÀúÀåÇÔ°ú µ¿½Ã¿¡ ¹æ¹®¿©ºÎ È®ÀÎ
+	// ë…¸ë“œ 1ê³¼ì˜ ê±°ë¦¬ë¥¼ ì €ìž¥í•¨ê³¼ ë™ì‹œì— ë°©ë¬¸ì—¬ë¶€ í™•ì¸
 	vector<int> visit(n + 1, -1);
-	// ¹®Á¦ ¿ä±¸Á¶°Ç: 1ºÎÅÍ ½ÃÀÛ
+	// ë¬¸ì œ ìš”êµ¬ì¡°ê±´: 1ë¶€í„° ì‹œìž‘
 	q.push(1);
 	visit[1] = 0;
-	// 2. BFS Å½»ö
+	// 2. BFS íƒìƒ‰
 	bfs(n, g, q, visit, 0);
-	// 10. Á¤·Ä
+	// 10. ì •ë ¬
 	sort(visit.begin(), visit.end());
-	// 11. ÃÖ´ñ°ªÀº °¡Àå ¿À¸¥ÂÊ °ª(¿À¸§Â÷¼ø Á¤·Ä)
+	// 11. ìµœëŒ“ê°’ì€ ê°€ìž¥ ì˜¤ë¥¸ìª½ ê°’(ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬)
 	int max = visit[n];
-	// 12. ÃÖ´ñ°ª°ú ´Þ¶óÁú ¶§ ±îÁö Á¤´ä°ª 1¾¿ Áõ°¡
+	// 12. ìµœëŒ“ê°’ê³¼ ë‹¬ë¼ì§ˆ ë•Œ ê¹Œì§€ ì •ë‹µê°’ 1ì”© ì¦ê°€
 	while (max == visit[n--]) {
 		answer++;
 	}

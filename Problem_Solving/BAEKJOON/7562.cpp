@@ -12,54 +12,54 @@ int main(void)
 	{
 		int l;
 		cin >> l;
-		int a, b, x, y; // ÇöÀç À§Ä¡ (a, b), ¸ñÇ¥ À§Ä¡ (x, y)
+		int a, b, x, y; // í˜„ìž¬ ìœ„ì¹˜ (a, b), ëª©í‘œ ìœ„ì¹˜ (x, y)
 		cin >> a >> b >> x >> y;
-		vector<vector<int>> visited(l, vector<int>(l)); // Ã¼½ºÆÇ Á¤Á¡ ¹æ¹® ¿©ºÎ
+		vector<vector<int>> visited(l, vector<int>(l)); // ì²´ìŠ¤íŒ ì •ì  ë°©ë¬¸ ì—¬ë¶€
 		queue<pair<int, int>> q; // bfs queue
-		// ÃÊ±â»óÅÂ: ½ÃÀÛÁöÁ¡À» Å¥¿¡ »ðÀÔ
-		visited[a][b] = 1; // Ã¼Å·
+		// ì´ˆê¸°ìƒíƒœ: ì‹œìž‘ì§€ì ì„ íì— ì‚½ìž…
+		visited[a][b] = 1; // ì²´í‚¹
 		q.push(make_pair(a, b));
-		// ³ªÀÌÆ® ÀÌµ¿ °¡´É ÁÂÇ¥
+		// ë‚˜ì´íŠ¸ ì´ë™ ê°€ëŠ¥ ì¢Œí‘œ
 		int dx[] = { -1,-2,-2,-1,1,2,2,1 };
 		int dy[] = { -2,-1,1,2,2,1,-1,-2 };
-		// ÇÑ¹ø ÀÌµ¿ÇßÀ» ¶§ Å¥¿¡ Ãß°¡ È½¼ö¸¦ ÀúÀå/°»½Å
-		//moving: ÀÌµ¿È½¼ö, flag: ¸ñÇ¥ÁöÁ¡¿¡ µµ´ÞÇÏ¸é Å»ÃâÇÏ±â À§ÇÑ ÇÃ·¡±×
+		// í•œë²ˆ ì´ë™í–ˆì„ ë•Œ íì— ì¶”ê°€ íšŸìˆ˜ë¥¼ ì €ìž¥/ê°±ì‹ 
+		//moving: ì´ë™íšŸìˆ˜, flag: ëª©í‘œì§€ì ì— ë„ë‹¬í•˜ë©´ íƒˆì¶œí•˜ê¸° ìœ„í•œ í”Œëž˜ê·¸
 		int seq = 1, curSeq, moving = 0, flag = 0;
-		// bfs Å½»ö
+		// bfs íƒìƒ‰
 		while (!q.empty())
 		{
 			curSeq = 0;
-			// ÀÌÀü¿¡ Å¥¿¡ Ãß°¡µÈ È½¼ö¸¸Å­ Å¥¿¡¼­ ÃßÃâ(1¹ø ÀÌµ¿ÇÒ¶§ Å¥¿¡ Ãß°¡µÈ È½¼ö)
+			// ì´ì „ì— íì— ì¶”ê°€ëœ íšŸìˆ˜ë§Œí¼ íì—ì„œ ì¶”ì¶œ(1ë²ˆ ì´ë™í• ë•Œ íì— ì¶”ê°€ëœ íšŸìˆ˜)
 			for (int i = 0; i < seq; i++)
 			{
-				// Å¥¿¡¼­ ÃßÃâ
+				// íì—ì„œ ì¶”ì¶œ
 				int cx = q.front().first;
 				int cy = q.front().second;
 				q.pop();
-				// ¸ñÇ¥ÁöÁ¡ µµ´Þ½Ã Å»Ãâ
+				// ëª©í‘œì§€ì  ë„ë‹¬ì‹œ íƒˆì¶œ
 				if (cx == x && cy == y)
 				{
 					flag = 1;
 					break;
 				}
-				// ÇöÀç Á¤Á¡À¸·ÎºÎÅÍ ³ªÀÌÆ® ÀÌµ¿
+				// í˜„ìž¬ ì •ì ìœ¼ë¡œë¶€í„° ë‚˜ì´íŠ¸ ì´ë™
 				for (int j = 0; j < 8; j++)
 				{
 					int nx = cx + dx[j], ny = cy + dy[j];
-					// Ã¼½ºÆÇ ¿µ¿ª ³»ÀÌ°í ÇÑ¹øµµ Ã¼Å·µÇÁö ¾Ê¾ÒÀ¸¸é Å¥¿¡ Ãß°¡
+					// ì²´ìŠ¤íŒ ì˜ì—­ ë‚´ì´ê³  í•œë²ˆë„ ì²´í‚¹ë˜ì§€ ì•Šì•˜ìœ¼ë©´ íì— ì¶”ê°€
 					if (nx >= 0 && nx < l && ny >= 0 && ny < l && !visited[nx][ny])
 					{
-						visited[nx][ny] = 1; // Ã¼Å·
+						visited[nx][ny] = 1; // ì²´í‚¹
 						q.push(make_pair(nx, ny));
-						curSeq++; // Å¥¿¡ Ãß°¡µÈ È½¼ö Ãß°¡
+						curSeq++; // íì— ì¶”ê°€ëœ íšŸìˆ˜ ì¶”ê°€
 					}
 				}
 			}
 			if (flag) break;
-			seq = curSeq; // Å¥¿¡ Ãß°¡µÈ È½¼ö °»½Å
-			moving++; // ÀÌµ¿ È½¼ö Áõ°¡
+			seq = curSeq; // íì— ì¶”ê°€ëœ íšŸìˆ˜ ê°±ì‹ 
+			moving++; // ì´ë™ íšŸìˆ˜ ì¦ê°€
 		}
-		cout << moving << '\n'; // ÀÌµ¿È½¼ö Ãâ·Â
+		cout << moving << '\n'; // ì´ë™íšŸìˆ˜ ì¶œë ¥
 	}
 
 }

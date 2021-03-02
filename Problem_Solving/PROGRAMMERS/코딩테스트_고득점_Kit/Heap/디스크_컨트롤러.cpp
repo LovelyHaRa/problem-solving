@@ -13,30 +13,30 @@ struct compare {
 
 int solution(vector<vector<int>> jobs) {
 	int answer = 0;
-	// 1. ½Ã°£´ëº° ¿À¸§Â÷¼ø Á¤·Ä
+	// 1. ì‹œê°„ëŒ€ë³„ ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
 	sort(jobs.begin(), jobs.end());
-	// 2. ¹éÅÍ¸¦ ÀúÀåÇÒ ¼ö ÀÖ´Â ¿ì¼±¼øÀ§ Å¥ ¼±¾ð
+	// 2. ë°±í„°ë¥¼ ì €ìž¥í•  ìˆ˜ ìžˆëŠ” ìš°ì„ ìˆœìœ„ í ì„ ì–¸
 	priority_queue<vector<int>, vector<vector<int>>, compare> pq;
-	int i = 0, time=0; // ÀÛ¾÷´Ü°è, ÁøÇà ½Ã°£
-	// 3. Å¥°¡ ºñ¾îÀÖ°í ¸ðµç ÀÛ¾÷À» ¿Ï·áÇÒ ¶§ ±îÁö Å½»ö
+	int i = 0, time=0; // ìž‘ì—…ë‹¨ê³„, ì§„í–‰ ì‹œê°„
+	// 3. íê°€ ë¹„ì–´ìžˆê³  ëª¨ë“  ìž‘ì—…ì„ ì™„ë£Œí•  ë•Œ ê¹Œì§€ íƒìƒ‰
 	while (i < jobs.size() || !pq.empty()) {
-		// 4. ÇöÀç ÀÛ¾÷ÀÌ ÁøÇà½Ã°£º¸´Ù ÀÛ¾Æ¼­ Å¥¿¡ ³ÖÀ» ¼ö ÀÖÀ» ¶§
+		// 4. í˜„ìž¬ ìž‘ì—…ì´ ì§„í–‰ì‹œê°„ë³´ë‹¤ ìž‘ì•„ì„œ íì— ë„£ì„ ìˆ˜ ìžˆì„ ë•Œ
 		if (i < jobs.size() && time>=jobs[i][0]) {
-			// 4-1. Å¥¿¡ »ðÀÔ
+			// 4-1. íì— ì‚½ìž…
 			pq.push(jobs[i++]);
-			// 4-2. ´Ù¸¥ ÀÛ¾÷µµ µ¿½Ã°£´ë¿¡ µé¾î¿Ã ¼ö ÀÖÀ¸¹Ç·Î ÀçÅ½»ö
+			// 4-2. ë‹¤ë¥¸ ìž‘ì—…ë„ ë™ì‹œê°„ëŒ€ì— ë“¤ì–´ì˜¬ ìˆ˜ ìžˆìœ¼ë¯€ë¡œ ìž¬íƒìƒ‰
 			continue;
 		}
-		// 5. Å¥°¡ ºñ¾îÀÖÁö ¾ÊÀ¸¸é
+		// 5. íê°€ ë¹„ì–´ìžˆì§€ ì•Šìœ¼ë©´
 		if (!pq.empty()) {
-			// 5-1. ÀÛ¾÷ ½Ã°£ ´©Àû
+			// 5-1. ìž‘ì—… ì‹œê°„ ëˆ„ì 
 			time += pq.top()[1];
-			// 5-2. ÀÛ¾÷ÀÌ ´ë±âºÎÅÍ ¿Ï·áÇÒ ¶§ ±îÁö ½Ã°£=(ÇöÀç½Ã°£-µé¾î¿Â½Ã°£)
+			// 5-2. ìž‘ì—…ì´ ëŒ€ê¸°ë¶€í„° ì™„ë£Œí•  ë•Œ ê¹Œì§€ ì‹œê°„=(í˜„ìž¬ì‹œê°„-ë“¤ì–´ì˜¨ì‹œê°„)
 			answer += time-pq.top()[0];
-			// 5-3. Å¥¿¡¼­ Á¦°Å
+			// 5-3. íì—ì„œ ì œê±°
 			pq.pop();
 		}
-		// 6. Å¥°¡ ºñ¾îÀÖ´Ù¸é ´ÙÀ½ ÀÛ¾÷ ½Ã°£¸¸Å­ Áõ°¡
+		// 6. íê°€ ë¹„ì–´ìžˆë‹¤ë©´ ë‹¤ìŒ ìž‘ì—… ì‹œê°„ë§Œí¼ ì¦ê°€
 		else
 			time = jobs[i][0];
 	}

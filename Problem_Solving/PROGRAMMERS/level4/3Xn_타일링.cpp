@@ -11,9 +11,9 @@ int solution(int n) {
 	vector<long long> cache(n + 1);
 	cache[0] = 1;
 	cache[1] = 0;
-	int sum = 0; // Æ¯¼öÇÑ ¸ğ¾ç ´©Àû
+	int sum = 0; // íŠ¹ìˆ˜í•œ ëª¨ì–‘ ëˆ„ì 
 	for (int i = 2; i <= n; i += 2) {
-		// ±âº» ¸ğ¾çÀº 3°³, Æ¯¼öÇÑ ¸ğ¾çÀº 2°³¾¿ ¸¸µé ¼ö ÀÖÀ½
+		// ê¸°ë³¸ ëª¨ì–‘ì€ 3ê°œ, íŠ¹ìˆ˜í•œ ëª¨ì–‘ì€ 2ê°œì”© ë§Œë“¤ ìˆ˜ ìˆìŒ
 		cache[i] = (3 * cache[i - 2] + 2 * sum) % mod;
 		sum = (sum + cache[i - 2]) % mod;
 	}

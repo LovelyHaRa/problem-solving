@@ -1,20 +1,20 @@
-// °£´ÜÇÑ DFS ¹®Á¦
-// ¼ø¿­ ±¸ÇÏ±â3
+// ê°„ë‹¨í•œ DFS ë¬¸ì œ
+// ìˆœì—´ êµ¬í•˜ê¸°3
 
 #include<iostream>
 #include<vector>
 using namespace std;
 
 int N, M;
-vector<int> s; // Ãâ·Â ¼ýÀÚ ÀúÀå
-// ¹æ¹®¿©ºÎ Ã¼Å© ºÒÇÊ¿ä
+vector<int> s; // ì¶œë ¥ ìˆ«ìž ì €ìž¥
+// ë°©ë¬¸ì—¬ë¶€ ì²´í¬ ë¶ˆí•„ìš”
 
 void func(int x)
 {
-	// ¼ø¿­ °³¼ö¸¸Å­ÀÇ ±íÀÌ¿¡ µµ´ÞÇÏ¸é
+	// ìˆœì—´ ê°œìˆ˜ë§Œí¼ì˜ ê¹Šì´ì— ë„ë‹¬í•˜ë©´
 	if (x == M)
 	{
-		// ÀúÀåÇÑ ¼ø¿­ Ãâ·Â
+		// ì €ìž¥í•œ ìˆœì—´ ì¶œë ¥
 		for (int i = 0; i < s.size(); i++)
 			cout << s[i] << ' ';
 		cout << '\n';
@@ -23,9 +23,9 @@ void func(int x)
 
 	for (int i = 1; i <= N; i++)
 	{
-		s.push_back(i); // ¼ø¿­¿¡ Áý¾î³Ö±â
-		func(x + 1); // ±íÀÌ Áõ°¡
-		s.pop_back(); // ¼ø¿­¿¡¼­ »©±â
+		s.push_back(i); // ìˆœì—´ì— ì§‘ì–´ë„£ê¸°
+		func(x + 1); // ê¹Šì´ ì¦ê°€
+		s.pop_back(); // ìˆœì—´ì—ì„œ ë¹¼ê¸°
 	}
 }
 
@@ -36,5 +36,5 @@ int main(void)
 	cout.tie(0);
 
 	cin >> N >> M;
-	func(0); // ±íÀÌ 0ºÎÅÍ ½ÃÀÛ
+	func(0); // ê¹Šì´ 0ë¶€í„° ì‹œìž‘
 }

@@ -14,20 +14,20 @@ int main(void)
 	{
 		int k;
 		cin >> k;
-		multiset<int> pq; // Áßº¹ °¡´ÉÇÑ set
+		multiset<int> pq; // ì¤‘ë³µ ê°€ëŠ¥í•œ set
 		while (k--)
 		{
 			char c;
 			int n;
 			cin >> c >> n;
-			if (c == 'I') pq.insert(n); // »ğÀÔ(ÀÚµ¿ Á¤·Ä)
+			if (c == 'I') pq.insert(n); // ì‚½ì…(ìë™ ì •ë ¬)
 			else
 			{
 				if (pq.empty()) continue;
-				pq.erase((n < 0 ? pq.begin() : --pq.end())); // »èÁ¦
+				pq.erase((n < 0 ? pq.begin() : --pq.end())); // ì‚­ì œ
 			}
 		}
 		if (pq.empty()) cout << "EMPTY\n";
-		else cout << *--pq.end() << ' ' << *pq.begin() << '\n'; // ÃÖ´ñ°ª, ÃÖ¼Ú°ª Ãâ·Â
+		else cout << *--pq.end() << ' ' << *pq.begin() << '\n'; // ìµœëŒ“ê°’, ìµœì†Ÿê°’ ì¶œë ¥
 	}
 }

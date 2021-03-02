@@ -14,14 +14,14 @@ void swap(vector<string>&arr, int p, int q, int r, int s)
 	arr[r][s] = t;
 }
 
-// Çà °Ë»ç
+// í–‰ ê²€ì‚¬
 int eatRowCandy(const vector<string>&arr, int row)
 {	
 	int max = 0, cnt = 0;
-	// Äµµğ Á¾·ù¸¸Å­ ¹İº¹
+	// ìº”ë”” ì¢…ë¥˜ë§Œí¼ ë°˜ë³µ
 	for (int i = 0; i < 4; i++)
 	{
-		// ¿¬¼ÓµÈ Ä«¿îÆ® ÀúÀå
+		// ì—°ì†ëœ ì¹´ìš´íŠ¸ ì €ì¥
 		cnt = 0;
 		for (int j = 0; j < arr.size(); j++)
 		{
@@ -33,21 +33,21 @@ int eatRowCandy(const vector<string>&arr, int row)
 				cnt = 0;
 			}
 		}
-		// Ä«¿îÆ® ÃÖ´ë°ª °»½Å
+		// ì¹´ìš´íŠ¸ ìµœëŒ€ê°’ ê°±ì‹ 
 		max = max < cnt ? cnt : max;
 	}
-	// ÃÖ´ë°ª ¸®ÅÏ
+	// ìµœëŒ€ê°’ ë¦¬í„´
 	return max;
 }
 
-// ¿­ °Ë»ç
+// ì—´ ê²€ì‚¬
 int eatColCandy(const vector<string>&arr, int col)
 {
 	int max = 0, cnt = 0;
-	// Äµµğ Á¾·ù¸¸Å­ ¹İº¹
+	// ìº”ë”” ì¢…ë¥˜ë§Œí¼ ë°˜ë³µ
 	for (int i = 0; i < 4; i++)
 	{
-		// ¿¬¼ÓµÈ Ä«¿îÆ® ÀúÀå
+		// ì—°ì†ëœ ì¹´ìš´íŠ¸ ì €ì¥
 		cnt = 0;
 		for (int j = 0; j < arr.size(); j++)
 		{
@@ -59,10 +59,10 @@ int eatColCandy(const vector<string>&arr, int col)
 				cnt = 0;
 			}
 		}
-		// Ä«¿îÆ® ÃÖ´ë°ª °»½Å
+		// ì¹´ìš´íŠ¸ ìµœëŒ€ê°’ ê°±ì‹ 
 		max = max < cnt ? cnt : max;
 	}
-	// ÃÖ´ë°ª ¸®ÅÏ
+	// ìµœëŒ€ê°’ ë¦¬í„´
 	return max;
 }
 
@@ -74,48 +74,48 @@ int main(void)
 	for (int i = 0; i < n; i++)
 		cin >> bomboni[i];
 	int max = -1;
-	// 1. ¿ÏÀüÅ½»ö
+	// 1. ì™„ì „íƒìƒ‰
 	for (int i = 0; i < n; i++)
 	{
 		for (int j = 0; j < n; j++)
 		{
 			int cnt;
-			// 2. Çà³¢¸® ±³È¯
-			if (i + 1 < n) // ¸¶Áö¸· ÇàÀº ±³È¯ ¾ÈÇÔ
+			// 2. í–‰ë¼ë¦¬ êµí™˜
+			if (i + 1 < n) // ë§ˆì§€ë§‰ í–‰ì€ êµí™˜ ì•ˆí•¨
 			{
-				// 3. ÇöÀçÄ­, ¹ØÄ­ ±³È¯
+				// 3. í˜„ì¬ì¹¸, ë°‘ì¹¸ êµí™˜
 				swap(bomboni, i, j, i + 1, j);
-				// 4. ÇöÀçÄ­ Çà °Ë»ç ÈÄ ÃÖ´ë°ª °»½Å
+				// 4. í˜„ì¬ì¹¸ í–‰ ê²€ì‚¬ í›„ ìµœëŒ€ê°’ ê°±ì‹ 
 				cnt=eatRowCandy(bomboni, j);
 				max = max < cnt ? cnt : max;
-				// 5. ÇöÀçÄ­ ¿­ °Ë»ç ÈÄ ÃÖ´ë°ª °»½Å
+				// 5. í˜„ì¬ì¹¸ ì—´ ê²€ì‚¬ í›„ ìµœëŒ€ê°’ ê°±ì‹ 
 				cnt = eatColCandy(bomboni, i);
 				max = max < cnt ? cnt : max;
-				// 6. ¹ØÄ­ ¿­ °Ë»ç ÈÄ ÃÖ´ë°ª °»½Å
+				// 6. ë°‘ì¹¸ ì—´ ê²€ì‚¬ í›„ ìµœëŒ€ê°’ ê°±ì‹ 
 				cnt = eatColCandy(bomboni, i + 1);
 				max = max < cnt ? cnt : max;
-				// 7. ¿ø»ó º¹±¸
+				// 7. ì›ìƒ ë³µêµ¬
 				swap(bomboni, i, j, i + 1, j);
 			}
-			// 8. ¿­³¢¸® ±³È¯
-			if (j + 1 < n) // ¸¶Áö¸· ¿­Àº ±³È¯ ¾ÈÇÔ
+			// 8. ì—´ë¼ë¦¬ êµí™˜
+			if (j + 1 < n) // ë§ˆì§€ë§‰ ì—´ì€ êµí™˜ ì•ˆí•¨
 			{
-				// 9. ÇöÀçÄ­, ¿·Ä­ ±³È¯
+				// 9. í˜„ì¬ì¹¸, ì˜†ì¹¸ êµí™˜
 				swap(bomboni, i, j, i, j + 1);
-				// 10. ÇöÀçÄ­ Çà °Ë»ç ÈÄ ÃÖ´ë°ª °»½Å
+				// 10. í˜„ì¬ì¹¸ í–‰ ê²€ì‚¬ í›„ ìµœëŒ€ê°’ ê°±ì‹ 
 				cnt=eatRowCandy(bomboni, j);
 				max = max < cnt ? cnt : max;
-				// 11. ¿·Ä­ Çà °Ë»ç ÈÄ ÃÖ´ë°ª °»½Å
+				// 11. ì˜†ì¹¸ í–‰ ê²€ì‚¬ í›„ ìµœëŒ€ê°’ ê°±ì‹ 
 				cnt = eatRowCandy(bomboni, j + 1);
 				max = max < cnt ? cnt : max;
-				// 12. ÇöÀçÄ­ ¿­ °Ë»ç ÈÄ ÃÖ´ë°ª °»½Å
+				// 12. í˜„ì¬ì¹¸ ì—´ ê²€ì‚¬ í›„ ìµœëŒ€ê°’ ê°±ì‹ 
 				cnt = eatColCandy(bomboni, i);
 				max = max < cnt ? cnt : max;
-				// 13. ¿ø»ó º¹±¸
+				// 13. ì›ìƒ ë³µêµ¬
 				swap(bomboni, i, j, i, j + 1);
 			}
 		}
 	}
-	// 14. ÃÖ´ë°ª Ãâ·Â
+	// 14. ìµœëŒ€ê°’ ì¶œë ¥
 	cout << max;
 }

@@ -3,44 +3,44 @@
 #include <queue>
 
 using namespace std;
-// ¿ì¼± ¼øÀ§ Å¥¿¡ ³ÖÀ» ³ëµå
+// ìš°ì„  ìˆœìœ„ íì— ë„£ì„ ë…¸ë“œ
 struct qnode {
-    int x, y, num; // ÁÂÇ¥, ³ëµå¹øÈ£
+    int x, y, num; // ì¢Œí‘œ, ë…¸ë“œë²ˆí˜¸
 };
 
-// ¿ì¼± ¼øÀ§ ºñ±³ ±¸Á¶Ã¼
+// ìš°ì„  ìˆœìœ„ ë¹„êµ êµ¬ì¡°ì²´
 struct compare {
     bool operator()(qnode& a, qnode& b) {
-        // yÁÂÇ¥°¡ ¶È°°´Ù¸é
+        // yì¢Œí‘œê°€ ë˜‘ê°™ë‹¤ë©´
         if (a.y == b.y) {
-            return a.x > b.x; // xÁÂÇ¥ ¿À¸§Â÷¼ø
+            return a.x > b.x; // xì¢Œí‘œ ì˜¤ë¦„ì°¨ìˆœ
         }
-        // yÁÂÇ¥ ³»¸²Â÷¼ø
+        // yì¢Œí‘œ ë‚´ë¦¼ì°¨ìˆœ
         return a.y < b.y;
     }
 };
 
-// Æ®¸® ³ëµå ±¸Á¶Ã¼
+// íŠ¸ë¦¬ ë…¸ë“œ êµ¬ì¡°ì²´
 struct TreeNode {
     int num, x;
     TreeNode* left, * right;
 };
 
-// ±âÁ¸ Æ®¸® tree¿¡ ÇöÀç ³ëµå curNode¸¦ »ğÀÔ
+// ê¸°ì¡´ íŠ¸ë¦¬ treeì— í˜„ì¬ ë…¸ë“œ curNodeë¥¼ ì‚½ì…
 void insert(TreeNode* tree, TreeNode* curNode) {
-    // ¿ŞÂÊ ³ëµå°¡ ºñ¾îÀÖ°í xÁÂÇ¥ °ªÀÌ ÀÛÀ» ¶§
+    // ì™¼ìª½ ë…¸ë“œê°€ ë¹„ì–´ìˆê³  xì¢Œí‘œ ê°’ì´ ì‘ì„ ë•Œ
     if (tree->left == NULL && tree->x > curNode->x) {
-        tree->left = curNode; // ¿ŞÂÊ ³ëµå¿¡ ÇöÀç ³ëµå »ğÀÔ
+        tree->left = curNode; // ì™¼ìª½ ë…¸ë“œì— í˜„ì¬ ë…¸ë“œ ì‚½ì…
     }
-    // ¿ŞÂÊ ³ëµå°¡ ºñ¾îÀÖÁö ¾Ê°í xÁÂÇ¥ °ªÀÌ ÀÛÀ» ¶§
+    // ì™¼ìª½ ë…¸ë“œê°€ ë¹„ì–´ìˆì§€ ì•Šê³  xì¢Œí‘œ ê°’ì´ ì‘ì„ ë•Œ
     else if (tree->left != NULL && tree->x > curNode->x) {
-        insert(tree->left, curNode); // ¿ŞÂÊ ³ëµå·Î ÀÌµ¿
+        insert(tree->left, curNode); // ì™¼ìª½ ë…¸ë“œë¡œ ì´ë™
     }
-    // ¿À¸¥ÂÊ ³ëµå°¡ ºñ¾îÀÖ°í xÁÂÇ¥ °ªÀÌ Å¬ ¶§
+    // ì˜¤ë¥¸ìª½ ë…¸ë“œê°€ ë¹„ì–´ìˆê³  xì¢Œí‘œ ê°’ì´ í´ ë•Œ
     else if (tree->right == NULL && tree->x < curNode->x) {
-        tree->right = curNode; // ¿À¸¥ÂÊ ³ëµå¿¡ ÇöÀç ³ëµå »ğÀÔ
+        tree->right = curNode; // ì˜¤ë¥¸ìª½ ë…¸ë“œì— í˜„ì¬ ë…¸ë“œ ì‚½ì…
     }
-    // ¿À¸¥ÂÊ ³ëµå°¡ ºñ¾îÀÖÁö ¾Ê°í yÁÂÇ¥ °ªÀÌ Å¬ ¶§
+    // ì˜¤ë¥¸ìª½ ë…¸ë“œê°€ ë¹„ì–´ìˆì§€ ì•Šê³  yì¢Œí‘œ ê°’ì´ í´ ë•Œ
     else if (tree->right != NULL && tree->x < curNode->x) {
         insert(tree->right, curNode);
     }
@@ -48,7 +48,7 @@ void insert(TreeNode* tree, TreeNode* curNode) {
 
 vector<vector<int>> answer;
 
-// ÀüÀ§ ¼øÈ¸
+// ì „ìœ„ ìˆœíšŒ
 void preorder(TreeNode* tree) {
     if (tree == NULL) return;
     answer[0].push_back(tree->num);
@@ -56,7 +56,7 @@ void preorder(TreeNode* tree) {
     preorder(tree->right);
 }
 
-// ÈÄÀ§ ¼øÈ¸
+// í›„ìœ„ ìˆœíšŒ
 void postorder(TreeNode* tree) {
     if (tree == NULL) return;
     postorder(tree->left);
@@ -65,8 +65,8 @@ void postorder(TreeNode* tree) {
 }
 
 vector<vector<int>> solution(vector<vector<int>> nodeinfo) {
-    answer.resize(2); // ÀüÀ§¼øÈ¸, ÈÄÀ§¼øÈ¸ °á°ú ÀúÀå °ø°£ ¸¸µé±â
-    // 1. ¿ì¼± ¼øÀ§ Å¥¿¡ ³ëµå ³Ö±â
+    answer.resize(2); // ì „ìœ„ìˆœíšŒ, í›„ìœ„ìˆœíšŒ ê²°ê³¼ ì €ì¥ ê³µê°„ ë§Œë“¤ê¸°
+    // 1. ìš°ì„  ìˆœìœ„ íì— ë…¸ë“œ ë„£ê¸°
     priority_queue<qnode, vector<qnode>, compare> pq;
     for (int i = 0; i < nodeinfo.size(); i++) {
         qnode qn;
@@ -75,14 +75,14 @@ vector<vector<int>> solution(vector<vector<int>> nodeinfo) {
         qn.num = i + 1;
         pq.push(qn);
     }
-    // 2. Æ®¸® »ı¼º
-    // Æ®¸® ·çÆ® »ı¼º
+    // 2. íŠ¸ë¦¬ ìƒì„±
+    // íŠ¸ë¦¬ ë£¨íŠ¸ ìƒì„±
     TreeNode* tree = new TreeNode();
     qnode topNode = pq.top();
     tree->num = topNode.num;
     tree->x = topNode.x;
     pq.pop();
-    // Æ®¸®¿¡ ³ëµå ¼ø¼­´ë·Î »ğÀÔ
+    // íŠ¸ë¦¬ì— ë…¸ë“œ ìˆœì„œëŒ€ë¡œ ì‚½ì…
     while (!pq.empty()) {
         topNode = pq.top();
         pq.pop();
@@ -91,7 +91,7 @@ vector<vector<int>> solution(vector<vector<int>> nodeinfo) {
         curNode->x = topNode.x;
         insert(tree, curNode);
     }
-    // 3. ÀüÀ§ ¼øÈ¸, ÈÄÀ§ ¼øÈ¸
+    // 3. ì „ìœ„ ìˆœíšŒ, í›„ìœ„ ìˆœíšŒ
     preorder(tree);
     postorder(tree);
     return answer;

@@ -9,24 +9,24 @@ vector<char> inequal;
 vector<int> check(10);
 string biggest, smallest;
 
-// Á¶°Ç¿¡ µû¶ó DFS Å½»öÀ» ½Ç½ÃÇÑ´Ù
+// ì¡°ê±´ì— ë”°ë¼ DFS íƒìƒ‰ì„ ì‹¤ì‹œí•œë‹¤
 void process(int cnt, string selected)
 {
-	// ±âÀú »ç·Ê: cnt==n+1
+	// ê¸°ì € ì‚¬ë¡€: cnt==n+1
 	if (cnt == n + 1)
 	{
-		// ÃÖ´ñ°ª °»½Å
+		// ìµœëŒ“ê°’ ê°±ì‹ 
 		if (biggest.compare(selected) < 0)
 			biggest = selected;
-		// ÃÖ¼Ú°ª °»½Å
+		// ìµœì†Ÿê°’ ê°±ì‹ 
 		if (smallest.compare(selected) > 0)
 			smallest = selected;
 		return;
 	}
 	for (int i = 0; i < 10; i++)
 	{
-		if (check[i]) continue; // Á¶°Ç 1: ¼ıÀÚ´Â ¸ğµÎ ´Ş¶ó¾ß ÇÑ´Ù.
-		// Á¶°Ç 2: ÀÔ·Â ¹ŞÀº ºÎµîÈ£µéÀ» ¸¸Á·ÇÑ´Ù
+		if (check[i]) continue; // ì¡°ê±´ 1: ìˆ«ìëŠ” ëª¨ë‘ ë‹¬ë¼ì•¼ í•œë‹¤.
+		// ì¡°ê±´ 2: ì…ë ¥ ë°›ì€ ë¶€ë“±í˜¸ë“¤ì„ ë§Œì¡±í•œë‹¤
 		if (cnt > 0)
 		{
 			switch (inequal[cnt - 1])
@@ -39,11 +39,11 @@ void process(int cnt, string selected)
 				break;
 			}
 		}
-		// Ã¼Å©
+		// ì²´í¬
 		check[i] = 1;
-		// ´ÙÀ½ °ª Å½»ö
+		// ë‹¤ìŒ ê°’ íƒìƒ‰
 		process(cnt + 1, selected + to_string(i));
-		// ¿ø»óº¹±¸
+		// ì›ìƒë³µêµ¬
 		check[i] = 0;
 	}
 }
@@ -55,9 +55,9 @@ int main(void)
 	for (int i = 0; i <= n; i++)
 	{
 		if (i != n) cin >> inequal[i];
-		// ÃÊ±â°ª ÀúÀå
-		biggest += to_string(i); // n=2ÀÌ¸é 012
-		smallest += to_string(9 - i); // n=2ÀÌ¸é 987
+		// ì´ˆê¸°ê°’ ì €ì¥
+		biggest += to_string(i); // n=2ì´ë©´ 012
+		smallest += to_string(9 - i); // n=2ì´ë©´ 987
 	}
 	process(0, "");
 	cout << biggest << '\n' << smallest << '\n';

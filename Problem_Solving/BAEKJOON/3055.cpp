@@ -9,70 +9,70 @@ int main(void)
 {
 	int r, c;
 	cin >> r >> c;
-	vector<string> map(r); // Áöµµ Á¤º¸
-	queue<pair<int, int>> water_pos; // ÃÊ±â¿¡ ¹°ÀÌ Â÷ ÀÖ´Â Áö¿ªÀÇ ÁÂÇ¥
-	queue<pair<int, int>> q; // °í½¿µµÄ¡ ÀÌµ¿ ÁÂÇ¥
-	//  ÁÂÇ¥ º° ¹°ÀÌ Â÷±â±îÁöÀÇ ½Ã°£, ÁÂÇ¥ º° ÀÌµ¿ ½Ã°£
+	vector<string> map(r); // ì§€ë„ ì •ë³´
+	queue<pair<int, int>> water_pos; // ì´ˆê¸°ì— ë¬¼ì´ ì°¨ ìˆëŠ” ì§€ì—­ì˜ ì¢Œí‘œ
+	queue<pair<int, int>> q; // ê³ ìŠ´ë„ì¹˜ ì´ë™ ì¢Œí‘œ
+	//  ì¢Œí‘œ ë³„ ë¬¼ì´ ì°¨ê¸°ê¹Œì§€ì˜ ì‹œê°„, ì¢Œí‘œ ë³„ ì´ë™ ì‹œê°„
 	vector<vector<int>> water_map(r, vector<int>(c)), check(r, vector<int>(c));
 	for (int i = 0; i < r; i++)
 	{
 		cin >> map[i];
 		for (int j = 0; j < c; j++)
 		{
-			if (map[i][j] == '*') water_pos.push(make_pair(i, j)); // ¹°ÀÌ Â÷ ÀÖ´Â Áö¿ª ÁÂÇ¥¸¦ Å¥¿¡ ÀúÀå
-			else if (map[i][j] == 'S') q.push(make_pair(i, j)); // ½ÃÀÛ ÁöÁ¡ Å¥¿¡ ÀúÀå
+			if (map[i][j] == '*') water_pos.push(make_pair(i, j)); // ë¬¼ì´ ì°¨ ìˆëŠ” ì§€ì—­ ì¢Œí‘œë¥¼ íì— ì €ì¥
+			else if (map[i][j] == 'S') q.push(make_pair(i, j)); // ì‹œì‘ ì§€ì  íì— ì €ì¥
 		}
 	}
-	int dx[] = { -1,0,0,1 }, dy[] = { 0,-1,1,0 }; // »óÇÏÁÂ¿ì ÀÌµ¿ Áõ°¡·®
-	// ¹°ÀÌ Â÷´Â ½Ã°£À» ¾Ë±â À§ÇØ BFS Å½»ö
+	int dx[] = { -1,0,0,1 }, dy[] = { 0,-1,1,0 }; // ìƒí•˜ì¢Œìš° ì´ë™ ì¦ê°€ëŸ‰
+	// ë¬¼ì´ ì°¨ëŠ” ì‹œê°„ì„ ì•Œê¸° ìœ„í•´ BFS íƒìƒ‰
 	while (!water_pos.empty())
 	{
-		// Å¥¿¡¼­ ÃßÃâ
+		// íì—ì„œ ì¶”ì¶œ
 		int x = water_pos.front().first;
 		int y = water_pos.front().second;
 		water_pos.pop();
-		// »óÇÏÁÂ¿ì ÀÌµ¿
+		// ìƒí•˜ì¢Œìš° ì´ë™
 		for (int i = 0; i < 4; i++)
 		{
-			int nx = x + dx[i], ny = y + dy[i]; // »õ·Î¿î ÁÂÇ¥ °ª
-			if (nx < 0 || nx >= r || ny < 0 || ny >= c) continue; // ¹üÀ§ ¹ÛÀÌ¸é °Ç³Ê¶Ù±â
-			// ¹°ÀÌ ÀÌµ¿ÇÒ ¼ö ÀÖ´Â °÷¿¡¸¸ ÀÌµ¿
+			int nx = x + dx[i], ny = y + dy[i]; // ìƒˆë¡œìš´ ì¢Œí‘œ ê°’
+			if (nx < 0 || nx >= r || ny < 0 || ny >= c) continue; // ë²”ìœ„ ë°–ì´ë©´ ê±´ë„ˆë›°ê¸°
+			// ë¬¼ì´ ì´ë™í•  ìˆ˜ ìˆëŠ” ê³³ì—ë§Œ ì´ë™
 			if (!water_map[nx][ny] && map[nx][ny] == '.')
 			{
-				water_map[nx][ny] = water_map[x][y] + 1; // ½Ã°£ Áõ°¡
-				water_pos.push(make_pair(nx, ny)); // Å¥¿¡ »ğÀÔ
+				water_map[nx][ny] = water_map[x][y] + 1; // ì‹œê°„ ì¦ê°€
+				water_pos.push(make_pair(nx, ny)); // íì— ì‚½ì…
 			}
 		}
 	}
-	// °í½¿µµÄ¡ ÀÌµ¿ BFS Å½»ö
+	// ê³ ìŠ´ë„ì¹˜ ì´ë™ BFS íƒìƒ‰
 	while (!q.empty())
 	{
-		// Å¥¿¡¼­ ÃßÃâ
+		// íì—ì„œ ì¶”ì¶œ
 		int x = q.front().first;
 		int y = q.front().second;
 		q.pop();
-		// Á¾·áÁ¶°Ç: µµÂøÁöÁ¡¿¡ µµ´Ş ½Ã
+		// ì¢…ë£Œì¡°ê±´: ë„ì°©ì§€ì ì— ë„ë‹¬ ì‹œ
 		if (map[x][y] == 'D')
 		{
-			// Ãâ·Â ÈÄ ÇÁ·Î±×·¥ Á¾·á
+			// ì¶œë ¥ í›„ í”„ë¡œê·¸ë¨ ì¢…ë£Œ
 			cout << check[x][y] << '\n';
 			return 0;
 		}
-		// »óÇÏÁÂ¿ì ÀÌµ¿
+		// ìƒí•˜ì¢Œìš° ì´ë™
 		for (int i = 0; i < 4; i++)
 		{
-			int nx = x + dx[i], ny = y + dy[i]; // »õ·Î¿î ÁÂÇ¥ °ª
-			if (nx < 0 || nx >= r || ny < 0 || ny >= c) continue; // ¹üÀ§ ¹ÛÀÌ¸é °Ç³Ê ¶Ù±â
-			// ÀÌµ¿ °¡´ÉÇÑ Á¶°Ç
-			// 1. ¹æ¹®ÇÏÁö ¾ÊÀº °æ¿ì
-			// 2. µµÂøÁöÁ¡ÀÏ °æ¿ì
-			// 3. ºñ¾îÀÖ´Â °÷ÀÌ¸é¼­ ¹°ÀÌ ¾Æ¿¹ Â÷¿À¸£Áö ¾ÊÀº Áö¿ªÀÌ°Å³ª ¹°ÀÌ Â÷´Â ½Ã°£ÀÌ ÇöÀç À§Ä¡ + 1 º¸´Ù Å©¸é
+			int nx = x + dx[i], ny = y + dy[i]; // ìƒˆë¡œìš´ ì¢Œí‘œ ê°’
+			if (nx < 0 || nx >= r || ny < 0 || ny >= c) continue; // ë²”ìœ„ ë°–ì´ë©´ ê±´ë„ˆ ë›°ê¸°
+			// ì´ë™ ê°€ëŠ¥í•œ ì¡°ê±´
+			// 1. ë°©ë¬¸í•˜ì§€ ì•Šì€ ê²½ìš°
+			// 2. ë„ì°©ì§€ì ì¼ ê²½ìš°
+			// 3. ë¹„ì–´ìˆëŠ” ê³³ì´ë©´ì„œ ë¬¼ì´ ì•„ì˜ˆ ì°¨ì˜¤ë¥´ì§€ ì•Šì€ ì§€ì—­ì´ê±°ë‚˜ ë¬¼ì´ ì°¨ëŠ” ì‹œê°„ì´ í˜„ì¬ ìœ„ì¹˜ + 1 ë³´ë‹¤ í¬ë©´
 			if (!check[nx][ny] && (map[nx][ny] == 'D' || (map[nx][ny] == '.' && (!water_map[nx][ny] || water_map[nx][ny] > check[x][y] + 1))))
 			{
-				check[nx][ny] = check[x][y] + 1; // ÀÌµ¿ ½Ã°£ °è»ê
-				q.push(make_pair(nx, ny)); // Å¥¿¡ »ğÀÔ
+				check[nx][ny] = check[x][y] + 1; // ì´ë™ ì‹œê°„ ê³„ì‚°
+				q.push(make_pair(nx, ny)); // íì— ì‚½ì…
 			}		
 		}
 	}
-	cout << "KAKTUS\n"; // ºÒ°¡´ÉÇÑ °æ¿ì Ãâ·Â
+	cout << "KAKTUS\n"; // ë¶ˆê°€ëŠ¥í•œ ê²½ìš° ì¶œë ¥
 }

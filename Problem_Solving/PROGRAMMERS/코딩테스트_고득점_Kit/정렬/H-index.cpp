@@ -5,8 +5,8 @@
 using namespace std;
 
 int solution(vector<int> citations) {
-	// 1. ¿À¸§Â÷¼ø Á¤·Ä
-	// 2. ¹è¿­°ú ÀÎµ¦½º¸¦ ºñ±³ÇØ Ã³À½À¸·Î º£¿­ °ªÀÌ ÀÎµ¦½ºº¸´Ù ÀÛ¾ÆÁú ¶§ ÀÎµ¦½º¸¦ ¹İÈ¯ÇÑ´Ù.
+	// 1. ì˜¤ë¦„ì°¨ìˆœ ì •ë ¬
+	// 2. ë°°ì—´ê³¼ ì¸ë±ìŠ¤ë¥¼ ë¹„êµí•´ ì²˜ìŒìœ¼ë¡œ ë² ì—´ ê°’ì´ ì¸ë±ìŠ¤ë³´ë‹¤ ì‘ì•„ì§ˆ ë•Œ ì¸ë±ìŠ¤ë¥¼ ë°˜í™˜í•œë‹¤.
 	sort(citations.begin(), citations.end(), greater<int>());
 	for (int i = 0; i < citations.size(); i++) {
 		if (citations[i] <= i)

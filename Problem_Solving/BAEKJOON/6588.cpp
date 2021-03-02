@@ -6,7 +6,7 @@ using namespace std;
 vector<int> prime(1000001);
 vector<int> setprime;
 
-// ¿¡¶óÅä½ºÅ×³×½ºÀÇ Ã¼
+// ì—ë¼í† ìŠ¤í…Œë„¤ìŠ¤ì˜ ì²´
 void getPrime()
 {
 	for (int i = 2; i < prime.size(); i++)
@@ -22,36 +22,36 @@ void getPrime()
 
 int main(void)
 {
-	// ÀÌ°É ¾ÈÇØ¼­ Å¸ÀÓ¾Æ¿ô
+	// ì´ê±¸ ì•ˆí•´ì„œ íƒ€ì„ì•„ì›ƒ
 	ios_base::sync_with_stdio(0);
 	cin.tie(0);
 	cout.tie(0);
 
-	// ¼Ò¼ö Å×ÀÌºí »ı¼º
+	// ì†Œìˆ˜ í…Œì´ë¸” ìƒì„±
 	getPrime();
-	// ¼Ò¼ö ÁıÇÕÀ» µû·Î »ı¼º
+	// ì†Œìˆ˜ ì§‘í•©ì„ ë”°ë¡œ ìƒì„±
 	for (int i = 3; i < prime.size(); i++)
 	{
 		if (prime[i]) setprime.push_back(i);
 	}
 	while (1)
 	{
-		// ÀÔ·Â
+		// ì…ë ¥
 		int n;
 		cin >> n;
 		if (!n) break;
 		int i;
-		// ¼Ò¼ö ÁıÇÕ Å½»ö(¼Ò¼ö´Â n/2 ±îÁö¸¸ Å½»öµÇ¸é µÊ)
+		// ì†Œìˆ˜ ì§‘í•© íƒìƒ‰(ì†Œìˆ˜ëŠ” n/2 ê¹Œì§€ë§Œ íƒìƒ‰ë˜ë©´ ë¨)
 		for (i = 0; i < setprime.size() && setprime[i] <= n / 2; i++)
 		{
-			// n-setprime[i] °¡ ¼Ò¼öÀÌ¸é b-a°¡ ÃÖ´ë°¡ µÇ´Â ÇÕ »ı¼º °¡´É
+			// n-setprime[i] ê°€ ì†Œìˆ˜ì´ë©´ b-aê°€ ìµœëŒ€ê°€ ë˜ëŠ” í•© ìƒì„± ê°€ëŠ¥
 			if (prime[n - setprime[i]])
 			{
 				cout << n << " = " << setprime[i] << " + " << n - setprime[i] << '\n';
 				break;
 			}
 		}
-		// ¸¸Á·ÇÏ´Â µ¥ÀÌÅÍ ¾øÀ½
+		// ë§Œì¡±í•˜ëŠ” ë°ì´í„° ì—†ìŒ
 		if (i == setprime.size() || setprime[i] > n / 2)
 			cout << "Goldbach's conjecture is wrong.\n";
 

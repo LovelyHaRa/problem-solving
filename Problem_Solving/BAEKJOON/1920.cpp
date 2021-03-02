@@ -14,14 +14,14 @@ int main(void)
 	vector<int> a(n);
 	for (int i = 0; i < n; i++)
 		cin >> a[i];
-	sort(a.begin(), a.end()); // Á¤·Ä
+	sort(a.begin(), a.end()); // ì •ë ¬
 	int m;
 	cin >> m;
 	for (int i = 0; i < m; i++)
 	{
 		int k;
 		cin >> k;
-		// ÀÌºĞ Å½»ö
+		// ì´ë¶„ íƒìƒ‰
 		cout << binary_search(a.begin(), a.end(), k) << '\n';
 	}
 }

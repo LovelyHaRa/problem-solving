@@ -9,12 +9,12 @@ using namespace std;
 vector<string> solution(vector<string> record) {
 	vector<string> answer;
 	map<string, string> m;
-	// 1. id <-> »ç¿ëÀÚ ÀÌ¸§ ¸ÅÄª
+	// 1. id <-> ì‚¬ìš©ì ì´ë¦„ ë§¤ì¹­
 	for (int i = 0; i < record.size(); i++) {
-		// char* Çüº¯È¯
+		// char* í˜•ë³€í™˜
 		char t[30];
 		strcpy(t, record[i].c_str());
-		// ¹®ÀÚ¿­ ÅäÅ« ºĞ¸®
+		// ë¬¸ìì—´ í† í° ë¶„ë¦¬
 		char *token = strtok(t, " ");
 		char cmd[3][20];
 		int j = 0;
@@ -22,17 +22,17 @@ vector<string> solution(vector<string> record) {
 			strcpy(cmd[j++], token);
 			token = strtok(NULL, " ");
 		}
-		// key value °»½Å
+		// key value ê°±ì‹ 
 		if (!strcmp(cmd[0], "Enter") || !strcmp(cmd[0], "Change")) {
 			m[cmd[1]] = cmd[2];
 		}
 	}
-	// 2. message Ãâ·Â
+	// 2. message ì¶œë ¥
 	for (int i = 0; i < record.size(); i++) {
-		// char* Çüº¯È¯
+		// char* í˜•ë³€í™˜
 		char t[30];
 		strcpy(t, record[i].c_str());
-		// ¹®ÀÚ¿­ ÅäÅ« ºĞ¸®
+		// ë¬¸ìì—´ í† í° ë¶„ë¦¬
 		char *token = strtok(t, " ");
 		char cmd[3][20];
 		int j = 0;
@@ -40,13 +40,13 @@ vector<string> solution(vector<string> record) {
 			strcpy(cmd[j++], token);
 			token = strtok(NULL, " ");
 		}
-		// Ä¿¸Çµå¿¡ µû¸¥ ¸Ş½ÃÁö ÀúÀå
+		// ì»¤ë§¨ë“œì— ë”°ë¥¸ ë©”ì‹œì§€ ì €ì¥
 		if (!strcmp(cmd[0], "Enter")) {
-			string res(m[cmd[1]] + "´ÔÀÌ µé¾î¿Ô½À´Ï´Ù.");
+			string res(m[cmd[1]] + "ë‹˜ì´ ë“¤ì–´ì™”ìŠµë‹ˆë‹¤.");
 			answer.push_back(res);
 		}
 		else if (!strcmp(cmd[0], "Leave")) {
-			string res(m[cmd[1]] + "´ÔÀÌ ³ª°¬½À´Ï´Ù.");
+			string res(m[cmd[1]] + "ë‹˜ì´ ë‚˜ê°”ìŠµë‹ˆë‹¤.");
 			answer.push_back(res);
 		}
 	}

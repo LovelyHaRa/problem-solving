@@ -6,16 +6,16 @@ using namespace std;
 int n, k;
 vector<vector<long long>> cache(201, vector<long long>(201,-1));
 
-// ÁÖ¾îÁø ¼ö k°³·Î nÀ» Ç¥ÇöÇÒ ¼ö ÀÖ´Â °æ¿ìÀÇ ¼ö¸¦ ¹İÈ¯
+// ì£¼ì–´ì§„ ìˆ˜ kê°œë¡œ nì„ í‘œí˜„í•  ìˆ˜ ìˆëŠ” ê²½ìš°ì˜ ìˆ˜ë¥¼ ë°˜í™˜
 int decomposition(int k, int n)
 {
-	// ±âÀú »ç·Ê: k==1 ÀÌ¸é 1°¡Áö »ÓÀÌ´Ù
+	// ê¸°ì € ì‚¬ë¡€: k==1 ì´ë©´ 1ê°€ì§€ ë¿ì´ë‹¤
 	if (k == 1) return 1;
-	// ¸Ş¸ğÀÌÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì´ì œì´ì…˜
 	long long& ret = cache[k][n];
 	if (ret != -1) return ret;
-	ret = 0; // ÃÊ±â°ª
-	// Á¡È­½Ä: decomposition(k,n) = sigma(i:0~n)[decomposition(k-1,i)]
+	ret = 0; // ì´ˆê¸°ê°’
+	// ì í™”ì‹: decomposition(k,n) = sigma(i:0~n)[decomposition(k-1,i)]
 	for (int i = 0; i <= n; i++)
 		ret = (ret + decomposition(k - 1, i)) % 1000000000;
 	return ret;

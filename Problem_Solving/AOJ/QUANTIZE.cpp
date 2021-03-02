@@ -9,10 +9,10 @@ vector<int> A, pSum, pSqSum;
 vector<vector<int>> cache;
 const int INF = 1987654321;
 
-// ºÎºÐÇÕ ±¸ÇÏ±â
+// ë¶€ë¶„í•© êµ¬í•˜ê¸°
 void precalc()
 {
-	sort(A.begin(), A.end()); // Á¤·Ä
+	sort(A.begin(), A.end()); // ì •ë ¬
 	pSum[0] = A[0];
 	pSqSum[0] = A[0] * A[0];
 	for (int i = 1; i < n; i++)
@@ -22,28 +22,28 @@ void precalc()
 	}
 }
 
-// ºÎºÐ ÇÕÀ» ÀÌ¿ëÇÏ¿© »ó¼ö ½Ã°£¿¡ Æò±ÕÀ» °è»êÇÏ´Â ¹æ¹ý
+// ë¶€ë¶„ í•©ì„ ì´ìš©í•˜ì—¬ ìƒìˆ˜ ì‹œê°„ì— í‰ê· ì„ ê³„ì‚°í•˜ëŠ” ë°©ë²•
 int minError(int lo, int hi)
 {
-	int sum = pSum[hi] - (lo == 0 ? 0 : pSum[lo - 1]); // ¼ö¿­ÀÇ ÇÕ
-	int sqSum = pSqSum[hi] - (lo == 0 ? 0 : pSqSum[lo - 1]); // ¼ö¿­ Á¦°öÀÇ ÇÕ
-	int m = int(0.5 + sum / (double)(hi - lo + 1)); // Æò±Õ ¹Ý¿Ã¸²
-	int ret = sqSum - (2 * m*sum) + (m * m*(hi - lo + 1)); // ÃÖ¼Ò ¿ÀÂ÷ ±¸ÇÏ±â
+	int sum = pSum[hi] - (lo == 0 ? 0 : pSum[lo - 1]); // ìˆ˜ì—´ì˜ í•©
+	int sqSum = pSqSum[hi] - (lo == 0 ? 0 : pSqSum[lo - 1]); // ìˆ˜ì—´ ì œê³±ì˜ í•©
+	int m = int(0.5 + sum / (double)(hi - lo + 1)); // í‰ê·  ë°˜ì˜¬ë¦¼
+	int ret = sqSum - (2 * m*sum) + (m * m*(hi - lo + 1)); // ìµœì†Œ ì˜¤ì°¨ êµ¬í•˜ê¸°
 	return ret;
 }
 
-// ¹®Á¦ º¯°æ: ÁÖ¾îÁø ¼ö¿­À» s°³ ¹­À½À¸·Î ³ª´©¾î ÃÖ¼Ò ¿ÀÂ÷ÀÇ ÇÕÀ» ±¸ÇÏ±â
+// ë¬¸ì œ ë³€ê²½: ì£¼ì–´ì§„ ìˆ˜ì—´ì„ sê°œ ë¬¶ìŒìœ¼ë¡œ ë‚˜ëˆ„ì–´ ìµœì†Œ ì˜¤ì°¨ì˜ í•©ì„ êµ¬í•˜ê¸°
 int quantize(int from, int parts)
 {
-	// ±âÀú »ç·Ê: ¸ðµç ¼ýÀÚ¸¦ ´Ù ¾çÀÚÈ­ ÇßÀ» ¶§
+	// ê¸°ì € ì‚¬ë¡€: ëª¨ë“  ìˆ«ìžë¥¼ ë‹¤ ì–‘ìží™” í–ˆì„ ë•Œ
 	if (from == n) return 0;
-	// ±âÀú »ç·Ê: ¼ýÀÚ´Â ³²¾Ò´Âµ¥ ¹­À» ¼ö ¾øÀ» ¶§: ¾ÆÁÖ Å« °ªÀ» ¹ÝÈ¯
+	// ê¸°ì € ì‚¬ë¡€: ìˆ«ìžëŠ” ë‚¨ì•˜ëŠ”ë° ë¬¶ì„ ìˆ˜ ì—†ì„ ë•Œ: ì•„ì£¼ í° ê°’ì„ ë°˜í™˜
 	if (parts == 0) return INF;
-	// ¸Þ¸ðÀÌÁ¦ÀÌ¼Ç
+	// ë©”ëª¨ì´ì œì´ì…˜
 	int& ret = cache[from][parts];
 	if (ret != -1) return ret;
-	ret = INF; // ÃÖ¼Ú°ªÀ» ±¸ÇÏ±â À§ÇØ ÃÊ±âÈ­
-	// Á¶°¢ÀÇ ±æÀÌ¸¦ º¯È­½ÃÅ°¸ç ÃÖ¼ÒÄ¡¸¦ Ã£´Â´Ù
+	ret = INF; // ìµœì†Ÿê°’ì„ êµ¬í•˜ê¸° ìœ„í•´ ì´ˆê¸°í™”
+	// ì¡°ê°ì˜ ê¸¸ì´ë¥¼ ë³€í™”ì‹œí‚¤ë©° ìµœì†Œì¹˜ë¥¼ ì°¾ëŠ”ë‹¤
 	for (int partSize = 1; from + partSize <= n; partSize++)
 		ret = min(ret, minError(from, from + partSize - 1) + quantize(from + partSize, parts - 1));
 	return ret;

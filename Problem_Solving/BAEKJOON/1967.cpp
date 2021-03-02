@@ -4,55 +4,55 @@
 
 using namespace std;
 
-vector<vector<pair<int, int>>> adj; // ¿¬°áµÈ Á¤Á¡, °¡ÁßÄ¡¸¦ Æä¾î·Î ÇÏ´Â ¿¬°á ¸®½ºÆ®
-int n; // ³ëµå °³¼ö
-int maxDist; // Ãâ·ÂÇÒ ÃÖ´ë ±æÀÌ
+vector<vector<pair<int, int>>> adj; // ì—°ê²°ëœ ì •ì , ê°€ì¤‘ì¹˜ë¥¼ í˜ì–´ë¡œ í•˜ëŠ” ì—°ê²° ë¦¬ìŠ¤íŠ¸
+int n; // ë…¸ë“œ ê°œìˆ˜
+int maxDist; // ì¶œë ¥í•  ìµœëŒ€ ê¸¸ì´
 
-// start ³ëµå¸¦ ½ÃÀÛÀ¸·Î BFS ¼öÇà µÚ ½ÃÀÛÁ¡À¸·Î ºÎÅÍ ÃÖ´ë ±æÀÌÀÇ ³ëµå¸¦ ¹İÈ¯
+// start ë…¸ë“œë¥¼ ì‹œì‘ìœ¼ë¡œ BFS ìˆ˜í–‰ ë’¤ ì‹œì‘ì ìœ¼ë¡œ ë¶€í„° ìµœëŒ€ ê¸¸ì´ì˜ ë…¸ë“œë¥¼ ë°˜í™˜
 int bfs(int start)
 {
 	queue<int> q;
-	vector<bool> visited(n + 1); // ¹æ¹® ¿©ºÎ
-	vector<int> dist(n + 1); // dist[n]: ½ÃÀÛ ³ëµå ºÎÅÍ n±îÁöÀÇ °Å¸®
-	int maxIdx = 0; // ¹İÈ¯ÇÒ ÃÖ´ë ±æÀÌÀÇ ³ëµå
-	// ÃÊ±â Å¥ »ı¼º
+	vector<bool> visited(n + 1); // ë°©ë¬¸ ì—¬ë¶€
+	vector<int> dist(n + 1); // dist[n]: ì‹œì‘ ë…¸ë“œ ë¶€í„° nê¹Œì§€ì˜ ê±°ë¦¬
+	int maxIdx = 0; // ë°˜í™˜í•  ìµœëŒ€ ê¸¸ì´ì˜ ë…¸ë“œ
+	// ì´ˆê¸° í ìƒì„±
 	q.push(start);
 	visited[start] = 1;
-	// BFS ¼öÇà
+	// BFS ìˆ˜í–‰
 	while (!q.empty())
 	{
-		// Å¥¿¡¼­ ÃßÃâ
+		// íì—ì„œ ì¶”ì¶œ
 		int here = q.front();
 		q.pop();
-		// ¿¬°áµÈ Á¤Á¡ ¸ğµÎ Å½»ö
+		// ì—°ê²°ëœ ì •ì  ëª¨ë‘ íƒìƒ‰
 		for (int i = 0; i < adj[here].size(); i++)
 		{
-			int there = adj[here][i].first; // ³ëµå
-			int weight = adj[here][i].second; // °¡ÁßÄ¡
-			// ¹Ì¹æ¹® ½Ã
+			int there = adj[here][i].first; // ë…¸ë“œ
+			int weight = adj[here][i].second; // ê°€ì¤‘ì¹˜
+			// ë¯¸ë°©ë¬¸ ì‹œ
 			if (!visited[there])
 			{
-				visited[there] = 1; // ¹æ¹® Ã¼Å©
-				dist[there] = dist[here] + weight; // °Å¸® ´©Àû
-				// °Å¸®ÀÇ ÃÖ´ñ°ª °»½Å
+				visited[there] = 1; // ë°©ë¬¸ ì²´í¬
+				dist[there] = dist[here] + weight; // ê±°ë¦¬ ëˆ„ì 
+				// ê±°ë¦¬ì˜ ìµœëŒ“ê°’ ê°±ì‹ 
 				if (maxDist < dist[there])
 				{
 					maxDist = dist[there];
-					maxIdx = there; // ³ëµå °»½Å
+					maxIdx = there; // ë…¸ë“œ ê°±ì‹ 
 				}
-				// Å¥¿¡ Ãß°¡
+				// íì— ì¶”ê°€
 				q.push(there);
 			}
 		}
 	}
-	return maxIdx; // ÃÖ´ë °Å¸® ³ëµå ¹İÈ¯
+	return maxIdx; // ìµœëŒ€ ê±°ë¦¬ ë…¸ë“œ ë°˜í™˜
 }
 
 int main(void)
 {
 	cin >> n;
 	adj.resize(n + 1);
-	// ÀÎÁ¢ ¸®½ºÆ® ±¸¼º
+	// ì¸ì ‘ ë¦¬ìŠ¤íŠ¸ êµ¬ì„±
 	for (int i = 0; i < n-1; i++)
 	{
 		int r, c, w;
@@ -60,7 +60,7 @@ int main(void)
 		adj[r].push_back(make_pair(c, w));
 		adj[c].push_back(make_pair(r, w));
 	}
-	// 1ºÎÅÍ ½ÃÀÛÇØ¼­ BFS ¼öÇà ÈÄ °¡Àå ±ä ³ëµåÀÇ ¹øÈ£·Î ´Ù½Ã BFS ¼öÇà
+	// 1ë¶€í„° ì‹œì‘í•´ì„œ BFS ìˆ˜í–‰ í›„ ê°€ì¥ ê¸´ ë…¸ë“œì˜ ë²ˆí˜¸ë¡œ ë‹¤ì‹œ BFS ìˆ˜í–‰
 	bfs(bfs(1));
 	cout << maxDist << '\n';
 }

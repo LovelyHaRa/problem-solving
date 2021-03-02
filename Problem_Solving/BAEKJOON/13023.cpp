@@ -9,21 +9,21 @@ bool answer = false;
 
 void dfs(int here, int cnt)
 {
-	// Ä£±¸ °ü°è°¡ 4°³°¡ µÇ¸é Á¤´äÃ³¸®
+	// ì¹œêµ¬ ê´€ê³„ê°€ 4ê°œê°€ ë˜ë©´ ì •ë‹µì²˜ë¦¬
 	if (cnt == 4)
 	{
 		answer = true;
 		return;
 	}
-	visited[here] = true; // Á¤Á¡ ¹æ¹® Ã³¸®
+	visited[here] = true; // ì •ì  ë°©ë¬¸ ì²˜ë¦¬
 	for (int i = 0; i < adj[here].size(); i++)
 	{
 		int there = adj[here][i];
 		if (!visited[there])
 			dfs(there, cnt + 1);
-		if (answer) return; // Á¤´äÀ» Ã£Àº °æ¿ì ¸®ÅÏ
+		if (answer) return; // ì •ë‹µì„ ì°¾ì€ ê²½ìš° ë¦¬í„´
 	}
-	visited[here] = false; // ¿ø»ó º¹±¸
+	visited[here] = false; // ì›ìƒ ë³µêµ¬
 }
 
 int main(void)
@@ -31,7 +31,7 @@ int main(void)
 	int n, m;
 	cin >> n >> m;
 	adj.resize(n, vector<int>());
-	// ±×·¡ÇÁ »ı¼º
+	// ê·¸ë˜í”„ ìƒì„±
 	for (int i = 0; i < m; i++)
 	{
 		int a, b;
@@ -39,14 +39,14 @@ int main(void)
 		adj[a].push_back(b);
 		adj[b].push_back(a);
 	}
-	// ¸ğµç Á¤Á¡À» ½ÃÀÛÁ¡À¸·Î DFS Å½»ö
+	// ëª¨ë“  ì •ì ì„ ì‹œì‘ì ìœ¼ë¡œ DFS íƒìƒ‰
 	for (int i = 0; i < n; i++)
 	{
-		// ¹æ¹®¿©ºÎ ¹è¿­ ÃÊ±âÈ­
+		// ë°©ë¬¸ì—¬ë¶€ ë°°ì—´ ì´ˆê¸°í™”
 		visited.clear();
 		visited.resize(n);
 		dfs(i, 0);
-		if (answer) break; // Á¤´äÀ» Ã£Àº °æ¿ì ´õÀÌ»ó Å½»öÇÏÁö ¾ÊÀ½
+		if (answer) break; // ì •ë‹µì„ ì°¾ì€ ê²½ìš° ë”ì´ìƒ íƒìƒ‰í•˜ì§€ ì•ŠìŒ
 	}
 	cout << answer << '\n';
 }

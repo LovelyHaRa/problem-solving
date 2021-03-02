@@ -55,7 +55,7 @@ vector<int> kmpSearch(const string& H, const string& N)
 
 int shift(const string& original, const string& target)
 {
-	return kmpSearch(original + original, target)[0]; // kmp ¾Ë°í¸®ÁòÀÇ Ã¹¹øÂ° °ªÀ» ¹İÈ¯ÇÑ´Ù.
+	return kmpSearch(original + original, target)[0]; // kmp ì•Œê³ ë¦¬ì¦˜ì˜ ì²«ë²ˆì§¸ ê°’ì„ ë°˜í™˜í•œë‹¤.
 }
 
 int main(void)
@@ -70,8 +70,8 @@ int main(void)
 		for (int i = 0; i < n + 1; i++)
 			cin >> k[i];
 		int cnt = 0;
-		// È¦¼ö¹øÂ°´Â ½Ã°è ¹æÇâ, Â¦¼ö ¹øÂ°´Â ¹İ½Ã°è ¹æÇâ
-		// b¸¦ ¹İ½Ã°è ¹æÇâÀ¸·Î µ¹·Á a¸¦ ¸¸µå´Â µ¥ ÇÊ¿äÇÑ Ä­ ¼ö = a¸¦ ½Ã°è¹æÇâÀ¸·Î µ¹·Á b¸¦ ¸¸µå´Â µ¥ ÇÊ¿äÇÑ Ä­ ¼ö
+		// í™€ìˆ˜ë²ˆì§¸ëŠ” ì‹œê³„ ë°©í–¥, ì§ìˆ˜ ë²ˆì§¸ëŠ” ë°˜ì‹œê³„ ë°©í–¥
+		// bë¥¼ ë°˜ì‹œê³„ ë°©í–¥ìœ¼ë¡œ ëŒë ¤ aë¥¼ ë§Œë“œëŠ” ë° í•„ìš”í•œ ì¹¸ ìˆ˜ = aë¥¼ ì‹œê³„ë°©í–¥ìœ¼ë¡œ ëŒë ¤ bë¥¼ ë§Œë“œëŠ” ë° í•„ìš”í•œ ì¹¸ ìˆ˜
 		for (int i = 1; i < n + 1; i++)
 			cnt += (i % 2) ? shift(k[i], k[i - 1]) : shift(k[i - 1], k[i]);
 		cout << cnt << '\n';

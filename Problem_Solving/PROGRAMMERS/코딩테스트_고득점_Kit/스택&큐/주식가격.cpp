@@ -5,9 +5,9 @@ using namespace std;
 
 vector<int> solution(vector<int> prices) {
 	vector<int> answer;
-	// ´ÙÀ½ ½Ã°£´ëºÎÅÍ Å½»öÇÏ´Ù°¡
-	// ¶³¾îÁö´Â ¼ø°£ÀÌ ¿Ã ¶§ ±¸°£À» count¿¡ ÀúÀå
-	// ¸¶Áö¸·Àº Ç×»ó 0ÀÌ¹Ç·Î 0 Ãß°¡
+	// ë‹¤ìŒ ì‹œê°„ëŒ€ë¶€í„° íƒìƒ‰í•˜ë‹¤ê°€
+	// ë–¨ì–´ì§€ëŠ” ìˆœê°„ì´ ì˜¬ ë•Œ êµ¬ê°„ì„ countì— ì €ìž¥
+	// ë§ˆì§€ë§‰ì€ í•­ìƒ 0ì´ë¯€ë¡œ 0 ì¶”ê°€
 	for (int i = 0; i < prices.size() - 1; i++)
 	{
 		int count = 0;

@@ -7,7 +7,7 @@ int main(void)
 	int x, res = 0;
 	cin >> x;
 	/*
-	  x¸¦ ÀÌÁø¼ö·Î ¹Ù…fÀ» ¶§ 1ÀÇ °³¼ö
+	  xë¥¼ ì´ì§„ìˆ˜ë¡œ ë°”ê¿§ì„ ë•Œ 1ì˜ ê°œìˆ˜
 	*/
 	for (; x; x /= 2)
 		res += x % 2;

@@ -7,25 +7,25 @@ using namespace std;
 int n, m;
 vector<int> a, selected;
 
-// ¼ø¿­À» Å½»öÇÑ´Ù
+// ìˆœì—´ì„ íƒìƒ‰í•œë‹¤
 void permutation(int cnt)
 {
-	// ±âÀú »ç·Ê: cnt==m
+	// ê¸°ì € ì‚¬ë¡€: cnt==m
 	if (cnt == m)
 	{
-		// Ãâ·Â
+		// ì¶œë ¥
 		for (int i = 0; i < m; i++)
 			cout << selected[i] << ' ';
 		cout << '\n';
 		return;
 	}
-	// ÁÖ¼ÒÀû Áßº¹Àº Çã¿ë, ¼ıÀÚ Áßº¹Àº ºñÇã¿ë
-	vector<int> visited(10001); // ¼ıÀÚ Áßº¹ Ã¼Å©
+	// ì£¼ì†Œì  ì¤‘ë³µì€ í—ˆìš©, ìˆ«ì ì¤‘ë³µì€ ë¹„í—ˆìš©
+	vector<int> visited(10001); // ìˆ«ì ì¤‘ë³µ ì²´í¬
 	for (int i = 0; i < n; i++)
 	{
 		if (visited[a[i]]) continue;
 		selected[cnt] = a[i];
-		visited[a[i]] = 1; // ¹æ¹® Ã¼Å©
+		visited[a[i]] = 1; // ë°©ë¬¸ ì²´í¬
 		permutation(cnt + 1);
 	}
 }

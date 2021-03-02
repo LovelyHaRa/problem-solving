@@ -4,18 +4,18 @@
 
 using namespace std;
 
-// bfs·Î °ü¸®µÉ ±¸½½ Á¤º¸
+// bfsë¡œ ê´€ë¦¬ë  êµ¬ìŠ¬ ì •ë³´
 struct balls
 {
-	// ÀÌµ¿È½¼ö, »¡°£ ±¸½½ ÁÂÇ¥, ÆÄ¶õ ±¸½½ ÁÂÇ¥
+	// ì´ë™íšŸìˆ˜, ë¹¨ê°„ êµ¬ìŠ¬ ì¢Œí‘œ, íŒŒë€ êµ¬ìŠ¬ ì¢Œí‘œ
 	int cnt, rx, ry, bx, by;
 };
 
-int board[10][10]; // º¸µå, 0: º®, 1: ºñ¾îÀÖÀ½, 2: ±¸¸Û
-bool visited[10][10][10][10]; // visited(x,y,z,w): »¡°£ ±¸½½ ÁÂÇ¥, ÆÄ¶õ ±¸½½ ÁÂÇ¥ ¹æ¹®¿©ºÎ
-int dx[] = { -1,0,0,1 }, dy[] = { 0,-1,1,0 }; // »óÇÏÁÂ¿ì Áõ°¡·®
+int board[10][10]; // ë³´ë“œ, 0: ë²½, 1: ë¹„ì–´ìˆìŒ, 2: êµ¬ë©
+bool visited[10][10][10][10]; // visited(x,y,z,w): ë¹¨ê°„ êµ¬ìŠ¬ ì¢Œí‘œ, íŒŒë€ êµ¬ìŠ¬ ì¢Œí‘œ ë°©ë¬¸ì—¬ë¶€
+int dx[] = { -1,0,0,1 }, dy[] = { 0,-1,1,0 }; // ìƒí•˜ì¢Œìš° ì¦ê°€ëŸ‰
 
-// º®ÀÌ³ª ±¸¸ÛÀ» ¸¸³¯ ¶§ ±îÁö d¹æÇâÀ¸·Î ¿òÁ÷ÀÌ±â
+// ë²½ì´ë‚˜ êµ¬ë©ì„ ë§Œë‚  ë•Œ ê¹Œì§€ dë°©í–¥ìœ¼ë¡œ ì›€ì§ì´ê¸°
 void moveBall(int &x, int &y, int d)
 {
 	while (board[x+dx[d]][y+dy[d]])
@@ -29,61 +29,61 @@ int main(void)
 {
 	int n, m;
 	cin >> n >> m;
-	// »¡°£ ±¸½½, ÆÄ¶õ ±¸½½, ±¸¸Û ÁÂÇ¥
+	// ë¹¨ê°„ êµ¬ìŠ¬, íŒŒë€ êµ¬ìŠ¬, êµ¬ë© ì¢Œí‘œ
 	pair<int, int> red, blue, hole;
-	// º¸µå ±¸Ãà
+	// ë³´ë“œ êµ¬ì¶•
 	for (int i = 0; i < n; i++)
 	{
 		string s;
 		cin >> s;
 		for (int j = 0; j < m; j++)
 		{
-			// ÀÔ·Â¹ŞÀº º¸µå Á¤º¸¸¦ ¼ıÀÚ·Î ¹Ù²ã ³Ö±â
+			// ì…ë ¥ë°›ì€ ë³´ë“œ ì •ë³´ë¥¼ ìˆ«ìë¡œ ë°”ê¿” ë„£ê¸°
 			switch (s[j])
 			{
-			case '#': board[i][j] = 0; break; // º®
-			case '.': board[i][j] = 1; break; // ºñ¾îÀÖÀ½
-			case 'O': board[i][j] = 2; hole = make_pair(i, j); break; // ±¸¸Û
-			case 'R': board[i][j] = 1; red = make_pair(i, j); break; // »¡°£ ±¸½½
-			case 'B': board[i][j] = 1; blue = make_pair(i, j); break; // ÆÄ¶õ ±¸½½
+			case '#': board[i][j] = 0; break; // ë²½
+			case '.': board[i][j] = 1; break; // ë¹„ì–´ìˆìŒ
+			case 'O': board[i][j] = 2; hole = make_pair(i, j); break; // êµ¬ë©
+			case 'R': board[i][j] = 1; red = make_pair(i, j); break; // ë¹¨ê°„ êµ¬ìŠ¬
+			case 'B': board[i][j] = 1; blue = make_pair(i, j); break; // íŒŒë€ êµ¬ìŠ¬
 			}
 		}
 	}
-	int res = -1; // °á°ú
-	// ÃÊ±â Å¥ ¼¼ÆÃ
+	int res = -1; // ê²°ê³¼
+	// ì´ˆê¸° í ì„¸íŒ…
 	queue<balls> q;
 	q.push({ 0,red.first,red.second,blue.first,blue.second });
 	visited[red.first][red.second][blue.first][blue.second] = 1;
-	// BFS Å½»ö
+	// BFS íƒìƒ‰
 	while (!q.empty())
 	{
-		// Å¥¿¡¼­ ÃßÃâ
+		// íì—ì„œ ì¶”ì¶œ
 		balls cur = q.front();
 		q.pop();
-		// 1. 10È¸¸¦ ÃÊ°úÇÏ¸é Å½»ö ÁßÁö
+		// 1. 10íšŒë¥¼ ì´ˆê³¼í•˜ë©´ íƒìƒ‰ ì¤‘ì§€
 		if (cur.cnt > 10)
 			break;
-		// 2. »¡°£ ±¸½½ÀÌ ±¸¸Û¿¡ µé¾î°¡¸é °á°ú ÀúÀå ÈÄ Å½»ö Á¾·á
+		// 2. ë¹¨ê°„ êµ¬ìŠ¬ì´ êµ¬ë©ì— ë“¤ì–´ê°€ë©´ ê²°ê³¼ ì €ì¥ í›„ íƒìƒ‰ ì¢…ë£Œ
 		if (make_pair(cur.rx, cur.ry) == hole)
 		{
 			res = cur.cnt;
 			break;
 		}
-		// 3. »óÇÏÁÂ¿ì ½Ã¹Ä·¹ÀÌ¼Ç
+		// 3. ìƒí•˜ì¢Œìš° ì‹œë®¬ë ˆì´ì…˜
 		for (int i = 0; i < 4; i++)
 		{
-			// ±¸½½ ¿òÁ÷ÀÌ±â
+			// êµ¬ìŠ¬ ì›€ì§ì´ê¸°
 			red = make_pair(cur.rx, cur.ry);
 			blue = make_pair(cur.bx, cur.by);
 			moveBall(red.first, red.second, i);
 			moveBall(blue.first, blue.second, i);
 
-			if (blue == hole) continue; // ÆÄ¶õ ±¸½½ÀÌ ±¸¸Û¿¡ ºüÁö¸é °Ç³Ê¶Ù±â
+			if (blue == hole) continue; // íŒŒë€ êµ¬ìŠ¬ì´ êµ¬ë©ì— ë¹ ì§€ë©´ ê±´ë„ˆë›°ê¸°
 
-			// ±¸½½ÀÌ ¿òÁ÷ÀÎ µÚ ¼­·Î °°Àº À§Ä¡¿¡ ÀÖÀ¸¸é
+			// êµ¬ìŠ¬ì´ ì›€ì§ì¸ ë’¤ ì„œë¡œ ê°™ì€ ìœ„ì¹˜ì— ìˆìœ¼ë©´
 			if (red == blue)
 			{
-				// ÃÊ±â À§Ä¡°ü°è¸¦ ÆÄ¾Ç ÇØ ±¸½½ À§Ä¡ ÀçÁ¶Á¤
+				// ì´ˆê¸° ìœ„ì¹˜ê´€ê³„ë¥¼ íŒŒì•… í•´ êµ¬ìŠ¬ ìœ„ì¹˜ ì¬ì¡°ì •
 				switch (i)
 				{
 				case 0: cur.rx > cur.bx ? red.first++ : blue.first++; break;
@@ -92,7 +92,7 @@ int main(void)
 				case 3: cur.rx < cur.bx ? red.first-- : blue.first--; break;
 				}
 			}
-			// ¹æ¹® ¿©ºÎ¸¦ È®ÀÎ µÚ Å¥¿¡ Ãß°¡
+			// ë°©ë¬¸ ì—¬ë¶€ë¥¼ í™•ì¸ ë’¤ íì— ì¶”ê°€
 			if (!visited[red.first][red.second][blue.first][blue.second])
 			{
 				visited[red.first][red.second][blue.first][blue.second] = 1;

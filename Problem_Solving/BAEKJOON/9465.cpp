@@ -20,13 +20,13 @@ int main(void)
 			cin >> sticker[0][i];
 		for (int i = 2; i < n + 2; i++)
 			cin >> sticker[1][i];
-		// cache[k][i] = k¹øÁÙ¿¡¼­ i¹ø¤Š ½ºÆ¼Ä¿¸¦ ¶¿ ¼ö ÀÖ´Â ÃÖ´ë°ª
-		// Á¡È­½Ä: cache[k][i]=sticker[k][i]+max(cache[!k][i-1], cache[!k][i-2])
+		// cache[k][i] = kë²ˆì¤„ì—ì„œ ië²ˆì¨° ìŠ¤í‹°ì»¤ë¥¼ ë—„ ìˆ˜ ìˆëŠ” ìµœëŒ€ê°’
+		// ì í™”ì‹: cache[k][i]=sticker[k][i]+max(cache[!k][i-1], cache[!k][i-2])
 		for (int i = 2; i < n + 2; i++)
 		{
 			cache[0][i] = sticker[0][i] + max(cache[1][i - 1], cache[1][i - 2]);
 			cache[1][i] = sticker[1][i] + max(cache[0][i - 1], cache[0][i - 2]);
 		}
-		cout << max(cache[0][n + 1], cache[1][n + 1]) << '\n'; // ´õ Å« °ª Ãâ·Â
+		cout << max(cache[0][n + 1], cache[1][n + 1]) << '\n'; // ë” í° ê°’ ì¶œë ¥
 	}
 }

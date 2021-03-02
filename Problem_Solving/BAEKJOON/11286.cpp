@@ -9,21 +9,21 @@ int main(void)
 {
 	int n;
 	cin >> n;
-	// Àý´ñ°ª, ¿ø·¡°ªÀ» ½ÖÀ¸·Î °¡Áö´Â pq »ý¼º
+	// ì ˆëŒ“ê°’, ì›ëž˜ê°’ì„ ìŒìœ¼ë¡œ ê°€ì§€ëŠ” pq ìƒì„±
 	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
 	while (n--)
 	{
 		int x;
 		cin >> x;
-		// 0ÀÏ ¶§
+		// 0ì¼ ë•Œ
 		if (!x)
 		{
-			// Å¥¿¡¼­ ÃßÃâ
+			// íì—ì„œ ì¶”ì¶œ
 			cout << (!pq.empty() ? pq.top().second : x) << '\n';
 			if (!pq.empty()) pq.pop();
 		}
-		// 0ÀÌ ¾Æ´Ò ¶§
+		// 0ì´ ì•„ë‹ ë•Œ
 		else
-			pq.push({ abs(x),x }); // Å¥¿¡ »ðÀÔ
+			pq.push({ abs(x),x }); // íì— ì‚½ìž…
 	}
 }

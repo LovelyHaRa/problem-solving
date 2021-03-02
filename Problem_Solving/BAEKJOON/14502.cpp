@@ -4,16 +4,16 @@
 
 using namespace std;
 
-vector<vector<int>> map; // ¿¬±¸½Ç Áöµµ
-vector<pair<int, int>> virus; // ÃÊ±â ¹ÙÀÌ·¯½º À§Ä¡
+vector<vector<int>> map; // ì—°êµ¬ì‹¤ ì§€ë„
+vector<pair<int, int>> virus; // ì´ˆê¸° ë°”ì´ëŸ¬ìŠ¤ ìœ„ì¹˜
 int n, m, maxArea;
 
-// ¹ÙÀÌ·¯½º È®»ê ½Ã¹Ä·¹ÀÌ¼Ç
+// ë°”ì´ëŸ¬ìŠ¤ í™•ì‚° ì‹œë®¬ë ˆì´ì…˜
 int diffusion()
 {
 	vector<vector<int>> nextMap = map;
 	vector<vector<bool>> checked(n, vector<bool>(m));
-	// ÃÊ±â Å¥ »ı¼º
+	// ì´ˆê¸° í ìƒì„±
 	queue<pair<int, int>> q;
 	int dx[] = { -1,0,0,1 }, dy[] = { 0,-1,1,0 };
 	for (int i = 0; i < virus.size(); i++)
@@ -21,25 +21,25 @@ int diffusion()
 		q.push(virus[i]);
 		checked[virus[i].first][virus[i].second] = 1;
 	}
-	// BFS Å½»ö
+	// BFS íƒìƒ‰
 	while (!q.empty())
 	{
-		// Å¥¿¡¼­ ÃßÃâ
+		// íì—ì„œ ì¶”ì¶œ
 		int x = q.front().first, y = q.front().second;
 		q.pop();
-		// »óÇÏÁÂ¿ì ÀÌµ¿
+		// ìƒí•˜ì¢Œìš° ì´ë™
 		for (int i = 0; i < 4; i++)
 		{
-			int nx = x + dx[i], ny = y + dy[i]; // ´ÙÀ½ ÁÂÇ¥
-			// ¹üÀ§ ¹Û, ÀÌ¹Ì ¹æ¹®, º®Àº °Ç³Ê¶Ù±â
+			int nx = x + dx[i], ny = y + dy[i]; // ë‹¤ìŒ ì¢Œí‘œ
+			// ë²”ìœ„ ë°–, ì´ë¯¸ ë°©ë¬¸, ë²½ì€ ê±´ë„ˆë›°ê¸°
 			if (nx < 0 || nx >= n || ny < 0 || ny >= m || checked[nx][ny] || nextMap[nx][ny] == 1) continue;
-			checked[nx][ny] = 1; // Ã¼Å©
-			nextMap[nx][ny] = 2; // ¹ÙÀÌ·¯½º È®»ê
-			// Å¥¿¡ Ãß°¡
+			checked[nx][ny] = 1; // ì²´í¬
+			nextMap[nx][ny] = 2; // ë°”ì´ëŸ¬ìŠ¤ í™•ì‚°
+			// íì— ì¶”ê°€
 			q.push(make_pair(nx, ny));
 		}
 	}
-	// ¾ÈÀü ¿µ¿ª °è»ê
+	// ì•ˆì „ ì˜ì—­ ê³„ì‚°
 	int safeArea = 0;
 	for (int i = 0; i < n; i++)
 		for (int j = 0; j < m; j++)
@@ -47,14 +47,14 @@ int diffusion()
 	return safeArea;
 }
 
-// °¡´ÉÇÑ ¸ğµç º® ¼³Ä¡
+// ê°€ëŠ¥í•œ ëª¨ë“  ë²½ ì„¤ì¹˜
 void buildWail(int cnt)
 {
-	// º® ¼³Ä¡ ¿Ï·á
+	// ë²½ ì„¤ì¹˜ ì™„ë£Œ
 	if (cnt == 3)
 	{
-		int area = diffusion(); // ¹ÙÀÌ·¯½º È®»ê
-		if (maxArea < area) maxArea = area; // ¾ÈÀü¿µ¿ª ÃÖ´ñ°ª °»½Å
+		int area = diffusion(); // ë°”ì´ëŸ¬ìŠ¤ í™•ì‚°
+		if (maxArea < area) maxArea = area; // ì•ˆì „ì˜ì—­ ìµœëŒ“ê°’ ê°±ì‹ 
 		return;
 	}
 	for (int i = 0; i < n; i++)
@@ -62,7 +62,7 @@ void buildWail(int cnt)
 			if (!map[i][j])
 			{
 				map[i][j] = 1;
-				buildWail(cnt + 1); // DFS Å½»ö
+				buildWail(cnt + 1); // DFS íƒìƒ‰
 				map[i][j] = 0;
 			}
 }

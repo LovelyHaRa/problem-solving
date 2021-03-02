@@ -1,4 +1,4 @@
-// บะวา มคบน
+// ๋ถํ•  ์ •๋ณต
 #include <iostream>
 #include <vector>
 
@@ -12,10 +12,10 @@ vector<vector<int>> pow(long long b)
 {
 	vector<vector<int>> res(n, vector<int>(n));
 	vector<vector<int>> t(n, vector<int>(n));
-	// 1. มฆฐ๖ผ๖ฐก 1ภฯ ถง
+	// 1. ์ ๊ณฑ์๊ฐ€ 1์ผ ๋•
 	if (b == 1)
 	{
-		// วเทฤ รโทย
+		// ํ–๋ ฌ ์ถ๋ ฅ
 		for (int i = 0; i < n; i++)
 		{
 			for (int j = 0; j < n; j++)
@@ -23,14 +23,14 @@ vector<vector<int>> pow(long long b)
 		}
 		return t;
 	}
-	// 2. มฆฐ๖ผ๖ฐก ยฆผ๖ภฯ ถง
-	// X^2b = x^b*x^b ภฬฟ๋
+	// 2. ์ ๊ณฑ์๊ฐ€ ์ง์์ผ ๋•
+	// X^2b = x^b*x^b ์ด์ฉ
 	else if (!(b % 2))
 	{
-		// b/2 ภฯ ถงภว วเทฤ ฑธวิ
+		// b/2 ์ผ ๋•์ ํ–๋ ฌ ๊ตฌํ•จ
 		t = pow(b / 2);
 
-		// วเทฤ มฆฐ๖ ผ๖วเ(t*t)
+		// ํ–๋ ฌ ์ ๊ณฑ ์ํ–(t*t)
 		for (int i = 0; i < n; i++)
 		{
 			for (int j = 0; j < n; j++)
@@ -43,14 +43,14 @@ vector<vector<int>> pow(long long b)
 
 		return res;
 	}
-	// 3. มฆฐ๖ผ๖ฐก ศฆผ๖ภฯ ถง
-	// x^b = x^b-1*x ภฬฟ๋
+	// 3. ์ ๊ณฑ์๊ฐ€ ํ€์์ผ ๋•
+	// x^b = x^b-1*x ์ด์ฉ
 	else
 	{
-		// b-1 ภฯ ถงภว วเทฤ ฑธวิ
+		// b-1 ์ผ ๋•์ ํ–๋ ฌ ๊ตฌํ•จ
 		t = pow(b - 1);
 
-		// t*a ผ๖วเ
+		// t*a ์ํ–
 		for (int i = 0; i < n; i++)
 		{
 			for (int j = 0; j < n; j++)

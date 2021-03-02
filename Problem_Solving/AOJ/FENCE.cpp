@@ -6,32 +6,32 @@ using namespace std;
 
 int solve(const vector<int> &h, int left, int right)
 {
-	// ±âÀú »ç·Ê: ¹üÀ§°¡ 1ÀÌ¸é ¸·´ë ³ôÀÌ¸¦ ¸®ÅÏ
+	// ê¸°ì € ì‚¬ë¡€: ë²”ìœ„ê°€ 1ì´ë©´ ë§‰ëŒ€ ë†’ì´ë¥¼ ë¦¬í„´
 	if (left == right) return h[left];
-	// ±¸°£ ºĞÇÒ
+	// êµ¬ê°„ ë¶„í• 
 	int mid = (left + right) / 2;
-	// °¢°³ °İÆÄ
+	// ê°ê°œ ê²©íŒŒ
 	int ret = max(solve(h, left, mid), solve(h, mid + 1, right));
-	// ±¸°£ 3: µÎ ºÎºĞ¿¡ ¸ğµÎ °ÉÄ¡´Â »ç°¢Çü Áß °¡Àå Å« °ªÀ» Ã£´Â´Ù.
-	int low = mid, high = mid + 1; // ÃÊ±â ¼¼ÆÃ
-	int height = min(h[low], h[high]); // ÃÖ¼Ò ³ôÀÌ
-	ret = max(ret, height * 2); // ³ĞÀÌÀÇ ÃÖ´ë°ª °»½Å
-	// »ç°¢ÇüÀÌ ¸ğµÎ Æ÷ÇÔ µÉ ¶§ ±îÁö ¹İº¹
+	// êµ¬ê°„ 3: ë‘ ë¶€ë¶„ì— ëª¨ë‘ ê±¸ì¹˜ëŠ” ì‚¬ê°í˜• ì¤‘ ê°€ì¥ í° ê°’ì„ ì°¾ëŠ”ë‹¤.
+	int low = mid, high = mid + 1; // ì´ˆê¸° ì„¸íŒ…
+	int height = min(h[low], h[high]); // ìµœì†Œ ë†’ì´
+	ret = max(ret, height * 2); // ë„“ì´ì˜ ìµœëŒ€ê°’ ê°±ì‹ 
+	// ì‚¬ê°í˜•ì´ ëª¨ë‘ í¬í•¨ ë  ë•Œ ê¹Œì§€ ë°˜ë³µ
 	while (left < low || high < right)
 	{
-		// ¿À¸¥ÂÊÀÌ ´õ Å« °æ¿ì or ¿ŞÂÊ Å½»öÀÌ ³¡³­ °æ¿ì
+		// ì˜¤ë¥¸ìª½ì´ ë” í° ê²½ìš° or ì™¼ìª½ íƒìƒ‰ì´ ëë‚œ ê²½ìš°
 		if (high < right && (low == left || h[low - 1] < h[high + 1]))
 		{
-			high++; // ¿À¸¥ÂÊ »ç°¢ÇüÀ» ÃëÇÔ
-			height = min(height, h[high]); // ³ôÀÌ °»½Å
+			high++; // ì˜¤ë¥¸ìª½ ì‚¬ê°í˜•ì„ ì·¨í•¨
+			height = min(height, h[high]); // ë†’ì´ ê°±ì‹ 
 		}
-		// ±×·¸Áö ¾ÊÀº °æ¿ì
+		// ê·¸ë ‡ì§€ ì•Šì€ ê²½ìš°
 		else
 		{
-			low--; // ¿ŞÂÊ »ç°¢ÇüÀ» ÃëÇÔ
-			height = min(height, h[low]); // ³ôÀÌ °»½Å
+			low--; // ì™¼ìª½ ì‚¬ê°í˜•ì„ ì·¨í•¨
+			height = min(height, h[low]); // ë†’ì´ ê°±ì‹ 
 		}
-		// ³ĞÀÌÀÇ ÃÖ´ë°ª °»½Å
+		// ë„“ì´ì˜ ìµœëŒ€ê°’ ê°±ì‹ 
 		ret = max(ret, (high - low + 1)*height);
 	}
 	return ret;

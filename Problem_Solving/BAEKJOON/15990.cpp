@@ -8,14 +8,14 @@ const int MOD = 1000000009;
 
 int main(void)
 {	
-	// ¹Ì¸® ´äÀ» ±¸ÇØ ³õ´Â´Ù(Ä³½Ì)
-	// cache[n][k] => nÀÇ °ªÀ» Ç¥ÇöÇßÀ» ¶§ ¸¶Áö¸· ¼ö°¡ kÀÎ °æ¿ìÀÇ ¼ö
+	// ë¯¸ë¦¬ ë‹µì„ êµ¬í•´ ë†“ëŠ”ë‹¤(ìºì‹±)
+	// cache[n][k] => nì˜ ê°’ì„ í‘œí˜„í–ˆì„ ë•Œ ë§ˆì§€ë§‰ ìˆ˜ê°€ kì¸ ê²½ìš°ì˜ ìˆ˜
 	vector<vector<long long>> cache(N + 1, vector<long long>(4));
-	// 1ÀÏ °æ¿ì: 1 , 2ÀÏ °æ¿ì: 2, 3ÀÏ °æ¿ì: 1+2, 2+1, 3
+	// 1ì¼ ê²½ìš°: 1 , 2ì¼ ê²½ìš°: 2, 3ì¼ ê²½ìš°: 1+2, 2+1, 3
 	cache[1][1] = cache[2][2] = cache[3][1] = cache[3][2] = cache[3][3] = 1;
 	for (int i = 4; i <= N; i++)
 	{
-		// Á¡È­½Ä
+		// ì í™”ì‹
 		if (i - 1 >= 0)
 			cache[i][1] = (cache[i - 1][2] + cache[i - 1][3]) % MOD;
 		if (i - 2 >= 0)

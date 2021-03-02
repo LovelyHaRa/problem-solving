@@ -1,5 +1,5 @@
-// DP ¹®Á¦
-// ³À»ö ¹®Á¦
+// DP ë¬¸ì œ
+// ëƒ…ìƒ‰ ë¬¸ì œ
 #include<iostream>
 
 using namespace std;
@@ -18,10 +18,10 @@ int main(void)
 	cin >> n >> k;
 	for (int i = 1; i <= n; i++)
 		cin >> w[i] >> v[i];
-	// dp[i][j] => i¹øÂ°±îÁö Å½»öÇßÀ» ¶§ ±× µ¿¾È ´ãÀº ¹°°ÇµéÀÇ ÇÕÀ» j¶ó°í ÇßÀ» ¶§ °¡ÁßÄ¡ °ª
-	// i¸¦ ¹°°Ç °³¼ö¸¸Å­, j¸¦ ³»°¡ µé¼ö ÀÖ´Â ÃÖ´ë ¹«°Ô¸¸Å­ µ¹¸²
-	// ¹è³¶¿¡ ´ãÁö ¾Ê´Â °æ¿ì : dp[i][j] = dp[i-1][j] (Àü¿¡ Å½»öÇÑ°Å ±×´ë·Î °®°í¿À¸é µÊ)
-	// ¹è³¶¿¡ ´ã´Â °æ¿ì : dp[i][j] = dp[i-1][j-w[i]]+v[i] (j¿¡¼­ i¹ø Â° º¸¼®ÀÇ ¹«°Ô¸¦ »« °ÍÀ» »ý°¢)
+	// dp[i][j] => ië²ˆì§¸ê¹Œì§€ íƒìƒ‰í–ˆì„ ë•Œ ê·¸ ë™ì•ˆ ë‹´ì€ ë¬¼ê±´ë“¤ì˜ í•©ì„ jë¼ê³  í–ˆì„ ë•Œ ê°€ì¤‘ì¹˜ ê°’
+	// ië¥¼ ë¬¼ê±´ ê°œìˆ˜ë§Œí¼, jë¥¼ ë‚´ê°€ ë“¤ìˆ˜ ìžˆëŠ” ìµœëŒ€ ë¬´ê²Œë§Œí¼ ëŒë¦¼
+	// ë°°ë‚­ì— ë‹´ì§€ ì•ŠëŠ” ê²½ìš° : dp[i][j] = dp[i-1][j] (ì „ì— íƒìƒ‰í•œê±° ê·¸ëŒ€ë¡œ ê°–ê³ ì˜¤ë©´ ë¨)
+	// ë°°ë‚­ì— ë‹´ëŠ” ê²½ìš° : dp[i][j] = dp[i-1][j-w[i]]+v[i] (jì—ì„œ ië²ˆ ì§¸ ë³´ì„ì˜ ë¬´ê²Œë¥¼ ëº€ ê²ƒì„ ìƒê°)
 	for (int i = 1; i <= n; i++)
 	{
 		for (int j = 1; j <= k; j++)
@@ -31,6 +31,6 @@ int main(void)
 				dp[i][j] = max(dp[i][j], dp[i - 1][j - w[i]] + v[i]);
 		}
 	}
-	// ¸¶Áö¸· °ª Ãâ·Â
+	// ë§ˆì§€ë§‰ ê°’ ì¶œë ¥
 	cout << dp[n][k] << '\n';
 }

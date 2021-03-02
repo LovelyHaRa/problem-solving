@@ -9,41 +9,41 @@ const int hugeNum = 1987654321;
 template<typename T>
 struct range_min_query
 {
-	int n; // ¹è¿­ÀÇ ±æÀÌ
-	std::vector<T> rangeMin; // ±¸°£º° ÃÖ¼Ú°ª ÀúÀå
+	int n; // ë°°ì—´ì˜ ê¸¸ì´
+	std::vector<T> rangeMin; // êµ¬ê°„ë³„ ìµœì†Ÿê°’ ì €ì¥
 	range_min_query(const std::vector<T>& array)
 	{
 		n = array.size();
 		rangeMin.resize(n * 4);
 		init(array, 0, n - 1, 1);
 	}
-	// node ³ëµå°¡ array[left..right]¹è¿­À» Ç¥ÇöÇÒ ¶§,
-	// node¸¦ ·çÆ®·Î ÇÏ´Â ¼­ºêÆ®¸®¸¦ ÃÊ±âÈ­ÇÏ°í, ÀÌ ±¸°£ÀÇ ÃÖ¼ÒÄ¡¸¦ ¹İÈ¯ÇÑ´Ù
+	// node ë…¸ë“œê°€ array[left..right]ë°°ì—´ì„ í‘œí˜„í•  ë•Œ,
+	// nodeë¥¼ ë£¨íŠ¸ë¡œ í•˜ëŠ” ì„œë¸ŒíŠ¸ë¦¬ë¥¼ ì´ˆê¸°í™”í•˜ê³ , ì´ êµ¬ê°„ì˜ ìµœì†Œì¹˜ë¥¼ ë°˜í™˜í•œë‹¤
 	T init(const std::vector<T>& array, int left, int right, int node)
 	{
-		// ±âÀú»ç·Ê: ¹üÀ§ ±æÀÌ°¡ 1ÀÎ °æ¿ì
+		// ê¸°ì €ì‚¬ë¡€: ë²”ìœ„ ê¸¸ì´ê°€ 1ì¸ ê²½ìš°
 		if (left == right)
 			return rangeMin[node] = array[left];
-		// ±¸°£º°·Î ³ª´«´Ù
+		// êµ¬ê°„ë³„ë¡œ ë‚˜ëˆˆë‹¤
 		int mid = (left + right) / 2;
 		int leftMin = init(array, left, mid, node * 2);
 		int rightMin = init(array, mid + 1, right, node * 2 + 1);
 		return rangeMin[node] = min(leftMin, rightMin);
 	}
-	// // node°¡ Ç¥ÇöÇÏ´Â ¹üÀ§ array[left..right]°¡ ÁÖ¾îÁú ¶§,
-	// ÀÌ ¹üÀ§¿Í array[left..right]ÀÇ ±³ÁıÇÕÀÇ ÃÖ¼ÒÄ¡¸¦ ±¸ÇÑ´Ù
+	// // nodeê°€ í‘œí˜„í•˜ëŠ” ë²”ìœ„ array[left..right]ê°€ ì£¼ì–´ì§ˆ ë•Œ,
+	// ì´ ë²”ìœ„ì™€ array[left..right]ì˜ êµì§‘í•©ì˜ ìµœì†Œì¹˜ë¥¼ êµ¬í•œë‹¤
 	T query(int left, int right, int node, int nodeLeft, int nodeRight)
 	{
-		// µÎ ±¸°£ÀÌ °ãÄ¡Áö ¾ÊÀ¸¸é ¾ÆÁÖ Å« °ª ¹İÈ¯: ¹«½ÃµÊ
+		// ë‘ êµ¬ê°„ì´ ê²¹ì¹˜ì§€ ì•Šìœ¼ë©´ ì•„ì£¼ í° ê°’ ë°˜í™˜: ë¬´ì‹œë¨
 		if (right < nodeLeft || nodeRight < left) return (T)hugeNum;
-		// node°¡ Ç¥ÇöÇÏ´Â ¹øÀ§°¡ array[left..right]¿¡ ¿ÏÀüÈ÷ Æ÷ÇÔµÇ´Â °æ¿ì
+		// nodeê°€ í‘œí˜„í•˜ëŠ” ë²ˆìœ„ê°€ array[left..right]ì— ì™„ì „íˆ í¬í•¨ë˜ëŠ” ê²½ìš°
 		if (left <= nodeLeft && nodeRight <= right)
 			return rangeMin[node];
-		// ¾çÂÊ ±¸°£À» ³ª´²¼­ Ç¬ µÚ °á°ú¸¦ ÇÕÄ£´Ù
+		// ì–‘ìª½ êµ¬ê°„ì„ ë‚˜ëˆ ì„œ í‘¼ ë’¤ ê²°ê³¼ë¥¼ í•©ì¹œë‹¤
 		int mid = (nodeLeft + nodeRight) / 2;
 		return min<T>(query(left, right, node * 2, nodeLeft, mid),
 			query(left, right, node * 2 + 1, mid + 1, nodeRight));
 	}
-	// ÀÎÅÍÆäÀÌ½º
+	// ì¸í„°í˜ì´ìŠ¤
 	T query(int left, int right) { return query(left, right, 1, 0, n - 1); }
 };

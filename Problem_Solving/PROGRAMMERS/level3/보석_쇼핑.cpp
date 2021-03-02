@@ -6,43 +6,43 @@
 
 using namespace std;
 
-// ºñ±³ ÇÔ¼ö
+// ë¹„êµ í•¨ìˆ˜
 bool compare(const pair<int, int>& p1, const pair<int, int>& p2) {
-	// 2. ½ÃÀÛ ¹øÈ£ ¿À¸§Â÷¼ø
+	// 2. ì‹œì‘ ë²ˆí˜¸ ì˜¤ë¦„ì°¨ìˆœ
 	if (p1.second - p1.first == p2.second - p2.first)
 		return p1.first < p2.first;
-	// 1. ¹üÀ§ ±æÀÌ ¿À¸§Â÷¼ø
+	// 1. ë²”ìœ„ ê¸¸ì´ ì˜¤ë¦„ì°¨ìˆœ
 	return p1.second - p1.first < p2.second - p2.first;
 }
 
 vector<int> solution(vector<string> gems) {
 	vector<int> answer;
-	set<string> gemset; // º¸¼® Á¾·ù ÁıÇÕ
-	// 1. º¸¼® Á¾·ù ÀúÀå
+	set<string> gemset; // ë³´ì„ ì¢…ë¥˜ ì§‘í•©
+	// 1. ë³´ì„ ì¢…ë¥˜ ì €ì¥
 	for (string gem : gems) {
 		gemset.insert(gem);
 	}
-	unordered_map<string, int> display; // Áø¿­´ëÀÇ ¹øÈ£, ½ÃÀÛÁöÁ¡À» mapÀ¸·Î ÀúÀå
-	vector<pair<int, int>> range; // ¼îÇÎÇÒ ¼ö ÀÖ´Â Áø¿­´ë ¹üÀ§(½ÃÀÛ, ³¡)
+	unordered_map<string, int> display; // ì§„ì—´ëŒ€ì˜ ë²ˆí˜¸, ì‹œì‘ì§€ì ì„ mapìœ¼ë¡œ ì €ì¥
+	vector<pair<int, int>> range; // ì‡¼í•‘í•  ìˆ˜ ìˆëŠ” ì§„ì—´ëŒ€ ë²”ìœ„(ì‹œì‘, ë)
 	int n = gems.size();
-	// 2. Áø¿­´ë Å½»ö
+	// 2. ì§„ì—´ëŒ€ íƒìƒ‰
 	for (int i = 0; i < n; i++) {
-		display[gems[i]] = i; // Áø¿­´ë map¿¡ ÀúÀå
-		// ½ÃÀÛ Áø¿­´ë ¹øÈ£
+		display[gems[i]] = i; // ì§„ì—´ëŒ€ mapì— ì €ì¥
+		// ì‹œì‘ ì§„ì—´ëŒ€ ë²ˆí˜¸
 		int start_dp = n - 1; 
-		// map¿¡ º¸¼® Á¾·ù°¡ ¸ğµÎ ÀúÀåµÇ¾ú´Ù¸é ¼îÇÎ °¡´É
+		// mapì— ë³´ì„ ì¢…ë¥˜ê°€ ëª¨ë‘ ì €ì¥ë˜ì—ˆë‹¤ë©´ ì‡¼í•‘ ê°€ëŠ¥
 		if (display.size() == gemset.size()) {
-			// ½ÃÀÛ Áø¿­´ë ¹øÈ£ ±¸ÇÏ±â
+			// ì‹œì‘ ì§„ì—´ëŒ€ ë²ˆí˜¸ êµ¬í•˜ê¸°
 			for (auto it = display.begin(); it != display.end(); it++) {
 				start_dp = start_dp > it->second ? it->second : start_dp;
 			}
-			// ¹üÀ§ ÀúÀå
+			// ë²”ìœ„ ì €ì¥
 			range.push_back(make_pair(start_dp, i));
 		}
 	}
-	// 3. ¹üÀ§ Á¤·Ä
+	// 3. ë²”ìœ„ ì •ë ¬
 	sort(range.begin(), range.end(), compare);
-	// 4. ¸®ÅÏ
+	// 4. ë¦¬í„´
 	answer.push_back(range[0].first + 1);
 	answer.push_back(range[0].second + 1);
 	return answer;

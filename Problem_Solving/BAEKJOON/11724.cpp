@@ -7,7 +7,7 @@ vector<vector<int>> adj;
 vector<int> visited;
 int n, m;
 
-// ÀÎÁ¢ ¸®½ºÆ®¿¡ ´ëÇÑ dfs Å½»ö
+// ì¸ì ‘ ë¦¬ìŠ¤íŠ¸ì— ëŒ€í•œ dfs íƒìƒ‰
 void dfs(int here)
 {
 	for (int i = 0; i < adj[here].size(); i++)
@@ -26,7 +26,7 @@ int main(void)
 	cin >> n >> m;
 	adj.resize(n + 1, vector<int>());
 	visited.resize(n + 1);
-	// ÀÎÁ¢ ¸®½ºÆ® Ç¥Çö
+	// ì¸ì ‘ ë¦¬ìŠ¤íŠ¸ í‘œí˜„
 	for (int i = 0; i < m; i++)
 	{
 		int a, b;
@@ -35,7 +35,7 @@ int main(void)
 		adj[b].push_back(a);
 	}
 	int cnt = 0;
-	// ¸ğµç Á¤Á¡¿¡ ´ëÇØ dfs¸¦ È£ÃâÇÑ È½¼ö°¡ ÄÄÆ÷³ÍÆ® °¹¼öÀÓ
+	// ëª¨ë“  ì •ì ì— ëŒ€í•´ dfsë¥¼ í˜¸ì¶œí•œ íšŸìˆ˜ê°€ ì»´í¬ë„ŒíŠ¸ ê°¯ìˆ˜ì„
 	for (int i = 1; i <= n; i++)
 	{
 		if (!visited[i])

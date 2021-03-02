@@ -10,12 +10,12 @@ void move(int from, int to) {
 }
 
 void hanoi(int n, int from, int by, int to) {
-	// ±âÀú»ç·Ê: n==1
+	// ê¸°ì €ì‚¬ë¡€: n==1
 	if (n == 1)
 		move(from, to);
 	else {
 		hanoi(n - 1, from, to, by); // 1 -> 3 -> 2
-		move(from, to); // ¿Å±â±â
+		move(from, to); // ì˜®ê¸°ê¸°
 		hanoi(n - 1, by, from, to); // 3 -> 1 ->2
 	}
 }

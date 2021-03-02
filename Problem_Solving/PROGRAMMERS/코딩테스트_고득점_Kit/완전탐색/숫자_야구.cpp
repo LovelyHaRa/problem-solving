@@ -5,15 +5,15 @@ using namespace std;
 
 int solution(vector<vector<int>> baseball) {
 	int answer = 0;
-	// ¿ÏÀü Å½»ö(123~987)
+	// ì™„ì „ íƒìƒ‰(123~987)
 	for (int num = 123; num <= 987; num++) {
 		string t = to_string(num);
-		// ¼ıÀÚ¾ß±¸ ±ÔÄ¢¿¡ ¾î±ß³ª´Â ¼ö´Â Á¦¿Ü
+		// ìˆ«ìì•¼êµ¬ ê·œì¹™ì— ì–´ê¸‹ë‚˜ëŠ” ìˆ˜ëŠ” ì œì™¸
 		if (t[0] == t[1] || t[0] == t[2] || t[1] == t[2] || t[0] == '0' || t[1] == '0' || t[2] == '0') {
 			continue;
 		}
 		int i;
-		// ½ºÆ®¶óÀÌÅ©, º¼ °Ë»ç
+		// ìŠ¤íŠ¸ë¼ì´í¬, ë³¼ ê²€ì‚¬
 		for (i = 0; i < baseball.size(); i++) {
 			string s = to_string(baseball[i][0]);
 			int strike = 0, ball = 0;
@@ -25,11 +25,11 @@ int solution(vector<vector<int>> baseball) {
 					}
 				}
 			}
-			// ÁÖ¾îÁø °ª°ú ÀÏÄ¡ÇÏÁö ¾ÊÀ¸¸é break
+			// ì£¼ì–´ì§„ ê°’ê³¼ ì¼ì¹˜í•˜ì§€ ì•Šìœ¼ë©´ break
 			if (strike != baseball[i][1] || ball != baseball[i][2])
 				break;
 		}
-		// ³¡±îÁö Å½»öÇÏ¸é ´äÀÌ µÉ ¼ö ÀÖ´Â ¼öÀÌ´Ù.
+		// ëê¹Œì§€ íƒìƒ‰í•˜ë©´ ë‹µì´ ë  ìˆ˜ ìˆëŠ” ìˆ˜ì´ë‹¤.
 		if (i == baseball.size())
 			answer++;
 	}

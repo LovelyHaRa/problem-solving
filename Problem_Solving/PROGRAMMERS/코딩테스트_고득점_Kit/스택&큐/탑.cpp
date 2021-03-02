@@ -5,26 +5,26 @@ using namespace std;
 
 vector<int> solution(vector<int> heights) {
 	vector<int> answer;
-	vector<int> tmp; // ¼ö½Å Å¾ ½ºÅÃ
-	// ½ºÅÃ Ã³·³ À§ºÎÅÍ Å½»ö
+	vector<int> tmp; // ìˆ˜ì‹  íƒ‘ ìŠ¤íƒ
+	// ìŠ¤íƒ ì²˜ëŸ¼ ìœ„ë¶€í„° íƒìƒ‰
 	for (int i = heights.size() - 1; i >= 0; i--)
 	{
 		int j;
-		// iÀ§Ä¡ ¹Ù·Î ¹ØºÎÅÍ Å½»ö
+		// iìœ„ì¹˜ ë°”ë¡œ ë°‘ë¶€í„° íƒìƒ‰
 		for (j = i - 1; j >= 0; j--)
 		{
-			// °¡Àå ¸ÕÀú iÀ§Ä¡º¸´Ù jÀ§Ä¡°¡ ´õ Å©´Ù¸é
+			// ê°€ì¥ ë¨¼ì € iìœ„ì¹˜ë³´ë‹¤ jìœ„ì¹˜ê°€ ë” í¬ë‹¤ë©´
 			if (heights[i] < heights[j])
 			{
 				tmp.push_back(j + 1); // push
 				break;
 			}
 		}
-		// Å¾ÀÌ ¼ö½Å ¸øÇÏ¸é 0 push
+		// íƒ‘ì´ ìˆ˜ì‹  ëª»í•˜ë©´ 0 push
 		if (j < 0)
 			tmp.push_back(j + 1);
 	}
-	// pop ÇØ¼­ answer ¹è¿­¿¡ push
+	// pop í•´ì„œ answer ë°°ì—´ì— push
 	for (int i = tmp.size() - 1; i >= 0; i--)
 		answer.push_back(tmp[i]);
 	return answer;

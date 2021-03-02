@@ -10,21 +10,21 @@ int matched(const string& s)
 	const string opening("({["), closing(")}]");
 	for (int i = 0; i < s.size(); i++)
 	{
-		// ¿©´Â °ýÈ£´Â ¹«Á¶°Ç ½ºÅÃ¿¡ ³ÖÀ½
+		// ì—¬ëŠ” ê´„í˜¸ëŠ” ë¬´ì¡°ê±´ ìŠ¤íƒì— ë„£ìŒ
 		if (opening.find(s[i]) != -1)
 			st.push(s[i]);
 		else
 		{
-			// ½ºÅÃÀÌ ºñ¾îÀÖÀ¸¸é ½ÇÆÐ
+			// ìŠ¤íƒì´ ë¹„ì–´ìžˆìœ¼ë©´ ì‹¤íŒ¨
 			if (st.empty()) return false;
-			// Â¦ÀÌ ¸ÂÁö ¾Ê¾Æµµ ½ÇÆÐ
+			// ì§ì´ ë§žì§€ ì•Šì•„ë„ ì‹¤íŒ¨
 			if (opening.find(st.top()) != closing.find(s[i]))
 				return false;
-			// Â¦ÀÌ ¸ÂÀ¸¸é ½ºÅÃ¿¡¼­ Á¦°Å
+			// ì§ì´ ë§žìœ¼ë©´ ìŠ¤íƒì—ì„œ ì œê±°
 			st.pop();
 		}
 	}
-	// ½ºÅÃÀÌ ºñ¾îÀÖÀ¸¸é ¼º°ø
+	// ìŠ¤íƒì´ ë¹„ì–´ìžˆìœ¼ë©´ ì„±ê³µ
 	return st.empty();
 }
 

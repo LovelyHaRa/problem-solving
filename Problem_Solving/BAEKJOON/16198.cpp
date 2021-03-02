@@ -3,28 +3,28 @@
 
 using namespace std;
 
-int maxEnergy; // ¿¡³ÊÁö ÃÖ´ë°ª
+int maxEnergy; // ì—ë„ˆì§€ ìµœëŒ€ê°’
 
-//  ³²Àº ±¸½½ ¹è¿­ w¿Í Áö±Ý±îÁö ¸ðÀº ¿¡³ÊÁö e¸¦ ¹ÙÅÁÀ¸·Î ¿¡³ÊÁö¸¦ ¸ðÀº´Ù
+//  ë‚¨ì€ êµ¬ìŠ¬ ë°°ì—´ wì™€ ì§€ê¸ˆê¹Œì§€ ëª¨ì€ ì—ë„ˆì§€ eë¥¼ ë°”íƒ•ìœ¼ë¡œ ì—ë„ˆì§€ë¥¼ ëª¨ì€ë‹¤
 void makeEnergy(vector<int> w, int e)
 {
-	// ±âÀú »ç·Ê: ±¸½½ÀÌ 2°³ ³²¾ÒÀ» ¶§
+	// ê¸°ì € ì‚¬ë¡€: êµ¬ìŠ¬ì´ 2ê°œ ë‚¨ì•˜ì„ ë•Œ
 	if (w.size() == 2)
 	{
-		// ÃÖ´ë°ª °»½Å
+		// ìµœëŒ€ê°’ ê°±ì‹ 
 		maxEnergy = maxEnergy < e ? e : maxEnergy;
 		return;
 	}
-	// Ã¹ ºÎºÐ°ú ¸¶Áö¸· ºÎºÐÀ» Á¦¿ÜÇÏ°í Å½»ö
+	// ì²« ë¶€ë¶„ê³¼ ë§ˆì§€ë§‰ ë¶€ë¶„ì„ ì œì™¸í•˜ê³  íƒìƒ‰
 	for (int i = 1; i < w.size() - 1; i++)
 	{
-		// ºÎºÐ ¿¡³ÊÁö °è»ê
+		// ë¶€ë¶„ ì—ë„ˆì§€ ê³„ì‚°
 		int pe = w[i - 1] * w[i + 1] + e;
-		// ¹è¿­ º¹»ç
+		// ë°°ì—´ ë³µì‚¬
 		vector<int> nw = w;
-		// ¿ø¼Ò »èÁ¦
+		// ì›ì†Œ ì‚­ì œ
 		nw.erase(nw.begin() + i);
-		// ³²Àº ±¸½½·Î ¿¡³ÊÁö ¸ðÀ¸±â
+		// ë‚¨ì€ êµ¬ìŠ¬ë¡œ ì—ë„ˆì§€ ëª¨ìœ¼ê¸°
 		makeEnergy(nw, pe);
 	}
 }

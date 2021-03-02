@@ -13,23 +13,23 @@ int main(void)
 	for (int i = 0; i < k; i++)
 	{
 		cin >> cable[i];
-		right = right < cable[i] ? cable[i] : right; // ÃÊ±â ¿À¸¥ÂÊ °ª ±¸ÇÏ±â
+		right = right < cable[i] ? cable[i] : right; // ì´ˆê¸° ì˜¤ë¥¸ìª½ ê°’ êµ¬í•˜ê¸°
 	}
-	// ÀÚ¸¦ ±æÀÌ ±âÁØÀ¸·Î ÀÌºÐ Å½»ö
+	// ìžë¥¼ ê¸¸ì´ ê¸°ì¤€ìœ¼ë¡œ ì´ë¶„ íƒìƒ‰
 	while (left <= right)
 	{
 		long long mid = (left + right) / 2;
 		long long cnt = 0;
-		// ·£¼± ÀÚ¸£±â
+		// ëžœì„  ìžë¥´ê¸°
 		for (int i = 0; i < k; i++)
 			cnt += cable[i] / mid;
-		// n°³ ÀÌ»óÀÌ¸é
+		// nê°œ ì´ìƒì´ë©´
 		if (cnt >= n)
 		{
-			res = res < mid ? mid : res; // ÀÚ¸¦ ¼ö ÀÖ´Â ÃÖ´ë ±æÀÌ °»½Å
-			left = mid + 1; // ¿ÞÂÊ °»½Å
+			res = res < mid ? mid : res; // ìžë¥¼ ìˆ˜ ìžˆëŠ” ìµœëŒ€ ê¸¸ì´ ê°±ì‹ 
+			left = mid + 1; // ì™¼ìª½ ê°±ì‹ 
 		}
-		else right = mid - 1; // ¿À¸¥ÂÊ °»½Å
+		else right = mid - 1; // ì˜¤ë¥¸ìª½ ê°±ì‹ 
 	}
 	cout << res << '\n';
 }

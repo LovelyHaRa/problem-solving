@@ -7,7 +7,7 @@ using namespace std;
 int n;
 vector<vector<int>> table;
 
-// ÆÀÀÇ ´É·ÂÄ¡ °è»ê
+// íŒ€ì˜ ëŠ¥ë ¥ì¹˜ ê³„ì‚°
 int calcSkill(const vector<int>& t)
 {
 	int ret = 0;
@@ -19,24 +19,24 @@ int calcSkill(const vector<int>& t)
 
 int abs(int a) { return a >= 0 ? a : -a; }
 
-// AÆÀ, BÆÀÀÇ ¼ö°¡ °áÁ¤ µÇ¾úÀ» ¶§ ´É·ÂÄ¡ÀÇ Ä¡ÀÌÀÇ ÃÖ¼Ú°ªÀ» ¹İÈ¯
+// AíŒ€, BíŒ€ì˜ ìˆ˜ê°€ ê²°ì • ë˜ì—ˆì„ ë•Œ ëŠ¥ë ¥ì¹˜ì˜ ì¹˜ì´ì˜ ìµœì†Ÿê°’ì„ ë°˜í™˜
 int process(int a, int b)
 {
 	vector<vector<int>> team1, team2;
 	vector<int> t1(a), t2(b);
 
-	// Á¶ÇÕÀ» °è»êÇÏ±â À§ÇÑ ¼¼ÆÃ
+	// ì¡°í•©ì„ ê³„ì‚°í•˜ê¸° ìœ„í•œ ì„¸íŒ…
 	vector<bool> c(n);
 	fill(c.end() - b, c.end(), true);
 
 	int idx1, idx2;
-	// Á¶ÇÕÀ» ÀÌ¿ëÇÏ¿© ¸ğµç °æ¿ìÀÇ ¼ö °è»ê
+	// ì¡°í•©ì„ ì´ìš©í•˜ì—¬ ëª¨ë“  ê²½ìš°ì˜ ìˆ˜ ê³„ì‚°
 	do
 	{
 		idx1 = idx2 = 0;
 		for (int i = 0; i < n; i++)
 		{
-			// ¾î´À ÆÀ¿¡ ÇÕ·ùÇÒÁö °áÁ¤
+			// ì–´ëŠ íŒ€ì— í•©ë¥˜í• ì§€ ê²°ì •
 			if (!c[i])
 				t1[idx1++] = i;
 			else
@@ -46,7 +46,7 @@ int process(int a, int b)
 		team2.push_back(t2);
 	} while (next_permutation(c.begin(), c.end()));
 
-	// ´É·ÂÄ¡ Â÷ÀÌÀÇ ÃÖ¼Ú°ªÀ» °è»ê
+	// ëŠ¥ë ¥ì¹˜ ì°¨ì´ì˜ ìµœì†Ÿê°’ì„ ê³„ì‚°
 	int ret = 1987654321;
 	for (int i = 0; i < team1.size(); i++)
 		ret = min(ret, abs(calcSkill(team1[i]) - calcSkill(team2[i])));
@@ -62,8 +62,8 @@ int main(void)
 			cin >> table[i][j];
 	int res = 1987654321;
 	int mod = n % 2;
-	// ¸ğµç °æ¿ìÀÇ ¼ö °è»ê
-	// ¾î¶² °æ¿ìµçÁö Â÷ÀÌÀÇ ÃÖ¼Ú°ªÀº 0ÀÌ±â ¶§¹®¿¡ res°¡ 0ÀÌ µÇ¸é ¹Ù·Î Á¾·á
+	// ëª¨ë“  ê²½ìš°ì˜ ìˆ˜ ê³„ì‚°
+	// ì–´ë–¤ ê²½ìš°ë“ ì§€ ì°¨ì´ì˜ ìµœì†Ÿê°’ì€ 0ì´ê¸° ë•Œë¬¸ì— resê°€ 0ì´ ë˜ë©´ ë°”ë¡œ ì¢…ë£Œ
 	for (int i = 0; i < n / 2; i++)
 	{
 		res = min(res, process(n / 2 + i + mod, n / 2 - i));
