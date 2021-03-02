@@ -33,9 +33,4 @@
 *.opendb
 *.db
 
-/Problem_Solving/.vs/**/*
-/Problem_Solving/**/Debug
-/Problem_Solving/**/*.vcxproj.*
-/Problem_Solving/**/*.txt
-
-/.vs
+*.txt
