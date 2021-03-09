@@ -6,7 +6,7 @@
 
 ### BAEKJOON[🚀](https://www.acmicpc.net/)
 
-346 problems solved
+347 problems solved
 
 ### programmers[🚀](https://programmers.co.kr/learn/challenges?tab=all_challenges)
 
