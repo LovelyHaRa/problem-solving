@@ -1,9 +1,9 @@
-/* Ä«¿îÆÃ Á¤·Ä */
+/* ì¹´ìš´íŒ… ì •ë ¬ */
 #include <stdio.h>
 
 int main(void)
 {
-	int N, data, i, j, count[10001] = { 0 }, max = 0;
+	int N, data, i, j, count[10001] = {0}, max = 0;
 	scanf("%d", &N);
 	for (i = 1; i <= N; i++)
 	{
@@ -11,7 +11,7 @@ int main(void)
 		count[data]++;
 		max = max < data ? data : max;
 	}
-	
+
 	for (i = 1; i <= max; i++)
 	{
 		for (j = 0; j < count[i]; j++)
